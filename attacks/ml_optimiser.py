@@ -2,7 +2,7 @@
 Machine Learning Payload Optimizer
 Learns which payloads are most effective
 """
-
+import pandas as pd
 import numpy as np
 from sklearn.ensemble import RandomForestClassifier
 from sklearn.feature_extraction.text import TfidfVectorizer
@@ -26,7 +26,9 @@ class MLPayloadOptimizer:
         
         # Models
         self.classifier = None
-        self.vectorizer = TfidfVectorizer(max_features=100)
+        self.vectorizer = TfidfVectorizer( analyzer="char",
+    ngram_range=(2,5),
+    max_features=1000)
         
         # Training data
         self.training_payloads = []
@@ -62,7 +64,22 @@ class MLPayloadOptimizer:
             # Vectorize payloads
             X = self.vectorizer.fit_transform(self.training_payloads)
             y = np.array(self.training_labels)
-            
+            print("X shape:", X.shape)
+            print("Sample payload:", self.training_payloads[:3])
+            print("Feature names:", self.vectorizer.get_feature_names_out()[:20])
+            logging.basicConfig(level=logging.INFO)
+            opt = MLPayloadOptimizer()
+
+            for i in range(12):
+                opt.add_training_data(f"<script>{i}</script>", i % 2 == 0)
+                opt.train()
+
+            # feature_names = self.vectorizer.get_feature_names_out()
+            # print(feature_names)
+            # print("X shape:", X.shape)
+            # print("Sample payload:", self.training_payloads[:3])
+            # print("Feature names:", self.vectorizer.get_feature_names_out()[:20])
+
             # Train classifier
             self.classifier = RandomForestClassifier(
                 n_estimators=50,
@@ -170,4 +187,4 @@ class MLPayloadOptimizer:
             'training_samples': len(self.training_payloads),
             'vulnerable_samples': sum(self.training_labels),
             'safe_samples': len(self.training_labels) - sum(self.training_labels),
-        }
+        }    
