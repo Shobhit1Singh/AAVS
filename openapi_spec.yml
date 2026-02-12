@@ -1,0 +1,56 @@
+openapi: 3.0.0
+info:
+  title: Test API
+  version: 1.0.0
+servers:
+  - url: https://api.example.com/v1
+
+paths:
+  /users/{userId}:
+    get:
+      summary: Get user by ID
+      parameters:
+        - name: userId
+          in: path
+          required: true
+          schema:
+            type: integer
+        - name: includeDetails
+          in: query
+          required: false
+          schema:
+            type: boolean
+      responses:
+        '200':
+          description: Success
+          
+  /users:
+    post:
+      summary: Create user
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - username
+                - email
+              properties:
+                username:
+                  type: string
+                  minLength: 3
+                  maxLength: 20
+                email:
+                  type: string
+                  format: email
+                age:
+                  type: integer
+                  minimum: 18
+                  maximum: 100
+                role:
+                  type: string
+                  enum: [admin, user, guest]
+      responses:
+        '201':
+          description: Created

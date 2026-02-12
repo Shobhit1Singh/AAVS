@@ -1,0 +1,570 @@
+[
+  {
+    "attack_type": "SQL Injection",
+    "severity": "CRITICAL",
+    "param_name": "username",
+    "param_location": "body",
+    "payload": "' OR '1'='1",
+    "expected_safe_behavior": "Reject malicious SQL syntax"
+  },
+  {
+    "attack_type": "SQL Injection",
+    "severity": "CRITICAL",
+    "param_name": "username",
+    "param_location": "body",
+    "payload": "' OR '1'='1' --",
+    "expected_safe_behavior": "Reject malicious SQL syntax"
+  },
+  {
+    "attack_type": "SQL Injection",
+    "severity": "CRITICAL",
+    "param_name": "username",
+    "param_location": "body",
+    "payload": "' OR '1'='1' /*",
+    "expected_safe_behavior": "Reject malicious SQL syntax"
+  },
+  {
+    "attack_type": "SQL Injection",
+    "severity": "CRITICAL",
+    "param_name": "username",
+    "param_location": "body",
+    "payload": "admin'--",
+    "expected_safe_behavior": "Reject malicious SQL syntax"
+  },
+  {
+    "attack_type": "SQL Injection",
+    "severity": "CRITICAL",
+    "param_name": "username",
+    "param_location": "body",
+    "payload": "admin' #",
+    "expected_safe_behavior": "Reject malicious SQL syntax"
+  },
+  {
+    "attack_type": "XSS",
+    "severity": "HIGH",
+    "param_name": "username",
+    "param_location": "body",
+    "payload": "<script>alert('XSS')</script>",
+    "expected_safe_behavior": "Sanitize or escape HTML"
+  },
+  {
+    "attack_type": "XSS",
+    "severity": "HIGH",
+    "param_name": "username",
+    "param_location": "body",
+    "payload": "<img src=x onerror=alert('XSS')>",
+    "expected_safe_behavior": "Sanitize or escape HTML"
+  },
+  {
+    "attack_type": "XSS",
+    "severity": "HIGH",
+    "param_name": "username",
+    "param_location": "body",
+    "payload": "<svg/onload=alert('XSS')>",
+    "expected_safe_behavior": "Sanitize or escape HTML"
+  },
+  {
+    "attack_type": "Command Injection",
+    "severity": "CRITICAL",
+    "param_name": "username",
+    "param_location": "body",
+    "payload": "; ls -la",
+    "expected_safe_behavior": "Reject shell metacharacters"
+  },
+  {
+    "attack_type": "Command Injection",
+    "severity": "CRITICAL",
+    "param_name": "username",
+    "param_location": "body",
+    "payload": "| whoami",
+    "expected_safe_behavior": "Reject shell metacharacters"
+  },
+  {
+    "attack_type": "Command Injection",
+    "severity": "CRITICAL",
+    "param_name": "username",
+    "param_location": "body",
+    "payload": "&& cat /etc/passwd",
+    "expected_safe_behavior": "Reject shell metacharacters"
+  },
+  {
+    "attack_type": "Path Traversal",
+    "severity": "HIGH",
+    "param_name": "username",
+    "param_location": "body",
+    "payload": "../../../etc/passwd",
+    "expected_safe_behavior": "Block directory traversal"
+  },
+  {
+    "attack_type": "Path Traversal",
+    "severity": "HIGH",
+    "param_name": "username",
+    "param_location": "body",
+    "payload": "..\\..\\..\\windows\\system32\\config\\sam",
+    "expected_safe_behavior": "Block directory traversal"
+  },
+  {
+    "attack_type": "Path Traversal",
+    "severity": "HIGH",
+    "param_name": "username",
+    "param_location": "body",
+    "payload": "....//....//....//etc/passwd",
+    "expected_safe_behavior": "Block directory traversal"
+  },
+  {
+    "attack_type": "Pattern Violation",
+    "severity": "MEDIUM",
+    "param_name": "username",
+    "param_location": "body",
+    "payload": "!@#$%^&*()",
+    "expected_safe_behavior": "Reject pattern mismatch"
+  },
+  {
+    "attack_type": "SQL Injection",
+    "severity": "CRITICAL",
+    "param_name": "email",
+    "param_location": "body",
+    "payload": "' OR '1'='1",
+    "expected_safe_behavior": "Reject malicious SQL syntax"
+  },
+  {
+    "attack_type": "SQL Injection",
+    "severity": "CRITICAL",
+    "param_name": "email",
+    "param_location": "body",
+    "payload": "' OR '1'='1' --",
+    "expected_safe_behavior": "Reject malicious SQL syntax"
+  },
+  {
+    "attack_type": "SQL Injection",
+    "severity": "CRITICAL",
+    "param_name": "email",
+    "param_location": "body",
+    "payload": "' OR '1'='1' /*",
+    "expected_safe_behavior": "Reject malicious SQL syntax"
+  },
+  {
+    "attack_type": "SQL Injection",
+    "severity": "CRITICAL",
+    "param_name": "email",
+    "param_location": "body",
+    "payload": "admin'--",
+    "expected_safe_behavior": "Reject malicious SQL syntax"
+  },
+  {
+    "attack_type": "SQL Injection",
+    "severity": "CRITICAL",
+    "param_name": "email",
+    "param_location": "body",
+    "payload": "admin' #",
+    "expected_safe_behavior": "Reject malicious SQL syntax"
+  },
+  {
+    "attack_type": "XSS",
+    "severity": "HIGH",
+    "param_name": "email",
+    "param_location": "body",
+    "payload": "<script>alert('XSS')</script>",
+    "expected_safe_behavior": "Sanitize or escape HTML"
+  },
+  {
+    "attack_type": "XSS",
+    "severity": "HIGH",
+    "param_name": "email",
+    "param_location": "body",
+    "payload": "<img src=x onerror=alert('XSS')>",
+    "expected_safe_behavior": "Sanitize or escape HTML"
+  },
+  {
+    "attack_type": "XSS",
+    "severity": "HIGH",
+    "param_name": "email",
+    "param_location": "body",
+    "payload": "<svg/onload=alert('XSS')>",
+    "expected_safe_behavior": "Sanitize or escape HTML"
+  },
+  {
+    "attack_type": "Command Injection",
+    "severity": "CRITICAL",
+    "param_name": "email",
+    "param_location": "body",
+    "payload": "; ls -la",
+    "expected_safe_behavior": "Reject shell metacharacters"
+  },
+  {
+    "attack_type": "Command Injection",
+    "severity": "CRITICAL",
+    "param_name": "email",
+    "param_location": "body",
+    "payload": "| whoami",
+    "expected_safe_behavior": "Reject shell metacharacters"
+  },
+  {
+    "attack_type": "Command Injection",
+    "severity": "CRITICAL",
+    "param_name": "email",
+    "param_location": "body",
+    "payload": "&& cat /etc/passwd",
+    "expected_safe_behavior": "Reject shell metacharacters"
+  },
+  {
+    "attack_type": "Path Traversal",
+    "severity": "HIGH",
+    "param_name": "email",
+    "param_location": "body",
+    "payload": "../../../etc/passwd",
+    "expected_safe_behavior": "Block directory traversal"
+  },
+  {
+    "attack_type": "Path Traversal",
+    "severity": "HIGH",
+    "param_name": "email",
+    "param_location": "body",
+    "payload": "..\\..\\..\\windows\\system32\\config\\sam",
+    "expected_safe_behavior": "Block directory traversal"
+  },
+  {
+    "attack_type": "Path Traversal",
+    "severity": "HIGH",
+    "param_name": "email",
+    "param_location": "body",
+    "payload": "....//....//....//etc/passwd",
+    "expected_safe_behavior": "Block directory traversal"
+  },
+  {
+    "attack_type": "Email Header Injection",
+    "severity": "HIGH",
+    "param_name": "email",
+    "param_location": "body",
+    "payload": "test@example.com\nBCC:attacker@evil.com",
+    "expected_safe_behavior": "Reject malformed emails"
+  },
+  {
+    "attack_type": "Email Header Injection",
+    "severity": "HIGH",
+    "param_name": "email",
+    "param_location": "body",
+    "payload": "test+<script>alert('xss')</script>@example.com",
+    "expected_safe_behavior": "Reject malformed emails"
+  },
+  {
+    "attack_type": "SQL Injection",
+    "severity": "CRITICAL",
+    "param_name": "password",
+    "param_location": "body",
+    "payload": "' OR '1'='1",
+    "expected_safe_behavior": "Reject malicious SQL syntax"
+  },
+  {
+    "attack_type": "SQL Injection",
+    "severity": "CRITICAL",
+    "param_name": "password",
+    "param_location": "body",
+    "payload": "' OR '1'='1' --",
+    "expected_safe_behavior": "Reject malicious SQL syntax"
+  },
+  {
+    "attack_type": "SQL Injection",
+    "severity": "CRITICAL",
+    "param_name": "password",
+    "param_location": "body",
+    "payload": "' OR '1'='1' /*",
+    "expected_safe_behavior": "Reject malicious SQL syntax"
+  },
+  {
+    "attack_type": "SQL Injection",
+    "severity": "CRITICAL",
+    "param_name": "password",
+    "param_location": "body",
+    "payload": "admin'--",
+    "expected_safe_behavior": "Reject malicious SQL syntax"
+  },
+  {
+    "attack_type": "SQL Injection",
+    "severity": "CRITICAL",
+    "param_name": "password",
+    "param_location": "body",
+    "payload": "admin' #",
+    "expected_safe_behavior": "Reject malicious SQL syntax"
+  },
+  {
+    "attack_type": "XSS",
+    "severity": "HIGH",
+    "param_name": "password",
+    "param_location": "body",
+    "payload": "<script>alert('XSS')</script>",
+    "expected_safe_behavior": "Sanitize or escape HTML"
+  },
+  {
+    "attack_type": "XSS",
+    "severity": "HIGH",
+    "param_name": "password",
+    "param_location": "body",
+    "payload": "<img src=x onerror=alert('XSS')>",
+    "expected_safe_behavior": "Sanitize or escape HTML"
+  },
+  {
+    "attack_type": "XSS",
+    "severity": "HIGH",
+    "param_name": "password",
+    "param_location": "body",
+    "payload": "<svg/onload=alert('XSS')>",
+    "expected_safe_behavior": "Sanitize or escape HTML"
+  },
+  {
+    "attack_type": "Command Injection",
+    "severity": "CRITICAL",
+    "param_name": "password",
+    "param_location": "body",
+    "payload": "; ls -la",
+    "expected_safe_behavior": "Reject shell metacharacters"
+  },
+  {
+    "attack_type": "Command Injection",
+    "severity": "CRITICAL",
+    "param_name": "password",
+    "param_location": "body",
+    "payload": "| whoami",
+    "expected_safe_behavior": "Reject shell metacharacters"
+  },
+  {
+    "attack_type": "Command Injection",
+    "severity": "CRITICAL",
+    "param_name": "password",
+    "param_location": "body",
+    "payload": "&& cat /etc/passwd",
+    "expected_safe_behavior": "Reject shell metacharacters"
+  },
+  {
+    "attack_type": "Path Traversal",
+    "severity": "HIGH",
+    "param_name": "password",
+    "param_location": "body",
+    "payload": "../../../etc/passwd",
+    "expected_safe_behavior": "Block directory traversal"
+  },
+  {
+    "attack_type": "Path Traversal",
+    "severity": "HIGH",
+    "param_name": "password",
+    "param_location": "body",
+    "payload": "..\\..\\..\\windows\\system32\\config\\sam",
+    "expected_safe_behavior": "Block directory traversal"
+  },
+  {
+    "attack_type": "Path Traversal",
+    "severity": "HIGH",
+    "param_name": "password",
+    "param_location": "body",
+    "payload": "....//....//....//etc/passwd",
+    "expected_safe_behavior": "Block directory traversal"
+  },
+  {
+    "attack_type": "Integer Overflow/Underflow",
+    "severity": "MEDIUM",
+    "param_name": "age",
+    "param_location": "body",
+    "payload": 0,
+    "expected_safe_behavior": "Handle extreme integers safely"
+  },
+  {
+    "attack_type": "Integer Overflow/Underflow",
+    "severity": "MEDIUM",
+    "param_name": "age",
+    "param_location": "body",
+    "payload": -1,
+    "expected_safe_behavior": "Handle extreme integers safely"
+  },
+  {
+    "attack_type": "Integer Overflow/Underflow",
+    "severity": "MEDIUM",
+    "param_name": "age",
+    "param_location": "body",
+    "payload": -2147483648,
+    "expected_safe_behavior": "Handle extreme integers safely"
+  },
+  {
+    "attack_type": "Integer Overflow/Underflow",
+    "severity": "MEDIUM",
+    "param_name": "age",
+    "param_location": "body",
+    "payload": 2147483647,
+    "expected_safe_behavior": "Handle extreme integers safely"
+  },
+  {
+    "attack_type": "Integer Overflow/Underflow",
+    "severity": "MEDIUM",
+    "param_name": "age",
+    "param_location": "body",
+    "payload": -9223372036854775808,
+    "expected_safe_behavior": "Handle extreme integers safely"
+  },
+  {
+    "attack_type": "Integer Overflow/Underflow",
+    "severity": "MEDIUM",
+    "param_name": "age",
+    "param_location": "body",
+    "payload": 9223372036854775807,
+    "expected_safe_behavior": "Handle extreme integers safely"
+  },
+  {
+    "attack_type": "Integer Overflow/Underflow",
+    "severity": "MEDIUM",
+    "param_name": "age",
+    "param_location": "body",
+    "payload": 999999999999999999,
+    "expected_safe_behavior": "Handle extreme integers safely"
+  },
+  {
+    "attack_type": "Boundary Violation",
+    "severity": "MEDIUM",
+    "param_name": "age",
+    "param_location": "body",
+    "payload": 17,
+    "expected_safe_behavior": "Reject values < 18"
+  },
+  {
+    "attack_type": "Boundary Violation",
+    "severity": "MEDIUM",
+    "param_name": "age",
+    "param_location": "body",
+    "payload": 151,
+    "expected_safe_behavior": "Reject values > 150"
+  },
+  {
+    "attack_type": "SQL Injection",
+    "severity": "CRITICAL",
+    "param_name": "role",
+    "param_location": "body",
+    "payload": "' OR '1'='1",
+    "expected_safe_behavior": "Reject malicious SQL syntax"
+  },
+  {
+    "attack_type": "SQL Injection",
+    "severity": "CRITICAL",
+    "param_name": "role",
+    "param_location": "body",
+    "payload": "' OR '1'='1' --",
+    "expected_safe_behavior": "Reject malicious SQL syntax"
+  },
+  {
+    "attack_type": "SQL Injection",
+    "severity": "CRITICAL",
+    "param_name": "role",
+    "param_location": "body",
+    "payload": "' OR '1'='1' /*",
+    "expected_safe_behavior": "Reject malicious SQL syntax"
+  },
+  {
+    "attack_type": "SQL Injection",
+    "severity": "CRITICAL",
+    "param_name": "role",
+    "param_location": "body",
+    "payload": "admin'--",
+    "expected_safe_behavior": "Reject malicious SQL syntax"
+  },
+  {
+    "attack_type": "SQL Injection",
+    "severity": "CRITICAL",
+    "param_name": "role",
+    "param_location": "body",
+    "payload": "admin' #",
+    "expected_safe_behavior": "Reject malicious SQL syntax"
+  },
+  {
+    "attack_type": "XSS",
+    "severity": "HIGH",
+    "param_name": "role",
+    "param_location": "body",
+    "payload": "<script>alert('XSS')</script>",
+    "expected_safe_behavior": "Sanitize or escape HTML"
+  },
+  {
+    "attack_type": "XSS",
+    "severity": "HIGH",
+    "param_name": "role",
+    "param_location": "body",
+    "payload": "<img src=x onerror=alert('XSS')>",
+    "expected_safe_behavior": "Sanitize or escape HTML"
+  },
+  {
+    "attack_type": "XSS",
+    "severity": "HIGH",
+    "param_name": "role",
+    "param_location": "body",
+    "payload": "<svg/onload=alert('XSS')>",
+    "expected_safe_behavior": "Sanitize or escape HTML"
+  },
+  {
+    "attack_type": "Command Injection",
+    "severity": "CRITICAL",
+    "param_name": "role",
+    "param_location": "body",
+    "payload": "; ls -la",
+    "expected_safe_behavior": "Reject shell metacharacters"
+  },
+  {
+    "attack_type": "Command Injection",
+    "severity": "CRITICAL",
+    "param_name": "role",
+    "param_location": "body",
+    "payload": "| whoami",
+    "expected_safe_behavior": "Reject shell metacharacters"
+  },
+  {
+    "attack_type": "Command Injection",
+    "severity": "CRITICAL",
+    "param_name": "role",
+    "param_location": "body",
+    "payload": "&& cat /etc/passwd",
+    "expected_safe_behavior": "Reject shell metacharacters"
+  },
+  {
+    "attack_type": "Path Traversal",
+    "severity": "HIGH",
+    "param_name": "role",
+    "param_location": "body",
+    "payload": "../../../etc/passwd",
+    "expected_safe_behavior": "Block directory traversal"
+  },
+  {
+    "attack_type": "Path Traversal",
+    "severity": "HIGH",
+    "param_name": "role",
+    "param_location": "body",
+    "payload": "..\\..\\..\\windows\\system32\\config\\sam",
+    "expected_safe_behavior": "Block directory traversal"
+  },
+  {
+    "attack_type": "Path Traversal",
+    "severity": "HIGH",
+    "param_name": "role",
+    "param_location": "body",
+    "payload": "....//....//....//etc/passwd",
+    "expected_safe_behavior": "Block directory traversal"
+  },
+  {
+    "attack_type": "Missing Required Field",
+    "severity": "MEDIUM",
+    "param_name": "username",
+    "param_location": "body",
+    "payload": "<MISSING>",
+    "expected_safe_behavior": "Reject request missing username"
+  },
+  {
+    "attack_type": "Missing Required Field",
+    "severity": "MEDIUM",
+    "param_name": "email",
+    "param_location": "body",
+    "payload": "<MISSING>",
+    "expected_safe_behavior": "Reject request missing email"
+  },
+  {
+    "attack_type": "Missing Required Field",
+    "severity": "MEDIUM",
+    "param_name": "password",
+    "param_location": "body",
+    "payload": "<MISSING>",
+    "expected_safe_behavior": "Reject request missing password"
+  }
+]

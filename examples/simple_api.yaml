@@ -1,0 +1,208 @@
+openapi: 3.0.0
+info:
+  title: Simple User API
+  version: 1.0.0
+  description: A simple API for managing users
+
+servers:
+  - url: https://api.example.com/v1
+    description: Production server
+  - url: https://staging-api.example.com/v1
+    description: Staging server
+
+paths:
+  /users:
+    get:
+      summary: List all users
+      description: Retrieve a list of all registered users
+      tags:
+        - Users
+      parameters:
+        - name: limit
+          in: query
+          description: Maximum number of users to return
+          required: false
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 100
+            default: 10
+        - name: offset
+          in: query
+          description: Number of users to skip
+          required: false
+          schema:
+            type: integer
+            minimum: 0
+            default: 0
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    id:
+                      type: integer
+                    username:
+                      type: string
+                    email:
+                      type: string
+        '400':
+          description: Bad request
+        '500':
+          description: Internal server error
+    
+    post:
+      summary: Create a new user
+      description: Register a new user in the system
+      tags:
+        - Users
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - username
+                - email
+                - password
+              properties:
+                username:
+                  type: string
+                  minLength: 3
+                  maxLength: 20
+                  pattern: '^[a-zA-Z0-9_]+$'
+                  description: Unique username
+                email:
+                  type: string
+                  format: email
+                  description: Valid email address
+                password:
+                  type: string
+                  minLength: 8
+                  maxLength: 128
+                  description: Strong password
+                age:
+                  type: integer
+                  minimum: 18
+                  maximum: 150
+                  description: User's age (optional)
+                role:
+                  type: string
+                  enum: [admin, user, guest]
+                  default: user
+                  description: User role
+      responses:
+        '201':
+          description: User created successfully
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: integer
+                  username:
+                    type: string
+                  message:
+                    type: string
+        '400':
+          description: Invalid input
+        '409':
+          description: User already exists
+
+  /users/{userId}:
+    get:
+      summary: Get user by ID
+      description: Retrieve detailed information about a specific user
+      tags:
+        - Users
+      parameters:
+        - name: userId
+          in: path
+          required: true
+          description: Unique user identifier
+          schema:
+            type: integer
+            minimum: 1
+        - name: includeDetails
+          in: query
+          required: false
+          description: Include additional user details
+          schema:
+            type: boolean
+            default: false
+      responses:
+        '200':
+          description: User found
+        '404':
+          description: User not found
+        '403':
+          description: Access denied
+    
+    put:
+      summary: Update user
+      description: Update an existing user's information
+      tags:
+        - Users
+      parameters:
+        - name: userId
+          in: path
+          required: true
+          schema:
+            type: integer
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                email:
+                  type: string
+                  format: email
+                age:
+                  type: integer
+                  minimum: 18
+                  maximum: 150
+      responses:
+        '200':
+          description: User updated
+        '404':
+          description: User not found
+    
+    delete:
+      summary: Delete user
+      description: Remove a user from the system
+      tags:
+        - Users
+      parameters:
+        - name: userId
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        '204':
+          description: User deleted
+        '404':
+          description: User not found
+
+components:
+  securitySchemes:
+    ApiKeyAuth:
+      type: apiKey
+      in: header
+      name: X-API-Key
+    BearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+
+security:
+  - ApiKeyAuth: []

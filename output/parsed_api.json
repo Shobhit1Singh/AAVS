@@ -1,0 +1,77 @@
+{
+  "api_info": {
+    "title": "Simple User API",
+    "version": "1.0.0",
+    "description": "A simple API for managing users",
+    "base_url": "https://api.example.com/v1"
+  },
+  "endpoints": [
+    {
+      "path": "/users",
+      "method": "GET",
+      "summary": "List all users",
+      "description": "Retrieve a list of all registered users",
+      "operation_id": "get_/users",
+      "tags": [
+        "Users"
+      ],
+      "deprecated": false
+    },
+    {
+      "path": "/users",
+      "method": "POST",
+      "summary": "Create a new user",
+      "description": "Register a new user in the system",
+      "operation_id": "post_/users",
+      "tags": [
+        "Users"
+      ],
+      "deprecated": false
+    },
+    {
+      "path": "/users/{userId}",
+      "method": "GET",
+      "summary": "Get user by ID",
+      "description": "Retrieve detailed information about a specific user",
+      "operation_id": "get_/users/{userId}",
+      "tags": [
+        "Users"
+      ],
+      "deprecated": false
+    },
+    {
+      "path": "/users/{userId}",
+      "method": "PUT",
+      "summary": "Update user",
+      "description": "Update an existing user's information",
+      "operation_id": "put_/users/{userId}",
+      "tags": [
+        "Users"
+      ],
+      "deprecated": false
+    },
+    {
+      "path": "/users/{userId}",
+      "method": "DELETE",
+      "summary": "Delete user",
+      "description": "Remove a user from the system",
+      "operation_id": "delete_/users/{userId}",
+      "tags": [
+        "Users"
+      ],
+      "deprecated": false
+    }
+  ],
+  "security_schemes": {
+    "ApiKeyAuth": {
+      "type": "apiKey",
+      "in": "header",
+      "name": "X-API-Key"
+    },
+    "BearerAuth": {
+      "type": "http",
+      "scheme": "bearer",
+      "bearerFormat": "JWT"
+    }
+  }
+}
