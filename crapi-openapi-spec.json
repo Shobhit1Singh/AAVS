@@ -9,7 +9,7 @@
     "url" : "https://github.com/OWASP/crAPI"
   },
   "servers" : [ {
-    "url" : "http://localhost:8888"
+     "url": "http://demo.crapi.io"
   } ],
   "paths" : {
     "/identity/api/auth/signup" : {
