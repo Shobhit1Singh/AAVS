@@ -1,0 +1,106 @@
+# API Security Fuzzer Configuration File
+# Complete example with all options
+
+# Target API Configuration
+target:
+  base_url: https://api.example.com/v1
+  spec_file: examples/simple_api.yaml
+  
+  # Alternative: Auto-discover spec from base URL
+  # auto_discover: true
+
+# Authentication Configuration
+auth:
+  # Method 1: Bearer Token (JWT)
+  bearer_token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...
+  
+  # Method 2: API Key
+  # api_key: your_api_key_here
+  # api_key_header: X-API-Key  # Optional, default is X-API-Key
+  
+  # Method 3: Basic Auth
+  # basic:
+  #   username: admin
+  #   password: password123
+  
+  # Method 4: Login endpoint
+  # login:
+  #   endpoint: /auth/login
+  #   method: POST
+  #   credentials:
+  #     username: admin
+  #     password: password123
+
+# Scan Configuration
+scan:
+  # Performance settings
+  rate_limit: 10        # Max requests per second
+  timeout: 10           # Request timeout in seconds
+  delay: 0.1            # Delay between requests (seconds)
+  
+  # Features
+  use_ml: true          # Use machine learning optimization
+  parallel: false       # Parallel execution (not implemented yet)
+  
+  # Scope
+  endpoints:            # Specific endpoints to test (optional)
+    - "GET /users"
+    - "POST /users"
+    - "GET /users/{userId}"
+  
+  # Or test all endpoints
+  # test_all_endpoints: true
+
+# Attack Configuration
+attacks:
+  # Enable/disable attack categories
+  categories:
+    sql_injection: true
+    nosql_injection: true
+    xss: true
+    command_injection: true
+    path_traversal: true
+    xxe: true
+    auth_bypass: true
+    jwt_attacks: true
+    oauth_attacks: false
+    
+  # Custom attack payloads (optional)
+  custom_payloads:
+    - "' OR '1'='1' -- custom"
+    - "../../../custom/path"
+  
+  # Severity threshold (skip attacks below this)
+  min_severity: MEDIUM  # CRITICAL, HIGH, MEDIUM, LOW
+
+# Output Configuration
+output:
+  directory: output/reports
+  
+  # Report formats
+  formats:
+    - json
+    - html
+    - txt
+  
+  # Report options
+  verbose: true
+  include_safe_results: false  # Include non-vulnerable results
+
+# Advanced Options
+advanced:
+  # Retry configuration
+  max_retries: 3
+  retry_delay: 1
+  
+  # User agent
+  user_agent: "API-Fuzzer/1.0"
+  
+  # Custom headers
+  headers:
+    X-Custom-Header: "value"
+  
+  # Proxy configuration (optional)
+  # proxy:
+  #   http: http://proxy.example.com:8080
+  #   https: https://proxy.example.com:8080

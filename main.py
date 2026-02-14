@@ -3,8 +3,6 @@ from attacks.attack_generator import AttackGenerator
 from attacks.auth_attacks import AuthAttackGenerator
 from attacks.executor import TestExecutor
 from attacks.ml_optimiser import MLPayloadOptimizer
-from analyser.response_analyser import ResponseAnalyzer
-from analyser.reporter import ReportGenerator
 from core.session_manager import SessionManager
 from core.rate_limiter import RateLimiter
 from colorama import Fore, Style
@@ -84,8 +82,6 @@ def run_complete_scan():
 
     parser = get_parser()
     generator = AttackGenerator()
-    analyzer = ResponseAnalyzer()
-    reporter = ReportGenerator()
 
     endpoint = parser.get_endpoint_details('/users', 'POST')
     attacks = generator.generate_attacks_for_endpoint(endpoint)
@@ -99,14 +95,7 @@ def run_complete_scan():
         delay=0.1
     )
 
-    analyzer.analyze_all_results(results)
-    analyzer.print_summary()
-
-    reporter.generate_html_report(
-        analyzer.get_vulnerabilities(),
-        analyzer.get_statistics(),
-        parser.get_api_info()
-    )
+    print(f"{Fore.GREEN}✓ Executed {len(results)} attacks{Style.RESET_ALL}")
 
 
 def run_advanced_scan():
@@ -116,8 +105,6 @@ def run_advanced_scan():
     generator = AttackGenerator()
     auth_generator = AuthAttackGenerator()
     optimizer = MLPayloadOptimizer()
-    analyzer = ResponseAnalyzer()
-    reporter = ReportGenerator()
     rate_limiter = RateLimiter(max_requests_per_second=5)
     executor = TestExecutor(BASE_URL, timeout=5)
 
@@ -141,13 +128,7 @@ def run_advanced_scan():
                 result.get('response_headers', {})
             )
 
-    analyzer.analyze_all_results(results)
-
-    reporter.generate_html_report(
-        analyzer.get_vulnerabilities(),
-        analyzer.get_statistics(),
-        parser.get_api_info()
-    )
+    print(f"{Fore.GREEN}✓ Intelligent scan executed on {len(results)} attacks{Style.RESET_ALL}")
 
     if optimizer.train():
         optimizer.save_model()
