@@ -21,7 +21,7 @@ def get_db():
 
 @flask_app.route("/")
 def home():
-    return "Vulnerable API Running"
+s    return "Vulnerable API Running"
 
 
 @flask_app.route('/api/v1/users', methods=['GET'])

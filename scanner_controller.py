@@ -55,7 +55,7 @@ def analyze_response(url, payload, response):
 
 
 if __name__ == "__main__":
-    findings = run_scan("openapi_spec.yaml")
+    findings = run_scan("crapi-openapi-spec.json")
 
     for f in findings:
         print(f)
