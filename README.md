@@ -243,10 +243,6 @@ This tool is NOT for:
 
 **You are responsible for your actions.** Always get written permission before testing third-party systems.
 
-## 📄 License
-
-MIT License - see [LICENSE](LICENSE) file
-
 ## 🙏 Acknowledgments
 
 Built with:
@@ -257,10 +253,9 @@ Built with:
 
 ## 📧 Contact
 
-- **Author**: Your Name
-- **Email**: your.email@example.com
-- **GitHub**: https://github.com/yourusername/api-security-fuzzer
-
+- **Author**: Shobhit Singh
+- **GitHub**: https://github.com/Shobhit1Singh/api-security-fuzzer
+- **LinkedIn**: www.linkedin.com/in/shobhit-singh-a65670356
 ---
 
 **⭐ Star this repo if you find it useful!**
