@@ -1,5 +1,5 @@
 # 🔒 API Security Fuzzer
-
+# Created By Shobhit Singh
 Professional automated security testing tool for REST APIs. Find vulnerabilities through intelligent fuzzing, JWT attacks, SQL injection, and more.
 
 ![Version](https://img.shields.io/badge/version-1.0.0-blue)
