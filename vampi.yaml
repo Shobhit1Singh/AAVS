@@ -1,0 +1,161 @@
+openapi: 3.0.1
+info:
+  title: VAmPI
+  description: Vulnerable API for Security Testing
+  version: "1.0"
+
+servers:
+  - url: http://127.0.0.1:5000
+
+paths:
+
+  /users/v1:
+    get:
+      tags:
+        - Users
+      summary: Get all users
+      responses:
+        "200":
+          description: Successful response
+
+  /users/v1/{username}:
+    get:
+      tags:
+        - Users
+      summary: Retrieve user by username
+      parameters:
+        - name: username
+          in: path
+          required: true
+          schema:
+            type: string
+          example: admin
+      responses:
+        "200":
+          description: Successful response
+          content:
+            text/plain:
+              schema:
+                type: string
+                example: ""
+
+  /users/v1/register:
+    post:
+      tags:
+        - Auth
+      summary: Register a new user
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - username
+                - password
+                - email
+              properties:
+                username:
+                  type: string
+                  example: testuser
+                password:
+                  type: string
+                  example: Password123
+                email:
+                  type: string
+                  example: test@test.com
+      responses:
+        "200":
+          description: User registered successfully
+
+  /users/v1/login:
+    post:
+      tags:
+        - Auth
+      summary: User login
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - username
+                - password
+              properties:
+                username:
+                  type: string
+                  example: admin
+                password:
+                  type: string
+                  example: admin
+      responses:
+        "200":
+          description: Login successful
+
+  /users/v1/email:
+    put:
+      tags:
+        - Users
+      summary: Update user email
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - email
+              properties:
+                email:
+                  type: string
+                  example: new@test.com
+      responses:
+        "200":
+          description: Email updated successfully
+
+  /users/v1/password:
+    put:
+      tags:
+        - Users
+      summary: Update password
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - password
+              properties:
+                password:
+                  type: string
+                  example: NewPassword123
+      responses:
+        "200":
+          description: Password updated successfully
+
+  /books/v1:
+    get:
+      tags:
+        - Books
+      summary: Get all books
+      responses:
+        "200":
+          description: Successful response
+
+  /books/v1/{book_id}:
+    get:
+      tags:
+        - Books
+      summary: Get book by ID
+      parameters:
+        - name: book_id
+          in: path
+          required: true
+          schema:
+            type: integer
+          example: 1
+      responses:
+        "200":
+          description: Successful response

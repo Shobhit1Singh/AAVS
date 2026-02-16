@@ -1,7 +1,7 @@
 from parser.api_parser import APIParser
 from attacks.attack_generator import AttackGenerator
 from attacks.executor import TestExecutor
-
+from analyser.response_analyser import ResponseAnalyzer
 def run_scan(swagger_path):
 
     parser = APIParser(swagger_path)
@@ -9,28 +9,32 @@ def run_scan(swagger_path):
     attacker = AttackGenerator()
     executor = TestExecutor(parser.base_url)
 
-    results = []
+    analyzer = ResponseAnalyzer()
+
+    all_results = []
 
     for ep in endpoints:
-        url = ep["path"]
-        method = ep["method"]
-        params = ep.get("params", [])
         details = parser.get_endpoint_details(ep["path"], ep["method"])
         payloads = attacker.generate_attacks_for_endpoint(details)
 
-
         for payload in payloads:
             response = executor.execute_attack(
-             attack=payload,
-            endpoint_path=ep["path"],
-            method=ep["method"]
+                attack=payload,
+                endpoint_path=ep["path"],
+                method=ep["method"]
             )
 
-            finding = analyze_response(url, payload, response)
-            if finding:
-                results.append(finding)
+            result_data = {
+                "url": ep["path"],
+                "payload": payload,
+                "response": response
+            }
 
-    return results
+            all_results.append(result_data)
+
+    findings = analyzer.analyze_all_results(all_results)
+    return findings
+    # return results
 
 
 def analyze_response(url, payload, response):
@@ -55,7 +59,7 @@ def analyze_response(url, payload, response):
 
 
 if __name__ == "__main__":
-    findings = run_scan("openapi3.yml")
+    findings = run_scan("C:/AAVS/vampi.yaml")
 
     for f in findings:
         print(f)
