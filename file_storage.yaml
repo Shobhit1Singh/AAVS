@@ -1,0 +1,57 @@
+openapi: 3.0.1
+info:
+  title: VulnFiles API
+  version: "1.0"
+
+servers:
+  - url: http://127.0.0.1:7000
+
+paths:
+
+  /files/v1/upload:
+    post:
+      summary: Upload file
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [filename, content]
+              properties:
+                filename:
+                  type: string
+                  example: "../../etc/passwd"
+                content:
+                  type: string
+      responses:
+        "200":
+          description: Uploaded
+
+  /files/v1/download:
+    get:
+      summary: Download file
+      parameters:
+        - name: path
+          in: query
+          required: true
+          schema:
+            type: string
+          example: "../../../../windows/system.ini"
+      responses:
+        "200":
+          description: File content
+
+  /files/v1/delete:
+    delete:
+      summary: Delete file
+      parameters:
+        - name: filename
+          in: query
+          required: true
+          schema:
+            type: string
+          example: "../../../important.db"
+      responses:
+        "200":
+          description: Deleted

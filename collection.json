@@ -1,0 +1,2094 @@
+{
+	"info": {
+		"_postman_id": "61d1fb89-87c7-438d-aa84-92bc79cefdcc",
+		"name": "SmartBookingAI Unified API v2.0",
+		"description": "Complete test collection for User Management, Booking System, AI Prediction, and Notification services",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "42106306",
+		"_collection_link": "https://language-2983.postman.co/workspace/My-Workspace~7112f5a1-9289-4edb-881e-f8255fe77448/collection/42106306-61d1fb89-87c7-438d-aa84-92bc79cefdcc?action=share&source=collection_link&creator=42106306"
+	},
+	"item": [
+		{
+			"name": "Health & Status",
+			"item": [
+				{
+					"name": "Root - API Info",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}",
+							"host": [
+								"{{base_url}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Health Check",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/health",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"health"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "1. User Management",
+			"item": [
+				{
+					"name": "Register User",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"if (pm.response.code === 200) {",
+									"    var jsonData = pm.response.json();",
+									"    if (jsonData.data && jsonData.data.id) {",
+									"        pm.collectionVariables.set('user_id', jsonData.data.id);",
+									"    }",
+									"}"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"username\": \"testuser\",\n  \"email\": \"test@example.com\",\n  \"password\": \"password123\",\n  \"first_name\": \"Test\",\n  \"last_name\": \"User\",\n  \"phone\": \"+1234567890\",\n  \"address\": \"123 Test St\",\n  \"city\": \"Test City\",\n  \"country\": \"Test Country\",\n  \"postal_code\": \"12345\"\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/register",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"register"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Register Admin User",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"username\": \"admin\",\n  \"email\": \"admin@example.com\",\n  \"password\": \"admin123\",\n  \"first_name\": \"Admin\",\n  \"last_name\": \"User\",\n  \"phone\": \"+1987654321\",\n  \"address\": \"456 Admin Ave\",\n  \"city\": \"Admin City\",\n  \"country\": \"Admin Country\",\n  \"postal_code\": \"54321\"\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/register",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"register"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Login",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"if (pm.response.code === 200) {",
+									"    var jsonData = pm.response.json();",
+									"    if (jsonData.data && jsonData.data.access_token) {",
+									"        pm.collectionVariables.set('access_token', jsonData.data.access_token);",
+									"    }",
+									"}"
+								],
+								"type": "text/javascript",
+								"packages": {},
+								"requests": {}
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"username\": \"admin\",\n  \"password\": \"admin123\"\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/login",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"login"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Login as Admin",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"if (pm.response.code === 200) {",
+									"    var jsonData = pm.response.json();",
+									"    if (jsonData.data && jsonData.data.access_token) {",
+									"        pm.collectionVariables.set('access_token', jsonData.data.access_token);",
+									"    }",
+									"}"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"username\": \"admin\",\n  \"password\": \"admin123\"\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/login",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"login"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Current User Info",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{access_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/users/me",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"users",
+								"me"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update Current User",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{access_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"first_name\": \"Updated\",\n  \"last_name\": \"Name\",\n  \"phone\": \"+1111111111\"\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/users/me",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"users",
+								"me"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get All Users (Admin)",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{access_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/users",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"users"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get User by ID (Admin)",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{access_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/users/{{user_id}}",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"users",
+								"{{user_id}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update User by ID (Admin)",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{access_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"role\": \"admin\"\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/users/{{user_id}}",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"users",
+								"{{user_id}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete User (Admin)",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{access_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/users/{{user_id}}",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"users",
+								"{{user_id}}"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "2. Event Management",
+			"item": [
+				{
+					"name": "Create Event",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"if (pm.response.code === 200) {",
+									"    var jsonData = pm.response.json();",
+									"    if (jsonData.data && jsonData.data.id) {",
+									"        pm.collectionVariables.set('event_id', jsonData.data.id);",
+									"    }",
+									"}"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{access_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"title\": \"AI Workshop 2025\",\n  \"description\": \"Learn about AI and Machine Learning\",\n  \"capacity\": 100,\n  \"duration_minutes\": 120,\n  \"start_time\": \"2025-01-15T09:00:00\",\n  \"end_time\": \"2025-01-20T18:00:00\",\n  \"created_by\": 1\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/events",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"events"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get All Events",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/all_events",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"all_events"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Event by ID",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/events/{{event_id}}",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"events",
+								"{{event_id}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update Event (Admin)",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{access_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"title\": \"Updated AI Workshop\",\n  \"capacity\": 150\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/events/{{event_id}}",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"events",
+								"{{event_id}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Event (Admin)",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{access_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/events/{{event_id}}",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"events",
+								"{{event_id}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Event Statistics",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/events/{{event_id}}/statistics",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"events",
+								"{{event_id}}",
+								"statistics"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Event Capacity Status",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/events/{{event_id}}/capacity",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"events",
+								"{{event_id}}",
+								"capacity"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Availability Calendar",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/events/{{event_id}}/availability-calendar?month=1&year=2025",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"events",
+								"{{event_id}}",
+								"availability-calendar"
+							],
+							"query": [
+								{
+									"key": "month",
+									"value": "1"
+								},
+								{
+									"key": "year",
+									"value": "2025"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Booking Flow Data",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/events/{{event_id}}/booking-flow",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"events",
+								"{{event_id}}",
+								"booking-flow"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "New Request",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": ""
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "3. Time Slot Management",
+			"item": [
+				{
+					"name": "Get Available Slots",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"if (pm.response.code === 200) {",
+									"    var jsonData = pm.response.json();",
+									"    if (jsonData.data && jsonData.data.length > 0) {",
+									"        pm.collectionVariables.set('slot_id', jsonData.data[0].id);",
+									"    }",
+									"}"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/events/{{event_id}}/slots",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"events",
+								"{{event_id}}",
+								"slots"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Slots by Date",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/events/{{event_id}}/slots?date=2025-01-15",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"events",
+								"{{event_id}}",
+								"slots"
+							],
+							"query": [
+								{
+									"key": "date",
+									"value": "2025-01-15"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Slots Grouped by Date",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/events/{{event_id}}/slots-by-date?start_date=2025-01-15&end_date=2025-01-20",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"events",
+								"{{event_id}}",
+								"slots-by-date"
+							],
+							"query": [
+								{
+									"key": "start_date",
+									"value": "2025-01-15"
+								},
+								{
+									"key": "end_date",
+									"value": "2025-01-20"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create Bulk Time Slots (Simple)",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{access_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer {{admin_token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"event_id\": {{event_id}},\n  \"dates\": [\"2024-12-16\", \"2024-12-17\", \"2024-12-18\"],\n  \"times\": [\"09:00\", \"11:00\", \"14:00\", \"16:00\"],\n  \"duration_minutes\": 60,\n  \"max_capacity\": 30\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/events/bulk-slots-simple",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"events",
+								"bulk-slots-simple"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create Bulk Time Slots (Standard)",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{access_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"dates\": [\"2025-01-18\", \"2025-01-19\"],\n  \"times\": [\"10:00\", \"15:00\"],\n  \"duration_minutes\": 90,\n  \"max_capacity\": 25\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/events/{{event_id}}/bulk-slots",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"events",
+								"{{event_id}}",
+								"bulk-slots"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create Flexible Bulk Time Slots",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{access_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"date_slots\": [\n    {\n      \"date\": \"2025-01-20\",\n      \"time_ranges\": [\n        {\n          \"start_time\": \"09:00\",\n          \"end_time\": \"11:00\"\n        },\n        {\n          \"start_time\": \"14:00\",\n          \"end_time\": \"16:30\"\n        }\n      ]\n    }\n  ]\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/events/{{event_id}}/bulk-slots-flexible",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"events",
+								"{{event_id}}",
+								"bulk-slots-flexible"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "4. Booking Management",
+			"item": [
+				{
+					"name": "Check Availability",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{access_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"event_id\": {{event_id}},\n  \"time_slot_id\": {{slot_id}},\n  \"quantity\": 2\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/bookings/check-availability",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"bookings",
+								"check-availability"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create Booking (Simple)",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"if (pm.response.code === 200) {",
+									"    var jsonData = pm.response.json();",
+									"    if (jsonData.data && jsonData.data.id) {",
+									"        pm.collectionVariables.set('booking_id', jsonData.data.id);",
+									"    }",
+									"}"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{access_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"event_id\": {{event_id}},\n  \"time_slot_id\": {{slot_id}},\n  \"quantity\": 2\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/bookings",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"bookings"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create Booking with Validation",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{access_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"event_id\": {{event_id}},\n  \"time_slot_id\": {{slot_id}},\n  \"quantity\": 1\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/bookings/create-with-validation",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"bookings",
+								"create-with-validation"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get My Bookings",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{access_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/bookings/my-bookings",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"bookings",
+								"my-bookings"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Booking by ID",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{access_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/bookings/{{booking_id}}",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"bookings",
+								"{{booking_id}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update Booking Status",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{access_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"status\": \"confirmed\"\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/bookings/{{booking_id}}",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"bookings",
+								"{{booking_id}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Cancel Booking",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{access_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"status\": \"cancelled\"\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/bookings/{{booking_id}}",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"bookings",
+								"{{booking_id}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get All Bookings (Admin)",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{access_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/admin/bookings/all",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"admin",
+								"bookings",
+								"all"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Event Bookings (Admin)",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{access_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/admin/bookings/event/{{event_id}}",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"admin",
+								"bookings",
+								"event",
+								"{{event_id}}"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "5. AI Prediction Service",
+			"item": [
+				{
+					"name": "Check Model Status",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{access_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/ai/model-status",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"ai",
+								"model-status"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Model Info",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{access_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/ai/model-info",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"ai",
+								"model-info"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Data Statistics",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{access_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/ai/data-stats",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"ai",
+								"data-stats"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Generate Synthetic Data (Admin)",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{access_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"days_back\": 60,\n  \"base_probability\": 0.3\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/ai/generate-data",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"ai",
+								"generate-data"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Train AI Models (Admin)",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{access_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"days_back\": 60,\n  \"base_probability\": 0.3\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/ai/train-models",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"ai",
+								"train-models"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Predict Demand",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{access_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"event_id\": 11,\n  \"start_time\": \"2025-05-15\",\n  \"max_capacity\": 30,\n  \"duration_minutes\": 120\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/ai/predict-demand",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"ai",
+								"predict-demand"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Slots with AI Prediction",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{access_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/events/{{event_id}}/slots-with-prediction?date=2025-01-15",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"events",
+								"{{event_id}}",
+								"slots-with-prediction"
+							],
+							"query": [
+								{
+									"key": "date",
+									"value": "2025-01-15"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Recommended Slots",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{access_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/api/recommend/event/{{event_id}}?limit=5",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"recommend",
+								"event",
+								"{{event_id}}"
+							],
+							"query": [
+								{
+									"key": "limit",
+									"value": "5"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Analyze Booking Patterns",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{access_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/ai/analyze-patterns",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"ai",
+								"analyze-patterns"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Slots-with-Prediction",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer {{access_token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/events/{{event_id}}/slots-with-prediction",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"events",
+								"{{event_id}}",
+								"slots-with-prediction"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "6. Notification Service",
+			"item": [
+				{
+					"name": "Get Available Templates",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{access_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/notifications/templates",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"notifications",
+								"templates"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Send Email Notification",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{access_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"recipient_email\": \"test@example.com\",\n  \"recipient_name\": \"Test User\",\n  \"notification_type\": \"booking_confirmation\",\n  \"data\": {\n    \"event_title\": \"AI Workshop\",\n    \"start_time\": \"2025-01-15 10:00 AM\",\n    \"duration\": 120,\n    \"booking_id\": 1\n  }\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/notifications/send-email",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"notifications",
+								"send-email"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Send Booking Confirmation",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{access_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"recipient_email\": \"test@example.com\",\n  \"recipient_name\": \"Test User\",\n  \"event_title\": \"AI Workshop 2025\",\n  \"start_time\": \"2025-01-15 10:00 AM\",\n  \"duration\": 120,\n  \"booking_id\": {{booking_id}}\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/notifications/send-booking-confirmation",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"notifications",
+								"send-booking-confirmation"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Send Cancellation Notice",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{access_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"recipient_email\": \"test@example.com\",\n  \"recipient_name\": \"Test User\",\n  \"event_title\": \"AI Workshop 2025\",\n  \"start_time\": \"2025-01-15 10:00 AM\",\n  \"booking_id\": {{booking_id}}\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/notifications/send-cancellation",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"notifications",
+								"send-cancellation"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Send AI Recommendation",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{access_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"recipient_email\": \"test@example.com\",\n  \"recipient_name\": \"Test User\",\n  \"recommendations\": \"<ul><li>Monday 10:00 AM - High demand expected</li><li>Tuesday 2:00 PM - Moderate demand</li></ul>\",\n  \"confidence\": 85\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/notifications/send-ai-recommendation",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"notifications",
+								"send-ai-recommendation"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Send Booking Reminder",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{access_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"recipient_email\": \"test@example.com\",\n  \"recipient_name\": \"Test User\",\n  \"event_title\": \"AI Workshop 2025\",\n  \"start_time\": \"2025-01-15 10:00 AM\",\n  \"location\": \"Conference Room A\"\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/notifications/send-reminder",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"notifications",
+								"send-reminder"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Send Bulk Notification (Admin)",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{access_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"recipients\": [\"user1@example.com\", \"user2@example.com\"],\n  \"notification_type\": \"booking_reminder\",\n  \"data\": {\n    \"event_title\": \"Important Event\",\n    \"start_time\": \"2025-01-20 14:00 PM\",\n    \"location\": \"Main Hall\"\n  }\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/notifications/bulk",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"notifications",
+								"bulk"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Notification History",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{access_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/notifications/history/test@example.com",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"notifications",
+								"history",
+								"test@example.com"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Notification Stats (Admin)",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{access_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/notifications/stats",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"notifications",
+								"stats"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "7. Admin Analytics & Charts",
+			"item": [
+				{
+					"name": "Booking Trends Chart",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{access_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/admin/charts/booking-trends?period=monthly",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"admin",
+								"charts",
+								"booking-trends"
+							],
+							"query": [
+								{
+									"key": "period",
+									"value": "monthly",
+									"description": "Options: daily, weekly, monthly"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Event Popularity Chart",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{access_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/admin/charts/event-popularity?limit=10",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"admin",
+								"charts",
+								"event-popularity"
+							],
+							"query": [
+								{
+									"key": "limit",
+									"value": "10"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Booking Status Distribution",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{access_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/admin/charts/booking-status",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"admin",
+								"charts",
+								"booking-status"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Peak Booking Hours",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{access_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/admin/charts/peak-hours",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"admin",
+								"charts",
+								"peak-hours"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "AI Performance Chart",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{access_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/admin/charts/ai-performance",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"admin",
+								"charts",
+								"ai-performance"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Capacity Utilization Chart",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{access_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/admin/charts/capacity-utilization",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"admin",
+								"charts",
+								"capacity-utilization"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "User Registration Trends",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{access_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/admin/charts/user-registration",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"admin",
+								"charts",
+								"user-registration"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	],
+	"auth": {
+		"type": "bearer",
+		"bearer": [
+			{
+				"key": "token",
+				"value": "{{access_token}}",
+				"type": "string"
+			}
+		]
+	},
+	"variable": [
+		{
+			"key": "base_url",
+			"value": "http://localhost:8000",
+			"type": "string"
+		},
+		{
+			"key": "access_token",
+			"value": "",
+			"type": "string"
+		},
+		{
+			"key": "user_id",
+			"value": "",
+			"type": "string"
+		},
+		{
+			"key": "event_id",
+			"value": "",
+			"type": "string"
+		},
+		{
+			"key": "booking_id",
+			"value": "",
+			"type": "string"
+		},
+		{
+			"key": "slot_id",
+			"value": "",
+			"type": "string"
+		}
+	]
+}

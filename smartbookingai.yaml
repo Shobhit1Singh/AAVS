@@ -1,0 +1,1261 @@
+
+openapi: '3.0.3'
+info:
+  title: SmartBookingAI Unified API v2.0
+  description: Complete test collection for User Management, Booking System, AI Prediction, and Notification services
+  version: '1.0.0'
+servers:
+  - url: |
+        https://api.example.com
+    description: Production server
+paths:
+  /:
+    get:
+      summary: New Request
+      description: ''
+      operationId: get_New_Request
+      tags:
+        - 2. Event Management
+      responses:
+        200:
+          description: Successful response
+        400:
+          description: Bad request
+        500:
+          description: Server error
+  /health:
+    get:
+      summary: Health Check
+      description: ''
+      operationId: get_Health_Check
+      tags:
+        - Health & Status
+      responses:
+        200:
+          description: Successful response
+        400:
+          description: Bad request
+        500:
+          description: Server error
+  /register:
+    post:
+      summary: Register Admin User
+      description: ''
+      operationId: post_Register_Admin_User
+      tags:
+        - 1. User Management
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+            example:
+              username: admin
+              email: admin@example.com
+              password: admin123
+              first_name: Admin
+              last_name: User
+              phone: +1987654321
+              address: 456 Admin Ave
+              city: Admin City
+              country: Admin Country
+              postal_code: '54321'
+      responses:
+        200:
+          description: Successful response
+        400:
+          description: Bad request
+        500:
+          description: Server error
+  /login:
+    post:
+      summary: Login as Admin
+      description: ''
+      operationId: post_Login_as_Admin
+      tags:
+        - 1. User Management
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+            example:
+              username: admin
+              password: admin123
+      responses:
+        200:
+          description: Successful response
+        400:
+          description: Bad request
+        500:
+          description: Server error
+  /users/me:
+    post:
+      summary: Get Current User Info
+      description: ''
+      operationId: post_Get_Current_User_Info
+      tags:
+        - 1. User Management
+      responses:
+        200:
+          description: Successful response
+        400:
+          description: Bad request
+        500:
+          description: Server error
+    put:
+      summary: Update Current User
+      description: ''
+      operationId: put_Update_Current_User
+      tags:
+        - 1. User Management
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+            example:
+              first_name: Updated
+              last_name: Name
+              phone: +1111111111
+      responses:
+        200:
+          description: Successful response
+        400:
+          description: Bad request
+        500:
+          description: Server error
+  /users:
+    post:
+      summary: Get All Users (Admin)
+      description: ''
+      operationId: post_Get_All_Users_Admin
+      tags:
+        - 1. User Management
+      responses:
+        200:
+          description: Successful response
+        400:
+          description: Bad request
+        500:
+          description: Server error
+  /users/{user_id}:
+    post:
+      summary: Get User by ID (Admin)
+      description: ''
+      operationId: post_Get_User_by_ID_Admin
+      tags:
+        - 1. User Management
+      parameters:
+        - name: user_id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        200:
+          description: Successful response
+        400:
+          description: Bad request
+        500:
+          description: Server error
+    put:
+      summary: Update User by ID (Admin)
+      description: ''
+      operationId: put_Update_User_by_ID_Admin
+      tags:
+        - 1. User Management
+      parameters:
+        - name: user_id
+          in: path
+          required: true
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+            example:
+              role: admin
+      responses:
+        200:
+          description: Successful response
+        400:
+          description: Bad request
+        500:
+          description: Server error
+    delete:
+      summary: Delete User (Admin)
+      description: ''
+      operationId: delete_Delete_User_Admin
+      tags:
+        - 1. User Management
+      parameters:
+        - name: user_id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        200:
+          description: Successful response
+        400:
+          description: Bad request
+        500:
+          description: Server error
+  /events:
+    post:
+      summary: Create Event
+      description: ''
+      operationId: post_Create_Event
+      tags:
+        - 2. Event Management
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+            example:
+              title: AI Workshop 2025
+              description: Learn about AI and Machine Learning
+              capacity: 100
+              duration_minutes: 120
+              start_time: |
+                  2025-01-15T09:00:00
+              end_time: |
+                  2025-01-20T18:00:00
+              created_by: 1
+      responses:
+        200:
+          description: Successful response
+        400:
+          description: Bad request
+        500:
+          description: Server error
+  /all_events:
+    post:
+      summary: Get All Events
+      description: ''
+      operationId: post_Get_All_Events
+      tags:
+        - 2. Event Management
+      responses:
+        200:
+          description: Successful response
+        400:
+          description: Bad request
+        500:
+          description: Server error
+  /events/{event_id}:
+    post:
+      summary: Get Event by ID
+      description: ''
+      operationId: post_Get_Event_by_ID
+      tags:
+        - 2. Event Management
+      parameters:
+        - name: event_id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        200:
+          description: Successful response
+        400:
+          description: Bad request
+        500:
+          description: Server error
+    put:
+      summary: Update Event (Admin)
+      description: ''
+      operationId: put_Update_Event_Admin
+      tags:
+        - 2. Event Management
+      parameters:
+        - name: event_id
+          in: path
+          required: true
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+            example:
+              title: Updated AI Workshop
+              capacity: 150
+      responses:
+        200:
+          description: Successful response
+        400:
+          description: Bad request
+        500:
+          description: Server error
+    delete:
+      summary: Delete Event (Admin)
+      description: ''
+      operationId: delete_Delete_Event_Admin
+      tags:
+        - 2. Event Management
+      parameters:
+        - name: event_id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        200:
+          description: Successful response
+        400:
+          description: Bad request
+        500:
+          description: Server error
+  /events/{event_id}/statistics:
+    get:
+      summary: Get Event Statistics
+      description: ''
+      operationId: get_Get_Event_Statistics
+      tags:
+        - 2. Event Management
+      parameters:
+        - name: event_id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        200:
+          description: Successful response
+        400:
+          description: Bad request
+        500:
+          description: Server error
+  /events/{event_id}/capacity:
+    get:
+      summary: Get Event Capacity Status
+      description: ''
+      operationId: get_Get_Event_Capacity_Status
+      tags:
+        - 2. Event Management
+      parameters:
+        - name: event_id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        200:
+          description: Successful response
+        400:
+          description: Bad request
+        500:
+          description: Server error
+  /events/{event_id}/availability-calendar:
+    get:
+      summary: Get Availability Calendar
+      description: ''
+      operationId: get_Get_Availability_Calendar
+      tags:
+        - 2. Event Management
+      parameters:
+        - name: event_id
+          in: path
+          required: true
+          schema:
+            type: string
+        - name: month
+          in: query
+          description: ''
+          required: false
+          schema:
+            type: string
+          example: '1'
+        - name: year
+          in: query
+          description: ''
+          required: false
+          schema:
+            type: string
+          example: '2025'
+      responses:
+        200:
+          description: Successful response
+        400:
+          description: Bad request
+        500:
+          description: Server error
+  /events/{event_id}/booking-flow:
+    get:
+      summary: Get Booking Flow Data
+      description: ''
+      operationId: get_Get_Booking_Flow_Data
+      tags:
+        - 2. Event Management
+      parameters:
+        - name: event_id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        200:
+          description: Successful response
+        400:
+          description: Bad request
+        500:
+          description: Server error
+  /events/{event_id}/slots:
+    post:
+      summary: Get Slots by Date
+      description: ''
+      operationId: post_Get_Slots_by_Date
+      tags:
+        - 3. Time Slot Management
+      parameters:
+        - name: event_id
+          in: path
+          required: true
+          schema:
+            type: string
+        - name: date
+          in: query
+          description: ''
+          required: false
+          schema:
+            type: string
+          example: 2025-01-15
+      responses:
+        200:
+          description: Successful response
+        400:
+          description: Bad request
+        500:
+          description: Server error
+  /events/{event_id}/slots-by-date:
+    get:
+      summary: Get Slots Grouped by Date
+      description: ''
+      operationId: get_Get_Slots_Grouped_by_Date
+      tags:
+        - 3. Time Slot Management
+      parameters:
+        - name: event_id
+          in: path
+          required: true
+          schema:
+            type: string
+        - name: start_date
+          in: query
+          description: ''
+          required: false
+          schema:
+            type: string
+          example: 2025-01-15
+        - name: end_date
+          in: query
+          description: ''
+          required: false
+          schema:
+            type: string
+          example: 2025-01-20
+      responses:
+        200:
+          description: Successful response
+        400:
+          description: Bad request
+        500:
+          description: Server error
+  /events/bulk-slots-simple:
+    post:
+      summary: Create Bulk Time Slots (Simple)
+      description: ''
+      operationId: post_Create_Bulk_Time_Slots_Simple
+      tags:
+        - 3. Time Slot Management
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+            example: |
+                {
+                  "event_id": {{event_id}},
+                  "dates": ["2024-12-16", "2024-12-17", "2024-12-18"],
+                  "times": ["09:00", "11:00", "14:00", "16:00"],
+                  "duration_minutes": 60,
+                  "max_capacity": 30
+                }
+      responses:
+        200:
+          description: Successful response
+        400:
+          description: Bad request
+        500:
+          description: Server error
+  /events/{event_id}/bulk-slots:
+    post:
+      summary: Create Bulk Time Slots (Standard)
+      description: ''
+      operationId: post_Create_Bulk_Time_Slots_Standard
+      tags:
+        - 3. Time Slot Management
+      parameters:
+        - name: event_id
+          in: path
+          required: true
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+            example:
+              dates:
+                - 2025-01-18
+                - 2025-01-19
+              times:
+                - |
+                    10:00
+                - |
+                    15:00
+              duration_minutes: 90
+              max_capacity: 25
+      responses:
+        200:
+          description: Successful response
+        400:
+          description: Bad request
+        500:
+          description: Server error
+  /events/{event_id}/bulk-slots-flexible:
+    post:
+      summary: Create Flexible Bulk Time Slots
+      description: ''
+      operationId: post_Create_Flexible_Bulk_Time_Slots
+      tags:
+        - 3. Time Slot Management
+      parameters:
+        - name: event_id
+          in: path
+          required: true
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+            example:
+              date_slots:
+                - date: 2025-01-20
+                  time_ranges:
+                    - start_time: |
+                          09:00
+                      end_time: |
+                          11:00
+                    - start_time: |
+                          14:00
+                      end_time: |
+                          16:30
+      responses:
+        200:
+          description: Successful response
+        400:
+          description: Bad request
+        500:
+          description: Server error
+  /bookings/check-availability:
+    post:
+      summary: Check Availability
+      description: ''
+      operationId: post_Check_Availability
+      tags:
+        - 4. Booking Management
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+            example: |
+                {
+                  "event_id": {{event_id}},
+                  "time_slot_id": {{slot_id}},
+                  "quantity": 2
+                }
+      responses:
+        200:
+          description: Successful response
+        400:
+          description: Bad request
+        500:
+          description: Server error
+  /bookings:
+    post:
+      summary: Create Booking (Simple)
+      description: ''
+      operationId: post_Create_Booking_Simple
+      tags:
+        - 4. Booking Management
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+            example: |
+                {
+                  "event_id": {{event_id}},
+                  "time_slot_id": {{slot_id}},
+                  "quantity": 2
+                }
+      responses:
+        200:
+          description: Successful response
+        400:
+          description: Bad request
+        500:
+          description: Server error
+  /bookings/create-with-validation:
+    post:
+      summary: Create Booking with Validation
+      description: ''
+      operationId: post_Create_Booking_with_Validation
+      tags:
+        - 4. Booking Management
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+            example: |
+                {
+                  "event_id": {{event_id}},
+                  "time_slot_id": {{slot_id}},
+                  "quantity": 1
+                }
+      responses:
+        200:
+          description: Successful response
+        400:
+          description: Bad request
+        500:
+          description: Server error
+  /bookings/my-bookings:
+    post:
+      summary: Get My Bookings
+      description: ''
+      operationId: post_Get_My_Bookings
+      tags:
+        - 4. Booking Management
+      responses:
+        200:
+          description: Successful response
+        400:
+          description: Bad request
+        500:
+          description: Server error
+  /bookings/{booking_id}:
+    post:
+      summary: Get Booking by ID
+      description: ''
+      operationId: post_Get_Booking_by_ID
+      tags:
+        - 4. Booking Management
+      parameters:
+        - name: booking_id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        200:
+          description: Successful response
+        400:
+          description: Bad request
+        500:
+          description: Server error
+    put:
+      summary: Cancel Booking
+      description: ''
+      operationId: put_Cancel_Booking
+      tags:
+        - 4. Booking Management
+      parameters:
+        - name: booking_id
+          in: path
+          required: true
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+            example:
+              status: cancelled
+      responses:
+        200:
+          description: Successful response
+        400:
+          description: Bad request
+        500:
+          description: Server error
+  /admin/bookings/all:
+    get:
+      summary: Get All Bookings (Admin)
+      description: ''
+      operationId: get_Get_All_Bookings_Admin
+      tags:
+        - 4. Booking Management
+      responses:
+        200:
+          description: Successful response
+        400:
+          description: Bad request
+        500:
+          description: Server error
+  /admin/bookings/event/{event_id}:
+    get:
+      summary: Get Event Bookings (Admin)
+      description: ''
+      operationId: get_Get_Event_Bookings_Admin
+      tags:
+        - 4. Booking Management
+      parameters:
+        - name: event_id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        200:
+          description: Successful response
+        400:
+          description: Bad request
+        500:
+          description: Server error
+  /ai/model-status:
+    get:
+      summary: Check Model Status
+      description: ''
+      operationId: get_Check_Model_Status
+      tags:
+        - 5. AI Prediction Service
+      responses:
+        200:
+          description: Successful response
+        400:
+          description: Bad request
+        500:
+          description: Server error
+  /ai/model-info:
+    get:
+      summary: Get Model Info
+      description: ''
+      operationId: get_Get_Model_Info
+      tags:
+        - 5. AI Prediction Service
+      responses:
+        200:
+          description: Successful response
+        400:
+          description: Bad request
+        500:
+          description: Server error
+  /ai/data-stats:
+    get:
+      summary: Get Data Statistics
+      description: ''
+      operationId: get_Get_Data_Statistics
+      tags:
+        - 5. AI Prediction Service
+      responses:
+        200:
+          description: Successful response
+        400:
+          description: Bad request
+        500:
+          description: Server error
+  /ai/generate-data:
+    post:
+      summary: Generate Synthetic Data (Admin)
+      description: ''
+      operationId: post_Generate_Synthetic_Data_Admin
+      tags:
+        - 5. AI Prediction Service
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+            example:
+              days_back: 60
+              base_probability: 0.3
+      responses:
+        200:
+          description: Successful response
+        400:
+          description: Bad request
+        500:
+          description: Server error
+  /ai/train-models:
+    post:
+      summary: Train AI Models (Admin)
+      description: ''
+      operationId: post_Train_AI_Models_Admin
+      tags:
+        - 5. AI Prediction Service
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+            example:
+              days_back: 60
+              base_probability: 0.3
+      responses:
+        200:
+          description: Successful response
+        400:
+          description: Bad request
+        500:
+          description: Server error
+  /ai/predict-demand:
+    post:
+      summary: Predict Demand
+      description: ''
+      operationId: post_Predict_Demand
+      tags:
+        - 5. AI Prediction Service
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+            example:
+              event_id: 11
+              start_time: 2025-05-15
+              max_capacity: 30
+              duration_minutes: 120
+      responses:
+        200:
+          description: Successful response
+        400:
+          description: Bad request
+        500:
+          description: Server error
+  /events/{event_id}/slots-with-prediction:
+    get:
+      summary: Slots-with-Prediction
+      description: ''
+      operationId: get_Slots_with_Prediction
+      tags:
+        - 5. AI Prediction Service
+      parameters:
+        - name: event_id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        200:
+          description: Successful response
+        400:
+          description: Bad request
+        500:
+          description: Server error
+  /api/recommend/event/{event_id}:
+    get:
+      summary: Get Recommended Slots
+      description: ''
+      operationId: get_Get_Recommended_Slots
+      tags:
+        - 5. AI Prediction Service
+      parameters:
+        - name: event_id
+          in: path
+          required: true
+          schema:
+            type: string
+        - name: limit
+          in: query
+          description: ''
+          required: false
+          schema:
+            type: string
+          example: '5'
+      responses:
+        200:
+          description: Successful response
+        400:
+          description: Bad request
+        500:
+          description: Server error
+  /ai/analyze-patterns:
+    get:
+      summary: Analyze Booking Patterns
+      description: ''
+      operationId: get_Analyze_Booking_Patterns
+      tags:
+        - 5. AI Prediction Service
+      responses:
+        200:
+          description: Successful response
+        400:
+          description: Bad request
+        500:
+          description: Server error
+  /notifications/templates:
+    get:
+      summary: Get Available Templates
+      description: ''
+      operationId: get_Get_Available_Templates
+      tags:
+        - 6. Notification Service
+      responses:
+        200:
+          description: Successful response
+        400:
+          description: Bad request
+        500:
+          description: Server error
+  /notifications/send-email:
+    post:
+      summary: Send Email Notification
+      description: ''
+      operationId: post_Send_Email_Notification
+      tags:
+        - 6. Notification Service
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+            example:
+              recipient_email: test@example.com
+              recipient_name: Test User
+              notification_type: booking_confirmation
+              data:
+                event_title: AI Workshop
+                start_time: |
+                    2025-01-15 10:00 AM
+                duration: 120
+                booking_id: 1
+      responses:
+        200:
+          description: Successful response
+        400:
+          description: Bad request
+        500:
+          description: Server error
+  /notifications/send-booking-confirmation:
+    post:
+      summary: Send Booking Confirmation
+      description: ''
+      operationId: post_Send_Booking_Confirmation
+      tags:
+        - 6. Notification Service
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+            example: |
+                {
+                  "recipient_email": "test@example.com",
+                  "recipient_name": "Test User",
+                  "event_title": "AI Workshop 2025",
+                  "start_time": "2025-01-15 10:00 AM",
+                  "duration": 120,
+                  "booking_id": {{booking_id}}
+                }
+      responses:
+        200:
+          description: Successful response
+        400:
+          description: Bad request
+        500:
+          description: Server error
+  /notifications/send-cancellation:
+    post:
+      summary: Send Cancellation Notice
+      description: ''
+      operationId: post_Send_Cancellation_Notice
+      tags:
+        - 6. Notification Service
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+            example: |
+                {
+                  "recipient_email": "test@example.com",
+                  "recipient_name": "Test User",
+                  "event_title": "AI Workshop 2025",
+                  "start_time": "2025-01-15 10:00 AM",
+                  "booking_id": {{booking_id}}
+                }
+      responses:
+        200:
+          description: Successful response
+        400:
+          description: Bad request
+        500:
+          description: Server error
+  /notifications/send-ai-recommendation:
+    post:
+      summary: Send AI Recommendation
+      description: ''
+      operationId: post_Send_AI_Recommendation
+      tags:
+        - 6. Notification Service
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+            example:
+              recipient_email: test@example.com
+              recipient_name: Test User
+              recommendations: |
+                  <ul><li>Monday 10:00 AM - High demand expected</li><li>Tuesday 2:00 PM - Moderate demand</li></ul>
+              confidence: 85
+      responses:
+        200:
+          description: Successful response
+        400:
+          description: Bad request
+        500:
+          description: Server error
+  /notifications/send-reminder:
+    post:
+      summary: Send Booking Reminder
+      description: ''
+      operationId: post_Send_Booking_Reminder
+      tags:
+        - 6. Notification Service
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+            example:
+              recipient_email: test@example.com
+              recipient_name: Test User
+              event_title: AI Workshop 2025
+              start_time: |
+                  2025-01-15 10:00 AM
+              location: Conference Room A
+      responses:
+        200:
+          description: Successful response
+        400:
+          description: Bad request
+        500:
+          description: Server error
+  /notifications/bulk:
+    post:
+      summary: Send Bulk Notification (Admin)
+      description: ''
+      operationId: post_Send_Bulk_Notification_Admin
+      tags:
+        - 6. Notification Service
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+            example:
+              recipients:
+                - user1@example.com
+                - user2@example.com
+              notification_type: booking_reminder
+              data:
+                event_title: Important Event
+                start_time: |
+                    2025-01-20 14:00 PM
+                location: Main Hall
+      responses:
+        200:
+          description: Successful response
+        400:
+          description: Bad request
+        500:
+          description: Server error
+  /notifications/history/test@example.com:
+    get:
+      summary: Get Notification History
+      description: ''
+      operationId: get_Get_Notification_History
+      tags:
+        - 6. Notification Service
+      responses:
+        200:
+          description: Successful response
+        400:
+          description: Bad request
+        500:
+          description: Server error
+  /notifications/stats:
+    get:
+      summary: Get Notification Stats (Admin)
+      description: ''
+      operationId: get_Get_Notification_Stats_Admin
+      tags:
+        - 6. Notification Service
+      responses:
+        200:
+          description: Successful response
+        400:
+          description: Bad request
+        500:
+          description: Server error
+  /admin/charts/booking-trends:
+    get:
+      summary: Booking Trends Chart
+      description: ''
+      operationId: get_Booking_Trends_Chart
+      tags:
+        - 7. Admin Analytics & Charts
+      parameters:
+        - name: period
+          in: query
+          description: |
+              Options: daily, weekly, monthly
+          required: false
+          schema:
+            type: string
+          example: monthly
+      responses:
+        200:
+          description: Successful response
+        400:
+          description: Bad request
+        500:
+          description: Server error
+  /admin/charts/event-popularity:
+    get:
+      summary: Event Popularity Chart
+      description: ''
+      operationId: get_Event_Popularity_Chart
+      tags:
+        - 7. Admin Analytics & Charts
+      parameters:
+        - name: limit
+          in: query
+          description: ''
+          required: false
+          schema:
+            type: string
+          example: '10'
+      responses:
+        200:
+          description: Successful response
+        400:
+          description: Bad request
+        500:
+          description: Server error
+  /admin/charts/booking-status:
+    get:
+      summary: Booking Status Distribution
+      description: ''
+      operationId: get_Booking_Status_Distribution
+      tags:
+        - 7. Admin Analytics & Charts
+      responses:
+        200:
+          description: Successful response
+        400:
+          description: Bad request
+        500:
+          description: Server error
+  /admin/charts/peak-hours:
+    get:
+      summary: Peak Booking Hours
+      description: ''
+      operationId: get_Peak_Booking_Hours
+      tags:
+        - 7. Admin Analytics & Charts
+      responses:
+        200:
+          description: Successful response
+        400:
+          description: Bad request
+        500:
+          description: Server error
+  /admin/charts/ai-performance:
+    get:
+      summary: AI Performance Chart
+      description: ''
+      operationId: get_AI_Performance_Chart
+      tags:
+        - 7. Admin Analytics & Charts
+      responses:
+        200:
+          description: Successful response
+        400:
+          description: Bad request
+        500:
+          description: Server error
+  /admin/charts/capacity-utilization:
+    get:
+      summary: Capacity Utilization Chart
+      description: ''
+      operationId: get_Capacity_Utilization_Chart
+      tags:
+        - 7. Admin Analytics & Charts
+      responses:
+        200:
+          description: Successful response
+        400:
+          description: Bad request
+        500:
+          description: Server error
+  /admin/charts/user-registration:
+    get:
+      summary: User Registration Trends
+      description: ''
+      operationId: get_User_Registration_Trends
+      tags:
+        - 7. Admin Analytics & Charts
+      responses:
+        200:
+          description: Successful response
+        400:
+          description: Bad request
+        500:
+          description: Server error
+components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+security:
+  - bearerAuth:[]

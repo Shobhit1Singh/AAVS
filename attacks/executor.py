@@ -55,7 +55,7 @@ class TestExecutor:
             Test result with response data
         """
         # Build full URL
-        url = urljoin(self.base_url, endpoint_path.lstrip('/'))
+        url = self.base_url.rstrip("/") + "/" +  endpoint_path.lstrip("/")
         
         # Prepare request based on parameter location
         params = {}

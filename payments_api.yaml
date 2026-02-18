@@ -1,0 +1,68 @@
+openapi: 3.0.1
+info:
+  title: VulnPay API
+  version: "1.0"
+servers:
+  - url: http://127.0.0.1:6000
+
+paths:
+
+  /payments/v1:
+    get:
+      summary: Get all payments
+      responses:
+        "200":
+          description: OK
+
+  /payments/v1/{user_id}:
+    get:
+      summary: Get payments by user ID
+      parameters:
+        - name: user_id
+          in: path
+          required: true
+          schema:
+            type: string
+          example: "1 OR 1=1"
+      responses:
+        "200":
+          description: OK
+
+  /payments/v1/create:
+    post:
+      summary: Create payment
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [amount, card_number]
+              properties:
+                amount:
+                  type: string
+                  example: "100; DROP TABLE payments"
+                card_number:
+                  type: string
+                  example: "4111111111111111"
+      responses:
+        "200":
+          description: Created
+
+  /payments/v1/refund:
+    post:
+      summary: Refund payment
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [payment_id]
+              properties:
+                payment_id:
+                  type: string
+                  example: "1 UNION SELECT * FROM users"
+      responses:
+        "200":
+          description: Refunded

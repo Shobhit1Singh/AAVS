@@ -82,7 +82,7 @@ class APIParser:
         # Get base URL from servers
         servers = self.spec.get('servers', [])
         if servers:
-            self.base_url = servers[0].get('url', '')
+            self.base_url = spec["servers"][0]["url"]
         else:
             self.base_url = ''
         

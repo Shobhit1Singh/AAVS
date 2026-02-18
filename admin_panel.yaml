@@ -1,0 +1,62 @@
+openapi: 3.0.1
+info:
+  title: VulnAdmin API
+  version: "1.0"
+
+servers:
+  - url: http://127.0.0.1:8000
+
+paths:
+
+  /admin/v1/login:
+    post:
+      summary: Admin login
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [username, password]
+              properties:
+                username:
+                  type: string
+                  example: "admin"
+                password:
+                  type: string
+                  example: "' OR '1'='1"
+      responses:
+        "200":
+          description: Logged in
+
+  /admin/v1/users:
+    get:
+      summary: Get all users (no auth)
+      responses:
+        "200":
+          description: OK
+
+  /admin/v1/promote:
+    post:
+      summary: Promote user to admin
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [username]
+              properties:
+                username:
+                  type: string
+                  example: "guest"
+      responses:
+        "200":
+          description: Promoted
+
+  /admin/v1/config:
+    get:
+      summary: Get system config
+      responses:
+        "200":
+          description: Sensitive config leak

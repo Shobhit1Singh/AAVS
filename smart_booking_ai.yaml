@@ -1,0 +1,712 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "SmartBookingAI Unified API v2.0",
+    "version": "1.0.0",
+    "description": "Complete test collection for User Management, Booking System, AI Prediction, and Notification services"
+  },
+  "paths": {
+    "/": {
+      "get": {
+        "summary": "Root - API Info",
+        "description": "",
+        "responses": {
+          "200": {
+            "description": "Successful response"
+          }
+        }
+      }
+    },
+    "/health": {
+      "get": {
+        "summary": "Health Check",
+        "description": "",
+        "responses": {
+          "200": {
+            "description": "Successful response"
+          }
+        }
+      }
+    },
+    "/register": {
+      "post": {
+        "summary": "Register Admin User",
+        "description": "",
+        "responses": {
+          "200": {
+            "description": "Successful response"
+          }
+        }
+      }
+    },
+    "/login": {
+      "post": {
+        "summary": "Login as Admin",
+        "description": "",
+        "responses": {
+          "200": {
+            "description": "Successful response"
+          }
+        }
+      }
+    },
+    "/users/me": {
+      "post": {
+        "summary": "Get Current User Info",
+        "description": "",
+        "responses": {
+          "200": {
+            "description": "Successful response"
+          }
+        }
+      },
+      "put": {
+        "summary": "Update Current User",
+        "description": "",
+        "responses": {
+          "200": {
+            "description": "Successful response"
+          }
+        }
+      }
+    },
+    "/users": {
+      "post": {
+        "summary": "Get All Users (Admin)",
+        "description": "",
+        "responses": {
+          "200": {
+            "description": "Successful response"
+          }
+        }
+      }
+    },
+    "/users/{{user_id}}": {
+      "post": {
+        "summary": "Get User by ID (Admin)",
+        "description": "",
+        "responses": {
+          "200": {
+            "description": "Successful response"
+          }
+        }
+      },
+      "put": {
+        "summary": "Update User by ID (Admin)",
+        "description": "",
+        "responses": {
+          "200": {
+            "description": "Successful response"
+          }
+        }
+      },
+      "delete": {
+        "summary": "Delete User (Admin)",
+        "description": "",
+        "responses": {
+          "200": {
+            "description": "Successful response"
+          }
+        }
+      }
+    },
+    "/events": {
+      "post": {
+        "summary": "Create Event",
+        "description": "",
+        "responses": {
+          "200": {
+            "description": "Successful response"
+          }
+        }
+      }
+    },
+    "/all_events": {
+      "post": {
+        "summary": "Get All Events",
+        "description": "",
+        "responses": {
+          "200": {
+            "description": "Successful response"
+          }
+        }
+      }
+    },
+    "/events/{{event_id}}": {
+      "post": {
+        "summary": "Get Event by ID",
+        "description": "",
+        "responses": {
+          "200": {
+            "description": "Successful response"
+          }
+        }
+      },
+      "put": {
+        "summary": "Update Event (Admin)",
+        "description": "",
+        "responses": {
+          "200": {
+            "description": "Successful response"
+          }
+        }
+      },
+      "delete": {
+        "summary": "Delete Event (Admin)",
+        "description": "",
+        "responses": {
+          "200": {
+            "description": "Successful response"
+          }
+        }
+      }
+    },
+    "/events/{{event_id}}/statistics": {
+      "get": {
+        "summary": "Get Event Statistics",
+        "description": "",
+        "responses": {
+          "200": {
+            "description": "Successful response"
+          }
+        }
+      }
+    },
+    "/events/{{event_id}}/capacity": {
+      "get": {
+        "summary": "Get Event Capacity Status",
+        "description": "",
+        "responses": {
+          "200": {
+            "description": "Successful response"
+          }
+        }
+      }
+    },
+    "/events/{{event_id}}/availability-calendar": {
+      "get": {
+        "summary": "Get Availability Calendar",
+        "description": "",
+        "responses": {
+          "200": {
+            "description": "Successful response"
+          }
+        },
+        "parameters": [
+          {
+            "name": "month",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            },
+            "example": "1"
+          },
+          {
+            "name": "year",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            },
+            "example": "2025"
+          }
+        ]
+      }
+    },
+    "/events/{{event_id}}/booking-flow": {
+      "get": {
+        "summary": "Get Booking Flow Data",
+        "description": "",
+        "responses": {
+          "200": {
+            "description": "Successful response"
+          }
+        }
+      }
+    },
+    "/UnknownPath-zzmnt": {
+      "get": {
+        "summary": "New Request",
+        "description": "",
+        "responses": {
+          "200": {
+            "description": "Successful response"
+          }
+        }
+      }
+    },
+    "/events/{{event_id}}/slots": {
+      "post": {
+        "summary": "Get Slots by Date",
+        "description": "",
+        "responses": {
+          "200": {
+            "description": "Successful response"
+          }
+        },
+        "parameters": [
+          {
+            "name": "date",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            },
+            "example": "2025-01-15"
+          }
+        ]
+      }
+    },
+    "/events/{{event_id}}/slots-by-date": {
+      "get": {
+        "summary": "Get Slots Grouped by Date",
+        "description": "",
+        "responses": {
+          "200": {
+            "description": "Successful response"
+          }
+        },
+        "parameters": [
+          {
+            "name": "start_date",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            },
+            "example": "2025-01-15"
+          },
+          {
+            "name": "end_date",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            },
+            "example": "2025-01-20"
+          }
+        ]
+      }
+    },
+    "/events/bulk-slots-simple": {
+      "post": {
+        "summary": "Create Bulk Time Slots (Simple)",
+        "description": "",
+        "responses": {
+          "200": {
+            "description": "Successful response"
+          }
+        }
+      }
+    },
+    "/events/{{event_id}}/bulk-slots": {
+      "post": {
+        "summary": "Create Bulk Time Slots (Standard)",
+        "description": "",
+        "responses": {
+          "200": {
+            "description": "Successful response"
+          }
+        }
+      }
+    },
+    "/events/{{event_id}}/bulk-slots-flexible": {
+      "post": {
+        "summary": "Create Flexible Bulk Time Slots",
+        "description": "",
+        "responses": {
+          "200": {
+            "description": "Successful response"
+          }
+        }
+      }
+    },
+    "/bookings/check-availability": {
+      "post": {
+        "summary": "Check Availability",
+        "description": "",
+        "responses": {
+          "200": {
+            "description": "Successful response"
+          }
+        }
+      }
+    },
+    "/bookings": {
+      "post": {
+        "summary": "Create Booking (Simple)",
+        "description": "",
+        "responses": {
+          "200": {
+            "description": "Successful response"
+          }
+        }
+      }
+    },
+    "/bookings/create-with-validation": {
+      "post": {
+        "summary": "Create Booking with Validation",
+        "description": "",
+        "responses": {
+          "200": {
+            "description": "Successful response"
+          }
+        }
+      }
+    },
+    "/bookings/my-bookings": {
+      "post": {
+        "summary": "Get My Bookings",
+        "description": "",
+        "responses": {
+          "200": {
+            "description": "Successful response"
+          }
+        }
+      }
+    },
+    "/bookings/{{booking_id}}": {
+      "post": {
+        "summary": "Get Booking by ID",
+        "description": "",
+        "responses": {
+          "200": {
+            "description": "Successful response"
+          }
+        }
+      },
+      "put": {
+        "summary": "Cancel Booking",
+        "description": "",
+        "responses": {
+          "200": {
+            "description": "Successful response"
+          }
+        }
+      }
+    },
+    "/admin/bookings/all": {
+      "get": {
+        "summary": "Get All Bookings (Admin)",
+        "description": "",
+        "responses": {
+          "200": {
+            "description": "Successful response"
+          }
+        }
+      }
+    },
+    "/admin/bookings/event/{{event_id}}": {
+      "get": {
+        "summary": "Get Event Bookings (Admin)",
+        "description": "",
+        "responses": {
+          "200": {
+            "description": "Successful response"
+          }
+        }
+      }
+    },
+    "/ai/model-status": {
+      "get": {
+        "summary": "Check Model Status",
+        "description": "",
+        "responses": {
+          "200": {
+            "description": "Successful response"
+          }
+        }
+      }
+    },
+    "/ai/model-info": {
+      "get": {
+        "summary": "Get Model Info",
+        "description": "",
+        "responses": {
+          "200": {
+            "description": "Successful response"
+          }
+        }
+      }
+    },
+    "/ai/data-stats": {
+      "get": {
+        "summary": "Get Data Statistics",
+        "description": "",
+        "responses": {
+          "200": {
+            "description": "Successful response"
+          }
+        }
+      }
+    },
+    "/ai/generate-data": {
+      "post": {
+        "summary": "Generate Synthetic Data (Admin)",
+        "description": "",
+        "responses": {
+          "200": {
+            "description": "Successful response"
+          }
+        }
+      }
+    },
+    "/ai/train-models": {
+      "post": {
+        "summary": "Train AI Models (Admin)",
+        "description": "",
+        "responses": {
+          "200": {
+            "description": "Successful response"
+          }
+        }
+      }
+    },
+    "/ai/predict-demand": {
+      "post": {
+        "summary": "Predict Demand",
+        "description": "",
+        "responses": {
+          "200": {
+            "description": "Successful response"
+          }
+        }
+      }
+    },
+    "/events/{{event_id}}/slots-with-prediction": {
+      "get": {
+        "summary": "Slots-with-Prediction",
+        "description": "",
+        "responses": {
+          "200": {
+            "description": "Successful response"
+          }
+        }
+      }
+    },
+    "/api/recommend/event/{{event_id}}": {
+      "get": {
+        "summary": "Get Recommended Slots",
+        "description": "",
+        "responses": {
+          "200": {
+            "description": "Successful response"
+          }
+        },
+        "parameters": [
+          {
+            "name": "limit",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            },
+            "example": "5"
+          }
+        ]
+      }
+    },
+    "/ai/analyze-patterns": {
+      "get": {
+        "summary": "Analyze Booking Patterns",
+        "description": "",
+        "responses": {
+          "200": {
+            "description": "Successful response"
+          }
+        }
+      }
+    },
+    "/notifications/templates": {
+      "get": {
+        "summary": "Get Available Templates",
+        "description": "",
+        "responses": {
+          "200": {
+            "description": "Successful response"
+          }
+        }
+      }
+    },
+    "/notifications/send-email": {
+      "post": {
+        "summary": "Send Email Notification",
+        "description": "",
+        "responses": {
+          "200": {
+            "description": "Successful response"
+          }
+        }
+      }
+    },
+    "/notifications/send-booking-confirmation": {
+      "post": {
+        "summary": "Send Booking Confirmation",
+        "description": "",
+        "responses": {
+          "200": {
+            "description": "Successful response"
+          }
+        }
+      }
+    },
+    "/notifications/send-cancellation": {
+      "post": {
+        "summary": "Send Cancellation Notice",
+        "description": "",
+        "responses": {
+          "200": {
+            "description": "Successful response"
+          }
+        }
+      }
+    },
+    "/notifications/send-ai-recommendation": {
+      "post": {
+        "summary": "Send AI Recommendation",
+        "description": "",
+        "responses": {
+          "200": {
+            "description": "Successful response"
+          }
+        }
+      }
+    },
+    "/notifications/send-reminder": {
+      "post": {
+        "summary": "Send Booking Reminder",
+        "description": "",
+        "responses": {
+          "200": {
+            "description": "Successful response"
+          }
+        }
+      }
+    },
+    "/notifications/bulk": {
+      "post": {
+        "summary": "Send Bulk Notification (Admin)",
+        "description": "",
+        "responses": {
+          "200": {
+            "description": "Successful response"
+          }
+        }
+      }
+    },
+    "/notifications/history/test@example.com": {
+      "get": {
+        "summary": "Get Notification History",
+        "description": "",
+        "responses": {
+          "200": {
+            "description": "Successful response"
+          }
+        }
+      }
+    },
+    "/notifications/stats": {
+      "get": {
+        "summary": "Get Notification Stats (Admin)",
+        "description": "",
+        "responses": {
+          "200": {
+            "description": "Successful response"
+          }
+        }
+      }
+    },
+    "/admin/charts/booking-trends": {
+      "get": {
+        "summary": "Booking Trends Chart",
+        "description": "",
+        "responses": {
+          "200": {
+            "description": "Successful response"
+          }
+        },
+        "parameters": [
+          {
+            "name": "period",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            },
+            "example": "monthly"
+          }
+        ]
+      }
+    },
+    "/admin/charts/event-popularity": {
+      "get": {
+        "summary": "Event Popularity Chart",
+        "description": "",
+        "responses": {
+          "200": {
+            "description": "Successful response"
+          }
+        },
+        "parameters": [
+          {
+            "name": "limit",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            },
+            "example": "10"
+          }
+        ]
+      }
+    },
+    "/admin/charts/booking-status": {
+      "get": {
+        "summary": "Booking Status Distribution",
+        "description": "",
+        "responses": {
+          "200": {
+            "description": "Successful response"
+          }
+        }
+      }
+    },
+    "/admin/charts/peak-hours": {
+      "get": {
+        "summary": "Peak Booking Hours",
+        "description": "",
+        "responses": {
+          "200": {
+            "description": "Successful response"
+          }
+        }
+      }
+    },
+    "/admin/charts/ai-performance": {
+      "get": {
+        "summary": "AI Performance Chart",
+        "description": "",
+        "responses": {
+          "200": {
+            "description": "Successful response"
+          }
+        }
+      }
+    },
+    "/admin/charts/capacity-utilization": {
+      "get": {
+        "summary": "Capacity Utilization Chart",
+        "description": "",
+        "responses": {
+          "200": {
+            "description": "Successful response"
+          }
+        }
+      }
+    },
+    "/admin/charts/user-registration": {
+      "get": {
+        "summary": "User Registration Trends",
+        "description": "",
+        "responses": {
+          "200": {
+            "description": "Successful response"
+          }
+        }
+      }
+    }
+  }
+}
