@@ -1,10 +1,9 @@
 # 🔒 API Security Fuzzer
-
+# Created By Shobhit Singh
 Professional automated security testing tool for REST APIs. Find vulnerabilities through intelligent fuzzing, JWT attacks, SQL injection, and more.
 
 ![Version](https://img.shields.io/badge/version-1.0.0-blue)
 ![Python](https://img.shields.io/badge/python-3.8+-green)
-![License](https://img.shields.io/badge/license-MIT-blue)
 
 ## ✨ Features
 
@@ -243,10 +242,6 @@ This tool is NOT for:
 
 **You are responsible for your actions.** Always get written permission before testing third-party systems.
 
-## 📄 License
-
-MIT License - see [LICENSE](LICENSE) file
-
 ## 🙏 Acknowledgments
 
 Built with:
@@ -257,10 +252,9 @@ Built with:
 
 ## 📧 Contact
 
-- **Author**: Your Name
-- **Email**: your.email@example.com
-- **GitHub**: https://github.com/yourusername/api-security-fuzzer
-
+- **Author**: Shobhit Singh
+- **GitHub**: https://github.com/Shobhit1Singh/api-security-fuzzer
+- **LinkedIn**: www.linkedin.com/in/shobhit-singh-a65670356
 ---
 
 **⭐ Star this repo if you find it useful!**
