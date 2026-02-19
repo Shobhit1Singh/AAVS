@@ -17,7 +17,7 @@ class RateLimiter:
     Smart rate limiting with adaptive delays
     """
     
-    def __init__(self, max_requests_per_second: float = 10):
+    def __init__(self, max_requests_per_second: float = 100):
         self.max_rps = max_requests_per_second
         self.min_delay = 1.0 / max_requests_per_second
         
