@@ -1,0 +1,832 @@
+[
+  {
+    "method": "POST",
+    "url": "{{baseURL}}/login",
+    "path": "{{baseURL}}/login",
+    "headers": {},
+    "query_params": {},
+    "body": {
+      "email": "admin@admin.com",
+      "password": "123"
+    }
+  },
+  {
+    "method": "POST",
+    "url": "{{baseURL}}/department/create",
+    "path": "{{baseURL}}/department/create",
+    "headers": {
+      "Authorization": "{{token}}"
+    },
+    "query_params": {},
+    "body": {
+      "name": "Information Technology"
+    }
+  },
+  {
+    "method": "POST",
+    "url": "{{baseURL}}/department/all",
+    "path": "{{baseURL}}/department/all",
+    "headers": {
+      "Authorization": "{{token}}"
+    },
+    "query_params": {},
+    "body": {}
+  },
+  {
+    "method": "POST",
+    "url": "{{baseURL}}/department/single",
+    "path": "{{baseURL}}/department/single",
+    "headers": {
+      "Authorization": "{{token}}"
+    },
+    "query_params": {},
+    "body": {
+      "_id": "695f63bb041b208909cea144"
+    }
+  },
+  {
+    "method": "POST",
+    "url": "{{baseURL}}/department/update",
+    "path": "{{baseURL}}/department/update",
+    "headers": {
+      "Authorization": "{{token}}"
+    },
+    "query_params": {},
+    "body": {
+      "_id": "695f686fb0a5b7e387edb1d7",
+      "name": "Information Technology "
+    }
+  },
+  {
+    "method": "POST",
+    "url": "{{baseURL}}/department/delete",
+    "path": "{{baseURL}}/department/delete",
+    "headers": {
+      "Authorization": "{{token}}"
+    },
+    "query_params": {},
+    "body": {
+      "_id": "695f63bb041b208909cea144"
+    }
+  },
+  {
+    "method": "POST",
+    "url": "{{baseURL}}/department/blockUnblock",
+    "path": "{{baseURL}}/department/blockUnblock",
+    "headers": {
+      "Authorization": "{{token}}"
+    },
+    "query_params": {},
+    "body": {
+      "_id": "695f63bb041b208909cea144",
+      "isBlocked": "false"
+    }
+  },
+  {
+    "method": "POST",
+    "url": "{{baseURL}}/department/allMini",
+    "path": "{{baseURL}}/department/allMini",
+    "headers": {
+      "Authorization": "{{token}}"
+    },
+    "query_params": {},
+    "body": {}
+  },
+  {
+    "method": "POST",
+    "url": "{{baseURL}}/classRoom/create",
+    "path": "{{baseURL}}/classRoom/create",
+    "headers": {
+      "Authorization": "{{token}}"
+    },
+    "query_params": {},
+    "body": {
+      "roomNumber": "103",
+      "type": "lab",
+      "capacity": "30",
+      "location": "A Block",
+      "equipments": "projector",
+      "departmentId": "6968fe5702c48a77127abbd7"
+    }
+  },
+  {
+    "method": "POST",
+    "url": "{{baseURL}}/classroom/all",
+    "path": "{{baseURL}}/classroom/all",
+    "headers": {
+      "Authorization": "{{token}}"
+    },
+    "query_params": {},
+    "body": {}
+  },
+  {
+    "method": "POST",
+    "url": "{{baseURL}}/classRoom/single",
+    "path": "{{baseURL}}/classRoom/single",
+    "headers": {
+      "Authorization": "{{token}}"
+    },
+    "query_params": {},
+    "body": {
+      "_id": "696081b14b44b0b5316cc52d"
+    }
+  },
+  {
+    "method": "POST",
+    "url": "{{baseURL}}/classRoom/update",
+    "path": "{{baseURL}}/classRoom/update",
+    "headers": {
+      "Authorization": "{{token}}"
+    },
+    "query_params": {},
+    "body": {
+      "_id": "696081b14b44b0b5316cc52d",
+      "roomNumber": "b103",
+      "type": "class",
+      "capacity": "100"
+    }
+  },
+  {
+    "method": "POST",
+    "url": "{{baseURL}}/classroom/delete",
+    "path": "{{baseURL}}/classroom/delete",
+    "headers": {
+      "Authorization": "{{token}}"
+    },
+    "query_params": {},
+    "body": {
+      "_id": "696081b14b44b0b5316cc52d"
+    }
+  },
+  {
+    "method": "POST",
+    "url": "{{baseURL}}/classRoom/blockUnblock",
+    "path": "{{baseURL}}/classRoom/blockUnblock",
+    "headers": {
+      "Authorization": "{{token}}"
+    },
+    "query_params": {},
+    "body": {
+      "_id": "696083ee42a226d71f7e827e",
+      "isBlocked": "true"
+    }
+  },
+  {
+    "method": "POST",
+    "url": "{{baseURL}}/classRoom/allMini",
+    "path": "{{baseURL}}/classRoom/allMini",
+    "headers": {
+      "Authorization": "{{token}}"
+    },
+    "query_params": {},
+    "body": {}
+  },
+  {
+    "method": "POST",
+    "url": "{{baseURL}}/teacher/create",
+    "path": "{{baseURL}}/teacher/create",
+    "headers": {
+      "Authorization": "{{token}}"
+    },
+    "query_params": {},
+    "body": {
+      "name": "Garv",
+      "email": "garv@gmail.com",
+      "password": "123",
+      "phone": "9876789876",
+      "departmentId": "6968fe0f02c48a77127abbd2",
+      "maxWeeklyHours": "4",
+      "maxDailyHours": "5",
+      "designation": "3",
+      "preferredRooms": "696083ee42a226d71f7e827e",
+      "preferredDays": "Tuesday",
+      "eligibleSubjects": "6969b64f863ac785a96dfbad",
+      "backToBackClasses": "true"
+    }
+  },
+  {
+    "method": "POST",
+    "url": "{{baseURL}}/teacher/all",
+    "path": "{{baseURL}}/teacher/all",
+    "headers": {
+      "Authorization": "{{token}}"
+    },
+    "query_params": {},
+    "body": {}
+  },
+  {
+    "method": "POST",
+    "url": "{{baseURL}}/teacher/single",
+    "path": "{{baseURL}}/teacher/single",
+    "headers": {
+      "Authorization": "{{token}}"
+    },
+    "query_params": {},
+    "body": {
+      "_id": "695f9b59377b42e69b23c53a"
+    }
+  },
+  {
+    "method": "POST",
+    "url": "{{baseURL}}/teacher/update",
+    "path": "{{baseURL}}/teacher/update",
+    "headers": {
+      "Authorization": "{{token}}"
+    },
+    "query_params": {},
+    "body": {
+      "_id": "695fa1057320b73ada8611c8",
+      "name": "Garv Sharma",
+      "email": "harpreet@gmail.com",
+      "designation": "3",
+      "phone": "8776876867",
+      "departmentId": "695f63bb041b208909cea144",
+      "maxWeeklyHours": "4"
+    }
+  },
+  {
+    "method": "POST",
+    "url": "{{baseURL}}/teacher/delete",
+    "path": "{{baseURL}}/teacher/delete",
+    "headers": {
+      "Authorization": "{{token}}"
+    },
+    "query_params": {},
+    "body": {
+      "_id": "695f9b59377b42e69b23c53a"
+    }
+  },
+  {
+    "method": "POST",
+    "url": "{{baseURL}}/teacher/blockUnblock",
+    "path": "{{baseURL}}/teacher/blockUnblock",
+    "headers": {
+      "Authorization": "{{token}}"
+    },
+    "query_params": {},
+    "body": {
+      "_id": "695fa0d37320b73ada8611be",
+      "isBlocked": "true"
+    }
+  },
+  {
+    "method": "POST",
+    "url": "{{baseURL}}/teacher/allMini",
+    "path": "{{baseURL}}/teacher/allMini",
+    "headers": {
+      "Authorization": "{{token}}"
+    },
+    "query_params": {},
+    "body": {}
+  },
+  {
+    "method": "POST",
+    "url": "{{baseURL}}/semester/create",
+    "path": "{{baseURL}}/semester/create",
+    "headers": {
+      "Authorization": "{{token}}"
+    },
+    "query_params": {},
+    "body": {
+      "semesterNumber": "3",
+      "departmentId": "6968fe0f02c48a77127abbd2",
+      "startTime": "2026-7-1",
+      "endTime": "2026-12-31"
+    }
+  },
+  {
+    "method": "POST",
+    "url": "{{baseURL}}/semester/all",
+    "path": "{{baseURL}}/semester/all",
+    "headers": {
+      "Authorization": "{{token}}"
+    },
+    "query_params": {},
+    "body": {}
+  },
+  {
+    "method": "POST",
+    "url": "{{baseURL}}/semester/single",
+    "path": "{{baseURL}}/semester/single",
+    "headers": {
+      "Authorization": "{{token}}"
+    },
+    "query_params": {},
+    "body": {
+      "_id": "6960c81913a8e00b6c5191a6"
+    }
+  },
+  {
+    "method": "POST",
+    "url": "{{baseURL}}/semester/update",
+    "path": "{{baseURL}}/semester/update",
+    "headers": {
+      "Authorization": "{{token}}"
+    },
+    "query_params": {},
+    "body": {
+      "_id": "6960bc299df7d78e1b82abdd",
+      "semesterNumber": "100",
+      "departmentId": "695f63bb041b208909cea144",
+      "semesterType": "1",
+      "academicYear": "2027-29",
+      "startTime": "09-01-2026",
+      "endTime": "09-07-2026"
+    }
+  },
+  {
+    "method": "POST",
+    "url": "{{baseURL}}/semester/delete",
+    "path": "{{baseURL}}/semester/delete",
+    "headers": {
+      "Authorization": "{{token}}"
+    },
+    "query_params": {},
+    "body": {
+      "_id": "6960bc299df7d78e1b82abdd"
+    }
+  },
+  {
+    "method": "POST",
+    "url": "{{baseURL}}/semester/blockUnblock",
+    "path": "{{baseURL}}/semester/blockUnblock",
+    "headers": {
+      "Authorization": "{{token}}"
+    },
+    "query_params": {},
+    "body": {
+      "_id": "6960c7c74b8ddbef8c00a1a8",
+      "isBlocked": "true"
+    }
+  },
+  {
+    "method": "POST",
+    "url": "{{baseURL}}/semester/allMini",
+    "path": "{{baseURL}}/semester/allMini",
+    "headers": {
+      "Authorization": "{{token}}"
+    },
+    "query_params": {},
+    "body": {}
+  },
+  {
+    "method": "POST",
+    "url": "{{baseURL}}/subject/create",
+    "path": "{{baseURL}}/subject/create",
+    "headers": {
+      "Authorization": "{{token}}"
+    },
+    "query_params": {},
+    "body": {
+      "name": "Subject 3",
+      "code": "s103",
+      "type": "1",
+      "weeklyHours": "4",
+      "departmentId": "6968fe0f02c48a77127abbd2",
+      "semesterId": "6969228d98a4f0a566bb99b9",
+      "requiredEquipments": "Internet Access",
+      "credits": "4",
+      "sessionsPerWeek": "3",
+      "sessionDuration": "50",
+      "continuousHours": "2",
+      "preferredTimeSlot": "1"
+    }
+  },
+  {
+    "method": "POST",
+    "url": "{{baseURL}}/subject/all",
+    "path": "{{baseURL}}/subject/all",
+    "headers": {
+      "Authorization": "{{token}}"
+    },
+    "query_params": {},
+    "body": {}
+  },
+  {
+    "method": "POST",
+    "url": "{{baseURL}}/subject/single",
+    "path": "{{baseURL}}/subject/single",
+    "headers": {
+      "Authorization": "{{token}}"
+    },
+    "query_params": {},
+    "body": {
+      "_id": "6960d71f89cf078e47466246"
+    }
+  },
+  {
+    "method": "POST",
+    "url": "{{baseURL}}/subject/update",
+    "path": "{{baseURL}}/subject/update",
+    "headers": {
+      "Authorization": "{{token}}"
+    },
+    "query_params": {},
+    "body": {
+      "_id": "6960d71f89cf078e47466246",
+      "name": "Subject-3",
+      "code": "S105",
+      "type": "1",
+      "credits": "1",
+      "weeklyHours": "6",
+      "sessionsPerWeek": "2",
+      "sessionDuration": "2",
+      "continuousHours": "2",
+      "preferredTimeSlot": "2",
+      "departmentId": "695f63bb041b208909cea144",
+      "semesterId": "6960bc299df7d78e1b82abdd"
+    }
+  },
+  {
+    "method": "POST",
+    "url": "{{baseURL}}/subject/delete",
+    "path": "{{baseURL}}/subject/delete",
+    "headers": {
+      "Authorization": "{{token}}"
+    },
+    "query_params": {},
+    "body": {
+      "_id": "6960d71f89cf078e47466246"
+    }
+  },
+  {
+    "method": "POST",
+    "url": "{{baseURL}}/subject/blockUnblock",
+    "path": "{{baseURL}}/subject/blockUnblock",
+    "headers": {
+      "Authorization": "{{token}}"
+    },
+    "query_params": {},
+    "body": {
+      "_id": "6960dd513293e75433f028c9",
+      "isBlocked": "true"
+    }
+  },
+  {
+    "method": "POST",
+    "url": "{{baseURL}}/subject/allMini",
+    "path": "{{baseURL}}/subject/allMini",
+    "headers": {
+      "Authorization": "{{token}}"
+    },
+    "query_params": {},
+    "body": {}
+  },
+  {
+    "method": "POST",
+    "url": "{{baseURL}}/batch/create",
+    "path": "{{baseURL}}/batch/create",
+    "headers": {
+      "Authorization": "{{token}}"
+    },
+    "query_params": {},
+    "body": {
+      "name": "Batch 2",
+      "section": "A",
+      "studentCount": "40",
+      "maxDayClasses": "3",
+      "departmentId": "6968fe0f02c48a77127abbd2",
+      "semesterId": "696922eb98a4f0a566bb99c1",
+      "mandatorySubjects": "6969b614863ac785a96dfba8",
+      "specialRequirements": "Computer Access"
+    }
+  },
+  {
+    "method": "POST",
+    "url": "{{baseURL}}/batch/all",
+    "path": "{{baseURL}}/batch/all",
+    "headers": {
+      "Authorization": "{{token}}"
+    },
+    "query_params": {},
+    "body": ""
+  },
+  {
+    "method": "POST",
+    "url": "{{baseURL}}/batch/single",
+    "path": "{{baseURL}}/batch/single",
+    "headers": {
+      "Authorization": "{{token}}"
+    },
+    "query_params": {},
+    "body": {
+      "_id": "6961cdfc6e301a33f09f5ebf"
+    }
+  },
+  {
+    "method": "POST",
+    "url": "{{baseURL}}/batch/update",
+    "path": "{{baseURL}}/batch/update",
+    "headers": {
+      "Authorization": "{{token}}"
+    },
+    "query_params": {},
+    "body": {
+      "_id": "6961cdfc6e301a33f09f5ebf",
+      "name": "Batch 2",
+      "section": "r",
+      "studentCount": "13",
+      "maxDayClasses": "25",
+      "mandatorySubjects": "6960e51442be8ac67f6fc879",
+      "specialRequirements": "Internet",
+      "departmentId": "",
+      "semesterId": ""
+    }
+  },
+  {
+    "method": "POST",
+    "url": "{{baseURL}}/batch/delete",
+    "path": "{{baseURL}}/batch/delete",
+    "headers": {
+      "Authorization": "{{token}}"
+    },
+    "query_params": {},
+    "body": {
+      "_id": "6961d1b5d26758993ef21d48"
+    }
+  },
+  {
+    "method": "POST",
+    "url": "{{baseURL}}/batch/blockUnblock",
+    "path": "{{baseURL}}/batch/blockUnblock",
+    "headers": {
+      "Authorization": "{{token}}"
+    },
+    "query_params": {},
+    "body": {
+      "_id": "6961d1b5d26758993ef21d48",
+      "isBlocked": "true"
+    }
+  },
+  {
+    "method": "POST",
+    "url": "{{baseURL}}/batch/allMini",
+    "path": "{{baseURL}}/batch/allMini",
+    "headers": {
+      "Authorization": "{{token}}"
+    },
+    "query_params": {},
+    "body": {}
+  },
+  {
+    "method": "POST",
+    "url": "{{baseURL}}/period/create",
+    "path": "{{baseURL}}/period/create",
+    "headers": {
+      "Authorization": "{{token}}"
+    },
+    "query_params": {},
+    "body": {
+      "day": "Tuesday",
+      "startTime": "12:50 pm",
+      "endTime": "2:00 pm",
+      "isBreak": "true",
+      "period": "Lunch Break"
+    }
+  },
+  {
+    "method": "POST",
+    "url": "{{baseURL}}/period/all",
+    "path": "{{baseURL}}/period/all",
+    "headers": {
+      "Authorization": "{{token}}"
+    },
+    "query_params": {},
+    "body": {}
+  },
+  {
+    "method": "POST",
+    "url": "{{baseURL}}/period/single",
+    "path": "{{baseURL}}/period/single",
+    "headers": {
+      "Authorization": "{{token}}"
+    },
+    "query_params": {},
+    "body": {
+      "_id": "6964b10982a711187853e509"
+    }
+  },
+  {
+    "method": "POST",
+    "url": "{{baseURL}}/period/update",
+    "path": "{{baseURL}}/period/update",
+    "headers": {
+      "Authorization": "{{token}}"
+    },
+    "query_params": {},
+    "body": {
+      "_id": "6964b10982a711187853e509",
+      "day": "Monday",
+      "period": "Period 1",
+      "startTime": "12:00",
+      "endTime": "1:00",
+      "isBreak": "true"
+    }
+  },
+  {
+    "method": "POST",
+    "url": "{{baseURL}}/period/delete",
+    "path": "{{baseURL}}/period/delete",
+    "headers": {
+      "Authorization": "{{token}}"
+    },
+    "query_params": {},
+    "body": {
+      "_id": "6964b10982a711187853e509"
+    }
+  },
+  {
+    "method": "POST",
+    "url": "{{baseURL}}/period/blockUnblock",
+    "path": "{{baseURL}}/period/blockUnblock",
+    "headers": {
+      "Authorization": "{{token}}"
+    },
+    "query_params": {},
+    "body": {
+      "isBlocked": "true",
+      "_id": "6964bbca6e94b32525907d85"
+    }
+  },
+  {
+    "method": "POST",
+    "url": "{{baseURL}}/period/allMini",
+    "path": "{{baseURL}}/period/allMini",
+    "headers": {
+      "Authorization": "{{token}}"
+    },
+    "query_params": {},
+    "body": {
+      "isBlocked": "true"
+    }
+  },
+  {
+    "method": "POST",
+    "url": "{{baseURL}}/user/add",
+    "path": "{{baseURL}}/user/add",
+    "headers": {
+      "Authorization": "{{token}}"
+    },
+    "query_params": {},
+    "body": {
+      "name": "varun",
+      "phone": "78987867998",
+      "email": "varun@gmail.com",
+      "password": "123",
+      "userType": "2",
+      "departmentId": "6968fe0f02c48a77127abbd2",
+      "designation": "2",
+      "eligibleSubjects": "6969b64f863ac785a96dfbad"
+    }
+  },
+  {
+    "method": "POST",
+    "url": "{{baseURL}}/period/all",
+    "path": "{{baseURL}}/period/all",
+    "headers": {
+      "Authorization": "{{token}}"
+    },
+    "query_params": {},
+    "body": {}
+  },
+  {
+    "method": "POST",
+    "url": "{{baseURL}}/period/single",
+    "path": "{{baseURL}}/period/single",
+    "headers": {
+      "Authorization": "{{token}}"
+    },
+    "query_params": {},
+    "body": {
+      "_id": "6964b10982a711187853e509"
+    }
+  },
+  {
+    "method": "POST",
+    "url": "{{baseURL}}/period/update",
+    "path": "{{baseURL}}/period/update",
+    "headers": {
+      "Authorization": "{{token}}"
+    },
+    "query_params": {},
+    "body": {
+      "_id": "6964b10982a711187853e509",
+      "day": "Monday",
+      "period": "Period 1",
+      "startTime": "12:00",
+      "endTime": "1:00",
+      "isBreak": "true"
+    }
+  },
+  {
+    "method": "POST",
+    "url": "{{baseURL}}/period/delete",
+    "path": "{{baseURL}}/period/delete",
+    "headers": {
+      "Authorization": "{{token}}"
+    },
+    "query_params": {},
+    "body": {
+      "_id": "6964b10982a711187853e509"
+    }
+  },
+  {
+    "method": "POST",
+    "url": "{{baseURL}}/period/blockUnblock",
+    "path": "{{baseURL}}/period/blockUnblock",
+    "headers": {
+      "Authorization": "{{token}}"
+    },
+    "query_params": {},
+    "body": {
+      "isBlocked": "true",
+      "_id": "6964bbca6e94b32525907d85"
+    }
+  },
+  {
+    "method": "POST",
+    "url": "{{baseURL}}/period/allMini",
+    "path": "{{baseURL}}/period/allMini",
+    "headers": {
+      "Authorization": "{{token}}"
+    },
+    "query_params": {},
+    "body": {
+      "isBlocked": "true"
+    }
+  },
+  {
+    "method": "POST",
+    "url": "{{baseURL}}/timetable/generate",
+    "path": "{{baseURL}}/timetable/generate",
+    "headers": {
+      "Authorization": "{{token}}",
+      "Content-Type": "application/json",
+      "Accept": "application/json"
+    },
+    "query_params": {},
+    "body": "{\r\n \"batches\": [\r\n    \"6969b93df894f2dcf31897b4\",\r\n    \"6969b9a9f894f2dcf31897b8\"\r\n  ],\r\n   \"classRooms\": [\r\n    \"696917e11b1f4d57f37d1471\",\r\n    \"696918d825125fd6a619132d\",\r\n    \"6969190725125fd6a6191331\"\r\n  ],\r\n  \"subjects\": [\r\n    \"6969b614863ac785a96dfba8\",\r\n    \"6969b64f863ac785a96dfbad\",\r\n    \"6969b6db698ddf70f41dc4eb\"\r\n  ],\r\n  \"teachers\": [\r\n    \"6969b768698ddf70f41dc4f2\",\r\n    \"6969b7c84dd15cab4e17cd46\",\r\n    \"6969b859f894f2dcf31897af\"\r\n  ],\r\n  \"semesters\": [\r\n    \"6969228d98a4f0a566bb99b9\",\r\n    \"696922eb98a4f0a566bb99c1\"\r\n  ],\r\n  \"departments\": [\r\n    \"6968fe0f02c48a77127abbd2\"\r\n  ],\r\n  \"constraints\": {\r\n  \"hard\": {\r\n    \"noFacultyDoubleBooking\": true,\r\n    \"noRoomDoubleBooking\": true,\r\n    \"noBatchDoubleBooking\": true,\r\n    \"roomCapacityCheck\": true\r\n  },\r\n  \"soft\": {\r\n    \"evenDistribution\": true,\r\n    \"minimizeIdleTime\": true,\r\n    \"labMorningPreference\": true,\r\n    \"facultyLoadBalance\": false,\r\n    \"avoidLastPeriod\": true\r\n  }\r\n}\r\n\r\n}\r\n"
+  },
+  {
+    "method": "POST",
+    "url": "{{baseURL}}/timetable/all",
+    "path": "{{baseURL}}/timetable/all",
+    "headers": {
+      "Authorization": "{{token}}"
+    },
+    "query_params": {},
+    "body": {
+      "versionId": "6979a3924fd3af3405fb6939"
+    }
+  },
+  {
+    "method": "GET",
+    "url": "",
+    "path": "",
+    "headers": {},
+    "query_params": {},
+    "body": null
+  },
+  {
+    "method": "POST",
+    "url": "{{baseURL}}/version/all",
+    "path": "{{baseURL}}/version/all",
+    "headers": {
+      "Authorization": "{{token}}"
+    },
+    "query_params": {},
+    "body": {
+      "departmentId": "6978c6ce72e23f7a5433376b",
+      "semesterId": "6978c96872e23f7a54333822",
+      "academicYear": "2024-2025"
+    }
+  },
+  {
+    "method": "POST",
+    "url": "{{baseURL}}/version/all",
+    "path": "{{baseURL}}/version/all",
+    "headers": {
+      "Authorization": "{{token}}"
+    },
+    "query_params": {},
+    "body": {
+      "departmentId": "6978c6ce72e23f7a5433376b",
+      "semesterId": "6978c96872e23f7a54333822",
+      "academicYear": "2024-2025"
+    }
+  },
+  {
+    "method": "POST",
+    "url": "{{baseURL}}/version/all",
+    "path": "{{baseURL}}/version/all",
+    "headers": {
+      "Authorization": "{{token}}"
+    },
+    "query_params": {},
+    "body": {
+      "departmentId": "6978c6ce72e23f7a5433376b",
+      "semesterId": "6978c96872e23f7a54333822",
+      "academicYear": "2024-2025"
+    }
+  }
+]

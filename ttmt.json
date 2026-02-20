@@ -1,0 +1,2867 @@
+{
+  "x-info": {
+    "_postman_id": "fce37bcc-aed6-4ddd-a503-1b8c5f768259",
+    "name": "Time Table Management",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "_exporter_id": "46078677",
+    "_collection_link": "https://go.postman.co/collection/46078677-fce37bcc-aed6-4ddd-a503-1b8c5f768259?source=collection_link"
+  },
+  "x-item": [
+    {
+      "name": "Admin",
+      "item": [
+        {
+          "name": "Auth",
+          "item": [
+            {
+              "name": "Login",
+              "request": {
+                "method": "POST",
+                "header": [],
+                "body": {
+                  "mode": "urlencoded",
+                  "urlencoded": [
+                    {
+                      "key": "email",
+                      "value": "admin@admin.com",
+                      "type": "text",
+                      "uuid": "1bf0e7dd-1edd-4119-87a0-78a2f3f34fdc"
+                    },
+                    {
+                      "key": "password",
+                      "value": "123",
+                      "type": "text",
+                      "uuid": "aa97722d-4bb8-4dc4-815d-2c861825bd62"
+                    }
+                  ]
+                },
+                "url": {
+                  "raw": "{{baseURL}}/login",
+                  "host": [
+                    "{{baseURL}}"
+                  ],
+                  "path": [
+                    "login"
+                  ]
+                }
+              },
+              "response": []
+            }
+          ]
+        },
+        {
+          "name": "Department",
+          "item": [
+            {
+              "name": "Add Department",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "{{token}}",
+                    "type": "text"
+                  }
+                ],
+                "body": {
+                  "mode": "urlencoded",
+                  "urlencoded": [
+                    {
+                      "key": "name",
+                      "value": "Information Technology",
+                      "type": "text",
+                      "uuid": "721ba43a-7422-441e-a65b-fe5e35f4e904"
+                    }
+                  ]
+                },
+                "url": {
+                  "raw": "{{baseURL}}/department/create",
+                  "host": [
+                    "{{baseURL}}"
+                  ],
+                  "path": [
+                    "department",
+                    "create"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "All Departments",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "{{token}}",
+                    "type": "text"
+                  }
+                ],
+                "body": {
+                  "mode": "urlencoded",
+                  "urlencoded": []
+                },
+                "url": {
+                  "raw": "{{baseURL}}/department/all",
+                  "host": [
+                    "{{baseURL}}"
+                  ],
+                  "path": [
+                    "department",
+                    "all"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "Single Department",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "{{token}}",
+                    "type": "text"
+                  }
+                ],
+                "body": {
+                  "mode": "urlencoded",
+                  "urlencoded": [
+                    {
+                      "key": "_id",
+                      "value": "695f63bb041b208909cea144",
+                      "type": "text",
+                      "uuid": "b8c73754-6a64-4882-b0fc-987540c52f85"
+                    }
+                  ]
+                },
+                "url": {
+                  "raw": "{{baseURL}}/department/single",
+                  "host": [
+                    "{{baseURL}}"
+                  ],
+                  "path": [
+                    "department",
+                    "single"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "Update Department",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "{{token}}",
+                    "type": "text"
+                  }
+                ],
+                "body": {
+                  "mode": "urlencoded",
+                  "urlencoded": [
+                    {
+                      "key": "_id",
+                      "value": "695f686fb0a5b7e387edb1d7",
+                      "type": "text",
+                      "uuid": "b8c73754-6a64-4882-b0fc-987540c52f85"
+                    },
+                    {
+                      "key": "name",
+                      "value": "Information Technology ",
+                      "type": "text",
+                      "uuid": "b6a4b9fd-6f31-4d3e-9f84-615fca3b5f9a"
+                    }
+                  ]
+                },
+                "url": {
+                  "raw": "{{baseURL}}/department/update",
+                  "host": [
+                    "{{baseURL}}"
+                  ],
+                  "path": [
+                    "department",
+                    "update"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "Delete Department",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "{{token}}",
+                    "type": "text"
+                  }
+                ],
+                "body": {
+                  "mode": "urlencoded",
+                  "urlencoded": [
+                    {
+                      "key": "_id",
+                      "value": "695f63bb041b208909cea144",
+                      "type": "text",
+                      "uuid": "b8c73754-6a64-4882-b0fc-987540c52f85"
+                    }
+                  ]
+                },
+                "url": {
+                  "raw": "{{baseURL}}/department/delete",
+                  "host": [
+                    "{{baseURL}}"
+                  ],
+                  "path": [
+                    "department",
+                    "delete"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "Block-Unblock Department",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "{{token}}",
+                    "type": "text"
+                  }
+                ],
+                "body": {
+                  "mode": "urlencoded",
+                  "urlencoded": [
+                    {
+                      "key": "_id",
+                      "value": "695f63bb041b208909cea144",
+                      "type": "text",
+                      "uuid": "b8c73754-6a64-4882-b0fc-987540c52f85"
+                    },
+                    {
+                      "key": "isBlocked",
+                      "value": "false",
+                      "type": "text",
+                      "uuid": "c1d4e32b-2509-4a8a-afe7-075c1e98ffcc"
+                    }
+                  ]
+                },
+                "url": {
+                  "raw": "{{baseURL}}/department/blockUnblock",
+                  "host": [
+                    "{{baseURL}}"
+                  ],
+                  "path": [
+                    "department",
+                    "blockUnblock"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "All Departments Mini",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "{{token}}",
+                    "type": "text"
+                  }
+                ],
+                "body": {
+                  "mode": "urlencoded",
+                  "urlencoded": []
+                },
+                "url": {
+                  "raw": "{{baseURL}}/department/allMini",
+                  "host": [
+                    "{{baseURL}}"
+                  ],
+                  "path": [
+                    "department",
+                    "allMini"
+                  ]
+                }
+              },
+              "response": []
+            }
+          ]
+        },
+        {
+          "name": "Class Room",
+          "item": [
+            {
+              "name": "Add Classroom",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "{{token}}",
+                    "type": "text"
+                  }
+                ],
+                "body": {
+                  "mode": "urlencoded",
+                  "urlencoded": [
+                    {
+                      "key": "roomNumber",
+                      "value": "103",
+                      "type": "text",
+                      "uuid": "721ba43a-7422-441e-a65b-fe5e35f4e904"
+                    },
+                    {
+                      "key": "type",
+                      "value": "lab",
+                      "type": "text",
+                      "uuid": "4a61ed14-65c3-4d47-9ee1-023455a2d703"
+                    },
+                    {
+                      "key": "capacity",
+                      "value": "30",
+                      "type": "text",
+                      "uuid": "bc326de4-9d56-4e94-8403-f655722025ed"
+                    },
+                    {
+                      "key": "location",
+                      "value": "A Block",
+                      "type": "text",
+                      "uuid": "60bff1b6-d2f6-40ec-b8a7-f6275911cc69"
+                    },
+                    {
+                      "key": "equipments",
+                      "value": "AC",
+                      "type": "text",
+                      "uuid": "9f350747-717e-4767-89fb-c471a05809e1",
+                      "disabled": true
+                    },
+                    {
+                      "key": "equipments",
+                      "value": "Internet",
+                      "type": "text",
+                      "uuid": "a8e71991-55f0-4610-879c-0b66a7e72a2d",
+                      "disabled": true
+                    },
+                    {
+                      "key": "equipments",
+                      "value": "projector",
+                      "type": "text",
+                      "uuid": "6a43f790-fc20-451f-86c5-ba349b4c62dd",
+                      "disabled": true
+                    },
+                    {
+                      "key": "departmentId",
+                      "value": "6968fe5702c48a77127abbd7",
+                      "type": "text",
+                      "uuid": "77c8ddf7-ff2b-4e83-a4c2-0d2b31d2495e"
+                    }
+                  ]
+                },
+                "url": {
+                  "raw": "{{baseURL}}/classRoom/create",
+                  "host": [
+                    "{{baseURL}}"
+                  ],
+                  "path": [
+                    "classRoom",
+                    "create"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "All Classrooms",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "{{token}}",
+                    "type": "text"
+                  }
+                ],
+                "body": {
+                  "mode": "urlencoded",
+                  "urlencoded": []
+                },
+                "url": {
+                  "raw": "{{baseURL}}/classroom/all",
+                  "host": [
+                    "{{baseURL}}"
+                  ],
+                  "path": [
+                    "classroom",
+                    "all"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "Single Classroom",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "{{token}}",
+                    "type": "text"
+                  }
+                ],
+                "body": {
+                  "mode": "urlencoded",
+                  "urlencoded": [
+                    {
+                      "key": "_id",
+                      "value": "696081b14b44b0b5316cc52d",
+                      "type": "text",
+                      "uuid": "b8c73754-6a64-4882-b0fc-987540c52f85"
+                    }
+                  ]
+                },
+                "url": {
+                  "raw": "{{baseURL}}/classRoom/single",
+                  "host": [
+                    "{{baseURL}}"
+                  ],
+                  "path": [
+                    "classRoom",
+                    "single"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "Update Classroom",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "{{token}}",
+                    "type": "text"
+                  }
+                ],
+                "body": {
+                  "mode": "urlencoded",
+                  "urlencoded": [
+                    {
+                      "key": "_id",
+                      "value": "696081b14b44b0b5316cc52d",
+                      "type": "text",
+                      "uuid": "b8c73754-6a64-4882-b0fc-987540c52f85"
+                    },
+                    {
+                      "key": "roomNumber",
+                      "value": "b103",
+                      "type": "text",
+                      "uuid": "b6a4b9fd-6f31-4d3e-9f84-615fca3b5f9a"
+                    },
+                    {
+                      "key": "type",
+                      "value": "class",
+                      "type": "text",
+                      "uuid": "95444759-2a65-4734-87f9-f4cd70313343"
+                    },
+                    {
+                      "key": "capacity",
+                      "value": "100",
+                      "type": "text",
+                      "uuid": "4d02be2a-7551-4b17-9f0b-ad3ded8573ec"
+                    }
+                  ]
+                },
+                "url": {
+                  "raw": "{{baseURL}}/classRoom/update",
+                  "host": [
+                    "{{baseURL}}"
+                  ],
+                  "path": [
+                    "classRoom",
+                    "update"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "Delete Classroom",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "{{token}}",
+                    "type": "text"
+                  }
+                ],
+                "body": {
+                  "mode": "urlencoded",
+                  "urlencoded": [
+                    {
+                      "key": "_id",
+                      "value": "696081b14b44b0b5316cc52d",
+                      "type": "text",
+                      "uuid": "b8c73754-6a64-4882-b0fc-987540c52f85"
+                    }
+                  ]
+                },
+                "url": {
+                  "raw": "{{baseURL}}/classroom/delete",
+                  "host": [
+                    "{{baseURL}}"
+                  ],
+                  "path": [
+                    "classroom",
+                    "delete"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "Block-Unblock Classroom",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "{{token}}",
+                    "type": "text"
+                  }
+                ],
+                "body": {
+                  "mode": "urlencoded",
+                  "urlencoded": [
+                    {
+                      "key": "_id",
+                      "value": "696083ee42a226d71f7e827e",
+                      "type": "text",
+                      "uuid": "b8c73754-6a64-4882-b0fc-987540c52f85"
+                    },
+                    {
+                      "key": "isBlocked",
+                      "value": "true",
+                      "type": "text",
+                      "uuid": "c1d4e32b-2509-4a8a-afe7-075c1e98ffcc"
+                    }
+                  ]
+                },
+                "url": {
+                  "raw": "{{baseURL}}/classRoom/blockUnblock",
+                  "host": [
+                    "{{baseURL}}"
+                  ],
+                  "path": [
+                    "classRoom",
+                    "blockUnblock"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "All Classrooms Mini",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "{{token}}",
+                    "type": "text"
+                  }
+                ],
+                "body": {
+                  "mode": "urlencoded",
+                  "urlencoded": []
+                },
+                "url": {
+                  "raw": "{{baseURL}}/classRoom/allMini",
+                  "host": [
+                    "{{baseURL}}"
+                  ],
+                  "path": [
+                    "classRoom",
+                    "allMini"
+                  ]
+                }
+              },
+              "response": []
+            }
+          ]
+        },
+        {
+          "name": "Teacher",
+          "item": [
+            {
+              "name": "Add Teacher",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "{{token}}",
+                    "type": "text"
+                  }
+                ],
+                "body": {
+                  "mode": "urlencoded",
+                  "urlencoded": [
+                    {
+                      "key": "name",
+                      "value": "Garv",
+                      "type": "text",
+                      "uuid": "721ba43a-7422-441e-a65b-fe5e35f4e904"
+                    },
+                    {
+                      "key": "email",
+                      "value": "garv@gmail.com",
+                      "type": "text",
+                      "uuid": "178287b3-907b-4e49-8d93-156b8eb19185"
+                    },
+                    {
+                      "key": "password",
+                      "value": "123",
+                      "type": "text",
+                      "uuid": "3214f506-2125-4304-be4f-ebd1c39bff1a"
+                    },
+                    {
+                      "key": "phone",
+                      "value": "9876789876",
+                      "type": "text",
+                      "uuid": "3ce323e8-db8c-4521-9c0f-dcaed830592a"
+                    },
+                    {
+                      "key": "departmentId",
+                      "value": "6968fe0f02c48a77127abbd2",
+                      "type": "text",
+                      "uuid": "f3d1fd4d-adf3-45b9-a8c0-c56f62682983"
+                    },
+                    {
+                      "key": "maxWeeklyHours",
+                      "value": "4",
+                      "type": "text",
+                      "uuid": "3f024ac7-a665-46ed-a6ec-51c2b42f1280"
+                    },
+                    {
+                      "key": "maxDailyHours",
+                      "value": "5",
+                      "type": "text",
+                      "uuid": "83a2628d-26ec-4bd6-b07a-c60490941225"
+                    },
+                    {
+                      "key": "designation",
+                      "value": "3",
+                      "description": "1-HOD 2-ASSISTANT | 3-ASSOCIATE | 4-PROFESSOR | 5-OTHER",
+                      "type": "text",
+                      "uuid": "0f59ae50-e071-40ac-a363-995dcc4dbd0f"
+                    },
+                    {
+                      "key": "preferredRooms",
+                      "value": "696081b14b44b0b5316cc52d",
+                      "type": "text",
+                      "uuid": "9270a09b-6915-42e0-9c64-a077ed41ff69",
+                      "disabled": true
+                    },
+                    {
+                      "key": "preferredDays",
+                      "value": "Monday",
+                      "type": "text",
+                      "uuid": "9b1af3e2-34d7-46fa-ad0f-5366d3b95d96",
+                      "disabled": true
+                    },
+                    {
+                      "key": "eligibleSubjects",
+                      "value": "6969b6db698ddf70f41dc4eb",
+                      "type": "text",
+                      "uuid": "2b617747-05c3-4b07-b06d-91e498dddfa5"
+                    },
+                    {
+                      "key": "backToBackClasses",
+                      "value": "true",
+                      "type": "text",
+                      "uuid": "7cd673ce-1a54-4482-9857-621f6bd7a488",
+                      "disabled": true
+                    },
+                    {
+                      "key": "preferredRooms",
+                      "value": "696083ee42a226d71f7e827e",
+                      "type": "text",
+                      "uuid": "1d8a7a70-1587-4320-9609-16974022ec78",
+                      "disabled": true
+                    },
+                    {
+                      "key": "preferredDays",
+                      "value": "Tuesday",
+                      "type": "text",
+                      "uuid": "72b2d052-5cfe-4d27-b923-574068db9e13",
+                      "disabled": true
+                    },
+                    {
+                      "key": "eligibleSubjects",
+                      "value": "6969b64f863ac785a96dfbad",
+                      "type": "text",
+                      "uuid": "0df311be-7917-496c-905e-e896b58e473a"
+                    }
+                  ]
+                },
+                "url": {
+                  "raw": "{{baseURL}}/teacher/create",
+                  "host": [
+                    "{{baseURL}}"
+                  ],
+                  "path": [
+                    "teacher",
+                    "create"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "All Teachers",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "{{token}}",
+                    "type": "text"
+                  }
+                ],
+                "body": {
+                  "mode": "urlencoded",
+                  "urlencoded": []
+                },
+                "url": {
+                  "raw": "{{baseURL}}/teacher/all",
+                  "host": [
+                    "{{baseURL}}"
+                  ],
+                  "path": [
+                    "teacher",
+                    "all"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "Single Teacher",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "{{token}}",
+                    "type": "text"
+                  }
+                ],
+                "body": {
+                  "mode": "urlencoded",
+                  "urlencoded": [
+                    {
+                      "key": "_id",
+                      "value": "695f9b59377b42e69b23c53a",
+                      "type": "text",
+                      "uuid": "b8c73754-6a64-4882-b0fc-987540c52f85"
+                    }
+                  ]
+                },
+                "url": {
+                  "raw": "{{baseURL}}/teacher/single",
+                  "host": [
+                    "{{baseURL}}"
+                  ],
+                  "path": [
+                    "teacher",
+                    "single"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "Update Teacher",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "{{token}}",
+                    "type": "text"
+                  }
+                ],
+                "body": {
+                  "mode": "urlencoded",
+                  "urlencoded": [
+                    {
+                      "key": "_id",
+                      "value": "695fa1057320b73ada8611c8",
+                      "type": "text",
+                      "uuid": "88865d76-5675-4cc0-bd4c-9e28619f1bc6"
+                    },
+                    {
+                      "key": "name",
+                      "value": "Garv Sharma",
+                      "type": "text",
+                      "uuid": "703f380f-0d97-4638-9891-3cb874e1ac05"
+                    },
+                    {
+                      "key": "email",
+                      "value": "harpreet@gmail.com",
+                      "type": "text",
+                      "uuid": "38a2760e-375a-42bd-af3c-02284ee4e564"
+                    },
+                    {
+                      "key": "designation",
+                      "value": "3",
+                      "type": "text",
+                      "uuid": "4db63422-48d0-42b1-bfcd-4777caccf016"
+                    },
+                    {
+                      "key": "phone",
+                      "value": "8776876867",
+                      "type": "text",
+                      "uuid": "fa73645b-1561-4c4c-b5c4-11355579c91c"
+                    },
+                    {
+                      "key": "departmentId",
+                      "value": "695f63bb041b208909cea144",
+                      "type": "text",
+                      "uuid": "a6b012d9-3265-4955-9002-8d44df0b8214"
+                    },
+                    {
+                      "key": "maxWeeklyHours",
+                      "value": "4",
+                      "type": "text",
+                      "uuid": "5e19903a-3a14-4a39-82a1-69591aa741a5"
+                    }
+                  ]
+                },
+                "url": {
+                  "raw": "{{baseURL}}/teacher/update",
+                  "host": [
+                    "{{baseURL}}"
+                  ],
+                  "path": [
+                    "teacher",
+                    "update"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "Delete Teacher",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "{{token}}",
+                    "type": "text"
+                  }
+                ],
+                "body": {
+                  "mode": "urlencoded",
+                  "urlencoded": [
+                    {
+                      "key": "_id",
+                      "value": "695f9b59377b42e69b23c53a",
+                      "type": "text",
+                      "uuid": "b8c73754-6a64-4882-b0fc-987540c52f85"
+                    }
+                  ]
+                },
+                "url": {
+                  "raw": "{{baseURL}}/teacher/delete",
+                  "host": [
+                    "{{baseURL}}"
+                  ],
+                  "path": [
+                    "teacher",
+                    "delete"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "Block-Unblock Teacher",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "{{token}}",
+                    "type": "text"
+                  }
+                ],
+                "body": {
+                  "mode": "urlencoded",
+                  "urlencoded": [
+                    {
+                      "key": "_id",
+                      "value": "695fa0d37320b73ada8611be",
+                      "type": "text",
+                      "uuid": "b8c73754-6a64-4882-b0fc-987540c52f85"
+                    },
+                    {
+                      "key": "isBlocked",
+                      "value": "true",
+                      "type": "text",
+                      "uuid": "c1d4e32b-2509-4a8a-afe7-075c1e98ffcc"
+                    }
+                  ]
+                },
+                "url": {
+                  "raw": "{{baseURL}}/teacher/blockUnblock",
+                  "host": [
+                    "{{baseURL}}"
+                  ],
+                  "path": [
+                    "teacher",
+                    "blockUnblock"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "All Teachers Mini",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "{{token}}",
+                    "type": "text"
+                  }
+                ],
+                "body": {
+                  "mode": "urlencoded",
+                  "urlencoded": []
+                },
+                "url": {
+                  "raw": "{{baseURL}}/teacher/allMini",
+                  "host": [
+                    "{{baseURL}}"
+                  ],
+                  "path": [
+                    "teacher",
+                    "allMini"
+                  ]
+                }
+              },
+              "response": []
+            }
+          ]
+        },
+        {
+          "name": "Semester",
+          "item": [
+            {
+              "name": "Add Semester",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "{{token}}",
+                    "type": "text"
+                  }
+                ],
+                "body": {
+                  "mode": "urlencoded",
+                  "urlencoded": [
+                    {
+                      "key": "semesterNumber",
+                      "value": "3",
+                      "type": "text",
+                      "uuid": "600fe1a1-6f4d-42a2-b485-17545a24229b"
+                    },
+                    {
+                      "key": "departmentId",
+                      "value": "6968fe0f02c48a77127abbd2",
+                      "type": "text",
+                      "uuid": "f3a595cc-19d5-49bd-b742-bcfe8022878f"
+                    },
+                    {
+                      "key": "startTime",
+                      "value": "2026-7-1",
+                      "type": "text",
+                      "uuid": "fc14c881-f2d4-4d8f-89f0-20ec50751f7e"
+                    },
+                    {
+                      "key": "endTime",
+                      "value": "2026-12-31",
+                      "type": "text",
+                      "uuid": "ebb3a129-48b4-4e1c-b753-2bd164289a92"
+                    }
+                  ]
+                },
+                "url": {
+                  "raw": "{{baseURL}}/semester/create",
+                  "host": [
+                    "{{baseURL}}"
+                  ],
+                  "path": [
+                    "semester",
+                    "create"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "All Semesters",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "{{token}}",
+                    "type": "text"
+                  }
+                ],
+                "body": {
+                  "mode": "urlencoded",
+                  "urlencoded": []
+                },
+                "url": {
+                  "raw": "{{baseURL}}/semester/all",
+                  "host": [
+                    "{{baseURL}}"
+                  ],
+                  "path": [
+                    "semester",
+                    "all"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "Single Semester",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "{{token}}",
+                    "type": "text"
+                  }
+                ],
+                "body": {
+                  "mode": "urlencoded",
+                  "urlencoded": [
+                    {
+                      "key": "_id",
+                      "value": "6960c81913a8e00b6c5191a6",
+                      "type": "text",
+                      "uuid": "b8c73754-6a64-4882-b0fc-987540c52f85"
+                    }
+                  ]
+                },
+                "url": {
+                  "raw": "{{baseURL}}/semester/single",
+                  "host": [
+                    "{{baseURL}}"
+                  ],
+                  "path": [
+                    "semester",
+                    "single"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "Update Semester",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "{{token}}",
+                    "type": "text"
+                  }
+                ],
+                "body": {
+                  "mode": "urlencoded",
+                  "urlencoded": [
+                    {
+                      "key": "_id",
+                      "value": "6960bc299df7d78e1b82abdd",
+                      "type": "text",
+                      "uuid": "c93fc124-8604-4ba6-abe9-84ec5ff184fb"
+                    },
+                    {
+                      "key": "semesterNumber",
+                      "value": "100",
+                      "type": "text",
+                      "uuid": "5367e28a-93ca-4b8f-821f-d36215f50c6c"
+                    },
+                    {
+                      "key": "departmentId",
+                      "value": "695f63bb041b208909cea144",
+                      "type": "text",
+                      "uuid": "0f68b583-5be2-425f-be0f-a12ec5d732fb"
+                    },
+                    {
+                      "key": "semesterType",
+                      "value": "1",
+                      "type": "text",
+                      "uuid": "caa57fab-3779-427e-82ec-130c0af6e887"
+                    },
+                    {
+                      "key": "academicYear",
+                      "value": "2027-29",
+                      "type": "text",
+                      "uuid": "9583d8f5-4a7a-43d3-9f7e-a8b7f1aa0a3a"
+                    },
+                    {
+                      "key": "startTime",
+                      "value": "09-01-2026",
+                      "type": "text",
+                      "uuid": "be4069a9-5117-48a1-9e9a-beafe2f58de1"
+                    },
+                    {
+                      "key": "endTime",
+                      "value": "09-07-2026",
+                      "type": "text",
+                      "uuid": "c1548b8b-f17e-4618-943d-d9e34a929177"
+                    }
+                  ]
+                },
+                "url": {
+                  "raw": "{{baseURL}}/semester/update",
+                  "host": [
+                    "{{baseURL}}"
+                  ],
+                  "path": [
+                    "semester",
+                    "update"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "Delete Semester",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "{{token}}",
+                    "type": "text"
+                  }
+                ],
+                "body": {
+                  "mode": "urlencoded",
+                  "urlencoded": [
+                    {
+                      "key": "_id",
+                      "value": "6960bc299df7d78e1b82abdd",
+                      "type": "text",
+                      "uuid": "b8c73754-6a64-4882-b0fc-987540c52f85"
+                    }
+                  ]
+                },
+                "url": {
+                  "raw": "{{baseURL}}/semester/delete",
+                  "host": [
+                    "{{baseURL}}"
+                  ],
+                  "path": [
+                    "semester",
+                    "delete"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "Block-Unblock Semester",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "{{token}}",
+                    "type": "text"
+                  }
+                ],
+                "body": {
+                  "mode": "urlencoded",
+                  "urlencoded": [
+                    {
+                      "key": "_id",
+                      "value": "6960c7c74b8ddbef8c00a1a8",
+                      "type": "text",
+                      "uuid": "b8c73754-6a64-4882-b0fc-987540c52f85"
+                    },
+                    {
+                      "key": "isBlocked",
+                      "value": "true",
+                      "type": "text",
+                      "uuid": "c1d4e32b-2509-4a8a-afe7-075c1e98ffcc"
+                    }
+                  ]
+                },
+                "url": {
+                  "raw": "{{baseURL}}/semester/blockUnblock",
+                  "host": [
+                    "{{baseURL}}"
+                  ],
+                  "path": [
+                    "semester",
+                    "blockUnblock"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "All Semesters Mini",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "{{token}}",
+                    "type": "text"
+                  }
+                ],
+                "body": {
+                  "mode": "urlencoded",
+                  "urlencoded": []
+                },
+                "url": {
+                  "raw": "{{baseURL}}/semester/allMini",
+                  "host": [
+                    "{{baseURL}}"
+                  ],
+                  "path": [
+                    "semester",
+                    "allMini"
+                  ]
+                }
+              },
+              "response": []
+            }
+          ]
+        },
+        {
+          "name": "Subject",
+          "item": [
+            {
+              "name": "Add Subject",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "{{token}}",
+                    "type": "text"
+                  }
+                ],
+                "body": {
+                  "mode": "urlencoded",
+                  "urlencoded": [
+                    {
+                      "key": "name",
+                      "value": "Subject 3",
+                      "type": "text",
+                      "uuid": "87c2e861-f69f-4030-b29f-900b72ce6eea"
+                    },
+                    {
+                      "key": "code",
+                      "value": "s103",
+                      "type": "text",
+                      "uuid": "5515f6ee-beb6-458b-a145-63cc7d9026b0"
+                    },
+                    {
+                      "key": "type",
+                      "value": "1",
+                      "type": "text",
+                      "uuid": "cf8101d0-9744-464b-8c20-f3717a1bfb3e"
+                    },
+                    {
+                      "key": "weeklyHours",
+                      "value": "4",
+                      "type": "text",
+                      "uuid": "c54f1318-626d-40f7-af87-ef49537f47c8"
+                    },
+                    {
+                      "key": "departmentId",
+                      "value": "6968fe0f02c48a77127abbd2",
+                      "type": "text",
+                      "uuid": "02f0a738-6647-4078-907c-dc347eafa900"
+                    },
+                    {
+                      "key": "semesterId",
+                      "value": "6969228d98a4f0a566bb99b9",
+                      "type": "text",
+                      "uuid": "66a8a653-24eb-4d05-97d5-1462a9b5de23"
+                    },
+                    {
+                      "key": "requiredEquipments",
+                      "value": "Projector",
+                      "type": "text",
+                      "uuid": "20fa18de-e4a2-45cd-8900-47a2c029df3d",
+                      "disabled": true
+                    },
+                    {
+                      "key": "requiredEquipments",
+                      "value": "Computer",
+                      "type": "text",
+                      "uuid": "2f3b25c8-f306-4b27-9294-4a17d119fdbb"
+                    },
+                    {
+                      "key": "requiredEquipments",
+                      "value": "Internet Access",
+                      "type": "text",
+                      "uuid": "168b7539-8e29-45e3-b986-a6cbbdf0a612"
+                    },
+                    {
+                      "key": "credits",
+                      "value": "4",
+                      "type": "text",
+                      "uuid": "b0f05a18-37ba-43ad-94f2-e0fb59b2fd9b"
+                    },
+                    {
+                      "key": "sessionsPerWeek",
+                      "value": "3",
+                      "type": "text",
+                      "uuid": "c1723dc7-6fb0-48e0-bc18-7fe362ae6a98"
+                    },
+                    {
+                      "key": "sessionDuration",
+                      "value": "50",
+                      "type": "text",
+                      "uuid": "9e695f96-dcf8-4ce8-91d1-1b16105f95ae"
+                    },
+                    {
+                      "key": "continuousHours",
+                      "value": "2",
+                      "type": "text",
+                      "uuid": "b976a1e1-5f61-401b-aef8-2aedebc7dbcd"
+                    },
+                    {
+                      "key": "preferredTimeSlot",
+                      "value": "1",
+                      "type": "text",
+                      "uuid": "62a3ef10-9b60-4029-90bc-d2272dacb9e9"
+                    }
+                  ]
+                },
+                "url": {
+                  "raw": "{{baseURL}}/subject/create",
+                  "host": [
+                    "{{baseURL}}"
+                  ],
+                  "path": [
+                    "subject",
+                    "create"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "All Subjects",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "{{token}}",
+                    "type": "text"
+                  }
+                ],
+                "body": {
+                  "mode": "urlencoded",
+                  "urlencoded": []
+                },
+                "url": {
+                  "raw": "{{baseURL}}/subject/all",
+                  "host": [
+                    "{{baseURL}}"
+                  ],
+                  "path": [
+                    "subject",
+                    "all"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "Single Subject",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "{{token}}",
+                    "type": "text"
+                  }
+                ],
+                "body": {
+                  "mode": "urlencoded",
+                  "urlencoded": [
+                    {
+                      "key": "_id",
+                      "value": "6960d71f89cf078e47466246",
+                      "type": "text",
+                      "uuid": "b8c73754-6a64-4882-b0fc-987540c52f85"
+                    }
+                  ]
+                },
+                "url": {
+                  "raw": "{{baseURL}}/subject/single",
+                  "host": [
+                    "{{baseURL}}"
+                  ],
+                  "path": [
+                    "subject",
+                    "single"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "Update Subject",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "{{token}}",
+                    "type": "text"
+                  }
+                ],
+                "body": {
+                  "mode": "urlencoded",
+                  "urlencoded": [
+                    {
+                      "key": "_id",
+                      "value": "6960d71f89cf078e47466246",
+                      "type": "text",
+                      "uuid": "664d6a4a-da7c-4fbf-88ec-80e7e3f99c1e"
+                    },
+                    {
+                      "key": "name",
+                      "value": "Subject-3",
+                      "type": "text",
+                      "uuid": "b28ff79a-789f-4ee9-afe6-ef6f420d8b72"
+                    },
+                    {
+                      "key": "code",
+                      "value": "S105",
+                      "type": "text",
+                      "uuid": "fa0d4054-04aa-4976-a1af-e31686710e10"
+                    },
+                    {
+                      "key": "type",
+                      "value": "1",
+                      "type": "text",
+                      "uuid": "6c3e7f78-18d5-4fdf-b07c-deecc3b5ba9d"
+                    },
+                    {
+                      "key": "credits",
+                      "value": "1",
+                      "type": "text",
+                      "uuid": "5fec9aa4-3c15-42ba-8b7c-fa797ade3a23"
+                    },
+                    {
+                      "key": "weeklyHours",
+                      "value": "6",
+                      "type": "text",
+                      "uuid": "8a301039-f4fa-47fb-8235-931cf90c23ce"
+                    },
+                    {
+                      "key": "sessionsPerWeek",
+                      "value": "2",
+                      "type": "text",
+                      "uuid": "98c48e3f-b05c-4a13-a311-719cf414af1d"
+                    },
+                    {
+                      "key": "sessionDuration",
+                      "value": "2",
+                      "type": "text",
+                      "uuid": "13e145d0-d925-4c02-ba35-eded231d2546"
+                    },
+                    {
+                      "key": "continuousHours",
+                      "value": "2",
+                      "type": "text",
+                      "uuid": "13936f77-a6d0-42f0-bbcd-41305fd7d010"
+                    },
+                    {
+                      "key": "preferredTimeSlot",
+                      "value": "2",
+                      "type": "text",
+                      "uuid": "23c434ef-11ca-466f-89b9-1c3240f282b1"
+                    },
+                    {
+                      "key": "departmentId",
+                      "value": "695f63bb041b208909cea144",
+                      "type": "text",
+                      "uuid": "bee0c611-8f76-4793-be9a-c7c87cf31930"
+                    },
+                    {
+                      "key": "semesterId",
+                      "value": "6960bc299df7d78e1b82abdd",
+                      "type": "text",
+                      "uuid": "040a291e-f715-461b-8c3f-df6aea4ee700"
+                    }
+                  ]
+                },
+                "url": {
+                  "raw": "{{baseURL}}/subject/update",
+                  "host": [
+                    "{{baseURL}}"
+                  ],
+                  "path": [
+                    "subject",
+                    "update"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "Delete Subject",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "{{token}}",
+                    "type": "text"
+                  }
+                ],
+                "body": {
+                  "mode": "urlencoded",
+                  "urlencoded": [
+                    {
+                      "key": "_id",
+                      "value": "6960d71f89cf078e47466246",
+                      "type": "text",
+                      "uuid": "b8c73754-6a64-4882-b0fc-987540c52f85"
+                    }
+                  ]
+                },
+                "url": {
+                  "raw": "{{baseURL}}/subject/delete",
+                  "host": [
+                    "{{baseURL}}"
+                  ],
+                  "path": [
+                    "subject",
+                    "delete"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "Block-Unblock Subject",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "{{token}}",
+                    "type": "text"
+                  }
+                ],
+                "body": {
+                  "mode": "urlencoded",
+                  "urlencoded": [
+                    {
+                      "key": "_id",
+                      "value": "6960dd513293e75433f028c9",
+                      "type": "text",
+                      "uuid": "b8c73754-6a64-4882-b0fc-987540c52f85"
+                    },
+                    {
+                      "key": "isBlocked",
+                      "value": "true",
+                      "type": "text",
+                      "uuid": "c1d4e32b-2509-4a8a-afe7-075c1e98ffcc"
+                    }
+                  ]
+                },
+                "url": {
+                  "raw": "{{baseURL}}/subject/blockUnblock",
+                  "host": [
+                    "{{baseURL}}"
+                  ],
+                  "path": [
+                    "subject",
+                    "blockUnblock"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "All Subjects Mini",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "{{token}}",
+                    "type": "text"
+                  }
+                ],
+                "body": {
+                  "mode": "urlencoded",
+                  "urlencoded": []
+                },
+                "url": {
+                  "raw": "{{baseURL}}/subject/allMini",
+                  "host": [
+                    "{{baseURL}}"
+                  ],
+                  "path": [
+                    "subject",
+                    "allMini"
+                  ]
+                }
+              },
+              "response": []
+            }
+          ]
+        },
+        {
+          "name": "Batch",
+          "item": [
+            {
+              "name": "Add Batch",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "{{token}}",
+                    "type": "text"
+                  }
+                ],
+                "body": {
+                  "mode": "urlencoded",
+                  "urlencoded": [
+                    {
+                      "key": "name",
+                      "value": "Batch 2",
+                      "type": "text",
+                      "uuid": "fdc5cfac-64c7-484f-a472-0237e8fdcb06"
+                    },
+                    {
+                      "key": "section",
+                      "value": "A",
+                      "type": "text",
+                      "uuid": "1780a01b-5296-4498-82d9-4e06e9e3f2c9"
+                    },
+                    {
+                      "key": "studentCount",
+                      "value": "40",
+                      "type": "text",
+                      "uuid": "6525ee0f-0865-4b58-8f69-42447406370a"
+                    },
+                    {
+                      "key": "maxDayClasses",
+                      "value": "3",
+                      "type": "text",
+                      "uuid": "57981b43-ffb0-406b-b547-d86668396770"
+                    },
+                    {
+                      "key": "departmentId",
+                      "value": "6968fe0f02c48a77127abbd2",
+                      "type": "text",
+                      "uuid": "527adab2-554d-408a-ae65-8b02c81c7bff"
+                    },
+                    {
+                      "key": "semesterId",
+                      "value": "696922eb98a4f0a566bb99c1",
+                      "type": "text",
+                      "uuid": "4d91a3cb-a6fd-4eb0-99d8-c2a63a175829"
+                    },
+                    {
+                      "key": "mandatorySubjects",
+                      "value": "6969b64f863ac785a96dfbad",
+                      "type": "text",
+                      "uuid": "9c428970-2d2f-44b3-82bd-7ba75b6d0791"
+                    },
+                    {
+                      "key": "specialRequirements",
+                      "value": "Intenet required",
+                      "type": "text",
+                      "uuid": "40a6dee0-239d-4f5b-9569-f3a537e31ef2"
+                    },
+                    {
+                      "key": "specialRequirements",
+                      "value": "Computer Access",
+                      "type": "text",
+                      "uuid": "cd00976d-8963-4105-9455-7fee1b9ec203"
+                    },
+                    {
+                      "key": "mandatorySubjects",
+                      "value": "6969b614863ac785a96dfba8",
+                      "type": "text",
+                      "uuid": "719afba5-2893-4bc5-9dc2-8a0a95546f8c"
+                    }
+                  ]
+                },
+                "url": {
+                  "raw": "{{baseURL}}/batch/create",
+                  "host": [
+                    "{{baseURL}}"
+                  ],
+                  "path": [
+                    "batch",
+                    "create"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "All Batches",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "{{token}}",
+                    "type": "text"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": ""
+                },
+                "url": {
+                  "raw": "{{baseURL}}/batch/all",
+                  "host": [
+                    "{{baseURL}}"
+                  ],
+                  "path": [
+                    "batch",
+                    "all"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "Single Batch",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "{{token}}",
+                    "type": "text"
+                  }
+                ],
+                "body": {
+                  "mode": "urlencoded",
+                  "urlencoded": [
+                    {
+                      "key": "_id",
+                      "value": "6961cdfc6e301a33f09f5ebf",
+                      "type": "text",
+                      "uuid": "b8c73754-6a64-4882-b0fc-987540c52f85"
+                    }
+                  ]
+                },
+                "url": {
+                  "raw": "{{baseURL}}/batch/single",
+                  "host": [
+                    "{{baseURL}}"
+                  ],
+                  "path": [
+                    "batch",
+                    "single"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "Update Batch",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "{{token}}",
+                    "type": "text"
+                  }
+                ],
+                "body": {
+                  "mode": "urlencoded",
+                  "urlencoded": [
+                    {
+                      "key": "_id",
+                      "value": "6961cdfc6e301a33f09f5ebf",
+                      "type": "text",
+                      "uuid": "b1ce2bef-8119-4a28-b53e-ffb0e439ff03"
+                    },
+                    {
+                      "key": "name",
+                      "value": "Batch 2",
+                      "type": "text",
+                      "uuid": "bd356bf3-d4d1-4be2-8ce4-13dacd7d52ca"
+                    },
+                    {
+                      "key": "section",
+                      "value": "r",
+                      "type": "text",
+                      "uuid": "218e4ec0-6728-4d8c-be63-e6823552a4c4"
+                    },
+                    {
+                      "key": "studentCount",
+                      "value": "13",
+                      "type": "text",
+                      "uuid": "dcd6407c-021a-4123-98c8-eab16b3c913e"
+                    },
+                    {
+                      "key": "maxDayClasses",
+                      "value": "25",
+                      "type": "text",
+                      "uuid": "253b2067-5a50-48eb-b997-06871e1a2206"
+                    },
+                    {
+                      "key": "mandatorySubjects",
+                      "value": "6960e51442be8ac67f6fc879",
+                      "type": "text",
+                      "uuid": "43b244b9-fad9-46d4-8d2c-45bfe5bb874e"
+                    },
+                    {
+                      "key": "specialRequirements",
+                      "value": "Internet",
+                      "type": "text",
+                      "uuid": "bda09346-d1ca-4999-8c83-2eadc8354b0b"
+                    },
+                    {
+                      "key": "departmentId",
+                      "value": "",
+                      "type": "text",
+                      "uuid": "a4a76211-faef-4238-988c-ee7237e8f3af",
+                      "disabled": true
+                    },
+                    {
+                      "key": "semesterId",
+                      "value": "",
+                      "type": "text",
+                      "uuid": "8521dd90-8721-490d-b1e3-6abfab6cd2e2",
+                      "disabled": true
+                    }
+                  ]
+                },
+                "url": {
+                  "raw": "{{baseURL}}/batch/update",
+                  "host": [
+                    "{{baseURL}}"
+                  ],
+                  "path": [
+                    "batch",
+                    "update"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "Delete Batch",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "{{token}}",
+                    "type": "text"
+                  }
+                ],
+                "body": {
+                  "mode": "urlencoded",
+                  "urlencoded": [
+                    {
+                      "key": "_id",
+                      "value": "6961d1b5d26758993ef21d48",
+                      "type": "text",
+                      "uuid": "b8c73754-6a64-4882-b0fc-987540c52f85"
+                    }
+                  ]
+                },
+                "url": {
+                  "raw": "{{baseURL}}/batch/delete",
+                  "host": [
+                    "{{baseURL}}"
+                  ],
+                  "path": [
+                    "batch",
+                    "delete"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "Block-Unblock Batch",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "{{token}}",
+                    "type": "text"
+                  }
+                ],
+                "body": {
+                  "mode": "urlencoded",
+                  "urlencoded": [
+                    {
+                      "key": "_id",
+                      "value": "6961d1b5d26758993ef21d48",
+                      "type": "text",
+                      "uuid": "b8c73754-6a64-4882-b0fc-987540c52f85"
+                    },
+                    {
+                      "key": "isBlocked",
+                      "value": "true",
+                      "type": "text",
+                      "uuid": "c1d4e32b-2509-4a8a-afe7-075c1e98ffcc"
+                    }
+                  ]
+                },
+                "url": {
+                  "raw": "{{baseURL}}/batch/blockUnblock",
+                  "host": [
+                    "{{baseURL}}"
+                  ],
+                  "path": [
+                    "batch",
+                    "blockUnblock"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "All Batches Mini",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "{{token}}",
+                    "type": "text"
+                  }
+                ],
+                "body": {
+                  "mode": "urlencoded",
+                  "urlencoded": []
+                },
+                "url": {
+                  "raw": "{{baseURL}}/batch/allMini",
+                  "host": [
+                    "{{baseURL}}"
+                  ],
+                  "path": [
+                    "batch",
+                    "allMini"
+                  ]
+                }
+              },
+              "response": []
+            }
+          ]
+        },
+        {
+          "name": "Period",
+          "item": [
+            {
+              "name": "Add Period",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "{{token}}",
+                    "type": "text"
+                  }
+                ],
+                "body": {
+                  "mode": "urlencoded",
+                  "urlencoded": [
+                    {
+                      "key": "day",
+                      "value": "Tuesday",
+                      "type": "text",
+                      "uuid": "5fd7e43a-0bdb-4818-ab1f-b939be259acc"
+                    },
+                    {
+                      "key": "startTime",
+                      "value": "12:50 pm",
+                      "type": "text",
+                      "uuid": "8f5fb07b-38f5-4cf9-8153-b67415d62665"
+                    },
+                    {
+                      "key": "endTime",
+                      "value": "2:00 pm",
+                      "type": "text",
+                      "uuid": "361e9e98-3b89-47b6-b78f-84058bb1fa1b"
+                    },
+                    {
+                      "key": "isBreak",
+                      "value": "true",
+                      "type": "text",
+                      "uuid": "f57d1c66-2488-43f2-8e9f-b56145719b40"
+                    },
+                    {
+                      "key": "period",
+                      "value": "Lunch Break",
+                      "type": "text",
+                      "uuid": "73ca83ea-63d9-4a24-a715-d876b6e9b637"
+                    }
+                  ]
+                },
+                "url": {
+                  "raw": "{{baseURL}}/period/create",
+                  "host": [
+                    "{{baseURL}}"
+                  ],
+                  "path": [
+                    "period",
+                    "create"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "All Periods",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "{{token}}",
+                    "type": "text"
+                  }
+                ],
+                "body": {
+                  "mode": "urlencoded",
+                  "urlencoded": []
+                },
+                "url": {
+                  "raw": "{{baseURL}}/period/all",
+                  "host": [
+                    "{{baseURL}}"
+                  ],
+                  "path": [
+                    "period",
+                    "all"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "Single Period",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "{{token}}",
+                    "type": "text"
+                  }
+                ],
+                "body": {
+                  "mode": "urlencoded",
+                  "urlencoded": [
+                    {
+                      "key": "_id",
+                      "value": "6964b10982a711187853e509",
+                      "type": "text",
+                      "uuid": "b8c73754-6a64-4882-b0fc-987540c52f85"
+                    }
+                  ]
+                },
+                "url": {
+                  "raw": "{{baseURL}}/period/single",
+                  "host": [
+                    "{{baseURL}}"
+                  ],
+                  "path": [
+                    "period",
+                    "single"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "Update Period",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "{{token}}",
+                    "type": "text"
+                  }
+                ],
+                "body": {
+                  "mode": "urlencoded",
+                  "urlencoded": [
+                    {
+                      "key": "_id",
+                      "value": "6964b10982a711187853e509",
+                      "type": "text",
+                      "uuid": "fde95668-b11f-431a-bd3d-b00325276207"
+                    },
+                    {
+                      "key": "day",
+                      "value": "Monday",
+                      "type": "text",
+                      "uuid": "aefbc340-e72d-4d4a-b5b9-5054c89076f6"
+                    },
+                    {
+                      "key": "period",
+                      "value": "Period 1",
+                      "type": "text",
+                      "uuid": "0ae32380-c85d-4db2-b2a8-cc49a460122c"
+                    },
+                    {
+                      "key": "startTime",
+                      "value": "12:00",
+                      "type": "text",
+                      "uuid": "b19ce7fc-d213-4050-9286-fbd4df25e3fc"
+                    },
+                    {
+                      "key": "endTime",
+                      "value": "1:00",
+                      "type": "text",
+                      "uuid": "ccd31448-f2e1-431b-a7e4-e047d1d2febf"
+                    },
+                    {
+                      "key": "isBreak",
+                      "value": "true",
+                      "type": "text",
+                      "uuid": "815feefb-a464-4771-ab71-6e1c17eea69f"
+                    }
+                  ]
+                },
+                "url": {
+                  "raw": "{{baseURL}}/period/update",
+                  "host": [
+                    "{{baseURL}}"
+                  ],
+                  "path": [
+                    "period",
+                    "update"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "Delete Period",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "{{token}}",
+                    "type": "text"
+                  }
+                ],
+                "body": {
+                  "mode": "urlencoded",
+                  "urlencoded": [
+                    {
+                      "key": "_id",
+                      "value": "6964b10982a711187853e509",
+                      "type": "text",
+                      "uuid": "b8c73754-6a64-4882-b0fc-987540c52f85"
+                    }
+                  ]
+                },
+                "url": {
+                  "raw": "{{baseURL}}/period/delete",
+                  "host": [
+                    "{{baseURL}}"
+                  ],
+                  "path": [
+                    "period",
+                    "delete"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "Block-Unblock Period",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "{{token}}",
+                    "type": "text"
+                  }
+                ],
+                "body": {
+                  "mode": "urlencoded",
+                  "urlencoded": [
+                    {
+                      "key": "isBlocked",
+                      "value": "true",
+                      "type": "text",
+                      "uuid": "c1d4e32b-2509-4a8a-afe7-075c1e98ffcc"
+                    },
+                    {
+                      "key": "_id",
+                      "value": "6964bbca6e94b32525907d85",
+                      "type": "text",
+                      "uuid": "8cedc9bc-5e70-4b6b-957c-c84f16cd5afe"
+                    }
+                  ]
+                },
+                "url": {
+                  "raw": "{{baseURL}}/period/blockUnblock",
+                  "host": [
+                    "{{baseURL}}"
+                  ],
+                  "path": [
+                    "period",
+                    "blockUnblock"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "All Periods Mini",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "{{token}}",
+                    "type": "text"
+                  }
+                ],
+                "body": {
+                  "mode": "urlencoded",
+                  "urlencoded": [
+                    {
+                      "key": "isBlocked",
+                      "value": "true",
+                      "type": "text",
+                      "uuid": "9a33edd7-bef5-4eab-a936-f53790f45147"
+                    }
+                  ]
+                },
+                "url": {
+                  "raw": "{{baseURL}}/period/allMini",
+                  "host": [
+                    "{{baseURL}}"
+                  ],
+                  "path": [
+                    "period",
+                    "allMini"
+                  ]
+                }
+              },
+              "response": []
+            }
+          ]
+        },
+        {
+          "name": "User",
+          "item": [
+            {
+              "name": "Add User",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "{{token}}",
+                    "type": "text"
+                  }
+                ],
+                "body": {
+                  "mode": "urlencoded",
+                  "urlencoded": [
+                    {
+                      "key": "name",
+                      "value": "varun",
+                      "type": "text",
+                      "uuid": "78edda73-ffaf-4ee6-a303-9fdfa0dfc8e8"
+                    },
+                    {
+                      "key": "phone",
+                      "value": "78987867998",
+                      "type": "text",
+                      "uuid": "34d2373e-efba-4031-9c1b-dbf9625e91ae"
+                    },
+                    {
+                      "key": "email",
+                      "value": "varun@gmail.com",
+                      "type": "text",
+                      "uuid": "73a388ee-d224-4051-a964-4660e264cd6b"
+                    },
+                    {
+                      "key": "password",
+                      "value": "123",
+                      "type": "text",
+                      "uuid": "077c529f-ef4f-4f7d-bdc5-1d53d8a561df"
+                    },
+                    {
+                      "key": "userType",
+                      "value": "2",
+                      "description": "// 1-admin,2-teacher,3-other",
+                      "type": "text",
+                      "uuid": "eb854c3d-0ffa-41f3-8b05-1afe7a715416"
+                    },
+                    {
+                      "key": "departmentId",
+                      "value": "6968fe0f02c48a77127abbd2",
+                      "type": "text",
+                      "uuid": "451dc463-3d97-42a3-9d2b-a6bb1e4a721a"
+                    },
+                    {
+                      "key": "designation",
+                      "value": "2",
+                      "type": "text",
+                      "uuid": "74fa1a94-9580-4a26-a132-464ac11ae149"
+                    },
+                    {
+                      "key": "eligibleSubjects",
+                      "value": "6969b614863ac785a96dfba8",
+                      "type": "text",
+                      "uuid": "b9be3d4e-2265-4e15-9144-cb688c06ee12"
+                    },
+                    {
+                      "key": "eligibleSubjects",
+                      "value": "6969b64f863ac785a96dfbad",
+                      "type": "text",
+                      "uuid": "376d84e1-824f-43d7-8e60-2ac9da727305"
+                    }
+                  ]
+                },
+                "url": {
+                  "raw": "{{baseURL}}/user/add",
+                  "host": [
+                    "{{baseURL}}"
+                  ],
+                  "path": [
+                    "user",
+                    "add"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "All Periods",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "{{token}}",
+                    "type": "text"
+                  }
+                ],
+                "body": {
+                  "mode": "urlencoded",
+                  "urlencoded": []
+                },
+                "url": {
+                  "raw": "{{baseURL}}/period/all",
+                  "host": [
+                    "{{baseURL}}"
+                  ],
+                  "path": [
+                    "period",
+                    "all"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "Single Period",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "{{token}}",
+                    "type": "text"
+                  }
+                ],
+                "body": {
+                  "mode": "urlencoded",
+                  "urlencoded": [
+                    {
+                      "key": "_id",
+                      "value": "6964b10982a711187853e509",
+                      "type": "text",
+                      "uuid": "b8c73754-6a64-4882-b0fc-987540c52f85"
+                    }
+                  ]
+                },
+                "url": {
+                  "raw": "{{baseURL}}/period/single",
+                  "host": [
+                    "{{baseURL}}"
+                  ],
+                  "path": [
+                    "period",
+                    "single"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "Update Period",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "{{token}}",
+                    "type": "text"
+                  }
+                ],
+                "body": {
+                  "mode": "urlencoded",
+                  "urlencoded": [
+                    {
+                      "key": "_id",
+                      "value": "6964b10982a711187853e509",
+                      "type": "text",
+                      "uuid": "fde95668-b11f-431a-bd3d-b00325276207"
+                    },
+                    {
+                      "key": "day",
+                      "value": "Monday",
+                      "type": "text",
+                      "uuid": "aefbc340-e72d-4d4a-b5b9-5054c89076f6"
+                    },
+                    {
+                      "key": "period",
+                      "value": "Period 1",
+                      "type": "text",
+                      "uuid": "0ae32380-c85d-4db2-b2a8-cc49a460122c"
+                    },
+                    {
+                      "key": "startTime",
+                      "value": "12:00",
+                      "type": "text",
+                      "uuid": "b19ce7fc-d213-4050-9286-fbd4df25e3fc"
+                    },
+                    {
+                      "key": "endTime",
+                      "value": "1:00",
+                      "type": "text",
+                      "uuid": "ccd31448-f2e1-431b-a7e4-e047d1d2febf"
+                    },
+                    {
+                      "key": "isBreak",
+                      "value": "true",
+                      "type": "text",
+                      "uuid": "815feefb-a464-4771-ab71-6e1c17eea69f"
+                    }
+                  ]
+                },
+                "url": {
+                  "raw": "{{baseURL}}/period/update",
+                  "host": [
+                    "{{baseURL}}"
+                  ],
+                  "path": [
+                    "period",
+                    "update"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "Delete Period",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "{{token}}",
+                    "type": "text"
+                  }
+                ],
+                "body": {
+                  "mode": "urlencoded",
+                  "urlencoded": [
+                    {
+                      "key": "_id",
+                      "value": "6964b10982a711187853e509",
+                      "type": "text",
+                      "uuid": "b8c73754-6a64-4882-b0fc-987540c52f85"
+                    }
+                  ]
+                },
+                "url": {
+                  "raw": "{{baseURL}}/period/delete",
+                  "host": [
+                    "{{baseURL}}"
+                  ],
+                  "path": [
+                    "period",
+                    "delete"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "Block-Unblock Period",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "{{token}}",
+                    "type": "text"
+                  }
+                ],
+                "body": {
+                  "mode": "urlencoded",
+                  "urlencoded": [
+                    {
+                      "key": "isBlocked",
+                      "value": "true",
+                      "type": "text",
+                      "uuid": "c1d4e32b-2509-4a8a-afe7-075c1e98ffcc"
+                    },
+                    {
+                      "key": "_id",
+                      "value": "6964bbca6e94b32525907d85",
+                      "type": "text",
+                      "uuid": "8cedc9bc-5e70-4b6b-957c-c84f16cd5afe"
+                    }
+                  ]
+                },
+                "url": {
+                  "raw": "{{baseURL}}/period/blockUnblock",
+                  "host": [
+                    "{{baseURL}}"
+                  ],
+                  "path": [
+                    "period",
+                    "blockUnblock"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "All Periods Mini",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "{{token}}",
+                    "type": "text"
+                  }
+                ],
+                "body": {
+                  "mode": "urlencoded",
+                  "urlencoded": [
+                    {
+                      "key": "isBlocked",
+                      "value": "true",
+                      "type": "text",
+                      "uuid": "9a33edd7-bef5-4eab-a936-f53790f45147"
+                    }
+                  ]
+                },
+                "url": {
+                  "raw": "{{baseURL}}/period/allMini",
+                  "host": [
+                    "{{baseURL}}"
+                  ],
+                  "path": [
+                    "period",
+                    "allMini"
+                  ]
+                }
+              },
+              "response": []
+            }
+          ]
+        },
+        {
+          "name": "Time Table",
+          "item": [
+            {
+              "name": "Generate Time Table",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "{{token}}",
+                    "type": "text"
+                  },
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json",
+                    "type": "text"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json",
+                    "type": "text"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\r\n \"batches\": [\r\n    \"6969b93df894f2dcf31897b4\",\r\n    \"6969b9a9f894f2dcf31897b8\"\r\n  ],\r\n   \"classRooms\": [\r\n    \"696917e11b1f4d57f37d1471\",\r\n    \"696918d825125fd6a619132d\",\r\n    \"6969190725125fd6a6191331\"\r\n  ],\r\n  \"subjects\": [\r\n    \"6969b614863ac785a96dfba8\",\r\n    \"6969b64f863ac785a96dfbad\",\r\n    \"6969b6db698ddf70f41dc4eb\"\r\n  ],\r\n  \"teachers\": [\r\n    \"6969b768698ddf70f41dc4f2\",\r\n    \"6969b7c84dd15cab4e17cd46\",\r\n    \"6969b859f894f2dcf31897af\"\r\n  ],\r\n  \"semesters\": [\r\n    \"6969228d98a4f0a566bb99b9\",\r\n    \"696922eb98a4f0a566bb99c1\"\r\n  ],\r\n  \"departments\": [\r\n    \"6968fe0f02c48a77127abbd2\"\r\n  ],\r\n  \"constraints\": {\r\n  \"hard\": {\r\n    \"noFacultyDoubleBooking\": true,\r\n    \"noRoomDoubleBooking\": true,\r\n    \"noBatchDoubleBooking\": true,\r\n    \"roomCapacityCheck\": true\r\n  },\r\n  \"soft\": {\r\n    \"evenDistribution\": true,\r\n    \"minimizeIdleTime\": true,\r\n    \"labMorningPreference\": true,\r\n    \"facultyLoadBalance\": false,\r\n    \"avoidLastPeriod\": true\r\n  }\r\n}\r\n\r\n}\r\n"
+                },
+                "url": {
+                  "raw": "{{baseURL}}/timetable/generate",
+                  "host": [
+                    "{{baseURL}}"
+                  ],
+                  "path": [
+                    "timetable",
+                    "generate"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "Get Timetable",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "{{token}}",
+                    "type": "text"
+                  }
+                ],
+                "body": {
+                  "mode": "urlencoded",
+                  "urlencoded": [
+                    {
+                      "key": "versionId",
+                      "value": "6979a3924fd3af3405fb6939",
+                      "type": "text",
+                      "uuid": "00e9c036-370a-4089-b13d-5c4c5e09f297"
+                    }
+                  ]
+                },
+                "url": {
+                  "raw": "{{baseURL}}/timetable/all",
+                  "host": [
+                    "{{baseURL}}"
+                  ],
+                  "path": [
+                    "timetable",
+                    "all"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "New Request",
+              "request": {
+                "method": "GET",
+                "header": []
+              },
+              "response": []
+            }
+          ]
+        },
+        {
+          "name": "Get Versions",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "{{token}}",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "urlencoded",
+              "urlencoded": [
+                {
+                  "key": "departmentId",
+                  "value": "6978c6ce72e23f7a5433376b",
+                  "type": "text",
+                  "uuid": "af30a076-fe42-4096-bc3f-cbaa291ace86"
+                },
+                {
+                  "key": "semesterId",
+                  "value": "6978c96872e23f7a54333822",
+                  "type": "text",
+                  "uuid": "a4b0f07f-4209-43f7-9efd-8ab3524d6d43"
+                },
+                {
+                  "key": "academicYear",
+                  "value": "2024-2025",
+                  "type": "text",
+                  "uuid": "455809a0-b721-4733-b7bd-aa1fc13d28af"
+                }
+              ]
+            },
+            "url": {
+              "raw": "{{baseURL}}/version/all",
+              "host": [
+                "{{baseURL}}"
+              ],
+              "path": [
+                "version",
+                "all"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Dashboard",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "{{token}}",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "urlencoded",
+              "urlencoded": [
+                {
+                  "key": "departmentId",
+                  "value": "6978c6ce72e23f7a5433376b",
+                  "type": "text",
+                  "uuid": "af30a076-fe42-4096-bc3f-cbaa291ace86"
+                },
+                {
+                  "key": "semesterId",
+                  "value": "6978c96872e23f7a54333822",
+                  "type": "text",
+                  "uuid": "a4b0f07f-4209-43f7-9efd-8ab3524d6d43"
+                },
+                {
+                  "key": "academicYear",
+                  "value": "2024-2025",
+                  "type": "text",
+                  "uuid": "455809a0-b721-4733-b7bd-aa1fc13d28af"
+                }
+              ]
+            },
+            "url": {
+              "raw": "{{baseURL}}/version/all",
+              "host": [
+                "{{baseURL}}"
+              ],
+              "path": [
+                "version",
+                "all"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "ClassRoom Status",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "{{token}}",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "urlencoded",
+              "urlencoded": [
+                {
+                  "key": "departmentId",
+                  "value": "6978c6ce72e23f7a5433376b",
+                  "type": "text",
+                  "uuid": "af30a076-fe42-4096-bc3f-cbaa291ace86"
+                },
+                {
+                  "key": "semesterId",
+                  "value": "6978c96872e23f7a54333822",
+                  "type": "text",
+                  "uuid": "a4b0f07f-4209-43f7-9efd-8ab3524d6d43"
+                },
+                {
+                  "key": "academicYear",
+                  "value": "2024-2025",
+                  "type": "text",
+                  "uuid": "455809a0-b721-4733-b7bd-aa1fc13d28af"
+                }
+              ]
+            },
+            "url": {
+              "raw": "{{baseURL}}/version/all",
+              "host": [
+                "{{baseURL}}"
+              ],
+              "path": [
+                "version",
+                "all"
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Teacher",
+      "item": []
+    }
+  ]
+}

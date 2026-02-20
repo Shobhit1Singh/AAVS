@@ -3,7 +3,7 @@ from attacks.attack_generator import AttackGenerator
 from attacks.executor import TestExecutor
 from analyser.response_analyser import ResponseAnalyzer
 from core.session_manager import SessionManager
-
+from core.endpoint_discoverer import EndpointDiscoverer
 import time
 import os
 from colorama import Fore, Style
@@ -37,7 +37,12 @@ def run_scan(swagger_path, base_url=None, delay=0.1):
 
     parser.base_url = target
     executor_base_url = parser.base_url
+    print("[*] Running endpoint discovery...")
 
+    discoverer = EndpointDiscoverer(executor_base_url)
+    discovered_paths = discoverer.run_all()
+
+    print(f"[*] Discovered {len(discovered_paths)} extra endpoints")
     print(f"\n{Fore.CYAN}[*] Target Server: {executor_base_url}{Style.RESET_ALL}\n")
 
     # -----------------------------
@@ -56,6 +61,12 @@ def run_scan(swagger_path, base_url=None, delay=0.1):
     analyzer = ResponseAnalyzer()
 
     endpoints = parser.get_all_endpoints()
+    # Add discovered endpoints as GET endpoints
+    for path in discovered_paths:
+        endpoints.append({
+            "path": path,
+            "method": "GET"
+        })
     all_results = []
 
     for ep in endpoints:
@@ -96,10 +107,8 @@ def run_scan(swagger_path, base_url=None, delay=0.1):
     analyzer.print_summary()
 
     return findings
-
-
 if __name__ == "__main__":
-    swagger_file = "C:/AAVS/juice_shop.json"
+    swagger_file = "C:/AAVS/crapi-openapi-spec.json"
 
     # Optional override via ENV
     target = os.getenv("AAVS_TARGET")
