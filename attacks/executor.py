@@ -7,6 +7,7 @@ import requests
 import time
 import logging
 from typing import Dict, Any, Optional
+from requests.adapters import HTTPAdapter
 
 logger = logging.getLogger(__name__)
 
@@ -23,12 +24,32 @@ class TestExecutor:
         self.default_headers = headers or {}
         self.timeout = timeout
 
-        if session_manager:
-            self.session = session_manager.get_authenticated_session()
-        else:
-            self.session = requests.Session()
+        # ---- CREATE ONE SESSION ONLY ----
+        self.session = requests.Session()
 
+        # ---- INCREASE CONNECTION POOL ----
+        adapter = HTTPAdapter(
+            pool_connections=100,
+            pool_maxsize=100,
+            max_retries=0,
+        )
+
+        self.session.mount("http://", adapter)
+        self.session.mount("https://", adapter)
+
+        # ---- MERGE AUTH SESSION (DO NOT REPLACE) ----
+        if session_manager:
+            auth_session = session_manager.get_authenticated_session()
+
+            # copy cookies
+            self.session.cookies.update(auth_session.cookies)
+
+            # copy headers
+            self.session.headers.update(auth_session.headers)
+
+        # apply default headers last
         self.session.headers.update(self.default_headers)
+
         self.results = []
 
     def execute_attack(
@@ -134,7 +155,7 @@ class TestExecutor:
         self.results.append(result)
         return result
 
-    def execute_all_attacks(self, attacks, endpoint_path, method, delay=0.1):
+    def execute_all_attacks(self, attacks, endpoint_path, method, delay=0):
         results = []
         for attack in attacks:
             results.append(self.execute_attack(attack, endpoint_path, method))

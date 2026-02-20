@@ -1,5 +1,4 @@
 import random
-import time
 
 
 class WAFManager:
@@ -23,38 +22,37 @@ class WAFManager:
     ]
 
     def __init__(self):
-        self.delay = 0.1
-        self.blocked_count = 0
+        self.total_requests = 0
+        self.waf_hits = 0
 
     def detect_waf(self, response):
+        self.total_requests += 1
 
-        text = (response.get("response_body", "") + str(response.get("response_headers", ""))).lower()
+        text = (
+            response.get("response_body", "") +
+            str(response.get("response_headers", ""))
+        ).lower()
 
         for sig in self.WAF_SIGNATURES:
             if sig in text:
+                self.waf_hits += 1
                 return True
 
         if response.get("status_code") in [401, 403, 429]:
+            self.waf_hits += 1
             return True
 
         return False
 
-    def adapt(self, waf_detected):
-
-        if waf_detected:
-            self.blocked_count += 1
-            self.delay = min(self.delay * 2, 5)
-
-        else:
-            self.delay = max(self.delay * 0.9, 0.1)
-
     def get_headers(self):
-
         return {
             "User-Agent": random.choice(self.USER_AGENTS),
             "Accept": "*/*",
             "Connection": "keep-alive"
         }
 
-    def wait(self):
-        time.sleep(self.delay)
+    def get_stats(self):
+        return {
+            "total_requests": self.total_requests,
+            "waf_hits": self.waf_hits
+        }
