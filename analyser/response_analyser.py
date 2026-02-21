@@ -1,6 +1,7 @@
 import re
 from typing import Dict, List, Any
 from colorama import Fore, Style
+from analyser.vulnerability_rules import VulnerabilityRules
 
 
 class ResponseAnalyzer:
@@ -43,24 +44,24 @@ class ResponseAnalyzer:
         ],
     }
 
-    DANGEROUS_HEADERS = [
+    DANGEROUS_HEADERS = {
         "X-Powered-By",
         "Server",
         "X-AspNet-Version",
         "X-AspNetMvc-Version",
-    ]
+    }
 
     def __init__(self):
         self.vulnerabilities: List[Dict[str, Any]] = []
+        self.compiled_patterns = {
+            t: [re.compile(p, re.IGNORECASE) for p in plist]
+            for t, plist in self.ERROR_PATTERNS.items()
+        }
 
     def analyze_result(self, result: Dict[str, Any]) -> Dict[str, Any]:
-        from analyser.vulnerability_rules import VulnerabilityRules
-
         findings = []
 
         if not result.get("success"):
-            if result.get("vulnerability_detected"):
-                self.vulnerabilities.append(result)
             return result
 
         status_code = result.get("status_code", 0)
@@ -75,41 +76,43 @@ class ResponseAnalyzer:
                 "reason": "Payload triggered internal server error",
             })
 
-        for error_type, patterns in self.ERROR_PATTERNS.items():
-            for pattern in patterns:
-                if re.search(pattern, body, re.IGNORECASE):
-                    findings.append({
-                        "type": f"Information Disclosure ({error_type})",
-                        "severity": "CRITICAL" if error_type == "sql_error" else "HIGH",
-                        "evidence": self._extract_evidence(body, pattern),
-                    })
+        if body:
+            for error_type, patterns in self.compiled_patterns.items():
+                for pattern in patterns:
+                    match = pattern.search(body)
+                    if match:
+                        findings.append({
+                            "type": f"Information Disclosure ({error_type})",
+                            "severity": "CRITICAL" if error_type == "sql_error" else "HIGH",
+                            "evidence": body[max(0, match.start()-80):match.end()+80],
+                        })
+                        break
 
         if response_time > 5:
             findings.append({
                 "type": "Timing Anomaly",
                 "severity": "MEDIUM",
-                "reason": f"Slow response detected ({response_time:.2f}s)",
+                "reason": f"Slow response ({response_time:.2f}s)",
             })
 
-        for h in self.DANGEROUS_HEADERS:
-            if h in headers:
-                findings.append({
-                    "type": "Sensitive Header Exposure",
-                    "severity": "LOW",
-                    "reason": f"{h} header exposed",
-                })
+        exposed = self.DANGEROUS_HEADERS.intersection(headers.keys())
+        for h in exposed:
+            findings.append({
+                "type": "Sensitive Header Exposure",
+                "severity": "LOW",
+                "reason": f"{h} header exposed",
+            })
 
-        if status_code == 200:
-            payload = str(result.get("payload", ""))
-            if "' OR '1'='1" in payload:
-                findings.append({
-                    "type": "Possible SQL Injection",
-                    "severity": "CRITICAL",
-                })
+        payload = str(result.get("payload", ""))
+        if status_code == 200 and "' OR '1'='1" in payload:
+            findings.append({
+                "type": "Possible SQL Injection",
+                "severity": "CRITICAL",
+            })
 
         rule_findings = VulnerabilityRules.run_all(result)
 
-        if rule_findings or findings:
+        if findings or rule_findings:
             result["vulnerability_detected"] = True
             result["vulnerabilities"] = findings + rule_findings
             self.vulnerabilities.append(result)
@@ -118,24 +121,15 @@ class ResponseAnalyzer:
 
         return result
 
-    def _extract_evidence(self, text: str, pattern: str, ctx: int = 100) -> str:
-        match = re.search(pattern, text, re.IGNORECASE)
-        if not match:
-            return ""
-        start = max(0, match.start() - ctx)
-        end = min(len(text), match.end() + ctx)
-        return text[start:end]
-
     def analyze_all_results(self, results: List[Dict]) -> List[Dict]:
         print(f"\n{Fore.CYAN}Analyzing {len(results)} results...{Style.RESET_ALL}\n")
 
         analyzed = [self.analyze_result(r) for r in results]
 
-        print(
-            f"{Fore.RED}Found {len(self.vulnerabilities)} potential vulnerabilities{Style.RESET_ALL}\n"
-            if self.vulnerabilities
-            else f"{Fore.GREEN}No vulnerabilities detected{Style.RESET_ALL}\n"
-        )
+        if self.vulnerabilities:
+            print(f"{Fore.RED}Found {len(self.vulnerabilities)} potential vulnerabilities{Style.RESET_ALL}\n")
+        else:
+            print(f"{Fore.GREEN}No vulnerabilities detected{Style.RESET_ALL}\n")
 
         return analyzed
 
