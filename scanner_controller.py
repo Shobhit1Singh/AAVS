@@ -1,8 +1,3 @@
-"""
-Async AAVS Runner with Endpoint Risk Scoring Engine
-STREAMING ANALYSIS VERSION (NO BATCH BOTTLENECK)
-"""
-
 import asyncio
 import os
 import json
@@ -11,14 +6,15 @@ from parser.api_parser import APIParser
 from attacks.attack_generator import AttackGenerator
 from attacks.async_executor import AsyncTestExecutor
 from analyser.response_analyser import ResponseAnalyzer
+from core.response_clusterer import ResponseClusterer
 from core.session_manager import SessionManager
 from core.endpoint_discoverer import EndpointDiscoverer
 from core.intelligent_retry import IntelligentRetryEngine
 from core.waf_manager import WAFManager
 from core.adaptive_scheduler import AdaptiveScheduler
 from core.intelligence_pipeline import IntelligencePipeline
-import aiohttp
 from analyser.endpoints_risk_scoring_engine import EndpointRiskScorer
+import aiohttp
 
 
 async def run_scan_async(swagger_path, base_url=None):
@@ -48,6 +44,7 @@ async def run_scan_async(swagger_path, base_url=None):
     executor = AsyncTestExecutor(executor_base_url, max_concurrency=20, timeout=10)
 
     analyzer = ResponseAnalyzer()
+    clusterer = ResponseClusterer()
     waf_manager = WAFManager()
     risk_scorer = EndpointRiskScorer()
 
@@ -60,23 +57,24 @@ async def run_scan_async(swagger_path, base_url=None):
     for path in discovered_paths:
         endpoints.append({"path": path, "method": "GET"})
 
-    # Risk scoring + prioritization
     ranked_endpoints = risk_scorer.rank_endpoints(endpoints)
     scheduler.add_endpoints(ranked_endpoints)
 
     await intelligence.start()
 
-    # ---------------------------------------
-    # STREAMING EXECUTOR (NO RESULT STORAGE)
-    # ---------------------------------------
     async def executor_func(session, endpoint, payload):
 
         result = await executor.send_request(session, endpoint, payload)
 
-        # feed intelligence pipeline
         await intelligence.submit_response(result)
 
-        # LIVE vulnerability analysis
+        # ADD TO CLUSTER ENGINE
+        clusterer.add_response(result)
+
+        # SKIP DEEP ANALYSIS IF RESPONSE IS COMMON
+        if clusterer.should_skip_payload(result):
+            return result
+
         analyzed = analyzer.analyze_result(result)
 
         if analyzed.get("vulnerability_detected"):
@@ -84,11 +82,9 @@ async def run_scan_async(swagger_path, base_url=None):
 
         return result
 
-    # ---------------------------------------
     def waf_detector_func(response):
         return waf_manager.detect_waf(response)
 
-    # ---------------------------------------
     def attack_generator_func(endpoint, fast_mode=True):
 
         details = parser.get_endpoint_details(
@@ -99,14 +95,11 @@ async def run_scan_async(swagger_path, base_url=None):
 
         return payloads[:10] if fast_mode else payloads
 
-    # ---------------------------------------
-    # RUN SCAN
-    # ---------------------------------------
     async with aiohttp.ClientSession() as session:
 
         await scheduler.run(
             lambda ep, pl: executor_func(session, ep, pl),
-            lambda r: False,  # analysis handled live
+            lambda r: False,
             waf_detector_func,
             attack_generator_func,
             retry_engine
@@ -118,13 +111,12 @@ async def run_scan_async(swagger_path, base_url=None):
         f"\n{Fore.GREEN}✓ Completed scanning {len(ranked_endpoints)} endpoints{Style.RESET_ALL}\n"
     )
 
-    # ---------------------------------------
-    # NO BATCH ANALYSIS
-    # ONLY PRINT SUMMARY
-    # ---------------------------------------
+    print("\nCluster Summary:")
+    print(clusterer.get_cluster_summary())
+
     analyzer.print_summary()
 
-    return analyzer.get_vulnerabilities()
+    return analyzer.vulnerabilities()
 
 
 def run_scan(swagger_path, base_url=None):
@@ -133,7 +125,7 @@ def run_scan(swagger_path, base_url=None):
 
 if __name__ == "__main__":
 
-    swagger_file = "C:/AAVS/crapi-openapi-spec.json"
+    swagger_file = "C:/AAVS/juice_shop.json"
     target = os.getenv("AAVS_TARGET")
 
     findings = run_scan(swagger_file, base_url=target)

@@ -1,0 +1,7 @@
+requests
+httpx
+colorama
+faker
+prance
+pyyaml
+openapi-spec-validator

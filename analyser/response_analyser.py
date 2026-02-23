@@ -1,4 +1,5 @@
 import re
+import hashlib
 from typing import Dict, List, Any
 from colorama import Fore, Style
 from analyser.vulnerability_rules import VulnerabilityRules
@@ -51,21 +52,81 @@ class ResponseAnalyzer:
         "X-AspNetMvc-Version",
     }
 
+    WAF_SIGNATURES = [
+        "cloudfront",
+        "akamai",
+        "incapsula",
+        "access denied",
+        "request blocked",
+        "forbidden"
+    ]
+
     def __init__(self):
         self.vulnerabilities: List[Dict[str, Any]] = []
+
         self.compiled_patterns = {
             t: [re.compile(p, re.IGNORECASE) for p in plist]
             for t, plist in self.ERROR_PATTERNS.items()
         }
 
-    def analyze_result(self, result: Dict[str, Any]) -> Dict[str, Any]:
-        findings = []
+        # 🚀 NEW: response clustering cache
+        self.seen_hashes = set()
+
+    # -------------------------------------------------------
+    # FAST FILTER: skip useless responses
+    # -------------------------------------------------------
+    def _is_interesting(self, result: Dict[str, Any]) -> bool:
 
         if not result.get("success"):
+            return False
+
+        code = result.get("status_code", 0)
+
+        if code in [401, 403, 404, 429]:
+            return False
+
+        body = result.get("response_body", "").lower()
+
+        if any(sig in body for sig in self.WAF_SIGNATURES):
+            return False
+
+        return True
+
+    # -------------------------------------------------------
+    # DUPLICATE RESPONSE SKIP
+    # -------------------------------------------------------
+    def _is_duplicate(self, result: Dict[str, Any]) -> bool:
+        fingerprint = hashlib.md5(
+            (result.get("response_body", "")[:500] +
+             str(result.get("status_code"))).encode()
+        ).hexdigest()
+
+        if fingerprint in self.seen_hashes:
+            return True
+
+        self.seen_hashes.add(fingerprint)
+        return False
+
+    # -------------------------------------------------------
+    # MAIN ANALYSIS
+    # -------------------------------------------------------
+    def analyze_result(self, result: Dict[str, Any]) -> Dict[str, Any]:
+
+        # 🚀 Skip junk instantly
+        if not self._is_interesting(result):
             return result
 
+        # 🚀 Skip duplicate responses
+        if self._is_duplicate(result):
+            return result
+
+        findings = []
+
         status_code = result.get("status_code", 0)
-        body = result.get("response_body", "")
+
+        # 🚀 Limit regex workload
+        body = result.get("response_body", "")[:2000]
+
         headers = result.get("response_headers", {})
         response_time = result.get("response_time", 0)
 
@@ -76,17 +137,17 @@ class ResponseAnalyzer:
                 "reason": "Payload triggered internal server error",
             })
 
-        if body:
-            for error_type, patterns in self.compiled_patterns.items():
-                for pattern in patterns:
-                    match = pattern.search(body)
-                    if match:
-                        findings.append({
-                            "type": f"Information Disclosure ({error_type})",
-                            "severity": "CRITICAL" if error_type == "sql_error" else "HIGH",
-                            "evidence": body[max(0, match.start()-80):match.end()+80],
-                        })
-                        break
+        # Pattern detection
+        for error_type, patterns in self.compiled_patterns.items():
+            for pattern in patterns:
+                match = pattern.search(body)
+                if match:
+                    findings.append({
+                        "type": f"Information Disclosure ({error_type})",
+                        "severity": "CRITICAL" if error_type == "sql_error" else "HIGH",
+                        "evidence": body[max(0, match.start()-80):match.end()+80],
+                    })
+                    break
 
         if response_time > 5:
             findings.append({
@@ -104,6 +165,7 @@ class ResponseAnalyzer:
             })
 
         payload = str(result.get("payload", ""))
+
         if status_code == 200 and "' OR '1'='1" in payload:
             findings.append({
                 "type": "Possible SQL Injection",
@@ -121,7 +183,11 @@ class ResponseAnalyzer:
 
         return result
 
+    # -------------------------------------------------------
+    # BULK ANALYSIS
+    # -------------------------------------------------------
     def analyze_all_results(self, results: List[Dict]) -> List[Dict]:
+
         print(f"\n{Fore.CYAN}Analyzing {len(results)} results...{Style.RESET_ALL}\n")
 
         analyzed = [self.analyze_result(r) for r in results]
@@ -133,6 +199,9 @@ class ResponseAnalyzer:
 
         return analyzed
 
+    # -------------------------------------------------------
+    # STATS
+    # -------------------------------------------------------
     def get_statistics(self) -> Dict[str, Any]:
         stats = {"total": len(self.vulnerabilities), "severity": {}}
 
@@ -144,6 +213,7 @@ class ResponseAnalyzer:
         return stats
 
     def print_summary(self):
+
         stats = self.get_statistics()
 
         print(f"\n{Fore.CYAN}{'='*60}")
