@@ -3,6 +3,7 @@ import hashlib
 from typing import Dict, List, Any
 from colorama import Fore, Style
 from analyser.vulnerability_rules import VulnerabilityRules
+from detectors.authorisztion_detector import AuthorizationDetector
 
 
 class ResponseAnalyzer:
@@ -63,17 +64,17 @@ class ResponseAnalyzer:
 
     def __init__(self):
         self.vulnerabilities: List[Dict[str, Any]] = []
+        self.auth_detector = AuthorizationDetector()
 
         self.compiled_patterns = {
             t: [re.compile(p, re.IGNORECASE) for p in plist]
             for t, plist in self.ERROR_PATTERNS.items()
         }
 
-        # 🚀 NEW: response clustering cache
         self.seen_hashes = set()
 
     # -------------------------------------------------------
-    # FAST FILTER: skip useless responses
+    # FAST FILTER
     # -------------------------------------------------------
     def _is_interesting(self, result: Dict[str, Any]) -> bool:
 
@@ -93,7 +94,7 @@ class ResponseAnalyzer:
         return True
 
     # -------------------------------------------------------
-    # DUPLICATE RESPONSE SKIP
+    # DUPLICATE SKIP
     # -------------------------------------------------------
     def _is_duplicate(self, result: Dict[str, Any]) -> bool:
         fingerprint = hashlib.md5(
@@ -108,27 +109,23 @@ class ResponseAnalyzer:
         return False
 
     # -------------------------------------------------------
-    # MAIN ANALYSIS
+    # SINGLE RESPONSE ANALYSIS
     # -------------------------------------------------------
     def analyze_result(self, result: Dict[str, Any]) -> Dict[str, Any]:
 
-        # 🚀 Skip junk instantly
         if not self._is_interesting(result):
             return result
 
-        # 🚀 Skip duplicate responses
         if self._is_duplicate(result):
             return result
 
         findings = []
 
         status_code = result.get("status_code", 0)
-
-        # 🚀 Limit regex workload
         body = result.get("response_body", "")[:2000]
-
         headers = result.get("response_headers", {})
         response_time = result.get("response_time", 0)
+        payload = str(result.get("payload", ""))
 
         if status_code == 500:
             findings.append({
@@ -137,7 +134,6 @@ class ResponseAnalyzer:
                 "reason": "Payload triggered internal server error",
             })
 
-        # Pattern detection
         for error_type, patterns in self.compiled_patterns.items():
             for pattern in patterns:
                 match = pattern.search(body)
@@ -164,8 +160,6 @@ class ResponseAnalyzer:
                 "reason": f"{h} header exposed",
             })
 
-        payload = str(result.get("payload", ""))
-
         if status_code == 200 and "' OR '1'='1" in payload:
             findings.append({
                 "type": "Possible SQL Injection",
@@ -182,6 +176,34 @@ class ResponseAnalyzer:
             result["vulnerability_detected"] = False
 
         return result
+
+    # -------------------------------------------------------
+    # DIFFERENTIAL AUTH ANALYSIS
+    # -------------------------------------------------------
+    def analyze_authorization(
+        self,
+        baseline_result: Dict[str, Any],
+        mutated_result: Dict[str, Any],
+        diff_object: Dict[str, Any],
+        metadata: Dict[str, Any] = None
+    ) -> Dict[str, Any]:
+
+        baseline_body = baseline_result.get("json")
+        mutated_body = mutated_result.get("json")
+
+        auth_finding = self.auth_detector.analyze(
+            baseline_body,
+            mutated_body,
+            diff_object,
+            metadata
+        )
+
+        if auth_finding:
+            mutated_result["vulnerability_detected"] = True
+            mutated_result.setdefault("vulnerabilities", []).append(auth_finding)
+            self.vulnerabilities.append(mutated_result)
+
+        return mutated_result
 
     # -------------------------------------------------------
     # BULK ANALYSIS
