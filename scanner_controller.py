@@ -6,6 +6,7 @@ from colorama import Fore, Style
 
 from parser.api_parser import APIParser
 from attacks.attack_generator import AttackGenerator
+from attacks.auth_attacks import AuthAttackGenerator
 from attacks.async_executor import (
     RealHTTPExecutor,
     MockExecutor,
@@ -15,11 +16,6 @@ from attacks.async_executor import (
 from analyser.response_analyser import ResponseAnalyzer
 from core.semantic_diff_engine import SemanticDiffEngine
 from core.response_clusterer import ResponseClusterer
-from core.endpoint_discoverer import EndpointDiscoverer
-from core.intelligent_retry import IntelligentRetryEngine
-from core.waf_manager import WAFManager
-from core.adaptive_scheduler import AdaptiveScheduler
-from core.intelligence_pipeline import IntelligencePipeline
 from analyser.endpoints_risk_scoring_engine import EndpointRiskScorer
 from core.payload_strategy import PayloadStrategy
 
@@ -62,6 +58,7 @@ async def run_scan_async(
     executor = create_executor(mode, target, replay_file)
 
     attacker = AttackGenerator()
+    auth_attacker = AuthAttackGenerator()
     analyzer = ResponseAnalyzer()
     clusterer = ResponseClusterer()
     semantic_engine = SemanticDiffEngine()
@@ -95,9 +92,7 @@ async def run_scan_async(
         return normalized
 
     async def get_baseline(endpoint):
-
         key = f"{endpoint['method']}:{endpoint['path']}"
-
         if key in baselines:
             return baselines[key]
 
@@ -110,7 +105,6 @@ async def run_scan_async(
         return baseline
 
     async def executor_func(endpoint, payload):
-
         baseline = await get_baseline(endpoint)
         if not baseline:
             return None
@@ -138,10 +132,34 @@ async def run_scan_async(
             )
 
         analyzer.analyze_result(result)
-
         return result
 
     async def run():
+
+        # ===== GENERATE GLOBAL AUTH ATTACKS =====
+        jwt_attacks = auth_attacker.generate_jwt_attacks()
+        api_key_attacks = auth_attacker.generate_api_key_attacks()
+
+        auth_payloads = []
+
+        # JWT Authorization header injection
+        for attack in jwt_attacks:
+            for token in attack.get("payloads", []):
+                if token:
+                    auth_payloads.append({
+                        "headers": {
+                            "Authorization": f"Bearer {token}"
+                        }
+                    })
+
+        # API Key header injection
+        for attack in api_key_attacks:
+            for key in attack.get("payloads", []):
+                auth_payloads.append({
+                    "headers": {
+                        "X-API-Key": key
+                    }
+                })
 
         for endpoint in ranked_endpoints:
 
@@ -158,7 +176,10 @@ async def run_scan_async(
                 base_payloads,
             )
 
-            for payload in selected_payloads[:10]:
+            # Merge base + auth payloads
+            final_payloads = selected_payloads[:10] + auth_payloads[:10]
+
+            for payload in final_payloads:
                 await executor_func(endpoint, payload)
 
     await run()
@@ -195,15 +216,13 @@ def run_scan(
 
 if __name__ == "__main__":
 
-    swagger_file = "C:/AAVS/crapi-openapi-spec.json"
+    swagger_file = "C:/AAVS/juice_shop.json"
     target = os.getenv("AAVS_TARGET")
 
     findings = run_scan(
         swagger_file,
         base_url=target,
-        mode="mock",
-        replay_file=None,
-        record_file=None,
+        mode="live",
     )
 
     for f in findings:
