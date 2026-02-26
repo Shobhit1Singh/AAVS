@@ -1,7 +1,6 @@
 import asyncio
 import os
 import json
-from collections import defaultdict
 from colorama import Fore, Style
 
 from parser.api_parser import APIParser
@@ -13,55 +12,24 @@ from attacks.async_executor import (
     ReplayExecutor,
     BaseExecutor,
 )
+
 from analyser.response_analyser import ResponseAnalyzer
+from analyser.endpoints_risk_scoring_engine import EndpointRiskScorer
+
 from core.semantic_diff_engine import SemanticDiffEngine
 from core.response_clusterer import ResponseClusterer
-from analyser.endpoints_risk_scoring_engine import EndpointRiskScorer
 from core.payload_strategy import PayloadStrategy
+from core.scan_memory import ScanMemory
+from core.execution_engine import ExecutionEngine
+from core.intelligence_core import IntelligenceCore
+from core.scan_phase_engine import ScanPhaseEngine
+from core.auth_strategy_engine import AuthStrategyEngine
+from core.stop_condition_engine import StopConditionEngine
 
 
-class PayloadPerformanceTracker:
-    def __init__(self):
-        self.stats = defaultdict(lambda: defaultdict(lambda: {
-            "attempts": 0,
-            "anomalies": 0,
-            "total_diff": 0.0
-        }))
-
-    def record(self, endpoint, family, diff_score, is_anomaly):
-        data = self.stats[endpoint][family]
-        data["attempts"] += 1
-        data["total_diff"] += diff_score or 0
-        if is_anomaly:
-            data["anomalies"] += 1
-
-    def family_score(self, endpoint, family):
-        data = self.stats[endpoint][family]
-        if data["attempts"] == 0:
-            return 0
-        anomaly_rate = data["anomalies"] / data["attempts"]
-        avg_diff = data["total_diff"] / data["attempts"]
-        return (anomaly_rate * 0.7) + (avg_diff * 0.3)
-
-    def rank_families(self, endpoint):
-        families = self.stats[endpoint]
-        scored = [(f, self.family_score(endpoint, f)) for f in families]
-        scored.sort(key=lambda x: x[1], reverse=True)
-        return [f for f, _ in scored]
-
-
-class EscalationEngine:
-    def __init__(self):
-        self.stage2 = 0.3
-        self.stage3 = 0.6
-
-    def stage(self, score):
-        if score >= self.stage3:
-            return 3
-        if score >= self.stage2:
-            return 2
-        return 1
-
+# ---------------------------------------
+# Executor Factory
+# ---------------------------------------
 
 def create_executor(mode, base_url=None, replay_file=None) -> BaseExecutor:
     if mode == "live":
@@ -80,12 +48,15 @@ def create_executor(mode, base_url=None, replay_file=None) -> BaseExecutor:
     raise ValueError("Invalid execution mode.")
 
 
+# ---------------------------------------
+# Async Scan Engine
+# ---------------------------------------
+
 async def run_scan_async(
     swagger_path,
     base_url=None,
     mode="live",
     replay_file=None,
-    record_file=None,
 ):
 
     parser = APIParser(swagger_path)
@@ -99,6 +70,7 @@ async def run_scan_async(
 
     executor = create_executor(mode, target, replay_file)
 
+    # Core components
     attacker = AttackGenerator()
     auth_attacker = AuthAttackGenerator()
     analyzer = ResponseAnalyzer()
@@ -106,156 +78,83 @@ async def run_scan_async(
     semantic_engine = SemanticDiffEngine()
     risk_scorer = EndpointRiskScorer()
     payload_strategy = PayloadStrategy()
+    memory = ScanMemory()
+    stop_engine = StopConditionEngine(memory)
 
-    tracker = PayloadPerformanceTracker()
-    escalator = EscalationEngine()
+    execution_engine = ExecutionEngine(executor, memory)
+
+    intelligence = IntelligenceCore(
+        semantic_engine,
+        clusterer,
+        analyzer,
+        memory
+    )
+
+    phase_engine = ScanPhaseEngine(memory)
+    auth_engine = AuthStrategyEngine(auth_attacker)
 
     endpoints = parser.get_all_endpoints()
     ranked_endpoints = risk_scorer.rank_endpoints(endpoints)
+    auth_payloads = auth_engine.get_auth_payloads()
 
-    baselines = {}
+    # ---------------------------------------
+    # Main Scan Loop
+    # ---------------------------------------
 
-    def normalize_response(result):
-        if result is None:
-            return None
+    for endpoint in ranked_endpoints:
 
-        if isinstance(result, dict):
-            return result
+        path = endpoint["path"]
+        method = endpoint["method"]
 
-        normalized = {
-            "status_code": getattr(result, "status", None),
-            "response_body": getattr(result, "text", ""),
-            "response_headers": dict(getattr(result, "headers", {})),
-            "url": str(getattr(result, "url", "")),
-        }
+        print(f"\n{Fore.CYAN}→ Scanning {method} {path}{Style.RESET_ALL}")
 
-        try:
-            normalized["json"] = json.loads(normalized["response_body"])
-        except:
-            normalized["json"] = None
+        baseline = await execution_engine.get_baseline(endpoint)
+        depth_limit = phase_engine.determine_depth(endpoint)
 
-        return normalized
+        details = parser.get_endpoint_details(path, method)
 
-    async def get_baseline(endpoint):
-        key = f"{endpoint['method']}:{endpoint['path']}"
-        if key in baselines:
-            return baselines[key]
+        base_payloads = attacker.generate_attacks_for_endpoint(details)
 
-        responses = await executor.run_tests([endpoint], [{}])
-        if not responses:
-            return None
+        selected_payloads = payload_strategy.generate(
+            path,
+            str(details.get("parameters", "unknown")),
+            base_payloads,
+        )
 
-        baseline = normalize_response(responses[0])
-        baselines[key] = baseline
-        return baseline
+        structured_payloads = []
+        for p in selected_payloads:
+            p["__family__"] = p.get("family", "generic")
+            structured_payloads.append(p)
 
-    async def execute_payload(endpoint, payload, family):
+        final_payloads = structured_payloads[:depth_limit] + auth_payloads[:10]
 
-        baseline = await get_baseline(endpoint)
-        if not baseline:
-            return
+        # Reset stop state per endpoint
+        stop_engine.reset(path)
 
-        responses = await executor.run_tests([endpoint], [payload])
-        if not responses:
-            return
+        for payload in final_payloads:
 
-        result = normalize_response(responses[0])
-        clusterer.add_response(result)
-
-        diff_score = 0
-        if baseline.get("json") and result.get("json"):
-            diff_score = semantic_engine.compare(
-                baseline["json"],
-                result["json"]
-            ) or 0
-
-        is_anomaly = diff_score > 0.2
-
-        tracker.record(endpoint["path"], family, diff_score, is_anomaly)
-
-        if is_anomaly:
-            analyzer.analyze_authorization(
-                baseline,
-                result,
-                diff_score,
-                {"endpoint": endpoint, "payload": payload}
-            )
-
-        analyzer.analyze_result(result)
-
-    async def run():
-
-        jwt_attacks = auth_attacker.generate_jwt_attacks()
-        api_key_attacks = auth_attacker.generate_api_key_attacks()
-
-        auth_payloads = []
-
-        for attack in jwt_attacks:
-            for token in attack.get("payloads", []):
-                if token:
-                    auth_payloads.append({
-                        "headers": {"Authorization": f"Bearer {token}"},
-                        "__family__": "auth_jwt"
-                    })
-
-        for attack in api_key_attacks:
-            for key in attack.get("payloads", []):
-                auth_payloads.append({
-                    "headers": {"X-API-Key": key},
-                    "__family__": "auth_apikey"
-                })
-
-        for endpoint in ranked_endpoints:
-
-            details = parser.get_endpoint_details(
-                endpoint["path"],
-                endpoint["method"]
-            )
-
-            base_payloads = attacker.generate_attacks_for_endpoint(details)
-
-            selected_payloads = payload_strategy.generate(
-                endpoint["path"],
-                str(details.get("parameters", "unknown")),
-                base_payloads,
-            )
-
-            structured_payloads = []
-            for p in selected_payloads:
-                family = p.get("family", "generic")
-                p["__family__"] = family
-                structured_payloads.append(p)
-
-            final_payloads = structured_payloads[:15] + auth_payloads[:10]
-
-            ranked_families = tracker.rank_families(endpoint["path"])
-
-            if ranked_families:
-                final_payloads.sort(
-                    key=lambda x: tracker.family_score(
-                        endpoint["path"],
-                        x.get("__family__", "generic")
-                    ),
-                    reverse=True
+            # Check stop condition before execution
+            if stop_engine.should_stop(path):
+                print(
+                    f"{Fore.YELLOW}⚡ Stop condition met for {path}. Skipping remaining payloads.{Style.RESET_ALL}"
                 )
+                break
 
-            for payload in final_payloads:
+            result = await execution_engine.execute(endpoint, payload)
 
-                family = payload.get("__family__", "generic")
-                score = tracker.family_score(endpoint["path"], family)
-                stage = escalator.stage(score)
+            analysis_result = intelligence.process(
+                endpoint,
+                payload,
+                baseline,
+                result
+            )
 
-                if stage == 1:
-                    await execute_payload(endpoint, payload, family)
+            # Update stop logic with latest signal
+            stop_engine.update(path, analysis_result)
 
-                elif stage == 2:
-                    await execute_payload(endpoint, payload, family)
-
-                elif stage == 3:
-                    await execute_payload(endpoint, payload, family)
-                    await execute_payload(endpoint, payload, family)
-
-    await run()
+    # ---------------------------------------
+    # Post Scan Reporting
+    # ---------------------------------------
 
     print(
         f"\n{Fore.GREEN}✓ Completed scanning {len(ranked_endpoints)} endpoints{Style.RESET_ALL}\n"
@@ -269,12 +168,15 @@ async def run_scan_async(
     return analyzer.vulnerabilities
 
 
+# ---------------------------------------
+# Sync Wrapper
+# ---------------------------------------
+
 def run_scan(
     swagger_path,
     base_url=None,
     mode="live",
     replay_file=None,
-    record_file=None,
 ):
     return asyncio.run(
         run_scan_async(
@@ -282,14 +184,17 @@ def run_scan(
             base_url,
             mode,
             replay_file,
-            record_file,
         )
     )
 
 
+# ---------------------------------------
+# Entry Point
+# ---------------------------------------
+
 if __name__ == "__main__":
 
-    swagger_file = "C:/AAVS/smart_booking_ai.yaml"
+    swagger_file = "C:/AAVS/crapi-openapi-spec.json"
     target = os.getenv("AAVS_TARGET")
 
     findings = run_scan(

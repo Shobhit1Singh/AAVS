@@ -1,0 +1,858 @@
+{
+  "endpoints": {
+    "POST::/users/v1/register": {
+      "profile": {
+        "has_json": false
+      },
+      "first_seen": 1772093884.1493735,
+      "scan_count": 2,
+      "suspicious": false
+    },
+    "POST::/users/v1/login": {
+      "profile": {
+        "has_json": false
+      },
+      "first_seen": 1772093884.7100787,
+      "scan_count": 2,
+      "suspicious": false
+    },
+    "PUT::/users/v1/email": {
+      "profile": {
+        "has_json": false
+      },
+      "first_seen": 1772093884.9170508,
+      "scan_count": 2,
+      "suspicious": false
+    },
+    "PUT::/users/v1/password": {
+      "profile": {
+        "has_json": false
+      },
+      "first_seen": 1772093885.0100322,
+      "scan_count": 2,
+      "suspicious": false
+    },
+    "GET::/users/v1": {
+      "profile": {
+        "has_json": false
+      },
+      "first_seen": 1772093885.1364813,
+      "scan_count": 2,
+      "suspicious": false
+    },
+    "GET::/users/v1/{username}": {
+      "profile": {
+        "has_json": false
+      },
+      "first_seen": 1772093885.4881124,
+      "scan_count": 2,
+      "suspicious": false
+    },
+    "GET::/books/v1": {
+      "profile": {
+        "has_json": false
+      },
+      "first_seen": 1772093886.055999,
+      "scan_count": 2,
+      "suspicious": false
+    },
+    "GET::/books/v1/{book_id}": {
+      "profile": {
+        "has_json": false
+      },
+      "first_seen": 1772093886.3797174,
+      "scan_count": 2,
+      "suspicious": false
+    },
+    "DELETE::/identity/api/v2/user/videos/{video_id}": {
+      "profile": {
+        "has_json": false
+      },
+      "first_seen": 1772094369.0281687,
+      "scan_count": 1,
+      "suspicious": false
+    },
+    "DELETE::/identity/api/v2/admin/videos/{video_id}": {
+      "profile": {
+        "has_json": false
+      },
+      "first_seen": 1772094377.8848512,
+      "scan_count": 1,
+      "suspicious": false
+    },
+    "POST::/identity/api/auth/signup": {
+      "profile": {
+        "has_json": false
+      },
+      "first_seen": 1772094386.4859085,
+      "scan_count": 1,
+      "suspicious": false
+    },
+    "POST::/identity/api/auth/login": {
+      "profile": {
+        "has_json": false
+      },
+      "first_seen": 1772094393.0392458,
+      "scan_count": 1,
+      "suspicious": false
+    },
+    "POST::/identity/api/auth/forget-password": {
+      "profile": {
+        "has_json": false
+      },
+      "first_seen": 1772094398.7735777,
+      "scan_count": 1,
+      "suspicious": false
+    },
+    "POST::/identity/api/auth/v3/check-otp": {
+      "profile": {
+        "has_json": false
+      },
+      "first_seen": 1772094404.2016366,
+      "scan_count": 1,
+      "suspicious": false
+    },
+    "POST::/identity/api/auth/v2/check-otp": {
+      "profile": {
+        "has_json": false
+      },
+      "first_seen": 1772094410.5506184,
+      "scan_count": 1,
+      "suspicious": false
+    },
+    "POST::/identity/api/auth/v4.0/user/login-with-token": {
+      "profile": {
+        "has_json": false
+      },
+      "first_seen": 1772094416.7122946,
+      "scan_count": 1,
+      "suspicious": false
+    },
+    "POST::/identity/api/auth/v2.7/user/login-with-token": {
+      "profile": {
+        "has_json": false
+      },
+      "first_seen": 1772094422.3729463,
+      "scan_count": 1,
+      "suspicious": false
+    },
+    "POST::/identity/api/v2/user/reset-password": {
+      "profile": {
+        "has_json": false
+      },
+      "first_seen": 1772094428.1621313,
+      "scan_count": 1,
+      "suspicious": false
+    },
+    "POST::/identity/api/v2/user/change-email": {
+      "profile": {
+        "has_json": false
+      },
+      "first_seen": 1772094433.7672715,
+      "scan_count": 1,
+      "suspicious": false
+    },
+    "POST::/identity/api/v2/user/verify-email-token": {
+      "profile": {
+        "has_json": false
+      },
+      "first_seen": 1772094439.6350522,
+      "scan_count": 1,
+      "suspicious": false
+    },
+    "POST::/identity/api/v2/user/pictures": {
+      "profile": {
+        "has_json": false
+      },
+      "first_seen": 1772094447.4164371,
+      "scan_count": 1,
+      "suspicious": false
+    },
+    "POST::/identity/api/v2/user/videos": {
+      "profile": {
+        "has_json": false
+      },
+      "first_seen": 1772094451.9212415,
+      "scan_count": 1,
+      "suspicious": false
+    },
+    "POST::/identity/api/v2/vehicle/add_vehicle": {
+      "profile": {
+        "has_json": false
+      },
+      "first_seen": 1772094459.6005747,
+      "scan_count": 1,
+      "suspicious": false
+    },
+    "POST::/identity/api/v2/vehicle/resend_email": {
+      "profile": {
+        "has_json": false
+      },
+      "first_seen": 1772094468.1411402,
+      "scan_count": 1,
+      "suspicious": false
+    },
+    "POST::/community/api/v2/community/posts": {
+      "profile": {
+        "has_json": false
+      },
+      "first_seen": 1772094473.0797164,
+      "scan_count": 1,
+      "suspicious": false
+    },
+    "POST::/community/api/v2/community/posts/{postId}/comment": {
+      "profile": {
+        "has_json": false
+      },
+      "first_seen": 1772094480.289294,
+      "scan_count": 1,
+      "suspicious": false
+    },
+    "POST::/community/api/v2/coupon/new-coupon": {
+      "profile": {
+        "has_json": false
+      },
+      "first_seen": 1772094486.1230788,
+      "scan_count": 1,
+      "suspicious": false
+    },
+    "POST::/community/api/v2/coupon/validate-coupon": {
+      "profile": {
+        "has_json": false
+      },
+      "first_seen": 1772094492.5641782,
+      "scan_count": 1,
+      "suspicious": false
+    },
+    "POST::/workshop/api/shop/products": {
+      "profile": {
+        "has_json": false
+      },
+      "first_seen": 1772094497.7974193,
+      "scan_count": 1,
+      "suspicious": false
+    },
+    "POST::/workshop/api/shop/orders": {
+      "profile": {
+        "has_json": false
+      },
+      "first_seen": 1772094503.9420106,
+      "scan_count": 1,
+      "suspicious": false
+    },
+    "POST::/workshop/api/shop/orders/return_order": {
+      "profile": {
+        "has_json": false
+      },
+      "first_seen": 1772094509.631032,
+      "scan_count": 1,
+      "suspicious": false
+    },
+    "POST::/workshop/api/shop/apply_coupon": {
+      "profile": {
+        "has_json": false
+      },
+      "first_seen": 1772094518.3813114,
+      "scan_count": 1,
+      "suspicious": false
+    },
+    "POST::/workshop/api/merchant/contact_mechanic": {
+      "profile": {
+        "has_json": false
+      },
+      "first_seen": 1772094524.2280664,
+      "scan_count": 1,
+      "suspicious": false
+    },
+    "POST::/workshop/api/mechanic/signup": {
+      "profile": {
+        "has_json": false
+      },
+      "first_seen": 1772094531.0857944,
+      "scan_count": 1,
+      "suspicious": false
+    },
+    "PUT::/identity/api/v2/user/videos/{video_id}": {
+      "profile": {
+        "has_json": false
+      },
+      "first_seen": 1772094537.9484677,
+      "scan_count": 1,
+      "suspicious": false
+    },
+    "PUT::/workshop/api/shop/orders/{order_id}": {
+      "profile": {
+        "has_json": false
+      },
+      "first_seen": 1772094546.8481376,
+      "scan_count": 1,
+      "suspicious": false
+    },
+    "GET::/identity/api/v2/user/dashboard": {
+      "profile": {
+        "has_json": false
+      },
+      "first_seen": 1772094557.6081924,
+      "scan_count": 1,
+      "suspicious": false
+    },
+    "GET::/identity/api/v2/user/videos/{video_id}": {
+      "profile": {
+        "has_json": false
+      },
+      "first_seen": 1772094563.6412346,
+      "scan_count": 1,
+      "suspicious": false
+    },
+    "GET::/identity/api/v2/user/videos/convert_video": {
+      "profile": {
+        "has_json": false
+      },
+      "first_seen": 1772094574.5997572,
+      "scan_count": 1,
+      "suspicious": false
+    },
+    "GET::/identity/api/v2/vehicle/vehicles": {
+      "profile": {
+        "has_json": false
+      },
+      "first_seen": 1772094584.4307601,
+      "scan_count": 1,
+      "suspicious": false
+    },
+    "GET::/identity/api/v2/vehicle/{vehicleId}/location": {
+      "profile": {
+        "has_json": false
+      },
+      "first_seen": 1772094588.9331508,
+      "scan_count": 1,
+      "suspicious": false
+    },
+    "GET::/community/api/v2/community/posts/{postId}": {
+      "profile": {
+        "has_json": false
+      },
+      "first_seen": 1772094593.3008127,
+      "scan_count": 1,
+      "suspicious": false
+    },
+    "GET::/community/api/v2/community/posts/recent": {
+      "profile": {
+        "has_json": false
+      },
+      "first_seen": 1772094597.8432689,
+      "scan_count": 1,
+      "suspicious": false
+    },
+    "GET::/workshop/api/shop/products": {
+      "profile": {
+        "has_json": false
+      },
+      "first_seen": 1772094606.2618732,
+      "scan_count": 1,
+      "suspicious": false
+    },
+    "GET::/workshop/api/shop/orders/{order_id}": {
+      "profile": {
+        "has_json": false
+      },
+      "first_seen": 1772094610.6447408,
+      "scan_count": 1,
+      "suspicious": false
+    },
+    "GET::/workshop/api/shop/orders/all": {
+      "profile": {
+        "has_json": false
+      },
+      "first_seen": 1772094619.2514658,
+      "scan_count": 1,
+      "suspicious": false
+    },
+    "GET::/workshop/api/shop/return_qr_code": {
+      "profile": {
+        "has_json": false
+      },
+      "first_seen": 1772095395.5500033,
+      "scan_count": 1,
+      "suspicious": false
+    },
+    "GET::/workshop/api/management/users/all": {
+      "profile": {
+        "has_json": false
+      },
+      "first_seen": 1772095480.2663324,
+      "scan_count": 1,
+      "suspicious": false
+    },
+    "GET::/workshop/api/mechanic/": {
+      "profile": {
+        "has_json": false
+      },
+      "first_seen": 1772095546.5071697,
+      "scan_count": 1,
+      "suspicious": false
+    },
+    "GET::/workshop/api/mechanic/receive_report": {
+      "profile": {
+        "has_json": false
+      },
+      "first_seen": 1772095568.2601676,
+      "scan_count": 1,
+      "suspicious": false
+    }
+  },
+  "payload_history": {
+    "POST::/users/v1/register": [
+      {
+        "payload": "{'attack_type': 'Baseline Body', 'severity': 'INFO', 'param_name': 'body', 'param_location': 'body', 'payload': {'username': 'politics', 'password': 'factor', 'email': 'what'}, 'expected_safe_behavior': 'Input should be validated', '__family__': 'generic'}",
+        "response_hash": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "cluster_id": null,
+        "confidence": 0,
+        "timestamp": 1772093884.1900265
+      }
+    ],
+    "POST::/users/v1/login": [
+      {
+        "payload": "{'attack_type': 'Field Mutation', 'severity': 'HIGH', 'param_name': 'username', 'param_location': 'body', 'payload': {'username': \"every' OR 1=1 --\", 'password': 'tell'}, 'expected_safe_behavior': 'Input should be validated', '__family__': 'generic'}",
+        "response_hash": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "cluster_id": null,
+        "confidence": 0,
+        "timestamp": 1772093884.7331603
+      }
+    ],
+    "PUT::/users/v1/email": [
+      {
+        "payload": "{'attack_type': 'Field Mutation', 'severity': 'HIGH', 'param_name': 'email', 'param_location': 'body', 'payload': {'email': \"religious' OR 1=1 --\"}, 'expected_safe_behavior': 'Input should be validated', '__family__': 'generic'}",
+        "response_hash": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "cluster_id": null,
+        "confidence": 0,
+        "timestamp": 1772093884.928771
+      }
+    ],
+    "PUT::/users/v1/password": [
+      {
+        "payload": "{'attack_type': 'Baseline Body', 'severity': 'INFO', 'param_name': 'body', 'param_location': 'body', 'payload': {'password': 'feeling'}, 'expected_safe_behavior': 'Input should be validated', '__family__': 'generic'}",
+        "response_hash": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "cluster_id": null,
+        "confidence": 0,
+        "timestamp": 1772093885.0199678
+      }
+    ],
+    "GET::/users/v1": [
+      {
+        "payload": "{'headers': {'Authorization': 'Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJub25lIn0.eyJ1c2VyX2lkIjoxLCJyb2xlIjoiYWRtaW4iLCJleHAiOjE3NzIwOTc0ODR9.'}, '__family__': 'auth_jwt'}",
+        "response_hash": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "cluster_id": null,
+        "confidence": 0,
+        "timestamp": 1772093885.175067
+      }
+    ],
+    "GET::/users/v1/{username}": [
+      {
+        "payload": "{'attack_type': 'Adaptive Injection', 'severity': 'HIGH', 'param_name': 'username', 'param_location': 'path', 'payload': 2147483647, 'expected_safe_behavior': 'Input should be validated', '__family__': 'generic'}",
+        "response_hash": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "cluster_id": null,
+        "confidence": 0,
+        "timestamp": 1772093885.5263307
+      }
+    ],
+    "GET::/books/v1": [
+      {
+        "payload": "{'headers': {'Authorization': 'Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJub25lIn0.eyJ1c2VyX2lkIjoxLCJyb2xlIjoiYWRtaW4iLCJleHAiOjE3NzIwOTc0ODR9.'}, '__family__': 'auth_jwt'}",
+        "response_hash": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "cluster_id": null,
+        "confidence": 0,
+        "timestamp": 1772093886.0903323
+      }
+    ],
+    "GET::/books/v1/{book_id}": [
+      {
+        "payload": "{'attack_type': 'Adaptive Injection', 'severity': 'HIGH', 'param_name': 'book_id', 'param_location': 'path', 'payload': '0--', 'expected_safe_behavior': 'Input should be validated', '__family__': 'generic'}",
+        "response_hash": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "cluster_id": null,
+        "confidence": 0,
+        "timestamp": 1772093886.4025457
+      }
+    ],
+    "DELETE::/identity/api/v2/user/videos/{video_id}": [
+      {
+        "payload": "{'attack_type': 'Adaptive Injection', 'severity': 'HIGH', 'param_name': 'video_id', 'param_location': 'path', 'payload': 2147483647, 'expected_safe_behavior': 'Input should be validated', '__family__': 'generic'}",
+        "response_hash": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "cluster_id": null,
+        "confidence": 0,
+        "timestamp": 1772094369.4453259
+      }
+    ],
+    "DELETE::/identity/api/v2/admin/videos/{video_id}": [
+      {
+        "payload": "{'attack_type': 'Adaptive Injection', 'severity': 'HIGH', 'param_name': 'video_id', 'param_location': 'path', 'payload': \"-9223372036854775808'\", 'expected_safe_behavior': 'Input should be validated', '__family__': 'generic'}",
+        "response_hash": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "cluster_id": null,
+        "confidence": 0,
+        "timestamp": 1772094378.2930799
+      }
+    ],
+    "POST::/identity/api/auth/signup": [
+      {
+        "payload": "{'attack_type': 'Field Mutation', 'severity': 'HIGH', 'param_name': 'number', 'param_location': 'body', 'payload': {'email': 'age', 'name': 'sport', 'number': \"small' OR 1=1 --\", 'password': 'general'}, 'expected_safe_behavior': 'Input should be validated', '__family__': 'generic'}",
+        "response_hash": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "cluster_id": null,
+        "confidence": 0,
+        "timestamp": 1772094386.8953311
+      }
+    ],
+    "POST::/identity/api/auth/login": [
+      {
+        "payload": "{'attack_type': 'Baseline Body', 'severity': 'INFO', 'param_name': 'body', 'param_location': 'body', 'payload': {'email': 'treat', 'password': 'month'}, 'expected_safe_behavior': 'Input should be validated', '__family__': 'generic'}",
+        "response_hash": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "cluster_id": null,
+        "confidence": 0,
+        "timestamp": 1772094393.4489355
+      }
+    ],
+    "POST::/identity/api/auth/forget-password": [
+      {
+        "payload": "{'attack_type': 'Baseline Body', 'severity': 'INFO', 'param_name': 'body', 'param_location': 'body', 'payload': {'email': 'reason'}, 'expected_safe_behavior': 'Input should be validated', '__family__': 'generic'}",
+        "response_hash": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "cluster_id": null,
+        "confidence": 0,
+        "timestamp": 1772094399.1791735
+      }
+    ],
+    "POST::/identity/api/auth/v3/check-otp": [
+      {
+        "payload": "{'attack_type': 'Field Mutation', 'severity': 'HIGH', 'param_name': 'password', 'param_location': 'body', 'payload': {'otp': 'similar', 'password': \"serious' OR 1=1 --\", 'email': 'woman'}, 'expected_safe_behavior': 'Input should be validated', '__family__': 'generic'}",
+        "response_hash": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "cluster_id": null,
+        "confidence": 0,
+        "timestamp": 1772094404.6117082
+      }
+    ],
+    "POST::/identity/api/auth/v2/check-otp": [
+      {
+        "payload": "{'attack_type': 'Baseline Body', 'severity': 'INFO', 'param_name': 'body', 'param_location': 'body', 'payload': {'otp': 'up', 'password': 'increase', 'email': 'shoulder'}, 'expected_safe_behavior': 'Input should be validated', '__family__': 'generic'}",
+        "response_hash": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "cluster_id": null,
+        "confidence": 0,
+        "timestamp": 1772094410.9596915
+      }
+    ],
+    "POST::/identity/api/auth/v4.0/user/login-with-token": [
+      {
+        "payload": "{'attack_type': 'Field Mutation', 'severity': 'HIGH', 'param_name': 'email', 'param_location': 'body', 'payload': {'email': \"him' OR 1=1 --\", 'token': 'white'}, 'expected_safe_behavior': 'Input should be validated', '__family__': 'generic'}",
+        "response_hash": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "cluster_id": null,
+        "confidence": 0,
+        "timestamp": 1772094417.1036806
+      }
+    ],
+    "POST::/identity/api/auth/v2.7/user/login-with-token": [
+      {
+        "payload": "{'attack_type': 'Baseline Body', 'severity': 'INFO', 'param_name': 'body', 'param_location': 'body', 'payload': {'email': 'deal', 'token': 'land'}, 'expected_safe_behavior': 'Input should be validated', '__family__': 'generic'}",
+        "response_hash": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "cluster_id": null,
+        "confidence": 0,
+        "timestamp": 1772094422.8385153
+      }
+    ],
+    "POST::/identity/api/v2/user/reset-password": [
+      {
+        "payload": "{'attack_type': 'Field Mutation', 'severity': 'HIGH', 'param_name': 'email', 'param_location': 'body', 'payload': {'email': \"professor' OR 1=1 --\", 'password': 'hear'}, 'expected_safe_behavior': 'Input should be validated', '__family__': 'generic'}",
+        "response_hash": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "cluster_id": null,
+        "confidence": 0,
+        "timestamp": 1772094428.5712926
+      }
+    ],
+    "POST::/identity/api/v2/user/change-email": [
+      {
+        "payload": "{'attack_type': 'Field Mutation', 'severity': 'HIGH', 'param_name': 'new_email', 'param_location': 'body', 'payload': {'new_email': \"nor' OR 1=1 --\", 'old_email': 'tree'}, 'expected_safe_behavior': 'Input should be validated', '__family__': 'generic'}",
+        "response_hash": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "cluster_id": null,
+        "confidence": 0,
+        "timestamp": 1772094434.1745517
+      }
+    ],
+    "POST::/identity/api/v2/user/verify-email-token": [
+      {
+        "payload": "{'attack_type': 'Field Mutation', 'severity': 'HIGH', 'param_name': 'token', 'param_location': 'body', 'payload': {'old_email': 'if', 'new_email': 'read', 'token': \"when' OR 1=1 --\"}, 'expected_safe_behavior': 'Input should be validated', '__family__': 'generic'}",
+        "response_hash": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "cluster_id": null,
+        "confidence": 0,
+        "timestamp": 1772094440.0544546
+      }
+    ],
+    "POST::/identity/api/v2/user/pictures": [
+      {
+        "payload": "{'headers': {'Authorization': 'Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJub25lIn0.eyJ1c2VyX2lkIjoxLCJyb2xlIjoiYWRtaW4iLCJleHAiOjE3NzIwOTc5Njh9.'}, '__family__': 'auth_jwt'}",
+        "response_hash": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "cluster_id": null,
+        "confidence": 0,
+        "timestamp": 1772094447.830698
+      }
+    ],
+    "POST::/identity/api/v2/user/videos": [
+      {
+        "payload": "{'headers': {'Authorization': 'Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJub25lIn0.eyJ1c2VyX2lkIjoxLCJyb2xlIjoiYWRtaW4iLCJleHAiOjE3NzIwOTc5Njh9.'}, '__family__': 'auth_jwt'}",
+        "response_hash": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "cluster_id": null,
+        "confidence": 0,
+        "timestamp": 1772094452.3391135
+      }
+    ],
+    "POST::/identity/api/v2/vehicle/add_vehicle": [
+      {
+        "payload": "{'attack_type': 'Baseline Body', 'severity': 'INFO', 'param_name': 'body', 'param_location': 'body', 'payload': {'pincode': 'Mrs', 'vin': 'fund'}, 'expected_safe_behavior': 'Input should be validated', '__family__': 'generic'}",
+        "response_hash": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "cluster_id": null,
+        "confidence": 0,
+        "timestamp": 1772094460.6374414
+      }
+    ],
+    "POST::/identity/api/v2/vehicle/resend_email": [
+      {
+        "payload": "{'headers': {'Authorization': 'Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJub25lIn0.eyJ1c2VyX2lkIjoxLCJyb2xlIjoiYWRtaW4iLCJleHAiOjE3NzIwOTc5Njh9.'}, '__family__': 'auth_jwt'}",
+        "response_hash": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "cluster_id": null,
+        "confidence": 0,
+        "timestamp": 1772094468.8387544
+      }
+    ],
+    "POST::/community/api/v2/community/posts": [
+      {
+        "payload": "{'attack_type': 'Field Mutation', 'severity': 'HIGH', 'param_name': 'title', 'param_location': 'body', 'payload': {'content': 'culture', 'title': \"young' OR 1=1 --\"}, 'expected_safe_behavior': 'Input should be validated', '__family__': 'generic'}",
+        "response_hash": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "cluster_id": null,
+        "confidence": 0,
+        "timestamp": 1772094473.5464551
+      }
+    ],
+    "POST::/community/api/v2/community/posts/{postId}/comment": [
+      {
+        "payload": "{'attack_type': 'Baseline Body', 'severity': 'INFO', 'param_name': 'body', 'param_location': 'body', 'payload': {'content': 'exactly'}, 'expected_safe_behavior': 'Input should be validated', '__family__': 'generic'}",
+        "response_hash": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "cluster_id": null,
+        "confidence": 0,
+        "timestamp": 1772094480.6987348
+      }
+    ],
+    "POST::/community/api/v2/coupon/new-coupon": [
+      {
+        "payload": "{'attack_type': 'Field Mutation', 'severity': 'HIGH', 'param_name': 'amount', 'param_location': 'body', 'payload': {'coupon_code': 'station', 'amount': \"strong' OR 1=1 --\"}, 'expected_safe_behavior': 'Input should be validated', '__family__': 'generic'}",
+        "response_hash": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "cluster_id": null,
+        "confidence": 0,
+        "timestamp": 1772094486.5078986
+      }
+    ],
+    "POST::/community/api/v2/coupon/validate-coupon": [
+      {
+        "payload": "{'attack_type': 'Field Mutation', 'severity': 'HIGH', 'param_name': 'coupon_code', 'param_location': 'body', 'payload': {'coupon_code': \"me' OR 1=1 --\"}, 'expected_safe_behavior': 'Input should be validated', '__family__': 'generic'}",
+        "response_hash": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "cluster_id": null,
+        "confidence": 0,
+        "timestamp": 1772094492.9900942
+      }
+    ],
+    "POST::/workshop/api/shop/products": [
+      {
+        "payload": "{'attack_type': 'Field Mutation', 'severity': 'HIGH', 'param_name': 'price', 'param_location': 'body', 'payload': {'name': 'ten', 'price': \"energy' OR 1=1 --\", 'image_url': 'individual'}, 'expected_safe_behavior': 'Input should be validated', '__family__': 'generic'}",
+        "response_hash": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "cluster_id": null,
+        "confidence": 0,
+        "timestamp": 1772094498.2080667
+      }
+    ],
+    "POST::/workshop/api/shop/orders": [
+      {
+        "payload": "{'attack_type': 'Baseline Body', 'severity': 'INFO', 'param_name': 'body', 'param_location': 'body', 'payload': {'product_id': 60, 'quantity': 6}, 'expected_safe_behavior': 'Input should be validated', '__family__': 'generic'}",
+        "response_hash": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "cluster_id": null,
+        "confidence": 0,
+        "timestamp": 1772094504.3521574
+      }
+    ],
+    "POST::/workshop/api/shop/orders/return_order": [
+      {
+        "payload": "{'attack_type': 'Type Confusion', 'severity': 'MEDIUM', 'param_name': 'order_id', 'param_location': 'query', 'payload': None, 'expected_safe_behavior': 'Input should be validated', '__family__': 'generic'}",
+        "response_hash": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "cluster_id": null,
+        "confidence": 0,
+        "timestamp": 1772094510.0800018
+      }
+    ],
+    "POST::/workshop/api/shop/apply_coupon": [
+      {
+        "payload": "{'attack_type': 'Field Mutation', 'severity': 'HIGH', 'param_name': 'coupon_code', 'param_location': 'body', 'payload': {'amount': 58, 'coupon_code': \"population' OR 1=1 --\"}, 'expected_safe_behavior': 'Input should be validated', '__family__': 'generic'}",
+        "response_hash": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "cluster_id": null,
+        "confidence": 0,
+        "timestamp": 1772094518.795721
+      }
+    ],
+    "POST::/workshop/api/merchant/contact_mechanic": [
+      {
+        "payload": "{'attack_type': 'Field Mutation', 'severity': 'HIGH', 'param_name': 'vin', 'param_location': 'body', 'payload': {'mechanic_api': 'themselves', 'vin': \"ahead' OR 1=1 --\", 'repeat_request_if_failed': True, 'problem_details': 'page', 'mechanic_code': 'ready'}, 'expected_safe_behavior': 'Input should be validated', '__family__': 'generic'}",
+        "response_hash": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "cluster_id": null,
+        "confidence": 0,
+        "timestamp": 1772094524.6338546
+      }
+    ],
+    "POST::/workshop/api/mechanic/signup": [
+      {
+        "payload": "{'attack_type': 'Field Mutation', 'severity': 'HIGH', 'param_name': 'mechanic_code', 'param_location': 'body', 'payload': {'name': 'a', 'email': 'six', 'number': 'step', 'password': 'appear', 'mechanic_code': \"employee' OR 1=1 --\"}, 'expected_safe_behavior': 'Input should be validated', '__family__': 'generic'}",
+        "response_hash": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "cluster_id": null,
+        "confidence": 0,
+        "timestamp": 1772094531.4898999
+      }
+    ],
+    "PUT::/identity/api/v2/user/videos/{video_id}": [
+      {
+        "payload": "{'attack_type': 'Baseline Body', 'severity': 'INFO', 'param_name': 'body', 'param_location': 'body', 'payload': {'id': 84, 'videoName': 'bring', 'video_url': 'enter', 'conversion_params': 'use'}, 'expected_safe_behavior': 'Input should be validated', '__family__': 'generic'}",
+        "response_hash": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "cluster_id": null,
+        "confidence": 0,
+        "timestamp": 1772094538.4687817
+      }
+    ],
+    "PUT::/workshop/api/shop/orders/{order_id}": [
+      {
+        "payload": "{'attack_type': 'Adaptive Injection', 'severity': 'HIGH', 'param_name': 'order_id', 'param_location': 'path', 'payload': \"2147483647'\", 'expected_safe_behavior': 'Input should be validated', '__family__': 'generic'}",
+        "response_hash": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "cluster_id": null,
+        "confidence": 0,
+        "timestamp": 1772094547.2198813
+      }
+    ],
+    "GET::/identity/api/v2/user/dashboard": [
+      {
+        "payload": "{'headers': {'Authorization': 'Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJub25lIn0.eyJ1c2VyX2lkIjoxLCJyb2xlIjoiYWRtaW4iLCJleHAiOjE3NzIwOTc5Njh9.'}, '__family__': 'auth_jwt'}",
+        "response_hash": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "cluster_id": null,
+        "confidence": 0,
+        "timestamp": 1772094558.0097947
+      }
+    ],
+    "GET::/identity/api/v2/user/videos/{video_id}": [
+      {
+        "payload": "{'attack_type': 'Adaptive Injection', 'severity': 'HIGH', 'param_name': 'video_id', 'param_location': 'path', 'payload': '0--', 'expected_safe_behavior': 'Input should be validated', '__family__': 'generic'}",
+        "response_hash": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "cluster_id": null,
+        "confidence": 0,
+        "timestamp": 1772094564.0509667
+      }
+    ],
+    "GET::/identity/api/v2/user/videos/convert_video": [
+      {
+        "payload": "{'attack_type': 'Type Confusion', 'severity': 'MEDIUM', 'param_name': 'video_id', 'param_location': 'query', 'payload': 123, 'expected_safe_behavior': 'Input should be validated', '__family__': 'generic'}",
+        "response_hash": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "cluster_id": null,
+        "confidence": 0,
+        "timestamp": 1772094575.6223655
+      }
+    ],
+    "GET::/identity/api/v2/vehicle/vehicles": [
+      {
+        "payload": "{'headers': {'Authorization': 'Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJub25lIn0.eyJ1c2VyX2lkIjoxLCJyb2xlIjoiYWRtaW4iLCJleHAiOjE3NzIwOTc5Njh9.'}, '__family__': 'auth_jwt'}",
+        "response_hash": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "cluster_id": null,
+        "confidence": 0,
+        "timestamp": 1772094584.8395658
+      }
+    ],
+    "GET::/identity/api/v2/vehicle/{vehicleId}/location": [
+      {
+        "payload": "{'headers': {'Authorization': 'Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJub25lIn0.eyJ1c2VyX2lkIjoxLCJyb2xlIjoiYWRtaW4iLCJleHAiOjE3NzIwOTc5Njh9.'}, '__family__': 'auth_jwt'}",
+        "response_hash": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "cluster_id": null,
+        "confidence": 0,
+        "timestamp": 1772094589.3490975
+      }
+    ],
+    "GET::/community/api/v2/community/posts/{postId}": [
+      {
+        "payload": "{'headers': {'Authorization': 'Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJub25lIn0.eyJ1c2VyX2lkIjoxLCJyb2xlIjoiYWRtaW4iLCJleHAiOjE3NzIwOTc5Njh9.'}, '__family__': 'auth_jwt'}",
+        "response_hash": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "cluster_id": null,
+        "confidence": 0,
+        "timestamp": 1772094593.7493007
+      }
+    ],
+    "GET::/community/api/v2/community/posts/recent": [
+      {
+        "payload": "{'attack_type': 'Type Confusion', 'severity': 'MEDIUM', 'param_name': 'limit', 'param_location': 'query', 'payload': True, 'expected_safe_behavior': 'Input should be validated', '__family__': 'generic'}",
+        "response_hash": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "cluster_id": null,
+        "confidence": 0,
+        "timestamp": 1772094598.256101
+      }
+    ],
+    "GET::/workshop/api/shop/products": [
+      {
+        "payload": "{'headers': {'Authorization': 'Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJub25lIn0.eyJ1c2VyX2lkIjoxLCJyb2xlIjoiYWRtaW4iLCJleHAiOjE3NzIwOTc5Njh9.'}, '__family__': 'auth_jwt'}",
+        "response_hash": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "cluster_id": null,
+        "confidence": 0,
+        "timestamp": 1772094606.6286695
+      }
+    ],
+    "GET::/workshop/api/shop/orders/{order_id}": [
+      {
+        "payload": "{'attack_type': 'Adaptive Injection', 'severity': 'HIGH', 'param_name': 'order_id', 'param_location': 'path', 'payload': 2147483647, 'expected_safe_behavior': 'Input should be validated', '__family__': 'generic'}",
+        "response_hash": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "cluster_id": null,
+        "confidence": 0,
+        "timestamp": 1772094611.053563
+      }
+    ],
+    "GET::/workshop/api/shop/orders/all": [
+      {
+        "payload": "{'attack_type': 'Adaptive Injection', 'severity': 'HIGH', 'param_name': 'limit', 'param_location': 'query', 'payload': \"' OR '1'='1' OR '1'='1\", 'expected_safe_behavior': 'Input should be validated', '__family__': 'generic'}",
+        "response_hash": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "cluster_id": null,
+        "confidence": 0,
+        "timestamp": 1772094619.6567726
+      }
+    ],
+    "GET::/workshop/api/shop/return_qr_code": [
+      {
+        "payload": "{'attack_type': 'Adaptive Injection', 'severity': 'HIGH', 'param_name': 'Accept', 'param_location': 'header', 'payload': \"<script>alert('XSS')</script>--\", 'expected_safe_behavior': 'Input should be validated', '__family__': 'generic'}",
+        "response_hash": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "cluster_id": null,
+        "confidence": 0,
+        "timestamp": 1772095395.9837463
+      }
+    ],
+    "GET::/workshop/api/management/users/all": [
+      {
+        "payload": "{'attack_type': 'Adaptive Injection', 'severity': 'HIGH', 'param_name': 'offset', 'param_location': 'query', 'payload': \"<script>alert('XSS')</script>--\", 'expected_safe_behavior': 'Input should be validated', '__family__': 'generic'}",
+        "response_hash": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "cluster_id": null,
+        "confidence": 0,
+        "timestamp": 1772095481.6789854
+      }
+    ],
+    "GET::/workshop/api/mechanic/": [
+      {
+        "payload": "{'headers': {'Authorization': 'Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJub25lIn0.eyJ1c2VyX2lkIjoxLCJyb2xlIjoiYWRtaW4iLCJleHAiOjE3NzIwOTc5Njh9.'}, '__family__': 'auth_jwt'}",
+        "response_hash": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "cluster_id": null,
+        "confidence": 0,
+        "timestamp": 1772095548.7597375
+      }
+    ],
+    "GET::/workshop/api/mechanic/receive_report": [
+      {
+        "payload": "{'attack_type': 'Adaptive Injection', 'severity': 'HIGH', 'param_name': 'mechanic_code', 'param_location': 'query', 'payload': \"<script>alert('XSS')</script>'\", 'expected_safe_behavior': 'Input should be validated', '__family__': 'generic'}",
+        "response_hash": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "cluster_id": null,
+        "confidence": 0,
+        "timestamp": 1772095579.261854
+      }
+    ]
+  },
+  "clusters": {},
+  "vulnerabilities": {}
+}
