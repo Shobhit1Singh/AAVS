@@ -1,7 +1,7 @@
 import asyncio
 import os
 import json
-import time
+from collections import defaultdict
 from colorama import Fore, Style
 
 from parser.api_parser import APIParser
@@ -18,6 +18,49 @@ from core.semantic_diff_engine import SemanticDiffEngine
 from core.response_clusterer import ResponseClusterer
 from analyser.endpoints_risk_scoring_engine import EndpointRiskScorer
 from core.payload_strategy import PayloadStrategy
+
+
+class PayloadPerformanceTracker:
+    def __init__(self):
+        self.stats = defaultdict(lambda: defaultdict(lambda: {
+            "attempts": 0,
+            "anomalies": 0,
+            "total_diff": 0.0
+        }))
+
+    def record(self, endpoint, family, diff_score, is_anomaly):
+        data = self.stats[endpoint][family]
+        data["attempts"] += 1
+        data["total_diff"] += diff_score or 0
+        if is_anomaly:
+            data["anomalies"] += 1
+
+    def family_score(self, endpoint, family):
+        data = self.stats[endpoint][family]
+        if data["attempts"] == 0:
+            return 0
+        anomaly_rate = data["anomalies"] / data["attempts"]
+        avg_diff = data["total_diff"] / data["attempts"]
+        return (anomaly_rate * 0.7) + (avg_diff * 0.3)
+
+    def rank_families(self, endpoint):
+        families = self.stats[endpoint]
+        scored = [(f, self.family_score(endpoint, f)) for f in families]
+        scored.sort(key=lambda x: x[1], reverse=True)
+        return [f for f, _ in scored]
+
+
+class EscalationEngine:
+    def __init__(self):
+        self.stage2 = 0.3
+        self.stage3 = 0.6
+
+    def stage(self, score):
+        if score >= self.stage3:
+            return 3
+        if score >= self.stage2:
+            return 2
+        return 1
 
 
 def create_executor(mode, base_url=None, replay_file=None) -> BaseExecutor:
@@ -46,7 +89,6 @@ async def run_scan_async(
 ):
 
     parser = APIParser(swagger_path)
-
     target = base_url or os.getenv("AAVS_TARGET")
 
     if not target and parser.spec.get("servers"):
@@ -64,6 +106,9 @@ async def run_scan_async(
     semantic_engine = SemanticDiffEngine()
     risk_scorer = EndpointRiskScorer()
     payload_strategy = PayloadStrategy()
+
+    tracker = PayloadPerformanceTracker()
+    escalator = EscalationEngine()
 
     endpoints = parser.get_all_endpoints()
     ranked_endpoints = risk_scorer.rank_endpoints(endpoints)
@@ -104,61 +149,60 @@ async def run_scan_async(
         baselines[key] = baseline
         return baseline
 
-    async def executor_func(endpoint, payload):
+    async def execute_payload(endpoint, payload, family):
+
         baseline = await get_baseline(endpoint)
         if not baseline:
-            return None
+            return
 
         responses = await executor.run_tests([endpoint], [payload])
         if not responses:
-            return None
+            return
 
         result = normalize_response(responses[0])
         clusterer.add_response(result)
 
-        diff = None
+        diff_score = 0
         if baseline.get("json") and result.get("json"):
-            diff = semantic_engine.compare(
+            diff_score = semantic_engine.compare(
                 baseline["json"],
                 result["json"]
-            )
+            ) or 0
 
-        if diff:
+        is_anomaly = diff_score > 0.2
+
+        tracker.record(endpoint["path"], family, diff_score, is_anomaly)
+
+        if is_anomaly:
             analyzer.analyze_authorization(
                 baseline,
                 result,
-                diff,
+                diff_score,
                 {"endpoint": endpoint, "payload": payload}
             )
 
         analyzer.analyze_result(result)
-        return result
 
     async def run():
 
-        # ===== GENERATE GLOBAL AUTH ATTACKS =====
         jwt_attacks = auth_attacker.generate_jwt_attacks()
         api_key_attacks = auth_attacker.generate_api_key_attacks()
 
         auth_payloads = []
 
-        # JWT Authorization header injection
         for attack in jwt_attacks:
             for token in attack.get("payloads", []):
                 if token:
                     auth_payloads.append({
-                        "headers": {
-                            "Authorization": f"Bearer {token}"
-                        }
+                        "headers": {"Authorization": f"Bearer {token}"},
+                        "__family__": "auth_jwt"
                     })
 
-        # API Key header injection
         for attack in api_key_attacks:
             for key in attack.get("payloads", []):
                 auth_payloads.append({
-                    "headers": {
-                        "X-API-Key": key
-                    }
+                    "headers": {"X-API-Key": key},
+                    "__family__": "auth_apikey"
                 })
 
         for endpoint in ranked_endpoints:
@@ -176,11 +220,40 @@ async def run_scan_async(
                 base_payloads,
             )
 
-            # Merge base + auth payloads
-            final_payloads = selected_payloads[:10] + auth_payloads[:10]
+            structured_payloads = []
+            for p in selected_payloads:
+                family = p.get("family", "generic")
+                p["__family__"] = family
+                structured_payloads.append(p)
+
+            final_payloads = structured_payloads[:15] + auth_payloads[:10]
+
+            ranked_families = tracker.rank_families(endpoint["path"])
+
+            if ranked_families:
+                final_payloads.sort(
+                    key=lambda x: tracker.family_score(
+                        endpoint["path"],
+                        x.get("__family__", "generic")
+                    ),
+                    reverse=True
+                )
 
             for payload in final_payloads:
-                await executor_func(endpoint, payload)
+
+                family = payload.get("__family__", "generic")
+                score = tracker.family_score(endpoint["path"], family)
+                stage = escalator.stage(score)
+
+                if stage == 1:
+                    await execute_payload(endpoint, payload, family)
+
+                elif stage == 2:
+                    await execute_payload(endpoint, payload, family)
+
+                elif stage == 3:
+                    await execute_payload(endpoint, payload, family)
+                    await execute_payload(endpoint, payload, family)
 
     await run()
 
@@ -216,7 +289,7 @@ def run_scan(
 
 if __name__ == "__main__":
 
-    swagger_file = "C:/AAVS/juice_shop.json"
+    swagger_file = "C:/AAVS/smart_booking_ai.yaml"
     target = os.getenv("AAVS_TARGET")
 
     findings = run_scan(
