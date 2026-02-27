@@ -6,7 +6,6 @@ import logging
 
 logger = logging.getLogger(__name__)
 
-
 class PostmanCollectionParser:
 
     def __init__(self, collection_path: str):
@@ -26,7 +25,6 @@ class PostmanCollectionParser:
 
     def _load_collection(self):
         path = Path(self.collection_path)
-
         if not path.exists():
             raise FileNotFoundError(f"Collection not found: {self.collection_path}")
 
@@ -47,10 +45,8 @@ class PostmanCollectionParser:
     def _resolve_variables(self, text: str) -> str:
         if not isinstance(text, str):
             return text
-
         for key, value in self.variables.items():
             text = text.replace(f"{{{{{key}}}}}", value)
-
         return text
 
     # --------------------------------------------------
@@ -69,13 +65,11 @@ class PostmanCollectionParser:
 
     def _flatten_items(self, items: List[Dict[str, Any]]) -> List[Dict[str, Any]]:
         flat = []
-
         for item in items:
             if "item" in item:
                 flat.extend(self._flatten_items(item["item"]))
             else:
                 flat.append(item)
-
         return flat
 
     # --------------------------------------------------
@@ -94,14 +88,12 @@ class PostmanCollectionParser:
 
             raw_url = ""
             url_data = request.get("url")
-
             if isinstance(url_data, dict):
                 raw_url = url_data.get("raw", "")
             elif isinstance(url_data, str):
                 raw_url = url_data
 
             raw_url = self._resolve_variables(raw_url)
-
             parsed = urlparse(raw_url)
 
             headers = {
@@ -136,8 +128,7 @@ class PostmanCollectionParser:
                 "path": parsed.path,
                 "method": method,
                 "base_url": f"{parsed.scheme}://{parsed.netloc}".rstrip("/")
-                if parsed.scheme
-                else self.base_url,
+                if parsed.scheme else self.base_url,
                 "query": query_params,
                 "headers": headers,
                 "body": body,
@@ -153,51 +144,43 @@ class PostmanCollectionParser:
     # ENDPOINT DETAILS (Unified Interface)
     # --------------------------------------------------
 
-    # def get_endpoint_details(self, path: str, method: str) -> Dict[str, Any]:
     def get_endpoint_details(self, path: str, method: str) -> Dict[str, Any]:
         method = method.upper()
 
         for ep in self.get_all_endpoints():
             if ep["path"] == path and ep["method"] == method:
-
                 raw_body = ep.get("body")
-
                 structured_body = None
 
-            if raw_body:
-
-                # If raw JSON string → parse it
-                if isinstance(raw_body, str):
-                    try:
-                        parsed_json = json.loads(raw_body)
-                    except Exception:
+                if raw_body:
+                    if isinstance(raw_body, str):
+                        try:
+                            parsed_json = json.loads(raw_body)
+                        except Exception:
+                            parsed_json = {}
+                    elif isinstance(raw_body, dict):
+                        parsed_json = raw_body
+                    else:
                         parsed_json = {}
 
-                # If already dict (formdata/urlencoded)
-                elif isinstance(raw_body, dict):
-                    parsed_json = raw_body
-
-                else:
-                    parsed_json = {}
-
-                structured_body = {
-                    "content": {
-                        "application/json": {
-                            "schema": {
-                                "example": parsed_json
+                    structured_body = {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "example": parsed_json
+                                }
                             }
                         }
                     }
+
+                return {
+                    "parameters": [],
+                    "request_body": structured_body,
+                    "responses": {},
+                    "security": ep.get("auth", {})
                 }
 
-            return {
-                "parameters": [],
-                "request_body": structured_body,
-                "responses": {},
-                "security": ep.get("auth", {})
-            }
-
-            return {}
+        return {}
 
     # --------------------------------------------------
     # SECURITY SCHEMES (Unified Interface)
@@ -212,7 +195,6 @@ class PostmanCollectionParser:
 
     def get_api_info(self) -> Dict[str, Any]:
         info = self.collection.get("info", {})
-
         return {
             "title": info.get("name", "Postman Collection"),
             "version": info.get("version", "1.0"),

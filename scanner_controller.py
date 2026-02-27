@@ -26,8 +26,6 @@ from core.execution_engine import ExecutionEngine
 from core.intelligence_core import IntelligenceCore
 from core.scan_pahse_engine import ScanPhaseEngine
 from core.auth_Strategy_engine import AuthStrategyEngine
-from core.stop_conditions_engine import StopConditionEngine
-
 
 # ---------------------------------------
 # Executor Factory
@@ -49,7 +47,6 @@ def create_executor(mode, base_url=None, replay_file=None) -> BaseExecutor:
 
     raise ValueError("Invalid execution mode.")
 
-
 # ---------------------------------------
 # Async Scan Engine
 # ---------------------------------------
@@ -61,16 +58,12 @@ async def run_scan_async(
     replay_file=None,
 ):
 
-    # Correct variable usage
     parser = ParserFactory.create_parser(swagger_path, base_url)
 
     target = base_url or os.getenv("AAVS_TARGET")
-
-    # Format-agnostic base URL extraction
     if not target:
         if hasattr(parser, "get_base_url"):
             target = parser.get_base_url()
-
     if mode == "live" and not target:
         raise ValueError("No target base URL found.")
 
@@ -85,10 +78,8 @@ async def run_scan_async(
     risk_scorer = EndpointRiskScorer()
     payload_strategy = PayloadStrategy()
     memory = ScanMemory()
-    stop_engine = StopConditionEngine(scan_memory=memory)
 
     execution_engine = ExecutionEngine(executor, memory)
-
     intelligence = IntelligenceCore(
         semantic_engine,
         clusterer,
@@ -118,9 +109,7 @@ async def run_scan_async(
         depth_limit = phase_engine.determine_depth(endpoint)
 
         details = parser.get_endpoint_details(path, method)
-
         base_payloads = attacker.generate_attacks_for_endpoint(details)
-
         selected_payloads = payload_strategy.generate(
             path,
             str(details.get("parameters", "unknown")),
@@ -134,26 +123,15 @@ async def run_scan_async(
 
         final_payloads = structured_payloads[:depth_limit] + auth_payloads[:10]
 
-        stop_engine.reset(path)
-
         for payload in final_payloads:
-
-            if stop_engine.should_stop(path):
-                print(
-                    f"{Fore.YELLOW}⚡ Stop condition met for {path}. Skipping remaining payloads.{Style.RESET_ALL}"
-                )
-                break
-
             result = await execution_engine.execute(endpoint, payload)
 
-            analysis_result = intelligence.process(
+            intelligence.process(
                 endpoint,
                 payload,
                 baseline,
                 result
             )
-
-            stop_engine.update(path, analysis_result)
 
     # ---------------------------------------
     # Post Scan Reporting
@@ -167,9 +145,7 @@ async def run_scan_async(
     print(clusterer.get_cluster_summary())
 
     analyzer.print_summary()
-
     return analyzer.vulnerabilities
-
 
 # ---------------------------------------
 # Sync Wrapper
@@ -189,7 +165,6 @@ def run_scan(
             replay_file,
         )
     )
-
 
 # ---------------------------------------
 # Entry Point

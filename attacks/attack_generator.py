@@ -28,13 +28,20 @@ class AttackGenerator:
             "path": endpoint_details.get("path", "").lower()
         }
 
+        # Parameter attacks (query, path, header)
         for loc in ("query", "path", "header"):
             for param in params[loc]:
                 attacks += self._generate_parameter_attacks(param, loc, context)
 
-        if endpoint_details.get("request_body"):
-            attacks += self._generate_body_attacks(endpoint_details["request_body"], context)
+        # Body attacks
+        request_body = endpoint_details.get("request_body")
+        if request_body:
+            # If Postman raw body (string), wrap in dict
+            if isinstance(request_body, str):
+                request_body = {"raw": request_body}
+            attacks += self._generate_body_attacks(request_body, context)
 
+        # Deduplicate
         unique = {self._hash_attack(a): a for a in attacks}
         result = list(unique.values())
 
@@ -49,16 +56,29 @@ class AttackGenerator:
         params = endpoint_details.get("parameters", {})
         normalized = {"query": [], "path": [], "header": []}
 
+        # Convert dict to list
         if isinstance(params, dict):
             for k in normalized:
-                normalized[k] = params.get(k, [])
+                normalized[k] = []
+                for name, value in params.get(k, {}).items():
+                    normalized[k].append({"name": name, "example": value, "type": "string"})
         elif isinstance(params, list):
             for p in params:
                 loc = p.get("in")
                 if loc in normalized:
                     normalized[loc].append(p)
 
+        # For Postman query strings
+        query = endpoint_details.get("query", {})
+        if query:
+            for k, v in query.items():
+                normalized["query"].append({"name": k, "example": v[0] if isinstance(v, list) else v, "type": "string"})
+
         return normalized
+
+    # -----------------------------
+    # Parameter Attack Generation
+    # -----------------------------
 
     def _generate_parameter_attacks(self, param: Dict[str, Any], location: str, context: Dict) -> List[Dict]:
 
@@ -123,7 +143,7 @@ class AttackGenerator:
         return attacks
 
     # -----------------------------
-    # Adaptive Integer Attacks
+    # Integer Attacks
     # -----------------------------
 
     def _adaptive_integer_attacks(self, name, param, loc):
@@ -146,14 +166,15 @@ class AttackGenerator:
         return attacks
 
     # -----------------------------
+    # Boolean Attacks
+    # -----------------------------
 
     def _boolean_confusion_attacks(self, name, loc):
         variants = ["true", "false", "1", "0", "yes", None, 999]
-        return [
-            self._build("Boolean Confusion", "LOW", name, loc, v)
-            for v in variants
-        ]
+        return [self._build("Boolean Confusion", "LOW", name, loc, v) for v in variants]
 
+    # -----------------------------
+    # Array Attacks
     # -----------------------------
 
     def _array_stress_attacks(self, name, loc):
@@ -163,6 +184,8 @@ class AttackGenerator:
         ]
 
     # -----------------------------
+    # Type Confusion
+    # -----------------------------
 
     def _type_confusion_attacks(self, name, typ, loc):
         wrong = {
@@ -170,25 +193,31 @@ class AttackGenerator:
             "integer": ["abc", None],
             "boolean": ["true", 1, "no"]
         }
-        return [
-            self._build("Type Confusion", "MEDIUM", name, loc, v)
-            for v in wrong.get(typ, [])
-        ]
+        return [self._build("Type Confusion", "MEDIUM", name, loc, v) for v in wrong.get(typ, [])]
 
     # -----------------------------
-    # Adaptive Body Attacks
+    # Body Attacks (Unified for Postman/OpenAPI)
     # -----------------------------
 
     def _generate_body_attacks(self, request_body: Dict, context: Dict) -> List[Dict]:
 
         attacks = []
 
+        # If raw Postman string
+        if "raw" in request_body:
+            body = request_body["raw"]
+            attacks.append(self._build("Raw Body Injection", "HIGH", "body", "body", body))
+            # Simple mutation
+            mutated = body + "' OR 1=1 --"
+            attacks.append(self._build("Raw Body Mutation", "HIGH", "body", "body", mutated))
+            return attacks
+
+        # OpenAPI schema-based body
         schema = request_body.get("content", {}).get("application/json", {}).get("schema", {})
         baseline_body = self._generate_valid_body(schema)
 
         if baseline_body:
             attacks.append(self._build("Baseline Body", "INFO", "body", "body", baseline_body))
-
             for key in baseline_body:
                 mutated = baseline_body.copy()
                 mutated[key] = self._mutate_single_value(mutated[key])
@@ -213,16 +242,12 @@ class AttackGenerator:
 
             if typ == "string":
                 body[name] = fake.word()
-
             elif typ == "integer":
                 body[name] = random.randint(1, 100)
-
             elif typ == "boolean":
                 body[name] = True
-
             elif typ == "array":
                 body[name] = []
-
             elif typ == "object":
                 body[name] = self._generate_valid_body(details)
 
@@ -233,28 +258,21 @@ class AttackGenerator:
     # -----------------------------
 
     def _mutate_payloads(self, payloads):
-
         mutated = []
-
         for p in payloads:
             mutated.append(p)
             mutated.append(str(p) + "'")
             mutated.append(str(p) + "--")
             mutated.append(str(p) * 2)
-
         return mutated
 
     def _mutate_single_value(self, value):
-
         if isinstance(value, str):
             return value + "' OR 1=1 --"
-
         if isinstance(value, int):
             return value * 99999
-
         if isinstance(value, bool):
             return not value
-
         return None
 
     # -----------------------------

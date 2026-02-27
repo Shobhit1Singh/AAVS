@@ -461,7 +461,7 @@
         "has_json": false
       },
       "first_seen": 1772186419.9453115,
-      "scan_count": 2,
+      "scan_count": 6,
       "suspicious": false
     },
     "GET::/users/1": {
@@ -469,6 +469,38 @@
         "has_json": false
       },
       "first_seen": 1772218003.1016998,
+      "scan_count": 5,
+      "suspicious": false
+    },
+    "GET::/admin/dashboard": {
+      "profile": {
+        "has_json": false
+      },
+      "first_seen": 1772218591.202175,
+      "scan_count": 2,
+      "suspicious": false
+    },
+    "GET::/search": {
+      "profile": {
+        "has_json": false
+      },
+      "first_seen": 1772218616.4557335,
+      "scan_count": 2,
+      "suspicious": false
+    },
+    "GET::/ping": {
+      "profile": {
+        "has_json": false
+      },
+      "first_seen": 1772218641.809964,
+      "scan_count": 2,
+      "suspicious": false
+    },
+    "GET::/download": {
+      "profile": {
+        "has_json": false
+      },
+      "first_seen": 1772218667.570011,
       "scan_count": 1,
       "suspicious": false
     }
@@ -940,6 +972,60 @@
         "cluster_id": null,
         "confidence": 0,
         "timestamp": 1772095728.7832937
+      }
+    ],
+    "POST::/login": [
+      {
+        "payload": "{'headers': {'Authorization': 'Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJub25lIn0.eyJ1c2VyX2lkIjoxLCJyb2xlIjoiYWRtaW4iLCJleHAiOjE3NzIyMjIwMzh9.'}, '__family__': 'auth_jwt'}",
+        "response_hash": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "cluster_id": null,
+        "confidence": 0,
+        "timestamp": 1772218443.369213
+      }
+    ],
+    "GET::/users/1": [
+      {
+        "payload": "{'headers': {'Authorization': 'Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJub25lIn0.eyJ1c2VyX2lkIjoxLCJyb2xlIjoiYWRtaW4iLCJleHAiOjE3NzIyMjIxMzh9.'}, '__family__': 'auth_jwt'}",
+        "response_hash": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "cluster_id": null,
+        "confidence": 0,
+        "timestamp": 1772218568.0166824
+      }
+    ],
+    "GET::/admin/dashboard": [
+      {
+        "payload": "{'headers': {'Authorization': 'Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJub25lIn0.eyJ1c2VyX2lkIjoxLCJyb2xlIjoiYWRtaW4iLCJleHAiOjE3NzIyMjIxMzh9.'}, '__family__': 'auth_jwt'}",
+        "response_hash": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "cluster_id": null,
+        "confidence": 0,
+        "timestamp": 1772218593.486518
+      }
+    ],
+    "GET::/search": [
+      {
+        "payload": "{'headers': {'Authorization': 'Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJub25lIn0.eyJ1c2VyX2lkIjoxLCJyb2xlIjoiYWRtaW4iLCJleHAiOjE3NzIyMjIxMzh9.'}, '__family__': 'auth_jwt'}",
+        "response_hash": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "cluster_id": null,
+        "confidence": 0,
+        "timestamp": 1772218618.7779837
+      }
+    ],
+    "GET::/ping": [
+      {
+        "payload": "{'headers': {'Authorization': 'Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJub25lIn0.eyJ1c2VyX2lkIjoxLCJyb2xlIjoiYWRtaW4iLCJleHAiOjE3NzIyMjIxMzh9.'}, '__family__': 'auth_jwt'}",
+        "response_hash": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "cluster_id": null,
+        "confidence": 0,
+        "timestamp": 1772218644.1260524
+      }
+    ],
+    "GET::/download": [
+      {
+        "payload": "{'headers': {'Authorization': 'Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJub25lIn0.eyJ1c2VyX2lkIjoxLCJyb2xlIjoiYWRtaW4iLCJleHAiOjE3NzIyMjIxMzh9.'}, '__family__': 'auth_jwt'}",
+        "response_hash": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "cluster_id": null,
+        "confidence": 0,
+        "timestamp": 1772218669.9545984
       }
     ]
   },
