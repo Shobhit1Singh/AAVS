@@ -69,7 +69,7 @@
         "has_json": false
       },
       "first_seen": 1772094369.0281687,
-      "scan_count": 1,
+      "scan_count": 5,
       "suspicious": false
     },
     "DELETE::/identity/api/v2/admin/videos/{video_id}": {
@@ -77,7 +77,7 @@
         "has_json": false
       },
       "first_seen": 1772094377.8848512,
-      "scan_count": 1,
+      "scan_count": 3,
       "suspicious": false
     },
     "POST::/identity/api/auth/signup": {
@@ -85,7 +85,7 @@
         "has_json": false
       },
       "first_seen": 1772094386.4859085,
-      "scan_count": 1,
+      "scan_count": 3,
       "suspicious": false
     },
     "POST::/identity/api/auth/login": {
@@ -93,7 +93,7 @@
         "has_json": false
       },
       "first_seen": 1772094393.0392458,
-      "scan_count": 1,
+      "scan_count": 3,
       "suspicious": false
     },
     "POST::/identity/api/auth/forget-password": {
@@ -101,7 +101,7 @@
         "has_json": false
       },
       "first_seen": 1772094398.7735777,
-      "scan_count": 1,
+      "scan_count": 3,
       "suspicious": false
     },
     "POST::/identity/api/auth/v3/check-otp": {
@@ -109,7 +109,7 @@
         "has_json": false
       },
       "first_seen": 1772094404.2016366,
-      "scan_count": 1,
+      "scan_count": 3,
       "suspicious": false
     },
     "POST::/identity/api/auth/v2/check-otp": {
@@ -117,7 +117,7 @@
         "has_json": false
       },
       "first_seen": 1772094410.5506184,
-      "scan_count": 1,
+      "scan_count": 3,
       "suspicious": false
     },
     "POST::/identity/api/auth/v4.0/user/login-with-token": {
@@ -125,7 +125,7 @@
         "has_json": false
       },
       "first_seen": 1772094416.7122946,
-      "scan_count": 1,
+      "scan_count": 3,
       "suspicious": false
     },
     "POST::/identity/api/auth/v2.7/user/login-with-token": {
@@ -133,7 +133,7 @@
         "has_json": false
       },
       "first_seen": 1772094422.3729463,
-      "scan_count": 1,
+      "scan_count": 3,
       "suspicious": false
     },
     "POST::/identity/api/v2/user/reset-password": {
@@ -141,7 +141,7 @@
         "has_json": false
       },
       "first_seen": 1772094428.1621313,
-      "scan_count": 1,
+      "scan_count": 3,
       "suspicious": false
     },
     "POST::/identity/api/v2/user/change-email": {
@@ -149,7 +149,7 @@
         "has_json": false
       },
       "first_seen": 1772094433.7672715,
-      "scan_count": 1,
+      "scan_count": 3,
       "suspicious": false
     },
     "POST::/identity/api/v2/user/verify-email-token": {
@@ -157,7 +157,7 @@
         "has_json": false
       },
       "first_seen": 1772094439.6350522,
-      "scan_count": 1,
+      "scan_count": 3,
       "suspicious": false
     },
     "POST::/identity/api/v2/user/pictures": {
@@ -165,7 +165,7 @@
         "has_json": false
       },
       "first_seen": 1772094447.4164371,
-      "scan_count": 1,
+      "scan_count": 3,
       "suspicious": false
     },
     "POST::/identity/api/v2/user/videos": {
@@ -173,7 +173,7 @@
         "has_json": false
       },
       "first_seen": 1772094451.9212415,
-      "scan_count": 1,
+      "scan_count": 3,
       "suspicious": false
     },
     "POST::/identity/api/v2/vehicle/add_vehicle": {
@@ -181,7 +181,7 @@
         "has_json": false
       },
       "first_seen": 1772094459.6005747,
-      "scan_count": 1,
+      "scan_count": 3,
       "suspicious": false
     },
     "POST::/identity/api/v2/vehicle/resend_email": {
@@ -189,7 +189,7 @@
         "has_json": false
       },
       "first_seen": 1772094468.1411402,
-      "scan_count": 1,
+      "scan_count": 3,
       "suspicious": false
     },
     "POST::/community/api/v2/community/posts": {
@@ -197,7 +197,7 @@
         "has_json": false
       },
       "first_seen": 1772094473.0797164,
-      "scan_count": 1,
+      "scan_count": 3,
       "suspicious": false
     },
     "POST::/community/api/v2/community/posts/{postId}/comment": {
@@ -205,7 +205,7 @@
         "has_json": false
       },
       "first_seen": 1772094480.289294,
-      "scan_count": 1,
+      "scan_count": 3,
       "suspicious": false
     },
     "POST::/community/api/v2/coupon/new-coupon": {
@@ -213,7 +213,7 @@
         "has_json": false
       },
       "first_seen": 1772094486.1230788,
-      "scan_count": 1,
+      "scan_count": 3,
       "suspicious": false
     },
     "POST::/community/api/v2/coupon/validate-coupon": {
@@ -221,7 +221,7 @@
         "has_json": false
       },
       "first_seen": 1772094492.5641782,
-      "scan_count": 1,
+      "scan_count": 3,
       "suspicious": false
     },
     "POST::/workshop/api/shop/products": {
@@ -229,7 +229,7 @@
         "has_json": false
       },
       "first_seen": 1772094497.7974193,
-      "scan_count": 1,
+      "scan_count": 3,
       "suspicious": false
     },
     "POST::/workshop/api/shop/orders": {
@@ -237,7 +237,7 @@
         "has_json": false
       },
       "first_seen": 1772094503.9420106,
-      "scan_count": 1,
+      "scan_count": 3,
       "suspicious": false
     },
     "POST::/workshop/api/shop/orders/return_order": {
@@ -245,7 +245,7 @@
         "has_json": false
       },
       "first_seen": 1772094509.631032,
-      "scan_count": 1,
+      "scan_count": 3,
       "suspicious": false
     },
     "POST::/workshop/api/shop/apply_coupon": {
@@ -253,7 +253,7 @@
         "has_json": false
       },
       "first_seen": 1772094518.3813114,
-      "scan_count": 1,
+      "scan_count": 3,
       "suspicious": false
     },
     "POST::/workshop/api/merchant/contact_mechanic": {
@@ -261,7 +261,7 @@
         "has_json": false
       },
       "first_seen": 1772094524.2280664,
-      "scan_count": 1,
+      "scan_count": 3,
       "suspicious": false
     },
     "POST::/workshop/api/mechanic/signup": {
@@ -269,7 +269,7 @@
         "has_json": false
       },
       "first_seen": 1772094531.0857944,
-      "scan_count": 1,
+      "scan_count": 3,
       "suspicious": false
     },
     "PUT::/identity/api/v2/user/videos/{video_id}": {
@@ -277,7 +277,7 @@
         "has_json": false
       },
       "first_seen": 1772094537.9484677,
-      "scan_count": 1,
+      "scan_count": 3,
       "suspicious": false
     },
     "PUT::/workshop/api/shop/orders/{order_id}": {
@@ -285,7 +285,7 @@
         "has_json": false
       },
       "first_seen": 1772094546.8481376,
-      "scan_count": 1,
+      "scan_count": 3,
       "suspicious": false
     },
     "GET::/identity/api/v2/user/dashboard": {
@@ -293,7 +293,7 @@
         "has_json": false
       },
       "first_seen": 1772094557.6081924,
-      "scan_count": 1,
+      "scan_count": 3,
       "suspicious": false
     },
     "GET::/identity/api/v2/user/videos/{video_id}": {
@@ -301,7 +301,7 @@
         "has_json": false
       },
       "first_seen": 1772094563.6412346,
-      "scan_count": 1,
+      "scan_count": 3,
       "suspicious": false
     },
     "GET::/identity/api/v2/user/videos/convert_video": {
@@ -309,7 +309,7 @@
         "has_json": false
       },
       "first_seen": 1772094574.5997572,
-      "scan_count": 1,
+      "scan_count": 3,
       "suspicious": false
     },
     "GET::/identity/api/v2/vehicle/vehicles": {
@@ -317,7 +317,7 @@
         "has_json": false
       },
       "first_seen": 1772094584.4307601,
-      "scan_count": 1,
+      "scan_count": 3,
       "suspicious": false
     },
     "GET::/identity/api/v2/vehicle/{vehicleId}/location": {
@@ -325,7 +325,7 @@
         "has_json": false
       },
       "first_seen": 1772094588.9331508,
-      "scan_count": 1,
+      "scan_count": 3,
       "suspicious": false
     },
     "GET::/community/api/v2/community/posts/{postId}": {
@@ -333,7 +333,7 @@
         "has_json": false
       },
       "first_seen": 1772094593.3008127,
-      "scan_count": 1,
+      "scan_count": 3,
       "suspicious": false
     },
     "GET::/community/api/v2/community/posts/recent": {
@@ -341,7 +341,7 @@
         "has_json": false
       },
       "first_seen": 1772094597.8432689,
-      "scan_count": 1,
+      "scan_count": 3,
       "suspicious": false
     },
     "GET::/workshop/api/shop/products": {
@@ -349,7 +349,7 @@
         "has_json": false
       },
       "first_seen": 1772094606.2618732,
-      "scan_count": 1,
+      "scan_count": 3,
       "suspicious": false
     },
     "GET::/workshop/api/shop/orders/{order_id}": {
@@ -357,7 +357,7 @@
         "has_json": false
       },
       "first_seen": 1772094610.6447408,
-      "scan_count": 1,
+      "scan_count": 3,
       "suspicious": false
     },
     "GET::/workshop/api/shop/orders/all": {
@@ -365,7 +365,7 @@
         "has_json": false
       },
       "first_seen": 1772094619.2514658,
-      "scan_count": 1,
+      "scan_count": 3,
       "suspicious": false
     },
     "GET::/workshop/api/shop/return_qr_code": {
@@ -373,7 +373,7 @@
         "has_json": false
       },
       "first_seen": 1772095395.5500033,
-      "scan_count": 1,
+      "scan_count": 3,
       "suspicious": false
     },
     "GET::/workshop/api/management/users/all": {
@@ -381,7 +381,7 @@
         "has_json": false
       },
       "first_seen": 1772095480.2663324,
-      "scan_count": 1,
+      "scan_count": 3,
       "suspicious": false
     },
     "GET::/workshop/api/mechanic/": {
@@ -389,7 +389,7 @@
         "has_json": false
       },
       "first_seen": 1772095546.5071697,
-      "scan_count": 1,
+      "scan_count": 3,
       "suspicious": false
     },
     "GET::/workshop/api/mechanic/receive_report": {
@@ -397,7 +397,7 @@
         "has_json": false
       },
       "first_seen": 1772095568.2601676,
-      "scan_count": 1,
+      "scan_count": 3,
       "suspicious": false
     },
     "GET::/workshop/api/mechanic/mechanic_report": {
@@ -405,7 +405,7 @@
         "has_json": false
       },
       "first_seen": 1772095617.0654452,
-      "scan_count": 1,
+      "scan_count": 3,
       "suspicious": false
     },
     "GET::/workshop/api/mechanic/service_requests": {
@@ -413,6 +413,62 @@
         "has_json": false
       },
       "first_seen": 1772095727.7674415,
+      "scan_count": 3,
+      "suspicious": false
+    },
+    "POST::/rest/user/login": {
+      "profile": {
+        "has_json": false
+      },
+      "first_seen": 1772185862.7334394,
+      "scan_count": 1,
+      "suspicious": false
+    },
+    "POST::/api/Users": {
+      "profile": {
+        "has_json": false
+      },
+      "first_seen": 1772185865.033938,
+      "scan_count": 1,
+      "suspicious": false
+    },
+    "POST::/api/BasketItems": {
+      "profile": {
+        "has_json": false
+      },
+      "first_seen": 1772185867.3335984,
+      "scan_count": 1,
+      "suspicious": false
+    },
+    "GET::/rest/products/search": {
+      "profile": {
+        "has_json": false
+      },
+      "first_seen": 1772185869.628172,
+      "scan_count": 1,
+      "suspicious": false
+    },
+    "GET::/rest/basket/{id}": {
+      "profile": {
+        "has_json": false
+      },
+      "first_seen": 1772185871.9364903,
+      "scan_count": 1,
+      "suspicious": false
+    },
+    "POST::/login": {
+      "profile": {
+        "has_json": false
+      },
+      "first_seen": 1772186419.9453115,
+      "scan_count": 2,
+      "suspicious": false
+    },
+    "GET::/users/1": {
+      "profile": {
+        "has_json": false
+      },
+      "first_seen": 1772218003.1016998,
       "scan_count": 1,
       "suspicious": false
     }

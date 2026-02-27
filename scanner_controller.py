@@ -4,6 +4,8 @@ import json
 from colorama import Fore, Style
 
 from parser.api_parser import APIParser
+from parser.parser_factory import ParserFactory
+
 from attacks.attack_generator import AttackGenerator
 from attacks.auth_attacks import AuthAttackGenerator
 from attacks.async_executor import (
@@ -22,9 +24,9 @@ from core.payload_strategy import PayloadStrategy
 from core.scan_memory import ScanMemory
 from core.execution_engine import ExecutionEngine
 from core.intelligence_core import IntelligenceCore
-from core.scan_phase_engine import ScanPhaseEngine
-from core.auth_strategy_engine import AuthStrategyEngine
-from core.stop_condition_engine import StopConditionEngine
+from core.scan_pahse_engine import ScanPhaseEngine
+from core.auth_Strategy_engine import AuthStrategyEngine
+from core.stop_conditions_engine import StopConditionEngine
 
 
 # ---------------------------------------
@@ -59,11 +61,15 @@ async def run_scan_async(
     replay_file=None,
 ):
 
-    parser = APIParser(swagger_path)
+    # Correct variable usage
+    parser = ParserFactory.create_parser(swagger_path, base_url)
+
     target = base_url or os.getenv("AAVS_TARGET")
 
-    if not target and parser.spec.get("servers"):
-        target = parser.spec["servers"][0]["url"]
+    # Format-agnostic base URL extraction
+    if not target:
+        if hasattr(parser, "get_base_url"):
+            target = parser.get_base_url()
 
     if mode == "live" and not target:
         raise ValueError("No target base URL found.")
@@ -79,7 +85,7 @@ async def run_scan_async(
     risk_scorer = EndpointRiskScorer()
     payload_strategy = PayloadStrategy()
     memory = ScanMemory()
-    stop_engine = StopConditionEngine(memory)
+    stop_engine = StopConditionEngine(scan_memory=memory)
 
     execution_engine = ExecutionEngine(executor, memory)
 
@@ -128,12 +134,10 @@ async def run_scan_async(
 
         final_payloads = structured_payloads[:depth_limit] + auth_payloads[:10]
 
-        # Reset stop state per endpoint
         stop_engine.reset(path)
 
         for payload in final_payloads:
 
-            # Check stop condition before execution
             if stop_engine.should_stop(path):
                 print(
                     f"{Fore.YELLOW}⚡ Stop condition met for {path}. Skipping remaining payloads.{Style.RESET_ALL}"
@@ -149,7 +153,6 @@ async def run_scan_async(
                 result
             )
 
-            # Update stop logic with latest signal
             stop_engine.update(path, analysis_result)
 
     # ---------------------------------------
@@ -194,12 +197,12 @@ def run_scan(
 
 if __name__ == "__main__":
 
-    swagger_file = "C:/AAVS/crapi-openapi-spec.json"
+    swagger_file = "C:/AAVS/postman_demo.json"
     target = os.getenv("AAVS_TARGET")
 
     findings = run_scan(
         swagger_file,
-        base_url=target,
+        base_url="http://localhost:3000",
         mode="live",
     )
 

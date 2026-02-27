@@ -2,6 +2,7 @@ class StopConditionEngine:
 
     def __init__(
         self,
+        scan_memory=None,
         max_attempts=40,
         repeat_response_limit=5,
         confidence_stability_window=6,
@@ -9,6 +10,8 @@ class StopConditionEngine:
         reproduction_threshold=3,
         stability_delta=0.02,
     ):
+        self.scan_memory = scan_memory
+
         self.max_attempts = max_attempts
         self.repeat_response_limit = repeat_response_limit
         self.confidence_stability_window = confidence_stability_window
@@ -29,6 +32,10 @@ class StopConditionEngine:
                 "reproduction_hits": 0,
             }
         return self.state[endpoint_key]
+
+    def reset(self, endpoint_key):
+        if endpoint_key in self.state:
+            del self.state[endpoint_key]
 
     def record(
         self,
@@ -77,6 +84,7 @@ class StopConditionEngine:
 
     def _confidence_stable(self, s):
         history = s["confidence_history"]
+
         if len(history) < self.confidence_stability_window:
             return False
 
@@ -88,8 +96,10 @@ class StopConditionEngine:
 
     def _anomaly_plateau(self, s):
         history = s["anomaly_history"]
+
         if len(history) < self.anomaly_plateau_window:
             return False
 
         window = history[-self.anomaly_plateau_window:]
+
         return sum(window) == 0
