@@ -421,7 +421,7 @@
         "has_json": false
       },
       "first_seen": 1772185862.7334394,
-      "scan_count": 1,
+      "scan_count": 2,
       "suspicious": false
     },
     "POST::/api/Users": {
@@ -429,7 +429,7 @@
         "has_json": false
       },
       "first_seen": 1772185865.033938,
-      "scan_count": 1,
+      "scan_count": 2,
       "suspicious": false
     },
     "POST::/api/BasketItems": {
@@ -437,7 +437,7 @@
         "has_json": false
       },
       "first_seen": 1772185867.3335984,
-      "scan_count": 1,
+      "scan_count": 2,
       "suspicious": false
     },
     "GET::/rest/products/search": {
@@ -445,7 +445,7 @@
         "has_json": false
       },
       "first_seen": 1772185869.628172,
-      "scan_count": 1,
+      "scan_count": 2,
       "suspicious": false
     },
     "GET::/rest/basket/{id}": {
@@ -453,7 +453,7 @@
         "has_json": false
       },
       "first_seen": 1772185871.9364903,
-      "scan_count": 1,
+      "scan_count": 2,
       "suspicious": false
     },
     "POST::/login": {
@@ -461,7 +461,7 @@
         "has_json": false
       },
       "first_seen": 1772186419.9453115,
-      "scan_count": 6,
+      "scan_count": 18,
       "suspicious": false
     },
     "GET::/users/1": {
@@ -469,7 +469,7 @@
         "has_json": false
       },
       "first_seen": 1772218003.1016998,
-      "scan_count": 5,
+      "scan_count": 15,
       "suspicious": false
     },
     "GET::/admin/dashboard": {
@@ -477,7 +477,7 @@
         "has_json": false
       },
       "first_seen": 1772218591.202175,
-      "scan_count": 2,
+      "scan_count": 12,
       "suspicious": false
     },
     "GET::/search": {
@@ -485,7 +485,7 @@
         "has_json": false
       },
       "first_seen": 1772218616.4557335,
-      "scan_count": 2,
+      "scan_count": 12,
       "suspicious": false
     },
     "GET::/ping": {
@@ -493,7 +493,7 @@
         "has_json": false
       },
       "first_seen": 1772218641.809964,
-      "scan_count": 2,
+      "scan_count": 12,
       "suspicious": false
     },
     "GET::/download": {
@@ -501,7 +501,7 @@
         "has_json": false
       },
       "first_seen": 1772218667.570011,
-      "scan_count": 1,
+      "scan_count": 11,
       "suspicious": false
     }
   },
@@ -1026,6 +1026,51 @@
         "cluster_id": null,
         "confidence": 0,
         "timestamp": 1772218669.9545984
+      }
+    ],
+    "POST::/rest/user/login": [
+      {
+        "payload": "{'attack_type': 'Field Mutation', 'severity': 'HIGH', 'param_name': 'password', 'param_location': 'body', 'payload': {'email': 'black', 'password': \"hand' OR 1=1 --\"}, 'expected_safe_behavior': 'Input should be validated', '__family__': 'generic'}",
+        "response_hash": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "cluster_id": null,
+        "confidence": 0,
+        "timestamp": 1772770432.7822738
+      }
+    ],
+    "POST::/api/Users": [
+      {
+        "payload": "{'attack_type': 'Field Mutation', 'severity': 'HIGH', 'param_name': 'securityAnswer', 'param_location': 'body', 'payload': {'email': 'want', 'password': 'always', 'passwordRepeat': 'near', 'securityQuestion': {}, 'securityAnswer': \"against' OR 1=1 --\"}, 'expected_safe_behavior': 'Input should be validated', '__family__': 'generic'}",
+        "response_hash": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "cluster_id": null,
+        "confidence": 0,
+        "timestamp": 1772770432.834266
+      }
+    ],
+    "POST::/api/BasketItems": [
+      {
+        "payload": "{'attack_type': 'Field Mutation', 'severity': 'HIGH', 'param_name': 'ProductId', 'param_location': 'body', 'payload': {'ProductId': 7899921, 'BasketId': 61, 'quantity': 67}, 'expected_safe_behavior': 'Input should be validated', '__family__': 'generic'}",
+        "response_hash": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "cluster_id": null,
+        "confidence": 0,
+        "timestamp": 1772770432.8993514
+      }
+    ],
+    "GET::/rest/products/search": [
+      {
+        "payload": "{'attack_type': 'Adaptive Injection', 'severity': 'HIGH', 'param_name': 'q', 'param_location': 'query', 'payload': \"<script>alert('XSS')</script>'\", 'expected_safe_behavior': 'Input should be validated', '__family__': 'generic'}",
+        "response_hash": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "cluster_id": null,
+        "confidence": 0,
+        "timestamp": 1772770432.9691818
+      }
+    ],
+    "GET::/rest/basket/{id}": [
+      {
+        "payload": "{'attack_type': 'Type Confusion', 'severity': 'MEDIUM', 'param_name': 'id', 'param_location': 'path', 'payload': None, 'expected_safe_behavior': 'Input should be validated', '__family__': 'generic'}",
+        "response_hash": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "cluster_id": null,
+        "confidence": 0,
+        "timestamp": 1772770433.0567036
       }
     ]
   },

@@ -3,7 +3,6 @@ import os
 import json
 from colorama import Fore, Style
 
-from parser.api_parser import APIParser
 from parser.parser_factory import ParserFactory
 
 from attacks.attack_generator import AttackGenerator
@@ -27,12 +26,16 @@ from core.intelligence_core import IntelligenceCore
 from core.scan_pahse_engine import ScanPhaseEngine
 from core.auth_Strategy_engine import AuthStrategyEngine
 
+
 # ---------------------------------------
 # Executor Factory
 # ---------------------------------------
 
 def create_executor(mode, base_url=None, replay_file=None) -> BaseExecutor:
+
     if mode == "live":
+        if not base_url:
+            raise ValueError("Live mode requires a base_url.")
         return RealHTTPExecutor(base_url, max_concurrency=20, timeout=10)
 
     if mode == "mock":
@@ -47,6 +50,7 @@ def create_executor(mode, base_url=None, replay_file=None) -> BaseExecutor:
 
     raise ValueError("Invalid execution mode.")
 
+
 # ---------------------------------------
 # Async Scan Engine
 # ---------------------------------------
@@ -60,12 +64,14 @@ async def run_scan_async(
 
     parser = ParserFactory.create_parser(swagger_path, base_url)
 
+    # Determine target URL
     target = base_url or os.getenv("AAVS_TARGET")
-    if not target:
-        if hasattr(parser, "get_base_url"):
-            target = parser.get_base_url()
+
+    if not target and hasattr(parser, "get_base_url"):
+        target = parser.get_base_url()
+
     if mode == "live" and not target:
-        raise ValueError("No target base URL found.")
+        raise ValueError("No base URL found for target API.")
 
     executor = create_executor(mode, target, replay_file)
 
@@ -80,6 +86,7 @@ async def run_scan_async(
     memory = ScanMemory()
 
     execution_engine = ExecutionEngine(executor, memory)
+
     intelligence = IntelligenceCore(
         semantic_engine,
         clusterer,
@@ -92,6 +99,7 @@ async def run_scan_async(
 
     endpoints = parser.get_all_endpoints()
     ranked_endpoints = risk_scorer.rank_endpoints(endpoints)
+
     auth_payloads = auth_engine.get_auth_payloads()
 
     # ---------------------------------------
@@ -106,32 +114,51 @@ async def run_scan_async(
         print(f"\n{Fore.CYAN}→ Scanning {method} {path}{Style.RESET_ALL}")
 
         baseline = await execution_engine.get_baseline(endpoint)
+
         depth_limit = phase_engine.determine_depth(endpoint)
 
         details = parser.get_endpoint_details(path, method)
-        base_payloads = attacker.generate_attacks_for_endpoint(details)
+
+        base_payloads = attacker.generate_for_endpoint(details)
+
         selected_payloads = payload_strategy.generate(
             path,
-            str(details.get("parameters", "unknown")),
+            str(details.get("parameters", "")),
             base_payloads,
         )
 
         structured_payloads = []
+
         for p in selected_payloads:
-            p["__family__"] = p.get("family", "generic")
-            structured_payloads.append(p)
+
+            if isinstance(p, dict):
+                payload = p.copy()
+            else:
+                payload = {"payload": str(p)}
+
+            payload["__family__"] = payload.get("family", "generic")
+
+            structured_payloads.append(payload)
 
         final_payloads = structured_payloads[:depth_limit] + auth_payloads[:10]
 
         for payload in final_payloads:
-            result = await execution_engine.execute(endpoint, payload)
 
-            intelligence.process(
-                endpoint,
-                payload,
-                baseline,
-                result
-            )
+            try:
+
+                result = await execution_engine.execute(endpoint, payload)
+
+                intelligence.process(
+                    endpoint,
+                    payload,
+                    baseline,
+                    result
+                )
+
+            except Exception as e:
+                print(
+                    f"{Fore.RED}Execution error on {path}: {str(e)}{Style.RESET_ALL}"
+                )
 
     # ---------------------------------------
     # Post Scan Reporting
@@ -145,7 +172,9 @@ async def run_scan_async(
     print(clusterer.get_cluster_summary())
 
     analyzer.print_summary()
+
     return analyzer.vulnerabilities
+
 
 # ---------------------------------------
 # Sync Wrapper
@@ -157,6 +186,7 @@ def run_scan(
     mode="live",
     replay_file=None,
 ):
+
     return asyncio.run(
         run_scan_async(
             swagger_path,
@@ -166,6 +196,7 @@ def run_scan(
         )
     )
 
+
 # ---------------------------------------
 # Entry Point
 # ---------------------------------------
@@ -173,13 +204,14 @@ def run_scan(
 if __name__ == "__main__":
 
     swagger_file = "C:/AAVS/postman_demo.json"
-    target = os.getenv("AAVS_TARGET")
 
     findings = run_scan(
         swagger_file,
-        base_url="http://localhost:3000",
+        base_url="http://localhost:5000",
         mode="live",
     )
+
+    print("\nFindings:\n")
 
     for f in findings:
         print(json.dumps(f, indent=2))

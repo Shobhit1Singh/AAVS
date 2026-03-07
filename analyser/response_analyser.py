@@ -3,6 +3,7 @@ import hashlib
 import math
 from typing import Dict, List, Any
 from colorama import Fore, Style
+
 from analyser.vulnerability_rules import VulnerabilityRules
 from detectors.authorisztion_detector import AuthorizationDetector
 
@@ -51,7 +52,10 @@ class ResponseAnalyzer:
         "X-AspNetMvc-Version",
     }
 
+    BASELINE_LIMIT = 10
+
     def __init__(self):
+
         self.vulnerabilities: List[Dict[str, Any]] = []
         self.auth_detector = AuthorizationDetector()
 
@@ -66,7 +70,6 @@ class ResponseAnalyzer:
         ]
 
         self.seen_hashes = set()
-
         self.endpoint_baselines = {}
 
     # -------------------------------------------------------
@@ -74,34 +77,50 @@ class ResponseAnalyzer:
     # -------------------------------------------------------
 
     def _fingerprint(self, result):
-        return hashlib.md5(
-            (result.get("response_body", "")[:500] +
-             str(result.get("status_code"))).encode()
-        ).hexdigest()
 
-    def _shannon_entropy(self, data: str) -> float:
+        key = (
+            str(result.get("status_code"))
+            + str(len(result.get("response_body", "")))
+            + str(result.get("response_headers", {}))[:200]
+        )
+
+        return hashlib.md5(key.encode()).hexdigest()
+
+    def _entropy(self, data: str):
+
         if not data:
-            return 0.0
+            return 0
+
         freq = {}
+
         for c in data:
             freq[c] = freq.get(c, 0) + 1
+
         entropy = 0
         length = len(data)
+
         for f in freq.values():
             p = f / length
             entropy -= p * math.log2(p)
+
         return entropy
 
     def _flatten_json_keys(self, obj, prefix=""):
+
         keys = []
+
         if isinstance(obj, dict):
+
             for k, v in obj.items():
                 full = f"{prefix}.{k}" if prefix else k
                 keys.append(full)
                 keys += self._flatten_json_keys(v, full)
+
         elif isinstance(obj, list):
-            for i, item in enumerate(obj):
+
+            for item in obj:
                 keys += self._flatten_json_keys(item, prefix)
+
         return keys
 
     # -------------------------------------------------------
@@ -109,170 +128,264 @@ class ResponseAnalyzer:
     # -------------------------------------------------------
 
     def _update_baseline(self, endpoint_key, result):
+
         body = result.get("response_body", "")
         size = len(body)
         time = result.get("response_time", 0)
-        json_body = result.get("json")
 
+        json_body = result.get("json")
         keys = self._flatten_json_keys(json_body) if json_body else []
 
         if endpoint_key not in self.endpoint_baselines:
+
             self.endpoint_baselines[endpoint_key] = {
                 "sizes": [],
                 "times": [],
+                "entropy": [],
                 "keys": set(),
-                "entropy": []
             }
 
         baseline = self.endpoint_baselines[endpoint_key]
-        baseline["sizes"].append(size)
-        baseline["times"].append(time)
-        baseline["entropy"].append(self._shannon_entropy(body[:2000]))
-        baseline["keys"].update(keys)
+
+        if len(baseline["sizes"]) < self.BASELINE_LIMIT:
+
+            baseline["sizes"].append(size)
+            baseline["times"].append(time)
+            baseline["entropy"].append(self._entropy(body[:2000]))
+            baseline["keys"].update(keys)
 
     # -------------------------------------------------------
-    # Intelligent Analysis
+    # Cluster Intelligence
+    # -------------------------------------------------------
+
+    def _analyze_cluster(self, result):
+
+        findings = []
+        confidence = 0
+
+        cluster = result.get("cluster")
+
+        if not cluster:
+            return findings, confidence
+
+        cluster_size = cluster.get("cluster_size", 0)
+        is_outlier = cluster.get("is_outlier", False)
+
+        if is_outlier:
+
+            findings.append({
+                "type": "Response Cluster Outlier",
+                "severity": "HIGH",
+            })
+
+            confidence += 3
+
+        if cluster_size <= 2:
+
+            findings.append({
+                "type": "Rare Response Pattern",
+                "severity": "MEDIUM",
+            })
+
+            confidence += 2
+
+        return findings, confidence
+
+    # -------------------------------------------------------
+    # Main Analysis
     # -------------------------------------------------------
 
     def analyze_result(self, result: Dict[str, Any]) -> Dict[str, Any]:
 
         fingerprint = self._fingerprint(result)
+
         if fingerprint in self.seen_hashes:
             return result
+
         self.seen_hashes.add(fingerprint)
 
-        endpoint_key = f"{result.get('url')}_{result.get('method', '')}"
+        endpoint_key = f"{result.get('url')}_{result.get('method','')}"
 
         findings = []
         confidence = 0
 
         status_code = result.get("status_code", 0)
-        body = result.get("response_body", "")[:2000]
+        body = result.get("response_body", "")[:3000]
         headers = result.get("response_headers", {})
         response_time = result.get("response_time", 0)
+
         json_body = result.get("json")
 
-        # -------------------------
-        # Pattern Detection
-        # -------------------------
+        # -----------------------------------
+        # Error Pattern Detection
+        # -----------------------------------
+
         for error_type, patterns in self.compiled_patterns.items():
+
             for pattern in patterns:
+
                 match = pattern.search(body)
+
                 if match:
+
                     findings.append({
-                        "type": f"Information Disclosure ({error_type})",
-                        "severity": "CRITICAL" if error_type == "sql_error" else "HIGH",
-                        "evidence": body[max(0, match.start()-50):match.end()+50],
+                        "type": f"{error_type} disclosure",
+                        "severity": "CRITICAL",
+                        "evidence": match.group(0)
                     })
-                    confidence += 3
+
+                    confidence += 4
                     break
 
-        # -------------------------
-        # Sensitive Field Detection
-        # -------------------------
+        # -----------------------------------
+        # Sensitive Fields
+        # -----------------------------------
+
         if json_body:
+
             keys = self._flatten_json_keys(json_body)
+
             for key in keys:
+
                 for pattern in self.compiled_sensitive:
+
                     if pattern.search(key):
+
                         findings.append({
                             "type": "Sensitive Field Exposure",
-                            "severity": "CRITICAL",
+                            "severity": "HIGH",
                             "field": key
                         })
-                        confidence += 4
+
+                        confidence += 3
                         break
 
-        # -------------------------
-        # Statistical Deviation
-        # -------------------------
-        if endpoint_key in self.endpoint_baselines:
-            baseline = self.endpoint_baselines[endpoint_key]
-
-            avg_size = sum(baseline["sizes"]) / len(baseline["sizes"])
-            if abs(len(body) - avg_size) > avg_size * 0.4:
-                findings.append({
-                    "type": "Structural Size Anomaly",
-                    "severity": "MEDIUM"
-                })
-                confidence += 2
-
-            avg_time = sum(baseline["times"]) / len(baseline["times"])
-            if response_time > avg_time * 2:
-                findings.append({
-                    "type": "Timing Anomaly",
-                    "severity": "MEDIUM"
-                })
-                confidence += 2
-
-            entropy_now = self._shannon_entropy(body)
-            avg_entropy = sum(baseline["entropy"]) / len(baseline["entropy"])
-            if entropy_now > avg_entropy + 1.0:
-                findings.append({
-                    "type": "High Entropy Data Exposure",
-                    "severity": "HIGH"
-                })
-                confidence += 3
-
-            if json_body:
-                new_keys = set(self._flatten_json_keys(json_body))
-                unexpected = new_keys - baseline["keys"]
-                if unexpected:
-                    findings.append({
-                        "type": "Unexpected JSON Fields",
-                        "severity": "HIGH",
-                        "fields": list(unexpected)
-                    })
-                    confidence += 3
-
-        # -------------------------
-        # Dangerous Headers
-        # -------------------------
-        exposed = self.DANGEROUS_HEADERS.intersection(headers.keys())
-        for h in exposed:
-            findings.append({
-                "type": "Sensitive Header Exposure",
-                "severity": "LOW",
-                "header": h
-            })
-            confidence += 1
-
-        # -------------------------
+        # -----------------------------------
         # Status Code Intelligence
-        # -------------------------
-        if status_code == 500:
+        # -----------------------------------
+
+        if status_code >= 500:
+
             findings.append({
                 "type": "Server Error Triggered",
                 "severity": "HIGH"
             })
+
             confidence += 2
 
-        # -------------------------
+        if status_code == 403:
+
+            findings.append({
+                "type": "Authorization Boundary Hit",
+                "severity": "INFO"
+            })
+
+        # -----------------------------------
+        # Header Exposure
+        # -----------------------------------
+
+        exposed = self.DANGEROUS_HEADERS.intersection(headers.keys())
+
+        for h in exposed:
+
+            findings.append({
+                "type": "Technology Disclosure",
+                "severity": "LOW",
+                "header": h
+            })
+
+            confidence += 1
+
+        # -----------------------------------
+        # Baseline Deviation
+        # -----------------------------------
+
+        if endpoint_key in self.endpoint_baselines:
+
+            baseline = self.endpoint_baselines[endpoint_key]
+
+            if baseline["sizes"]:
+
+                avg_size = sum(baseline["sizes"]) / len(baseline["sizes"])
+
+                if abs(len(body) - avg_size) > avg_size * 0.35:
+
+                    findings.append({
+                        "type": "Response Size Anomaly",
+                        "severity": "MEDIUM"
+                    })
+
+                    confidence += 2
+
+            if baseline["times"]:
+
+                avg_time = sum(baseline["times"]) / len(baseline["times"])
+
+                if response_time > avg_time * 2:
+
+                    findings.append({
+                        "type": "Timing Anomaly",
+                        "severity": "MEDIUM"
+                    })
+
+                    confidence += 2
+
+            if baseline["entropy"]:
+
+                avg_entropy = sum(baseline["entropy"]) / len(baseline["entropy"])
+                now_entropy = self._entropy(body)
+
+                if now_entropy > avg_entropy + 0.8:
+
+                    findings.append({
+                        "type": "High Entropy Data Leak",
+                        "severity": "HIGH"
+                    })
+
+                    confidence += 3
+
+        # -----------------------------------
+        # Cluster Intelligence
+        # -----------------------------------
+
+        cluster_findings, cluster_conf = self._analyze_cluster(result)
+
+        findings.extend(cluster_findings)
+        confidence += cluster_conf
+
+        # -----------------------------------
         # External Rules
-        # -------------------------
+        # -----------------------------------
+
         rule_findings = VulnerabilityRules.run_all(result)
+
         if rule_findings:
+
             findings.extend(rule_findings)
             confidence += 3
 
-        # -------------------------
+        # -----------------------------------
         # Decision Engine
-        # -------------------------
-        if confidence >= 3:
+        # -----------------------------------
+
+        if confidence >= 2:
+
             result["vulnerability_detected"] = True
             result["vulnerabilities"] = findings
             result["confidence_score"] = confidence
+
             self.vulnerabilities.append(result)
+
         else:
+
             result["vulnerability_detected"] = False
 
-        # Update baseline after evaluation
         self._update_baseline(endpoint_key, result)
 
         return result
 
     # -------------------------------------------------------
-    # Differential Authorization
+    # Authorization Differential
     # -------------------------------------------------------
 
     def analyze_authorization(
@@ -281,7 +394,7 @@ class ResponseAnalyzer:
         mutated_result: Dict[str, Any],
         diff_object: Dict[str, Any],
         metadata: Dict[str, Any] = None
-    ) -> Dict[str, Any]:
+    ):
 
         baseline_body = baseline_result.get("json")
         mutated_body = mutated_result.get("json")
@@ -294,8 +407,10 @@ class ResponseAnalyzer:
         )
 
         if auth_finding:
+
             mutated_result["vulnerability_detected"] = True
             mutated_result.setdefault("vulnerabilities", []).append(auth_finding)
+
             self.vulnerabilities.append(mutated_result)
 
         return mutated_result
@@ -304,12 +419,16 @@ class ResponseAnalyzer:
     # Stats
     # -------------------------------------------------------
 
-    def get_statistics(self) -> Dict[str, Any]:
+    def get_statistics(self):
+
         stats = {"total": len(self.vulnerabilities), "severity": {}}
 
         for v in self.vulnerabilities:
+
             for item in v.get("vulnerabilities", []):
+
                 sev = item.get("severity", "UNKNOWN")
+
                 stats["severity"][sev] = stats["severity"].get(sev, 0) + 1
 
         return stats
