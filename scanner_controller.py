@@ -19,7 +19,6 @@ from analyser.response_analyser import ResponseAnalyzer
 from analyser.endpoints_risk_scoring_engine import EndpointRiskScorer
 
 from core.semantic_diff_engine import SemanticDiffEngine
-from core.response_clusterer import ResponseClusterer
 from core.payload_strategy import PayloadStrategy
 from core.scan_memory import ScanMemory
 from core.execution_engine import ExecutionEngine
@@ -65,7 +64,6 @@ async def run_scan_async(
 
     parser = ParserFactory.create_parser(swagger_path, base_url)
 
-    # Determine target URL
     target = base_url or os.getenv("AAVS_TARGET")
 
     if not target and hasattr(parser, "get_base_url"):
@@ -80,7 +78,6 @@ async def run_scan_async(
     attacker = AttackGenerator()
     auth_attacker = AuthAttackGenerator()
     analyzer = ResponseAnalyzer()
-    clusterer = ResponseClusterer()
     semantic_engine = SemanticDiffEngine()
     risk_scorer = EndpointRiskScorer()
     payload_strategy = PayloadStrategy()
@@ -90,7 +87,6 @@ async def run_scan_async(
 
     intelligence = IntelligenceCore(
         semantic_engine,
-        clusterer,
         analyzer,
         memory
     )
@@ -169,9 +165,6 @@ async def run_scan_async(
         f"\n{Fore.GREEN}✓ Completed scanning {len(ranked_endpoints)} endpoints{Style.RESET_ALL}\n"
     )
 
-    print("\nCluster Summary:")
-    print(clusterer.get_cluster_summary())
-
     analyzer.print_summary()
 
     return analyzer.vulnerabilities
@@ -203,47 +196,46 @@ def run_scan(
 # ---------------------------------------
 if __name__ == "__main__":
 
-   parser = argparse.ArgumentParser(description="AAVS API Vulnerability Scanner")
+    parser = argparse.ArgumentParser(description="AAVS API Vulnerability Scanner")
 
-   parser.add_argument(
-       "--spec",
-       required=True,
-       help="Path to OpenAPI/Swagger specification file",
-   )
+    parser.add_argument(
+        "--spec",
+        required=True,
+        help="Path to OpenAPI/Swagger specification file",
+    )
 
-   parser.add_argument(
-       "--base_url",
-       default="http://localhost:3000",
-       help="Target API base URL",
-   )
+    parser.add_argument(
+        "--base_url",
+        default="http://localhost:3000",
+        help="Target API base URL",
+    )
 
-   parser.add_argument(
-       "--mode",
-       default="live",
-       choices=["live", "mock", "replay"],
-       help="Execution mode",
-   )
+    parser.add_argument(
+        "--mode",
+        default="live",
+        choices=["live", "mock", "replay"],
+        help="Execution mode",
+    )
 
-   parser.add_argument(
-       "--replay_file",
-       default=None,
-       help="Replay file for replay mode",
-   )
+    parser.add_argument(
+        "--replay_file",
+        default=None,
+        help="Replay file for replay mode",
+    )
 
-   args = parser.parse_args()
+    args = parser.parse_args()
 
-   swagger_file = os.path.abspath(args.spec)
+    swagger_file = os.path.abspath(args.spec)
 
-   if not os.path.exists(swagger_file):
-       raise FileNotFoundError(f"Spec file not found: {swagger_file}")
+    if not os.path.exists(swagger_file):
+        raise FileNotFoundError(f"Spec file not found: {swagger_file}")
 
-   findings = run_scan(
-       swagger_file,
-       base_url=args.base_url,
-       mode=args.mode,
-       replay_file=args.replay_file,
-   )
+    findings = run_scan(
+        swagger_file,
+        base_url=args.base_url,
+        mode=args.mode,
+        replay_file=args.replay_file,
+    )
 
-   for f in findings:
-       print(json.dumps(f, indent=2))
-    
+    for f in findings:
+        print(json.dumps(f, indent=2))

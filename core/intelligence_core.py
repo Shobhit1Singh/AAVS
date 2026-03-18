@@ -1,8 +1,8 @@
 class IntelligenceCore:
 
-    def __init__(self, semantic_engine, clusterer, analyzer, memory):
+    def __init__(self, semantic_engine,  analyzer, memory):
         self.semantic_engine = semantic_engine
-        self.clusterer = clusterer
+        # self.clusterer = clusterer
         self.analyzer = analyzer
         self.memory = memory
 
@@ -10,7 +10,7 @@ class IntelligenceCore:
         if not result:
             return {"anomaly": False, "confidence": 0}
 
-        self.clusterer.add_response(result)
+        # self.clusterer.add_response(result)
 
         if self.memory.has_similar_response(
             endpoint["method"],

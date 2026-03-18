@@ -421,7 +421,7 @@
         "has_json": false
       },
       "first_seen": 1772185862.7334394,
-      "scan_count": 4,
+      "scan_count": 5,
       "suspicious": false
     },
     "POST::/api/Users": {
@@ -429,7 +429,7 @@
         "has_json": false
       },
       "first_seen": 1772185865.033938,
-      "scan_count": 4,
+      "scan_count": 5,
       "suspicious": false
     },
     "POST::/api/BasketItems": {
@@ -437,7 +437,7 @@
         "has_json": false
       },
       "first_seen": 1772185867.3335984,
-      "scan_count": 3,
+      "scan_count": 5,
       "suspicious": false
     },
     "GET::/rest/products/search": {
@@ -445,7 +445,7 @@
         "has_json": false
       },
       "first_seen": 1772185869.628172,
-      "scan_count": 3,
+      "scan_count": 5,
       "suspicious": false
     },
     "GET::/rest/basket/{id}": {
@@ -453,7 +453,7 @@
         "has_json": false
       },
       "first_seen": 1772185871.9364903,
-      "scan_count": 3,
+      "scan_count": 5,
       "suspicious": false
     },
     "POST::/login": {
