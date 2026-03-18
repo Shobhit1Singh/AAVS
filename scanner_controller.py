@@ -1,6 +1,7 @@
 import asyncio
 import os
 import json
+import argparse
 from colorama import Fore, Style
 
 from parser.parser_factory import ParserFactory
@@ -200,18 +201,49 @@ def run_scan(
 # ---------------------------------------
 # Entry Point
 # ---------------------------------------
-
 if __name__ == "__main__":
 
-    swagger_file = "C:/AAVS/postman_demo.json"
+   parser = argparse.ArgumentParser(description="AAVS API Vulnerability Scanner")
 
-    findings = run_scan(
-        swagger_file,
-        base_url="http://localhost:5000",
-        mode="live",
-    )
+   parser.add_argument(
+       "--spec",
+       required=True,
+       help="Path to OpenAPI/Swagger specification file",
+   )
 
-    print("\nFindings:\n")
+   parser.add_argument(
+       "--base_url",
+       default="http://localhost:3000",
+       help="Target API base URL",
+   )
 
-    for f in findings:
-        print(json.dumps(f, indent=2))
+   parser.add_argument(
+       "--mode",
+       default="live",
+       choices=["live", "mock", "replay"],
+       help="Execution mode",
+   )
+
+   parser.add_argument(
+       "--replay_file",
+       default=None,
+       help="Replay file for replay mode",
+   )
+
+   args = parser.parse_args()
+
+   swagger_file = os.path.abspath(args.spec)
+
+   if not os.path.exists(swagger_file):
+       raise FileNotFoundError(f"Spec file not found: {swagger_file}")
+
+   findings = run_scan(
+       swagger_file,
+       base_url=args.base_url,
+       mode=args.mode,
+       replay_file=args.replay_file,
+   )
+
+   for f in findings:
+       print(json.dumps(f, indent=2))
+    

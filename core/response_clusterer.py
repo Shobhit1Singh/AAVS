@@ -1,38 +1,52 @@
 import hashlib
+import re
+import json
 from typing import Dict, List, Any
 
 
 class ResponseClusterer:
-    """
-    Groups similar responses together to detect anomalies and
-    avoid redundant payload testing.
-    """
-
     def __init__(self):
         self.clusters: Dict[str, List[Dict[str, Any]]] = {}
 
     def _normalize_body(self, body: str) -> str:
-        """
-        Remove dynamic noise like IDs, timestamps, tokens.
-        """
         if not body:
             return ""
 
-        # Remove numbers (IDs, timestamps)
-        body = "".join(["#" if c.isdigit() else c for c in body])
+        # Replace only long numeric sequences (timestamps, IDs)
+        body = re.sub(r'\d{4,}', '####', body)
 
-        # Trim whitespace noise
-        return " ".join(body.split())
+        # Normalize whitespace
+        body = " ".join(body.split())
+
+        return body
+
+    def _extract_structure(self, body: str) -> str:
+        try:
+            parsed = json.loads(body)
+
+            if isinstance(parsed, dict):
+                return "|".join(sorted(parsed.keys()))
+
+            elif isinstance(parsed, list) and len(parsed) > 0:
+                if isinstance(parsed[0], dict):
+                    return "list|" + "|".join(sorted(parsed[0].keys()))
+
+            return "generic"
+
+        except:
+            return "non_json"
 
     def _generate_signature(self, response: Dict[str, Any]) -> str:
-        """
-        Create hash fingerprint for clustering.
-        """
-        body = self._normalize_body(response.get("response_body", ""))
-        status = str(response.get("status_code", ""))
-        length = str(len(body))
+        raw_body = response.get("response_body", "")
+        body = self._normalize_body(raw_body)
 
-        signature_base = status + "|" + length + "|" + body[:500]
+        status = str(response.get("status_code", ""))
+        structure = self._extract_structure(body)
+
+        # Use full body hash instead of truncation
+        body_hash = hashlib.md5(body.encode()).hexdigest()
+
+        signature_base = f"{status}|{structure}|{body_hash}"
 
         return hashlib.md5(signature_base.encode()).hexdigest()
 
@@ -45,14 +59,10 @@ class ResponseClusterer:
         self.clusters[sig].append(response)
 
     def get_anomalies(self) -> List[Dict[str, Any]]:
-        """
-        Returns responses that are unique or rare.
-        These are HIGH VALUE for vulnerability detection.
-        """
         anomalies = []
 
         for cluster in self.clusters.values():
-            if len(cluster) <= 2:  # rare response
+            if len(cluster) <= 2:
                 anomalies.extend(cluster)
 
         return anomalies
@@ -74,13 +84,7 @@ class ResponseClusterer:
         return summary
 
     def should_skip_payload(self, response: Dict[str, Any]) -> bool:
-        """
-        Decide if payload testing should stop early.
-        If response matches large boring cluster → skip further tests.
-        """
         sig = self._generate_signature(response)
-
         cluster = self.clusters.get(sig, [])
 
-        # If already seen many identical responses → stop wasting time
         return len(cluster) > 5

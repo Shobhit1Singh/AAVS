@@ -69,7 +69,7 @@
         "has_json": false
       },
       "first_seen": 1772094369.0281687,
-      "scan_count": 5,
+      "scan_count": 6,
       "suspicious": false
     },
     "DELETE::/identity/api/v2/admin/videos/{video_id}": {
@@ -77,7 +77,7 @@
         "has_json": false
       },
       "first_seen": 1772094377.8848512,
-      "scan_count": 3,
+      "scan_count": 4,
       "suspicious": false
     },
     "POST::/identity/api/auth/signup": {
@@ -85,7 +85,7 @@
         "has_json": false
       },
       "first_seen": 1772094386.4859085,
-      "scan_count": 3,
+      "scan_count": 4,
       "suspicious": false
     },
     "POST::/identity/api/auth/login": {
@@ -93,7 +93,7 @@
         "has_json": false
       },
       "first_seen": 1772094393.0392458,
-      "scan_count": 3,
+      "scan_count": 4,
       "suspicious": false
     },
     "POST::/identity/api/auth/forget-password": {
@@ -101,7 +101,7 @@
         "has_json": false
       },
       "first_seen": 1772094398.7735777,
-      "scan_count": 3,
+      "scan_count": 4,
       "suspicious": false
     },
     "POST::/identity/api/auth/v3/check-otp": {
@@ -109,7 +109,7 @@
         "has_json": false
       },
       "first_seen": 1772094404.2016366,
-      "scan_count": 3,
+      "scan_count": 4,
       "suspicious": false
     },
     "POST::/identity/api/auth/v2/check-otp": {
@@ -117,7 +117,7 @@
         "has_json": false
       },
       "first_seen": 1772094410.5506184,
-      "scan_count": 3,
+      "scan_count": 4,
       "suspicious": false
     },
     "POST::/identity/api/auth/v4.0/user/login-with-token": {
@@ -125,7 +125,7 @@
         "has_json": false
       },
       "first_seen": 1772094416.7122946,
-      "scan_count": 3,
+      "scan_count": 4,
       "suspicious": false
     },
     "POST::/identity/api/auth/v2.7/user/login-with-token": {
@@ -133,7 +133,7 @@
         "has_json": false
       },
       "first_seen": 1772094422.3729463,
-      "scan_count": 3,
+      "scan_count": 4,
       "suspicious": false
     },
     "POST::/identity/api/v2/user/reset-password": {
@@ -141,7 +141,7 @@
         "has_json": false
       },
       "first_seen": 1772094428.1621313,
-      "scan_count": 3,
+      "scan_count": 4,
       "suspicious": false
     },
     "POST::/identity/api/v2/user/change-email": {
@@ -149,7 +149,7 @@
         "has_json": false
       },
       "first_seen": 1772094433.7672715,
-      "scan_count": 3,
+      "scan_count": 4,
       "suspicious": false
     },
     "POST::/identity/api/v2/user/verify-email-token": {
@@ -157,7 +157,7 @@
         "has_json": false
       },
       "first_seen": 1772094439.6350522,
-      "scan_count": 3,
+      "scan_count": 4,
       "suspicious": false
     },
     "POST::/identity/api/v2/user/pictures": {
@@ -421,7 +421,7 @@
         "has_json": false
       },
       "first_seen": 1772185862.7334394,
-      "scan_count": 2,
+      "scan_count": 4,
       "suspicious": false
     },
     "POST::/api/Users": {
@@ -429,7 +429,7 @@
         "has_json": false
       },
       "first_seen": 1772185865.033938,
-      "scan_count": 2,
+      "scan_count": 4,
       "suspicious": false
     },
     "POST::/api/BasketItems": {
@@ -437,7 +437,7 @@
         "has_json": false
       },
       "first_seen": 1772185867.3335984,
-      "scan_count": 2,
+      "scan_count": 3,
       "suspicious": false
     },
     "GET::/rest/products/search": {
@@ -445,7 +445,7 @@
         "has_json": false
       },
       "first_seen": 1772185869.628172,
-      "scan_count": 2,
+      "scan_count": 3,
       "suspicious": false
     },
     "GET::/rest/basket/{id}": {
@@ -453,7 +453,7 @@
         "has_json": false
       },
       "first_seen": 1772185871.9364903,
-      "scan_count": 2,
+      "scan_count": 3,
       "suspicious": false
     },
     "POST::/login": {
