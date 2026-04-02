@@ -4,6 +4,7 @@ import Dashboard from "./pages/Dashboard"
 import NewScan from "./pages/NewScans"
 import ActiveScans from "./pages/ActiveScans"
 import Results from "./pages/Results"
+import VulnerabilityDetails from "./pages/VulnerabilityDetails"
 export default function App(){
   return (
     <BrowserRouter>
@@ -13,7 +14,7 @@ export default function App(){
           <Route path="/scan" element={<NewScan />} />
           <Route path="/activescan" element={<ActiveScans />} />
           <Route path="/results" element={<Results />} />
-
+          <Route path="/details" element={<VulnerabilityDetails />} />
         </Routes>
       </MainLayout>
     </BrowserRouter>

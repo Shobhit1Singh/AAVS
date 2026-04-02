@@ -1,8 +1,10 @@
 import { useEffect, useState } from "react"
+import { useNavigate } from "react-router-dom"
 
 export default function Results() {
 
   const [vulns, setVulns] = useState([])
+  const navigate = useNavigate()
 
   useEffect(() => {
     fetchResults()
@@ -59,7 +61,11 @@ export default function Results() {
             )}
 
             {vulns.map((v, index) => (
-              <tr key={index} className="border-t border-slate-700">
+              <tr
+                key={index}
+                onClick={() => navigate(`/results/${index}`)}
+                className="border-t border-slate-700 cursor-pointer hover:bg-slate-700 transition"
+              >
 
                 <td className="p-3">{v.endpoint}</td>
 

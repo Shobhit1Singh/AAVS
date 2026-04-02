@@ -421,7 +421,7 @@
         "has_json": false
       },
       "first_seen": 1772185862.7334394,
-      "scan_count": 5,
+      "scan_count": 8,
       "suspicious": false
     },
     "POST::/api/Users": {
@@ -429,7 +429,7 @@
         "has_json": false
       },
       "first_seen": 1772185865.033938,
-      "scan_count": 5,
+      "scan_count": 8,
       "suspicious": false
     },
     "POST::/api/BasketItems": {
@@ -437,7 +437,7 @@
         "has_json": false
       },
       "first_seen": 1772185867.3335984,
-      "scan_count": 5,
+      "scan_count": 8,
       "suspicious": false
     },
     "GET::/rest/products/search": {
@@ -445,7 +445,7 @@
         "has_json": false
       },
       "first_seen": 1772185869.628172,
-      "scan_count": 5,
+      "scan_count": 8,
       "suspicious": false
     },
     "GET::/rest/basket/{id}": {
@@ -453,7 +453,7 @@
         "has_json": false
       },
       "first_seen": 1772185871.9364903,
-      "scan_count": 5,
+      "scan_count": 8,
       "suspicious": false
     },
     "POST::/login": {
@@ -502,6 +502,54 @@
       },
       "first_seen": 1772218667.570011,
       "scan_count": 11,
+      "suspicious": false
+    },
+    "POST::/api/login": {
+      "profile": {
+        "has_json": false
+      },
+      "first_seen": 1775120445.274336,
+      "scan_count": 1,
+      "suspicious": false
+    },
+    "POST::/api/update": {
+      "profile": {
+        "has_json": false
+      },
+      "first_seen": 1775120470.440643,
+      "scan_count": 1,
+      "suspicious": false
+    },
+    "POST::/api/exec": {
+      "profile": {
+        "has_json": false
+      },
+      "first_seen": 1775120495.7529597,
+      "scan_count": 1,
+      "suspicious": false
+    },
+    "GET::/api/users": {
+      "profile": {
+        "has_json": false
+      },
+      "first_seen": 1775120521.0850008,
+      "scan_count": 1,
+      "suspicious": false
+    },
+    "GET::/api/user/{id}": {
+      "profile": {
+        "has_json": false
+      },
+      "first_seen": 1775120546.2358134,
+      "scan_count": 1,
+      "suspicious": false
+    },
+    "GET::/api/search": {
+      "profile": {
+        "has_json": false
+      },
+      "first_seen": 1775120571.6057417,
+      "scan_count": 1,
       "suspicious": false
     }
   },
@@ -1071,6 +1119,60 @@
         "cluster_id": null,
         "confidence": 0,
         "timestamp": 1772770433.0567036
+      }
+    ],
+    "POST::/api/login": [
+      {
+        "payload": "{'headers': {'Authorization': 'Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJub25lIn0.eyJ1c2VyX2lkIjoxLCJyb2xlIjoiYWRtaW4iLCJleHAiOjE3NzUxMjQwNDJ9.'}, '__family__': 'auth_jwt'}",
+        "response_hash": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "cluster_id": null,
+        "confidence": 0,
+        "timestamp": 1775120447.5943375
+      }
+    ],
+    "POST::/api/update": [
+      {
+        "payload": "{'headers': {'Authorization': 'Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJub25lIn0.eyJ1c2VyX2lkIjoxLCJyb2xlIjoiYWRtaW4iLCJleHAiOjE3NzUxMjQwNDJ9.'}, '__family__': 'auth_jwt'}",
+        "response_hash": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "cluster_id": null,
+        "confidence": 0,
+        "timestamp": 1775120472.755243
+      }
+    ],
+    "POST::/api/exec": [
+      {
+        "payload": "{'headers': {'Authorization': 'Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJub25lIn0.eyJ1c2VyX2lkIjoxLCJyb2xlIjoiYWRtaW4iLCJleHAiOjE3NzUxMjQwNDJ9.'}, '__family__': 'auth_jwt'}",
+        "response_hash": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "cluster_id": null,
+        "confidence": 0,
+        "timestamp": 1775120498.0823863
+      }
+    ],
+    "GET::/api/users": [
+      {
+        "payload": "{'headers': {'Authorization': 'Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJub25lIn0.eyJ1c2VyX2lkIjoxLCJyb2xlIjoiYWRtaW4iLCJleHAiOjE3NzUxMjQwNDJ9.'}, '__family__': 'auth_jwt'}",
+        "response_hash": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "cluster_id": null,
+        "confidence": 0,
+        "timestamp": 1775120523.3682153
+      }
+    ],
+    "GET::/api/user/{id}": [
+      {
+        "payload": "{'headers': {'Authorization': 'Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJub25lIn0.eyJ1c2VyX2lkIjoxLCJyb2xlIjoiYWRtaW4iLCJleHAiOjE3NzUxMjQwNDJ9.'}, '__family__': 'auth_jwt'}",
+        "response_hash": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "cluster_id": null,
+        "confidence": 0,
+        "timestamp": 1775120548.5804513
+      }
+    ],
+    "GET::/api/search": [
+      {
+        "payload": "{'headers': {'Authorization': 'Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJub25lIn0.eyJ1c2VyX2lkIjoxLCJyb2xlIjoiYWRtaW4iLCJleHAiOjE3NzUxMjQwNDJ9.'}, '__family__': 'auth_jwt'}",
+        "response_hash": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "cluster_id": null,
+        "confidence": 0,
+        "timestamp": 1775120573.910524
       }
     ]
   },
