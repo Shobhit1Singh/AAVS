@@ -35,8 +35,8 @@ class Response:
 
 
 class BaseExecutor:
-    async def run_tests(self, endpoints, payloads):
-        raise NotImplementedError("Executor must implement run_tests()")
+    async def execute(self, endpoint, payload):
+        raise NotImplementedError("Executor must implement execute()")
 
 
 class RealHTTPExecutor(BaseExecutor):
@@ -45,134 +45,156 @@ class RealHTTPExecutor(BaseExecutor):
         self.semaphore = asyncio.Semaphore(max_concurrency)
         self.timeout = timeout
 
-    async def _send_request(self, session, endpoint, payload):
+    async def execute(self, endpoint, payload):
         async with self.semaphore:
-            url = f"{self.base_url}{endpoint['path']}"
-            method = endpoint.get("method", "POST").upper()
-            headers = endpoint.get("headers", {})
+            path = endpoint["path"]
+            method = endpoint.get("method", "GET").upper()
+
+            url = f"{self.base_url}{path}"
+
+            headers = {}
+            params = {}
+            json_body = None
+
+            # ----------------------------
+            # PAYLOAD INTERPRETATION FIX
+            # ----------------------------
+            if isinstance(payload, dict):
+
+                # headers injection
+                if "headers" in payload:
+                    headers.update(payload["headers"])
+
+                # param-based payload
+                param_location = payload.get("param_location")
+                param_name = payload.get("param_name")
+                value = payload.get("payload")
+
+                if param_location == "query":
+                    params[param_name] = value
+
+                elif param_location == "header":
+                    headers[param_name] = str(value)
+
+                elif param_location == "path":
+                    url = url.replace(f"{{{param_name}}}", str(value))
+
+                elif param_location == "body":
+                    json_body = {param_name: value}
+
+                # full body override
+                if "full_body" in payload:
+                    json_body = payload["full_body"]
+
+            # ----------------------------
+            # DEBUG (finally useful)
+            # ----------------------------
+            print("\n=== HTTP DEBUG ===")
+            print("METHOD:", method)
+            print("URL:", url)
+            print("HEADERS:", headers)
+            print("PARAMS:", params)
+            print("BODY:", json_body)
 
             try:
                 start = time.time()
-                async with session.request(
-                    method,
-                    url,
-                    json=payload,
-                    headers=headers,
-                    timeout=self.timeout,
-                ) as resp:
-                    body = await resp.text()
-                    elapsed = time.time() - start
 
-                    return Response(
-                        endpoint=endpoint["path"],
-                        payload=payload,
-                        status_code=resp.status,
-                        body=body,
-                        headers=dict(resp.headers),
-                        response_time=elapsed,
-                    )
+                async with aiohttp.ClientSession() as session:
+                    async with session.request(
+                        method,
+                        url,
+                        params=params,
+                        json=json_body,
+                        headers=headers,
+                        timeout=self.timeout,
+                    ) as resp:
+
+                        body = await resp.text()
+                        elapsed = time.time() - start
+
+                        print("STATUS:", resp.status)
+                        print("RESPONSE:", body[:200])
+                        print("=================\n")
+
+                        return {
+                            "status_code": resp.status,
+                            "response_body": body,
+                            "response_headers": dict(resp.headers),
+                            "response_time": elapsed,
+                        }
 
             except asyncio.TimeoutError:
-                return Response(
-                    endpoint=endpoint["path"],
-                    payload=payload,
-                    status_code=0,
-                    body="",
-                    headers={},
-                    response_time=self.timeout,
-                    error="Timeout",
-                )
+                print("TIMEOUT\n")
+                return {
+                    "status_code": 0,
+                    "response_body": "",
+                    "response_headers": {},
+                    "response_time": self.timeout,
+                    "error": "Timeout",
+                }
 
             except Exception as e:
-                return Response(
-                    endpoint=endpoint["path"],
-                    payload=payload,
-                    status_code=0,
-                    body="",
-                    headers={},
-                    response_time=0,
-                    error=str(e),
-                )
-
-    async def run_tests(self, endpoints, payloads):
-        async with aiohttp.ClientSession() as session:
-            tasks = []
-            for ep in endpoints:
-                for pl in payloads:
-                    tasks.append(self._send_request(session, ep, pl))
-            return await asyncio.gather(*tasks)
+                print("ERROR:", str(e), "\n")
+                return {
+                    "status_code": 0,
+                    "response_body": "",
+                    "response_headers": {},
+                    "response_time": 0,
+                    "error": str(e),
+                }
 
 
 class MockExecutor(BaseExecutor):
-    async def run_tests(self, endpoints, payloads):
-        results = []
+    async def execute(self, endpoint, payload):
 
-        for ep in endpoints:
-            for pl in payloads:
-                payload_str = str(pl)
+        payload_str = str(payload)
 
-                if "' OR '1'='1'" in payload_str or "UNION SELECT" in payload_str:
-                    status = 500
-                    body = "Internal Server Error"
-                else:
-                    status = 200
-                    body = "OK"
+        if "' OR '1'='1'" in payload_str or "UNION SELECT" in payload_str:
+            return {
+                "status_code": 500,
+                "response_body": "Internal Server Error",
+                "response_headers": {},
+                "response_time": 0.01,
+            }
 
-                results.append(
-                    Response(
-                        endpoint=ep["path"],
-                        payload=pl,
-                        status_code=status,
-                        body=body,
-                        headers={},
-                        response_time=0.01,
-                    )
-                )
-
-        return results
+        return {
+            "status_code": 200,
+            "response_body": "OK",
+            "response_headers": {},
+            "response_time": 0.01,
+        }
 
 
 class ReplayExecutor(BaseExecutor):
     def __init__(self, recorded_responses):
         self.recorded_responses = recorded_responses
 
-    async def run_tests(self, endpoints, payloads):
-        responses = []
+    async def execute(self, endpoint, payload):
         for item in self.recorded_responses:
-            responses.append(
-                Response(
-                    endpoint=item["endpoint"],
-                    payload=item["payload"],
-                    status_code=item["status_code"],
-                    body=item["response_body"],
-                    headers=item["response_headers"],
-                    response_time=item["response_time"],
-                    error=item.get("error"),
-                )
-            )
-        return responses
+            if item["endpoint"] == endpoint["path"]:
+                return item
+
+        return {
+            "status_code": 404,
+            "response_body": "",
+            "response_headers": {},
+            "response_time": 0,
+        }
 
 
-# Example usage
+# ----------------------------
+# TEST RUN
+# ----------------------------
 if __name__ == "__main__":
-    endpoints = [
-        {"path": "/rest/user/login", "method": "POST"},
-        {"path": "/rest/product", "method": "GET"},
-    ]
-
-    payloads = [
-        {"username": "' OR '1'='1' /*", "password": "test"},
-        {"username": "admin", "password": "admin"},
-    ]
-
-    mode = "mock"  # change to "live" for real HTTP
-
-    if mode == "live":
+    async def main():
         executor = RealHTTPExecutor("http://localhost:3000")
-    else:
-        executor = MockExecutor()
 
-    results = asyncio.run(executor.run_tests(endpoints, payloads))
+        endpoint = {"path": "/api/users", "method": "GET"}
 
-    for r in results:
-        print(r.to_dict())
+        payload = {}
+
+        result = await executor.execute(endpoint, payload)
+
+        print(result)
+
+    asyncio.run(main())

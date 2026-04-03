@@ -12,14 +12,11 @@ class ExecutionEngine:
         if result is None:
             return None
 
-        if isinstance(result, dict):
-            return result
-
         normalized = {
-            "status_code": getattr(result, "status", None),
-            "response_body": getattr(result, "text", ""),
-            "response_headers": dict(getattr(result, "headers", {})),
-            "url": str(getattr(result, "url", "")),
+            "status_code": getattr(result, "status_code", None),
+            "response_body": getattr(result, "body", ""),
+            "response_headers": getattr(result, "headers", {}),
+            "response_time": getattr(result, "response_time", 0),
         }
 
         try:
@@ -34,11 +31,11 @@ class ExecutionEngine:
         if key in self.baselines:
             return self.baselines[key]
 
-        responses = await self.executor.run_tests([endpoint], [{}])
-        if not responses:
+        response = await self.executor.execute(endpoint, {})
+        if not response:
             return None
 
-        baseline = self._normalize(responses[0])
+        baseline = self._normalize(response)
         self.baselines[key] = baseline
 
         self.memory.register_endpoint(
@@ -50,7 +47,8 @@ class ExecutionEngine:
         return baseline
 
     async def execute(self, endpoint, payload):
-        responses = await self.executor.run_tests([endpoint], [payload])
-        if not responses:
+        response = await self.executor.execute(endpoint, payload)
+        if not response:
             return None
-        return self._normalize(responses[0])
+
+        return self._normalize(response)
