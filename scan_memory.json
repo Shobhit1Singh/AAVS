@@ -509,7 +509,7 @@
         "has_json": false
       },
       "first_seen": 1775120445.274336,
-      "scan_count": 1,
+      "scan_count": 7,
       "suspicious": false
     },
     "POST::/api/update": {
@@ -517,7 +517,7 @@
         "has_json": false
       },
       "first_seen": 1775120470.440643,
-      "scan_count": 1,
+      "scan_count": 7,
       "suspicious": false
     },
     "POST::/api/exec": {
@@ -525,7 +525,7 @@
         "has_json": false
       },
       "first_seen": 1775120495.7529597,
-      "scan_count": 1,
+      "scan_count": 7,
       "suspicious": false
     },
     "GET::/api/users": {
@@ -533,7 +533,7 @@
         "has_json": false
       },
       "first_seen": 1775120521.0850008,
-      "scan_count": 1,
+      "scan_count": 7,
       "suspicious": false
     },
     "GET::/api/user/{id}": {
@@ -541,7 +541,7 @@
         "has_json": false
       },
       "first_seen": 1775120546.2358134,
-      "scan_count": 1,
+      "scan_count": 7,
       "suspicious": false
     },
     "GET::/api/search": {
@@ -549,7 +549,7 @@
         "has_json": false
       },
       "first_seen": 1775120571.6057417,
-      "scan_count": 1,
+      "scan_count": 6,
       "suspicious": false
     }
   },
