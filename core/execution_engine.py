@@ -8,15 +8,18 @@ class ExecutionEngine:
         self.memory = memory
         self.baselines = {}
 
-    def _normalize(self, result):
+    def _normalize(self, result, endpoint=None, payload=None):
         if result is None:
             return None
 
         normalized = {
-            "status_code": getattr(result, "status_code", None),
-            "response_body": getattr(result, "body", ""),
-            "response_headers": getattr(result, "headers", {}),
-            "response_time": getattr(result, "response_time", 0),
+            "status_code": result.get("status_code"),
+            "response_body": result.get("response_body", ""),
+            "response_headers": result.get("response_headers", {}),
+            "response_time": result.get("response_time", 0),
+            "endpoint": endpoint.get("path") if endpoint else "",
+            "method": endpoint.get("method") if endpoint else "",
+            "payload": payload
         }
 
         try:
@@ -28,14 +31,17 @@ class ExecutionEngine:
 
     async def get_baseline(self, endpoint):
         key = f"{endpoint['method']}:{endpoint['path']}"
+
         if key in self.baselines:
             return self.baselines[key]
 
         response = await self.executor.execute(endpoint, {})
+
         if not response:
             return None
 
-        baseline = self._normalize(response)
+        baseline = self._normalize(response, endpoint, {})
+
         self.baselines[key] = baseline
 
         self.memory.register_endpoint(
@@ -48,7 +54,8 @@ class ExecutionEngine:
 
     async def execute(self, endpoint, payload):
         response = await self.executor.execute(endpoint, payload)
+
         if not response:
             return None
 
-        return self._normalize(response)
+        return self._normalize(response, endpoint, payload)

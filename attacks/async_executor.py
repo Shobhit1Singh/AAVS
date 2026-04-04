@@ -3,37 +3,6 @@ import aiohttp
 import time
 
 
-class Response:
-    def __init__(
-        self,
-        endpoint,
-        payload,
-        status_code,
-        body,
-        headers,
-        response_time,
-        error=None,
-    ):
-        self.endpoint = endpoint
-        self.payload = payload
-        self.status_code = status_code
-        self.body = body
-        self.headers = headers
-        self.response_time = response_time
-        self.error = error
-
-    def to_dict(self):
-        return {
-            "endpoint": self.endpoint,
-            "payload": self.payload,
-            "status_code": self.status_code,
-            "response_body": self.body,
-            "response_headers": self.headers,
-            "response_time": self.response_time,
-            "error": self.error,
-        }
-
-
 class BaseExecutor:
     async def execute(self, endpoint, payload):
         raise NotImplementedError("Executor must implement execute()")
@@ -43,11 +12,12 @@ class RealHTTPExecutor(BaseExecutor):
     def __init__(self, base_url, max_concurrency=20, timeout=10):
         self.base_url = base_url.rstrip("/")
         self.semaphore = asyncio.Semaphore(max_concurrency)
-        self.timeout = timeout
+        self.timeout = aiohttp.ClientTimeout(total=timeout)
 
     async def execute(self, endpoint, payload):
         async with self.semaphore:
-            path = endpoint["path"]
+
+            path = endpoint.get("path", "")
             method = endpoint.get("method", "GET").upper()
 
             url = f"{self.base_url}{path}"
@@ -57,37 +27,47 @@ class RealHTTPExecutor(BaseExecutor):
             json_body = None
 
             # ----------------------------
-            # PAYLOAD INTERPRETATION FIX
+            # PAYLOAD INTERPRETATION (FIXED PROPERLY)
             # ----------------------------
             if isinstance(payload, dict):
 
-                # headers injection
-                if "headers" in payload:
-                    headers.update(payload["headers"])
+                # 1. Direct structured payload support (preferred)
+                headers.update(payload.get("headers", {}))
+                params.update(payload.get("params", {}))
 
-                # param-based payload
+                if "body" in payload:
+                    json_body = payload["body"]
+
+                # 2. Backward compatibility (your old broken format)
                 param_location = payload.get("param_location")
                 param_name = payload.get("param_name")
                 value = payload.get("payload")
 
-                if param_location == "query":
-                    params[param_name] = value
+                if param_location and param_name:
 
-                elif param_location == "header":
-                    headers[param_name] = str(value)
+                    if param_location == "query":
+                        params[param_name] = value
 
-                elif param_location == "path":
-                    url = url.replace(f"{{{param_name}}}", str(value))
+                    elif param_location == "header":
+                        headers[param_name] = str(value)
 
-                elif param_location == "body":
-                    json_body = {param_name: value}
+                    elif param_location == "path":
+                        url = url.replace(f"{{{param_name}}}", str(value))
 
-                # full body override
+                    elif param_location == "body":
+                        json_body = {param_name: value}
+
+                # 3. Full body override (highest priority)
                 if "full_body" in payload:
                     json_body = payload["full_body"]
 
+                # 4. Path params (NEW - critical for /user/{id})
+                if "path_params" in payload:
+                    for k, v in payload["path_params"].items():
+                        url = url.replace(f"{{{k}}}", str(v))
+
             # ----------------------------
-            # DEBUG (finally useful)
+            # DEBUG
             # ----------------------------
             print("\n=== HTTP DEBUG ===")
             print("METHOD:", method)
@@ -99,14 +79,13 @@ class RealHTTPExecutor(BaseExecutor):
             try:
                 start = time.time()
 
-                async with aiohttp.ClientSession() as session:
+                async with aiohttp.ClientSession(timeout=self.timeout) as session:
                     async with session.request(
-                        method,
-                        url,
-                        params=params,
-                        json=json_body,
+                        method=method,
+                        url=url,
+                        params=params if params else None,
+                        json=json_body if method in ["POST", "PUT", "PATCH"] else None,
                         headers=headers,
-                        timeout=self.timeout,
                     ) as resp:
 
                         body = await resp.text()
@@ -121,6 +100,7 @@ class RealHTTPExecutor(BaseExecutor):
                             "response_body": body,
                             "response_headers": dict(resp.headers),
                             "response_time": elapsed,
+                            "url": str(resp.url),
                         }
 
             except asyncio.TimeoutError:
@@ -129,7 +109,7 @@ class RealHTTPExecutor(BaseExecutor):
                     "status_code": 0,
                     "response_body": "",
                     "response_headers": {},
-                    "response_time": self.timeout,
+                    "response_time": self.timeout.total,
                     "error": "Timeout",
                 }
 
@@ -171,7 +151,7 @@ class ReplayExecutor(BaseExecutor):
 
     async def execute(self, endpoint, payload):
         for item in self.recorded_responses:
-            if item["endpoint"] == endpoint["path"]:
+            if item.get("endpoint") == endpoint.get("path"):
                 return item
 
         return {
@@ -189,9 +169,11 @@ if __name__ == "__main__":
     async def main():
         executor = RealHTTPExecutor("http://localhost:3000")
 
-        endpoint = {"path": "/api/users", "method": "GET"}
+        endpoint = {"path": "/api/search", "method": "GET"}
 
-        payload = {}
+        payload = {
+            "params": {"q": "<script>alert(1)</script>"}
+        }
 
         result = await executor.execute(endpoint, payload)
 

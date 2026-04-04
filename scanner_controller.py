@@ -5,6 +5,7 @@ import argparse
 from colorama import Fore, Style
 
 from parser.parser_factory import ParserFactory
+from core.Severity_engine import SeverityEngine
 
 from attacks.attack_generator import AttackGenerator
 from attacks.auth_attacks import AuthAttackGenerator
@@ -73,6 +74,7 @@ async def run_scan_async(
     risk_scorer = EndpointRiskScorer()
     payload_strategy = PayloadStrategy()
     memory = ScanMemory()
+    severity_engine = SeverityEngine()
 
     execution_engine = ExecutionEngine(executor, memory)
 
@@ -131,17 +133,24 @@ async def run_scan_async(
         for payload in final_payloads:
 
             try:
-
                 result = await execution_engine.execute(endpoint, payload)
 
-                # -------- DEBUG OUTPUT --------
+                if "/login" in path:
+                    auth_engine.extract_token(result)
+
+                    auth_findings = auth_engine.process(endpoint, payload, result, baseline)
+
+                if not result:
+                    continue
+
+                # DEBUG
                 print("\n--- DEBUG ---")
                 print("ENDPOINT:", path)
                 print("PAYLOAD:", payload)
                 print("RESPONSE:", str(result)[:300])
                 print("-------------\n")
 
-                # -------- BASIC FALLBACK DETECTION --------
+                # fallback detection
                 response_text = str(result).lower()
 
                 vuln = False
@@ -175,6 +184,10 @@ async def run_scan_async(
                     result
                 )
 
+                # ✅ SEVERITY ENGINE HOOK (this is what you forgot)
+                if result.get("vulnerability_detected"):
+                    severity_engine.process(result)
+
             except Exception as e:
                 print(
                     f"{Fore.RED}Execution error on {path}: {str(e)}{Style.RESET_ALL}"
@@ -189,6 +202,9 @@ async def run_scan_async(
     print("\n========== MANUAL FINDINGS ==========")
     for f in findings:
         print(json.dumps(f, indent=2))
+
+    # ✅ FINAL RISK RANKING OUTPUT
+    severity_engine.print_ranking()
 
     return findings
 

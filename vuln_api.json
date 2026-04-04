@@ -1,28 +1,50 @@
 {
   "openapi": "3.0.0",
   "info": {
-    "title": "Vulnerable API",
-    "version": "1.0.0"
+    "title": "Advanced Vulnerable API",
+    "version": "2.0.0"
   },
   "servers": [
     {
       "url": "http://localhost:3000"
     }
   ],
+  "components": {
+    "securitySchemes": {
+      "bearerAuth": {
+        "type": "http",
+        "scheme": "bearer",
+        "bearerFormat": "JWT"
+      }
+    }
+  },
   "paths": {
-    "/api/users": {
-      "get": {
-        "summary": "Get all users",
-        "responses": {
-          "200": {
-            "description": "List users"
+    "/api/register": {
+      "post": {
+        "summary": "Register user",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "username": { "type": "string" },
+                  "password": { "type": "string" },
+                  "role": { "type": "string" }
+                }
+              }
+            }
           }
+        },
+        "responses": {
+          "200": { "description": "Registered" }
         }
       }
     },
     "/api/login": {
       "post": {
-        "summary": "Login",
+        "summary": "Login and get JWT",
         "requestBody": {
           "required": true,
           "content": {
@@ -38,14 +60,44 @@
           }
         },
         "responses": {
-          "200": { "description": "Success" },
-          "401": { "description": "Invalid credentials" }
+          "200": { "description": "JWT Token" }
+        }
+      }
+    },
+    "/api/refresh": {
+      "post": {
+        "summary": "Refresh JWT",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "refreshToken": { "type": "string" }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": { "description": "New JWT" }
+        }
+      }
+    },
+    "/api/users": {
+      "get": {
+        "summary": "Get all users (requires auth)",
+        "security": [{ "bearerAuth": [] }],
+        "responses": {
+          "200": { "description": "List users" }
         }
       }
     },
     "/api/user/{id}": {
       "get": {
         "summary": "Get user by ID (IDOR)",
+        "security": [{ "bearerAuth": [] }],
         "parameters": [
           {
             "name": "id",
@@ -61,7 +113,8 @@
     },
     "/api/update": {
       "post": {
-        "summary": "Update user role (mass assignment)",
+        "summary": "Update user (mass assignment)",
+        "security": [{ "bearerAuth": [] }],
         "requestBody": {
           "required": true,
           "content": {
@@ -70,7 +123,8 @@
                 "type": "object",
                 "properties": {
                   "id": { "type": "integer" },
-                  "role": { "type": "string" }
+                  "role": { "type": "string" },
+                  "isAdmin": { "type": "boolean" }
                 }
               }
             }
@@ -81,14 +135,22 @@
         }
       }
     },
+    "/api/admin": {
+      "get": {
+        "summary": "Admin panel (weak auth)",
+        "security": [{ "bearerAuth": [] }],
+        "responses": {
+          "200": { "description": "Admin data" }
+        }
+      }
+    },
     "/api/search": {
       "get": {
-        "summary": "Search (reflected input)",
+        "summary": "Search (XSS)",
         "parameters": [
           {
             "name": "q",
             "in": "query",
-            "required": false,
             "schema": { "type": "string" }
           }
         ],
@@ -97,9 +159,33 @@
         }
       }
     },
+    "/api/upload": {
+      "post": {
+        "summary": "File upload (no validation)",
+        "requestBody": {
+          "content": {
+            "multipart/form-data": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "file": {
+                    "type": "string",
+                    "format": "binary"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": { "description": "Uploaded" }
+        }
+      }
+    },
     "/api/exec": {
       "post": {
-        "summary": "Execute command (command injection)",
+        "summary": "Execute command (RCE)",
+        "security": [{ "bearerAuth": [] }],
         "requestBody": {
           "required": true,
           "content": {

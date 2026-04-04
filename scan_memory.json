@@ -421,7 +421,7 @@
         "has_json": false
       },
       "first_seen": 1772185862.7334394,
-      "scan_count": 8,
+      "scan_count": 11,
       "suspicious": false
     },
     "POST::/api/Users": {
@@ -429,7 +429,7 @@
         "has_json": false
       },
       "first_seen": 1772185865.033938,
-      "scan_count": 8,
+      "scan_count": 10,
       "suspicious": false
     },
     "POST::/api/BasketItems": {
@@ -437,7 +437,7 @@
         "has_json": false
       },
       "first_seen": 1772185867.3335984,
-      "scan_count": 8,
+      "scan_count": 10,
       "suspicious": false
     },
     "GET::/rest/products/search": {
@@ -445,7 +445,7 @@
         "has_json": false
       },
       "first_seen": 1772185869.628172,
-      "scan_count": 8,
+      "scan_count": 10,
       "suspicious": false
     },
     "GET::/rest/basket/{id}": {
@@ -453,7 +453,7 @@
         "has_json": false
       },
       "first_seen": 1772185871.9364903,
-      "scan_count": 8,
+      "scan_count": 10,
       "suspicious": false
     },
     "POST::/login": {
@@ -509,7 +509,7 @@
         "has_json": false
       },
       "first_seen": 1775120445.274336,
-      "scan_count": 8,
+      "scan_count": 30,
       "suspicious": false
     },
     "POST::/api/update": {
@@ -517,7 +517,7 @@
         "has_json": false
       },
       "first_seen": 1775120470.440643,
-      "scan_count": 8,
+      "scan_count": 29,
       "suspicious": false
     },
     "POST::/api/exec": {
@@ -525,7 +525,7 @@
         "has_json": false
       },
       "first_seen": 1775120495.7529597,
-      "scan_count": 8,
+      "scan_count": 29,
       "suspicious": false
     },
     "GET::/api/users": {
@@ -533,7 +533,7 @@
         "has_json": false
       },
       "first_seen": 1775120521.0850008,
-      "scan_count": 8,
+      "scan_count": 29,
       "suspicious": false
     },
     "GET::/api/user/{id}": {
@@ -541,7 +541,7 @@
         "has_json": false
       },
       "first_seen": 1775120546.2358134,
-      "scan_count": 8,
+      "scan_count": 29,
       "suspicious": false
     },
     "GET::/api/search": {
@@ -549,7 +549,39 @@
         "has_json": false
       },
       "first_seen": 1775120571.6057417,
-      "scan_count": 8,
+      "scan_count": 29,
+      "suspicious": false
+    },
+    "POST::/api/register": {
+      "profile": {
+        "has_json": false
+      },
+      "first_seen": 1775209704.7330592,
+      "scan_count": 11,
+      "suspicious": false
+    },
+    "POST::/api/refresh": {
+      "profile": {
+        "has_json": false
+      },
+      "first_seen": 1775209705.2454872,
+      "scan_count": 11,
+      "suspicious": false
+    },
+    "POST::/api/upload": {
+      "profile": {
+        "has_json": false
+      },
+      "first_seen": 1775209705.673375,
+      "scan_count": 10,
+      "suspicious": false
+    },
+    "GET::/api/admin": {
+      "profile": {
+        "has_json": false
+      },
+      "first_seen": 1775209706.7387412,
+      "scan_count": 10,
       "suspicious": false
     }
   },
@@ -1083,6 +1115,13 @@
         "cluster_id": null,
         "confidence": 0,
         "timestamp": 1772770432.7822738
+      },
+      {
+        "payload": "{'headers': {'Authorization': 'Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJub25lIn0.eyJ1c2VyX2lkIjoxLCJyb2xlIjoiYWRtaW4iLCJleHAiOjE3NzUyMTQyNDV9.'}, '__family__': 'auth_jwt'}",
+        "response_hash": "a6cece175702f9e8a5961d6b1d7c4bdea1859d903ebac33b3c3cc4e2ac5d796c",
+        "cluster_id": 404,
+        "confidence": 0,
+        "timestamp": 1775210645.4252074
       }
     ],
     "POST::/api/Users": [
@@ -1092,6 +1131,13 @@
         "cluster_id": null,
         "confidence": 0,
         "timestamp": 1772770432.834266
+      },
+      {
+        "payload": "{'headers': {'Authorization': 'Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJub25lIn0.eyJ1c2VyX2lkIjoxLCJyb2xlIjoiYWRtaW4iLCJleHAiOjE3NzUyMTQyNDV9.'}, '__family__': 'auth_jwt'}",
+        "response_hash": "196f6b3834df4ba9bac1badc0f96eeed8f87410a7238df7050da752b42793d9b",
+        "cluster_id": 404,
+        "confidence": 0,
+        "timestamp": 1775210645.659587
       }
     ],
     "POST::/api/BasketItems": [
@@ -1101,6 +1147,13 @@
         "cluster_id": null,
         "confidence": 0,
         "timestamp": 1772770432.8993514
+      },
+      {
+        "payload": "{'headers': {'Authorization': 'Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJub25lIn0.eyJ1c2VyX2lkIjoxLCJyb2xlIjoiYWRtaW4iLCJleHAiOjE3NzUyMTQyNDV9.'}, '__family__': 'auth_jwt'}",
+        "response_hash": "388955016c3bfa915db499939f6a84dd7ae565ee19e50adc5263895b000a316f",
+        "cluster_id": 404,
+        "confidence": 0,
+        "timestamp": 1775210645.895942
       }
     ],
     "GET::/rest/products/search": [
@@ -1110,6 +1163,13 @@
         "cluster_id": null,
         "confidence": 0,
         "timestamp": 1772770432.9691818
+      },
+      {
+        "payload": "{'params': {'q': '<body onload=alert(1)>'}, '__family__': 'generic'}",
+        "response_hash": "bd13349b391d4c719995d2f74caffb3e0d0c84f8c4469f3344962f3ca56574e5",
+        "cluster_id": 404,
+        "confidence": 0,
+        "timestamp": 1775210646.121006
       }
     ],
     "GET::/rest/basket/{id}": [
@@ -1119,6 +1179,118 @@
         "cluster_id": null,
         "confidence": 0,
         "timestamp": 1772770433.0567036
+      },
+      {
+        "payload": "{'path_params': {'id': \"' OR 1=1--\"}, '__family__': 'generic'}",
+        "response_hash": "579e9b76f22e124922539122ee78d3e7b3a8acf019da1ab71fc324f4081baf20",
+        "cluster_id": 404,
+        "confidence": 0,
+        "timestamp": 1775210646.6179142
+      },
+      {
+        "payload": "{'path_params': {'id': '\"><script>alert(1)</script>'}, '__family__': 'generic'}",
+        "response_hash": "39803cd40aee77abc8d3427bda9c1c6d470d3c7f770d23668178f41e6fea0e5a",
+        "cluster_id": 404,
+        "confidence": 0,
+        "timestamp": 1775210646.7090223
+      },
+      {
+        "payload": "{'path_params': {'id': \"' OR 'a'='a\"}, '__family__': 'generic'}",
+        "response_hash": "ca0b50613e5254d4debef38df1167627e661e9925b297bacc91ac31587daf580",
+        "cluster_id": 404,
+        "confidence": 0,
+        "timestamp": 1775210646.7327306
+      },
+      {
+        "payload": "{'path_params': {'id': '/etc/passwd'}, '__family__': 'generic'}",
+        "response_hash": "9dd3900e18c937f73e51d215f6c9c54c6667e4d29761fd5cab70cc508330f97d",
+        "cluster_id": 404,
+        "confidence": 0,
+        "timestamp": 1775210646.7674112
+      },
+      {
+        "payload": "{'path_params': {'id': '/proc/self/environ'}, '__family__': 'generic'}",
+        "response_hash": "685ae2153dfee497474e90f0b99f3553e44490c1073f249398fddef8f90b5cc1",
+        "cluster_id": 404,
+        "confidence": 0,
+        "timestamp": 1775210646.7936745
+      },
+      {
+        "payload": "{'path_params': {'id': '&& ls'}, '__family__': 'generic'}",
+        "response_hash": "a6f861474a3f749d7ae76e4adc7cdade5d3d8ab0cbfc1b27712f7c07349bcbe4",
+        "cluster_id": 404,
+        "confidence": 0,
+        "timestamp": 1775210646.821838
+      },
+      {
+        "payload": "{'path_params': {'id': ''}, '__family__': 'generic'}",
+        "response_hash": "adbdae11fe5cee0ca70bd28679fb34d248df9bcdbbd12a0a2bf6161bd531b923",
+        "cluster_id": 404,
+        "confidence": 0,
+        "timestamp": 1775210646.864518
+      },
+      {
+        "payload": "{'path_params': {'id': \"' OR ''='\"}, '__family__': 'generic'}",
+        "response_hash": "fbd99c5f42436462aa32b3c9ee03297a328eb4a988b8d8310aebdc2594a627b4",
+        "cluster_id": 404,
+        "confidence": 0,
+        "timestamp": 1775210646.9049706
+      },
+      {
+        "payload": "{'path_params': {'id': 'true'}, '__family__': 'generic'}",
+        "response_hash": "576b3a9347082c8246db87264a8c6679c4c7ca5e2fc4eb44f8092276c9895a80",
+        "cluster_id": 404,
+        "confidence": 0,
+        "timestamp": 1775210646.938764
+      },
+      {
+        "payload": "{'path_params': {'id': '| id'}, '__family__': 'generic'}",
+        "response_hash": "785e47c3358cdd22c9ad51d3417064b11864128f2b94cc53e9b00b4b4c1a885c",
+        "cluster_id": 404,
+        "confidence": 0,
+        "timestamp": 1775210646.9653141
+      },
+      {
+        "payload": "{'headers': {'Authorization': 'Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJub25lIn0.eyJ1c2VyX2lkIjoxLCJyb2xlIjoiYWRtaW4iLCJleHAiOjE3NzUyMTQyNDV9.'}, '__family__': 'auth_jwt'}",
+        "response_hash": "96c1a906977efc19b6bcb124244fbf0c74b832d2ed67495f8e0f9d3ca8b8e556",
+        "cluster_id": 404,
+        "confidence": 0,
+        "timestamp": 1775210646.9891717
+      },
+      {
+        "payload": "{'path_params': {'id': \"' OR 1=1/*\"}, '__family__': 'generic'}",
+        "response_hash": "92f7e649fd067804af7587261ebbcd5e979d3c3c003072774600ff3362356d0d",
+        "cluster_id": 404,
+        "confidence": 0,
+        "timestamp": 1775210995.3043256
+      },
+      {
+        "payload": "{'path_params': {'id': 'null'}, '__family__': 'generic'}",
+        "response_hash": "c5b2adf509a691713bdbd500a4a85747b7c2a0bb4fd92a0460630fd237c4d394",
+        "cluster_id": 404,
+        "confidence": 0,
+        "timestamp": 1775210995.3704758
+      },
+      {
+        "payload": "{'path_params': {'id': '../../../etc/passwd'}, '__family__': 'generic'}",
+        "response_hash": "142ac34354696ff9f45c0a957151fcd631dae3ec15a2ffa7ea248eb4b0d6abf4",
+        "cluster_id": 404,
+        "confidence": 0,
+        "timestamp": 1775210995.4064171
+      },
+      {
+        "payload": "{'path_params': {'id': '&& whoami'}, '__family__': 'generic'}",
+        "response_hash": "7041977eb88631d394e6d5b2b4e01785148801936164a17c3e51bad800151d92",
+        "cluster_id": 404,
+        "confidence": 0,
+        "timestamp": 1775210995.4355168
+      },
+      {
+        "payload": "{'path_params': {'id': 'administrator'}, '__family__': 'generic'}",
+        "response_hash": "cb0414d988ac9fd4c22b6230016f34e6ec6ae822ba79c4f7cfa6fdf208d2ce13",
+        "cluster_id": 404,
+        "confidence": 0,
+        "timestamp": 1775210995.5003438
       }
     ],
     "POST::/api/login": [
@@ -1128,6 +1300,13 @@
         "cluster_id": null,
         "confidence": 0,
         "timestamp": 1775120447.5943375
+      },
+      {
+        "payload": "{'headers': {'Authorization': 'Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJub25lIn0.eyJ1c2VyX2lkIjoxLCJyb2xlIjoiYWRtaW4iLCJleHAiOjE3NzUyMTQxMjN9.'}, '__family__': 'auth_jwt'}",
+        "response_hash": "4455ad8dedbfae043ec53abaae4f20f01562dcb5384b62224b848855f9634d32",
+        "cluster_id": 200,
+        "confidence": 0,
+        "timestamp": 1775210524.1241717
       }
     ],
     "POST::/api/update": [
@@ -1137,6 +1316,13 @@
         "cluster_id": null,
         "confidence": 0,
         "timestamp": 1775120472.755243
+      },
+      {
+        "payload": "{'headers': {'Authorization': 'Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJub25lIn0.eyJ1c2VyX2lkIjoxLCJyb2xlIjoiYWRtaW4iLCJleHAiOjE3NzUyMTQxMjN9.'}, '__family__': 'auth_jwt'}",
+        "response_hash": "e4e7e4e048734191f064b429514f2e940c7411880df552eb5a62503406a955db",
+        "cluster_id": 404,
+        "confidence": 0,
+        "timestamp": 1775210524.494785
       }
     ],
     "POST::/api/exec": [
@@ -1146,6 +1332,13 @@
         "cluster_id": null,
         "confidence": 0,
         "timestamp": 1775120498.0823863
+      },
+      {
+        "payload": "{'headers': {'Authorization': 'Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJub25lIn0.eyJ1c2VyX2lkIjoxLCJyb2xlIjoiYWRtaW4iLCJleHAiOjE3NzUyMTQxMjN9.'}, '__family__': 'auth_jwt'}",
+        "response_hash": "4bd3f85d6559226db0c04f02ed286a7320587981696823a847c417dd2726d26f",
+        "cluster_id": 400,
+        "confidence": 0,
+        "timestamp": 1775210524.8906157
       }
     ],
     "GET::/api/users": [
@@ -1155,6 +1348,13 @@
         "cluster_id": null,
         "confidence": 0,
         "timestamp": 1775120523.3682153
+      },
+      {
+        "payload": "{'headers': {'Authorization': 'Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJub25lIn0.eyJ1c2VyX2lkIjoxLCJyb2xlIjoiYWRtaW4iLCJleHAiOjE3NzUyMTQxMjN9.'}, '__family__': 'auth_jwt'}",
+        "response_hash": "4eb1c3ff56750e71ba03ad751f8067a36ca31da6bb512f6e7048d324152ad2e1",
+        "cluster_id": 200,
+        "confidence": 0,
+        "timestamp": 1775210525.0850885
       }
     ],
     "GET::/api/user/{id}": [
@@ -1164,6 +1364,83 @@
         "cluster_id": null,
         "confidence": 0,
         "timestamp": 1775120548.5804513
+      },
+      {
+        "payload": "{'path_params': {'id': '1'}, '__family__': 'generic'}",
+        "response_hash": "4d184180404d86b116827958cf7df4bd6f8bd1d4a2746ceee02af5a0b321dcdd",
+        "cluster_id": 200,
+        "confidence": 0,
+        "timestamp": 1775210525.3236992
+      },
+      {
+        "payload": "{'path_params': {'id': '../../../../../../etc/shadow'}, '__family__': 'generic'}",
+        "response_hash": "5d6fb38331603d59804cc479c381aeafa9265d578c732b4cff45ec810da28286",
+        "cluster_id": 404,
+        "confidence": 0,
+        "timestamp": 1775210525.3645866
+      },
+      {
+        "payload": "{'path_params': {'id': '<script>alert(1)</script>'}, '__family__': 'generic'}",
+        "response_hash": "dd668e30c95cb9d9a0737bb5ca2e7ad7ebece49eb8dc7bf099af4211fd7daab1",
+        "cluster_id": 404,
+        "confidence": 0,
+        "timestamp": 1775210525.397118
+      },
+      {
+        "payload": "{'path_params': {'id': '/proc/self/environ'}, '__family__': 'generic'}",
+        "response_hash": "b580f5ce230e7ed0dc6015ab36839f7d034f81a2f1bb8b214a7a5686905046e6",
+        "cluster_id": 404,
+        "confidence": 0,
+        "timestamp": 1775210525.4360197
+      },
+      {
+        "payload": "{'path_params': {'id': '\"><script>alert(1)</script>'}, '__family__': 'generic'}",
+        "response_hash": "d07f4a5df927af491f949bf353498ab057b5bb6ad8f79ad549045a75702e3888",
+        "cluster_id": 404,
+        "confidence": 0,
+        "timestamp": 1775210525.4613404
+      },
+      {
+        "payload": "{'path_params': {'id': ''}, '__family__': 'generic'}",
+        "response_hash": "be8b9df170dba8f2636ff783c50655beb5b166356ca00ee4219dc0e89c06f941",
+        "cluster_id": 404,
+        "confidence": 0,
+        "timestamp": 1775210933.0999806
+      },
+      {
+        "payload": "{'path_params': {'id': '../../../../etc/passwd'}, '__family__': 'generic'}",
+        "response_hash": "142ac34354696ff9f45c0a957151fcd631dae3ec15a2ffa7ea248eb4b0d6abf4",
+        "cluster_id": 404,
+        "confidence": 0,
+        "timestamp": 1775210933.1946182
+      },
+      {
+        "payload": "{'path_params': {'id': '; cat /etc/passwd'}, '__family__': 'generic'}",
+        "response_hash": "1de8f8d13e115287532b3cac98c8688c421a38d97724670f411df0ce9a7a26f8",
+        "cluster_id": 404,
+        "confidence": 0,
+        "timestamp": 1775210933.256491
+      },
+      {
+        "payload": "{'path_params': {'id': '<svg/onload=alert(1)>'}, '__family__': 'generic'}",
+        "response_hash": "83f24798adb5fdd1cdabab638bf93bd88dca983a765767ec59f0b69e82fdc067",
+        "cluster_id": 404,
+        "confidence": 0,
+        "timestamp": 1775211260.937356
+      },
+      {
+        "payload": "{'path_params': {'id': \"' OR 1=1/*\"}, '__family__': 'generic'}",
+        "response_hash": "a4cdb0ebabe76b6a292b6e5b98267cb9bfedd3c8d69c2a5ceb9f9657dcf4dcb2",
+        "cluster_id": 404,
+        "confidence": 0,
+        "timestamp": 1775211260.9940298
+      },
+      {
+        "payload": "{'path_params': {'id': '/etc/passwd'}, '__family__': 'generic'}",
+        "response_hash": "5a0221269ef4fc59d13c17efe91b526c500c0cb2a7f1ce0a807d8008cff92167",
+        "cluster_id": 404,
+        "confidence": 0,
+        "timestamp": 1775294797.7873094
       }
     ],
     "GET::/api/search": [
@@ -1173,6 +1450,322 @@
         "cluster_id": null,
         "confidence": 0,
         "timestamp": 1775120573.910524
+      },
+      {
+        "payload": "{'params': {'q': \"' OR ''='\"}, '__family__': 'generic'}",
+        "response_hash": "5f3234289c01b1049a3bd625b5f82eb9576e9d10044ff55ba78fa849d0e56f1c",
+        "cluster_id": 200,
+        "confidence": 0,
+        "timestamp": 1775210525.9112377
+      },
+      {
+        "payload": "{'params': {'q': '../../../../etc/passwd'}, '__family__': 'generic'}",
+        "response_hash": "5b32516862faf3a19eadafb953c71dd9aabefc4588f2d86f9e6655f6faf7eccb",
+        "cluster_id": 200,
+        "confidence": 0,
+        "timestamp": 1775210525.937617
+      },
+      {
+        "payload": "{'params': {'q': \"' UNION SELECT null--\"}, '__family__': 'generic'}",
+        "response_hash": "6da40d4fad1cc196677b17704e4e01d6c6c353c387f893b380cf10ab879dab68",
+        "cluster_id": 200,
+        "confidence": 0,
+        "timestamp": 1775210525.9600081
+      },
+      {
+        "payload": "{'params': {'q': '| ls'}, '__family__': 'generic'}",
+        "response_hash": "590836a20e823430674d68be338507d667ee1f5999ce2c49c601067fb5ff942f",
+        "cluster_id": 200,
+        "confidence": 0,
+        "timestamp": 1775210525.9862013
+      },
+      {
+        "payload": "{'params': {'q': '../../etc/passwd'}, '__family__': 'generic'}",
+        "response_hash": "f2d54a79cdd6a130205961928ec9d8f18d0a2bdc375c60f2de7f35dbf42f6809",
+        "cluster_id": 200,
+        "confidence": 0,
+        "timestamp": 1775210526.018281
+      },
+      {
+        "payload": "{'params': {'q': '/etc/passwd'}, '__family__': 'generic'}",
+        "response_hash": "8d10a16664ac20f08f1f5ea89394d5b35d1289ce026ed4fd97a0807b5a97a2bd",
+        "cluster_id": 200,
+        "confidence": 0,
+        "timestamp": 1775210526.0690727
+      },
+      {
+        "payload": "{'params': {'q': '; uname -a'}, '__family__': 'generic'}",
+        "response_hash": "280a0c46a9d6f2e534f75d8d8a48d3ad1a6fe9bd01e05b9f57a5dacdbd6d184a",
+        "cluster_id": 200,
+        "confidence": 0,
+        "timestamp": 1775210526.0998297
+      },
+      {
+        "payload": "{'params': {'q': '&& ls'}, '__family__': 'generic'}",
+        "response_hash": "9f26f18e7931014f38f7abc7d18fa56814016d258a2c28430754105b992f8425",
+        "cluster_id": 200,
+        "confidence": 0,
+        "timestamp": 1775210526.135328
+      },
+      {
+        "payload": "{'params': {'q': '&& ping -c 1 127.0.0.1'}, '__family__': 'generic'}",
+        "response_hash": "2a43461ad707ab25db9dc0a773f232db2d205878fc2083fa193579081513a939",
+        "cluster_id": 200,
+        "confidence": 0,
+        "timestamp": 1775210526.1613522
+      },
+      {
+        "payload": "{'params': {'q': '../../../etc/passwd'}, '__family__': 'generic'}",
+        "response_hash": "cca99e0e8019b4d0743fdeee56ab212351e43681d9aa827a17db9f9a7282379f",
+        "cluster_id": 200,
+        "confidence": 0,
+        "timestamp": 1775210526.1881242
+      },
+      {
+        "payload": "{'headers': {'Authorization': 'Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJub25lIn0.eyJ1c2VyX2lkIjoxLCJyb2xlIjoiYWRtaW4iLCJleHAiOjE3NzUyMTQxMjN9.'}, '__family__': 'auth_jwt'}",
+        "response_hash": "57798101ad6471d6990727803143df19d4601b96e896389ad30dba04e4b4da73",
+        "cluster_id": 200,
+        "confidence": 0,
+        "timestamp": 1775210526.232489
+      },
+      {
+        "payload": "{'params': {'q': \"' OR '1'='1\"}, '__family__': 'generic'}",
+        "response_hash": "f989ea045f054a3765ef5efc0955362883106c16581ccb7888dcffd2d81981cd",
+        "cluster_id": 200,
+        "confidence": 0,
+        "timestamp": 1775210933.6409826
+      },
+      {
+        "payload": "{'params': {'q': \"<math href='javascript:alert(1)>\"}, '__family__': 'generic'}",
+        "response_hash": "a0c588fb0cb9e1befa1a0aea2d082757e6e817808d626a1be35b65c502d03a77",
+        "cluster_id": 200,
+        "confidence": 0,
+        "timestamp": 1775210933.6729841
+      },
+      {
+        "payload": "{'params': {'q': '<body onload=alert(1)>'}, '__family__': 'generic'}",
+        "response_hash": "6822cdb9c34c8274b3826da3e0f241d63ee1bc8e63356eea24a0010bf01f2c81",
+        "cluster_id": 200,
+        "confidence": 0,
+        "timestamp": 1775210933.7000499
+      },
+      {
+        "payload": "{'params': {'q': \"' OR 'admin'='admin\"}, '__family__': 'generic'}",
+        "response_hash": "072e0016dac0fc9f4378b6714cf0e2b5bc896f9a311bd8f1fc3d8cf9b1aa2e90",
+        "cluster_id": 200,
+        "confidence": 0,
+        "timestamp": 1775210933.7271955
+      },
+      {
+        "payload": "{'params': {'q': \"' OR 'a'='a\"}, '__family__': 'generic'}",
+        "response_hash": "907983808fc1930e00902b62f64463be70b47e5bba369cac49cb90675ded2c02",
+        "cluster_id": 200,
+        "confidence": 0,
+        "timestamp": 1775210933.774851
+      },
+      {
+        "payload": "{'params': {'q': \"' OR 1=1#\"}, '__family__': 'generic'}",
+        "response_hash": "fa8af266464d72664666396615403538e4683332ad13867abb5ed7388f510d76",
+        "cluster_id": 200,
+        "confidence": 0,
+        "timestamp": 1775210933.8487756
+      },
+      {
+        "payload": "{'params': {'q': '..%2f..%2f..%2fetc%2fpasswd'}, '__family__': 'generic'}",
+        "response_hash": "b08d121ec1e65262b6b7f4213c311c97c2a6bdeaafa90183e5c647f3cea13714",
+        "cluster_id": 200,
+        "confidence": 0,
+        "timestamp": 1775210933.884313
+      },
+      {
+        "payload": "{'params': {'q': '; ls'}, '__family__': 'generic'}",
+        "response_hash": "f977302908b7493b1917f33b1cbe92456129bf7f578c5691c33c3f07995ba6f1",
+        "cluster_id": 200,
+        "confidence": 0,
+        "timestamp": 1775210933.915502
+      },
+      {
+        "payload": "{'params': {'q': 'admin'}, '__family__': 'generic'}",
+        "response_hash": "ff33afb00c12839e0877659e3c7c638ce939c29b6df4dc18ac9d10cda416f39d",
+        "cluster_id": 200,
+        "confidence": 0,
+        "timestamp": 1775211261.347289
+      },
+      {
+        "payload": "{'params': {'q': '; cat /etc/passwd'}, '__family__': 'generic'}",
+        "response_hash": "22a7898a4236f448188e02b767a463cf05d5541989efce82b46888a089b7af94",
+        "cluster_id": 200,
+        "confidence": 0,
+        "timestamp": 1775211261.3751476
+      },
+      {
+        "payload": "{'params': {'q': '<svg/onload=alert(1)>'}, '__family__': 'generic'}",
+        "response_hash": "de7dce2394a95b08be8464e8716bf1534dde80881e449fa6cc04f14121bdae73",
+        "cluster_id": 200,
+        "confidence": 0,
+        "timestamp": 1775211261.443361
+      },
+      {
+        "payload": "{'params': {'q': '<details open ontoggle=alert(1)>'}, '__family__': 'generic'}",
+        "response_hash": "e5ed59eb42e5c2c89401f7290cb42d13687debe01ce07a23493dec18b5353ed8",
+        "cluster_id": 200,
+        "confidence": 0,
+        "timestamp": 1775211261.5306568
+      },
+      {
+        "payload": "{'params': {'q': 'null'}, '__family__': 'generic'}",
+        "response_hash": "77d26dbec6b245d33137065000be62a49361df1ef5a962a0850d4da073a9ef34",
+        "cluster_id": 200,
+        "confidence": 0,
+        "timestamp": 1775294541.3221734
+      },
+      {
+        "payload": "{'params': {'q': '..\\\\..\\\\..\\\\windows\\\\win.ini'}, '__family__': 'generic'}",
+        "response_hash": "8b0e962b98cfe4d15e3a10b51246bcc2dfa733c6ce820fff0c2300d592047bad",
+        "cluster_id": 200,
+        "confidence": 0,
+        "timestamp": 1775294541.3784394
+      },
+      {
+        "payload": "{'params': {'q': 'administrator'}, '__family__': 'generic'}",
+        "response_hash": "007fd69beaf7d36548f12ce46543032c9331b0041342ed5951baeb4a24fcaf31",
+        "cluster_id": 200,
+        "confidence": 0,
+        "timestamp": 1775294541.414853
+      },
+      {
+        "payload": "{'params': {'q': '../../../../../../etc/shadow'}, '__family__': 'generic'}",
+        "response_hash": "f078232294e8c3a2d976d7e47097eeac3a2260aa37f27421b2d9f25a9bc07fc5",
+        "cluster_id": 200,
+        "confidence": 0,
+        "timestamp": 1775294541.451554
+      },
+      {
+        "payload": "{'params': {'q': '&& whoami'}, '__family__': 'generic'}",
+        "response_hash": "984fd52a65c1192827f8b90a99d268c98fd34d4b33836581dce00f51167ac8c2",
+        "cluster_id": 200,
+        "confidence": 0,
+        "timestamp": 1775294541.487998
+      },
+      {
+        "payload": "{'params': {'q': \"' OR 1=1--\"}, '__family__': 'generic'}",
+        "response_hash": "eed441205b9be01cf47a1bf93d091eb8e4c1f164a9b941df67e6e352865eda67",
+        "cluster_id": 200,
+        "confidence": 0,
+        "timestamp": 1775294541.5606263
+      },
+      {
+        "payload": "{'params': {'q': '| id'}, '__family__': 'generic'}",
+        "response_hash": "07800106ab66908fe843a2396e02f8d1f0d6af20f0c54d120639538087b06115",
+        "cluster_id": 200,
+        "confidence": 0,
+        "timestamp": 1775294690.3447423
+      },
+      {
+        "payload": "{'params': {'q': '<img src=x onerror=alert(1)>'}, '__family__': 'generic'}",
+        "response_hash": "9f977a3f7e450dbc7154eb85960c9c50b6b72e224124ce075b0b0887d152ff83",
+        "cluster_id": 200,
+        "confidence": 0,
+        "timestamp": 1775294690.3714871
+      },
+      {
+        "payload": "{'params': {'q': '1'}, '__family__': 'generic'}",
+        "response_hash": "b019bba83686769f48a20242428f8c5a6a55b84c8ebb766953ec5bd668053a58",
+        "cluster_id": 200,
+        "confidence": 0,
+        "timestamp": 1775294690.396331
+      },
+      {
+        "payload": "{'params': {'q': '<iframe src=javascript:alert(1)>'}, '__family__': 'generic'}",
+        "response_hash": "4dd877c085e1a8e854ce5a257335d2d1d0bee67d463a21fde9b012259924bff6",
+        "cluster_id": 200,
+        "confidence": 0,
+        "timestamp": 1775294743.1135106
+      },
+      {
+        "payload": "{'params': {'q': '/proc/self/environ'}, '__family__': 'generic'}",
+        "response_hash": "c001a2823bba67c6c6a1fac7a8fa15aa8b5c09257d5be25bfae45de896b722c4",
+        "cluster_id": 200,
+        "confidence": 0,
+        "timestamp": 1775294743.2083974
+      },
+      {
+        "payload": "{'params': {'q': 'true'}, '__family__': 'generic'}",
+        "response_hash": "643c05da4ccc22e9ebbf8f217208fae67140d3090fc4c7286c596b119453bda3",
+        "cluster_id": 200,
+        "confidence": 0,
+        "timestamp": 1775294798.26516
+      },
+      {
+        "payload": "{'params': {'q': '<script>alert(1)</script>'}, '__family__': 'generic'}",
+        "response_hash": "3cc3db305e15cfa0eb61bc45dfdb59aaa795d38ed896fbeacc8e8f11a0713450",
+        "cluster_id": 200,
+        "confidence": 0,
+        "timestamp": 1775294798.2962368
+      }
+    ],
+    "POST::/api/register": [
+      {
+        "payload": "{'headers': {'Authorization': 'Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJub25lIn0.eyJ1c2VyX2lkIjoxLCJyb2xlIjoiYWRtaW4iLCJleHAiOjE3NzUyMTMzMDR9.'}, '__family__': 'auth_jwt'}",
+        "response_hash": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "cluster_id": null,
+        "confidence": 0,
+        "timestamp": 1775209704.7901173
+      },
+      {
+        "payload": "{'headers': {'Authorization': 'Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJub25lIn0.eyJ1c2VyX2lkIjoxLCJyb2xlIjoiYWRtaW4iLCJleHAiOjE3NzUyMTQxMjN9.'}, '__family__': 'auth_jwt'}",
+        "response_hash": "c5e601bead1d3de340b662152d1cdf8770e0bd13791422b20d1a36640f62bf6e",
+        "cluster_id": 404,
+        "confidence": 0,
+        "timestamp": 1775210523.88907
+      }
+    ],
+    "POST::/api/refresh": [
+      {
+        "payload": "{'headers': {'Authorization': 'Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJub25lIn0.eyJ1c2VyX2lkIjoxLCJyb2xlIjoiYWRtaW4iLCJleHAiOjE3NzUyMTMzMDR9.'}, '__family__': 'auth_jwt'}",
+        "response_hash": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "cluster_id": null,
+        "confidence": 0,
+        "timestamp": 1775209705.2752326
+      },
+      {
+        "payload": "{'headers': {'Authorization': 'Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJub25lIn0.eyJ1c2VyX2lkIjoxLCJyb2xlIjoiYWRtaW4iLCJleHAiOjE3NzUyMTQxMjN9.'}, '__family__': 'auth_jwt'}",
+        "response_hash": "747526aeed26fa5642bb0b0f2652412f3145735f6f6dca179c45d7c31baee9ba",
+        "cluster_id": 404,
+        "confidence": 0,
+        "timestamp": 1775210524.3106363
+      }
+    ],
+    "POST::/api/upload": [
+      {
+        "payload": "{'headers': {'Authorization': 'Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJub25lIn0.eyJ1c2VyX2lkIjoxLCJyb2xlIjoiYWRtaW4iLCJleHAiOjE3NzUyMTMzMDR9.'}, '__family__': 'auth_jwt'}",
+        "response_hash": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "cluster_id": null,
+        "confidence": 0,
+        "timestamp": 1775209705.7166376
+      },
+      {
+        "payload": "{'headers': {'Authorization': 'Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJub25lIn0.eyJ1c2VyX2lkIjoxLCJyb2xlIjoiYWRtaW4iLCJleHAiOjE3NzUyMTQxMjN9.'}, '__family__': 'auth_jwt'}",
+        "response_hash": "42f761bd31a0f70cbf8fb367840969fd329de972ebe31fa4419c31434940512a",
+        "cluster_id": 404,
+        "confidence": 0,
+        "timestamp": 1775210524.6974597
+      }
+    ],
+    "GET::/api/admin": [
+      {
+        "payload": "{'headers': {'Authorization': 'Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJub25lIn0.eyJ1c2VyX2lkIjoxLCJyb2xlIjoiYWRtaW4iLCJleHAiOjE3NzUyMTMzMDR9.'}, '__family__': 'auth_jwt'}",
+        "response_hash": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "cluster_id": null,
+        "confidence": 0,
+        "timestamp": 1775209706.77791
+      },
+      {
+        "payload": "{'headers': {'Authorization': 'Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJub25lIn0.eyJ1c2VyX2lkIjoxLCJyb2xlIjoiYWRtaW4iLCJleHAiOjE3NzUyMTQxMjN9.'}, '__family__': 'auth_jwt'}",
+        "response_hash": "998cafa85925140415d88675427afbe0d1daf7e18145325e555dc6ce593624d8",
+        "cluster_id": 404,
+        "confidence": 0,
+        "timestamp": 1775210525.7135675
       }
     ]
   },
