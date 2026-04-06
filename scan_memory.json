@@ -509,7 +509,7 @@
         "has_json": false
       },
       "first_seen": 1775120445.274336,
-      "scan_count": 38,
+      "scan_count": 44,
       "suspicious": false
     },
     "POST::/api/update": {
@@ -517,7 +517,7 @@
         "has_json": false
       },
       "first_seen": 1775120470.440643,
-      "scan_count": 37,
+      "scan_count": 43,
       "suspicious": false
     },
     "POST::/api/exec": {
@@ -525,7 +525,7 @@
         "has_json": false
       },
       "first_seen": 1775120495.7529597,
-      "scan_count": 37,
+      "scan_count": 43,
       "suspicious": false
     },
     "GET::/api/users": {
@@ -541,7 +541,7 @@
         "has_json": false
       },
       "first_seen": 1775120546.2358134,
-      "scan_count": 37,
+      "scan_count": 43,
       "suspicious": false
     },
     "GET::/api/search": {
@@ -549,7 +549,7 @@
         "has_json": false
       },
       "first_seen": 1775120571.6057417,
-      "scan_count": 37,
+      "scan_count": 43,
       "suspicious": false
     },
     "POST::/api/register": {
@@ -581,7 +581,7 @@
         "has_json": false
       },
       "first_seen": 1775209706.7387412,
-      "scan_count": 18,
+      "scan_count": 24,
       "suspicious": false
     },
     "GET::/api/debug": {
@@ -589,7 +589,7 @@
         "has_json": false
       },
       "first_seen": 1775467917.3143191,
-      "scan_count": 2,
+      "scan_count": 8,
       "suspicious": false
     }
   },
@@ -1724,6 +1724,13 @@
         "cluster_id": 200,
         "confidence": 0,
         "timestamp": 1775463845.6751657
+      },
+      {
+        "payload": "{'params': {'q': \"'; DROP TABLE users--\"}, '__family__': 'generic'}",
+        "response_hash": "2c7f44786c2319c7e5e2e925a28f13d97302feaa938d68441b6de9d197a81618",
+        "cluster_id": 200,
+        "confidence": 0,
+        "timestamp": 1775468172.6540294
       }
     ],
     "POST::/api/register": [
@@ -1801,5 +1808,6 @@
     ]
   },
   "clusters": {},
-  "vulnerabilities": {}
+  "vulnerabilities": {},
+  "global": {}
 }

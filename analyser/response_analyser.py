@@ -1,11 +1,9 @@
 import re
-import hashlib
 import math
 from typing import Dict, List, Any
 from colorama import Fore, Style
 
 from analyser.vulnerability_rules import VulnerabilityRules
-from detectors.authorisztion_detector import AuthorizationDetector
 
 
 class ResponseAnalyzer:
@@ -35,14 +33,11 @@ class ResponseAnalyzer:
     }
 
     SENSITIVE_FIELD_PATTERNS = [
-        r"pass",
+        r"password",
         r"token",
         r"secret",
-        r"key",
-        r"auth",
-        r"admin",
-        r"role",
-        r"ssn",
+        r"api[_-]?key",
+        r"authorization",
     ]
 
     DANGEROUS_HEADERS = {
@@ -55,7 +50,6 @@ class ResponseAnalyzer:
     def __init__(self):
 
         self.vulnerabilities: List[Dict[str, Any]] = []
-        self.auth_detector = AuthorizationDetector()
 
         self.compiled_patterns = {
             t: [re.compile(p, re.IGNORECASE) for p in plist]
@@ -90,21 +84,6 @@ class ResponseAnalyzer:
 
         return entropy
 
-    def _flatten_json_keys(self, obj, prefix=""):
-        keys = []
-
-        if isinstance(obj, dict):
-            for k, v in obj.items():
-                full = f"{prefix}.{k}" if prefix else k
-                keys.append(full)
-                keys += self._flatten_json_keys(v, full)
-
-        elif isinstance(obj, list):
-            for item in obj:
-                keys += self._flatten_json_keys(item, prefix)
-
-        return keys
-
     # -----------------------------
     # Baseline
     # -----------------------------
@@ -118,13 +97,35 @@ class ResponseAnalyzer:
             self.endpoint_baselines[endpoint_key] = {
                 "sizes": [],
                 "samples": [],
+                "status_codes": []
             }
 
         baseline = self.endpoint_baselines[endpoint_key]
 
         if len(baseline["sizes"]) < 5:
             baseline["sizes"].append(size)
-            baseline["samples"].append(body[:500])
+            baseline["samples"].append(body[:300])
+            baseline["status_codes"].append(result.get("status_code"))
+
+    def _is_deviation(self, endpoint_key, result):
+        baseline = self.endpoint_baselines.get(endpoint_key)
+
+        if not baseline:
+            return False
+
+        body = result.get("response_body", "")[:300]
+        status = result.get("status_code")
+
+        # Status change
+        if status not in baseline["status_codes"]:
+            return True
+
+        # Body mismatch
+        for sample in baseline["samples"]:
+            if sample == body:
+                return False
+
+        return True
 
     # -----------------------------
     # MAIN ANALYSIS
@@ -132,22 +133,22 @@ class ResponseAnalyzer:
 
     def analyze_result(self, result: Dict[str, Any]) -> Dict[str, Any]:
 
-        endpoint_key = f"{result.get('url')}_{result.get('method','')}"
+        endpoint_key = f"{result.get('method')}:{result.get('endpoint')}"
 
         findings = []
 
         status_code = result.get("status_code", 0)
         body = result.get("response_body", "")
         headers = result.get("response_headers", {})
-        payload = str(result.get("payload", ""))
+        payload = str(result.get("payload", "")).lower()
 
         # -----------------------------
-        # 1. PAYLOAD REFLECTION (CRITICAL)
+        # 1. PAYLOAD REFLECTION
         # -----------------------------
-        if payload and payload.lower() in body.lower():
+        if payload and payload in body.lower():
             findings.append({
-                "type": "Payload Reflection (Possible XSS / Injection)",
-                "severity": "CRITICAL"
+                "type": "Payload Reflection",
+                "severity": "HIGH"
             })
 
         # -----------------------------
@@ -157,30 +158,31 @@ class ResponseAnalyzer:
             for pattern in patterns:
                 if pattern.search(body):
                     findings.append({
-                        "type": f"{error_type}",
+                        "type": error_type,
                         "severity": "CRITICAL"
                     })
                     break
 
         # -----------------------------
-        # 3. STATUS ANOMALY
+        # 3. SERVER ERROR
         # -----------------------------
         if status_code >= 500:
             findings.append({
-                "type": "Server Crash / Error Triggered",
+                "type": "Server Error Triggered",
                 "severity": "HIGH"
             })
 
         # -----------------------------
-        # 4. SENSITIVE DATA
+        # 4. SENSITIVE DATA (LESS DUMB NOW)
         # -----------------------------
-        for pattern in self.compiled_sensitive:
-            if pattern.search(body):
-                findings.append({
-                    "type": "Sensitive Data Exposure",
-                    "severity": "HIGH"
-                })
-                break
+        if status_code == 200:
+            for pattern in self.compiled_sensitive:
+                if pattern.search(body):
+                    findings.append({
+                        "type": "Sensitive Data Exposure",
+                        "severity": "HIGH"
+                    })
+                    break
 
         # -----------------------------
         # 5. HEADER LEAK
@@ -193,44 +195,50 @@ class ResponseAnalyzer:
                 })
 
         # -----------------------------
-        # 6. BASELINE DIFFERENCE (REAL ONE)
+        # 6. RESPONSE DEVIATION (FIXED)
         # -----------------------------
-        if endpoint_key in self.endpoint_baselines:
-
-            baseline = self.endpoint_baselines[endpoint_key]
-
-            for sample in baseline["samples"]:
-                if sample != body[:500]:
-                    findings.append({
-                        "type": "Response Deviation",
-                        "severity": "MEDIUM"
-                    })
-                    break
-
-        # -----------------------------
-        # 7. ENTROPY SPIKE
-        # -----------------------------
-        if self._entropy(body) > 5:
+        if self._is_deviation(endpoint_key, result):
             findings.append({
-                "type": "High Entropy Response (Possible Leak)",
+                "type": "Behavior Change Detected",
                 "severity": "MEDIUM"
             })
 
         # -----------------------------
-        # 8. EXTERNAL RULES
+        # 7. ENTROPY CHECK
+        # -----------------------------
+        if self._entropy(body) > 5.5:
+            findings.append({
+                "type": "High Entropy Response",
+                "severity": "MEDIUM"
+            })
+
+        # -----------------------------
+        # 8. AUTH-SPECIFIC SIGNALS (NEW)
+        # -----------------------------
+        if status_code == 200 and "unauthorized" in body.lower():
+            findings.append({
+                "type": "Broken Auth Logic",
+                "severity": "HIGH"
+            })
+
+        if status_code == 200 and "admin" in body.lower():
+            findings.append({
+                "type": "Possible Privilege Escalation",
+                "severity": "HIGH"
+            })
+
+        # -----------------------------
+        # 9. EXTERNAL RULES
         # -----------------------------
         findings.extend(VulnerabilityRules.run_all(result))
 
         # -----------------------------
-        # FINAL DECISION (AGGRESSIVE)
+        # FINAL DECISION
         # -----------------------------
         if findings:
-
             result["vulnerability_detected"] = True
             result["vulnerabilities"] = findings
-
             self.vulnerabilities.append(result)
-
         else:
             result["vulnerability_detected"] = False
 

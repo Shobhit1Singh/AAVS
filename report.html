@@ -48,26 +48,8 @@
     <body>
 
     <h1>🚨 AAVS Vulnerability Report</h1>
-    <h3>Total Findings: 1</h3>
+    <h3>Total Findings: 0</h3>
     
-        <div class="card">
-            <div class="severity" style="background:#4da6ff;">
-                LOW
-            </div>
-
-            <div class="endpoint">
-                GET /api/search
-            </div>
-
-            <p><b>Issue:</b> XSS</p>
-
-            <p><b>Payload:</b></p>
-            <pre>{'params': {'q': '"><script>alert(1)</script>'}, '__family__': 'generic'}</pre>
-
-            <p><b>Response:</b></p>
-            <pre>{'status_code': 200, 'response_body': 'results for: "><script>alert(1)</script>', 'response_headers': {'x-powered-by': 'express', 'content-type': 'text/html; charset=utf-8', 'content-length': '40', 'e</pre>
-        </div>
-        
     </body>
     </html>
     
