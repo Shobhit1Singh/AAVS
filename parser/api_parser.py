@@ -105,7 +105,8 @@ class APIParser:
                         "method": method.upper(),
                         "params": params,
                         "raw_parameters": details.get("parameters", []),
-                        "request_body": details.get("requestBody", {})
+                        "request_body": details.get("requestBody", {}),
+                        "security": details.get("security", [])
                     })
 
         self.endpoints = endpoints

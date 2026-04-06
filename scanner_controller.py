@@ -3,7 +3,7 @@ import os
 import json
 import argparse
 from colorama import Fore, Style
-
+from report_generator import generate_html_report
 from parser.parser_factory import ParserFactory
 from core.Severity_engine import SeverityEngine
 
@@ -133,15 +133,17 @@ async def run_scan_async(
         for payload in final_payloads:
 
             try:
+                # ✅ Inject token BEFORE request (stateful auth)
+                payload = auth_engine.inject_token(payload)
+
                 result = await execution_engine.execute(endpoint, payload)
-
-                if "/login" in path:
-                    auth_engine.extract_token(result)
-
-                    auth_findings = auth_engine.process(endpoint, payload, result, baseline)
 
                 if not result:
                     continue
+
+                # ✅ Extract token AFTER login response
+                if "/login" in path:
+                    auth_engine.extract_token(result)
 
                 # DEBUG
                 print("\n--- DEBUG ---")
@@ -177,6 +179,19 @@ async def run_scan_async(
                         "response": response_text[:200]
                     })
 
+                # ✅ AUTH FINDINGS (this was missing properly)
+                auth_findings = auth_engine.process(endpoint, payload, result, memory)
+
+                for af in auth_findings:
+                    findings.append({
+                        "endpoint": path,
+                        "method": method,
+                        "payload": payload,
+                        "reason": af["type"],
+                        "severity": af["severity"],
+                        "response": str(result)[:200]
+                    })
+
                 intelligence.process(
                     endpoint,
                     payload,
@@ -184,7 +199,6 @@ async def run_scan_async(
                     result
                 )
 
-                # ✅ SEVERITY ENGINE HOOK (this is what you forgot)
                 if result.get("vulnerability_detected"):
                     severity_engine.process(result)
 
@@ -203,7 +217,6 @@ async def run_scan_async(
     for f in findings:
         print(json.dumps(f, indent=2))
 
-    # ✅ FINAL RISK RANKING OUTPUT
     severity_engine.print_ranking()
 
     return findings
@@ -271,3 +284,4 @@ if __name__ == "__main__":
 
     for f in findings:
         print(json.dumps(f, indent=2))
+generate_html_report(findings)        

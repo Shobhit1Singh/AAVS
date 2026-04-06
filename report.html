@@ -1,0 +1,73 @@
+
+    <html>
+    <head>
+        <title>AAVS Scan Report</title>
+        <style>
+            body {
+                font-family: Arial, sans-serif;
+                background: #0f172a;
+                color: #e2e8f0;
+                margin: 0;
+                padding: 20px;
+            }
+            h1 {
+                text-align: center;
+                color: #38bdf8;
+            }
+            .card {
+                background: #1e293b;
+                padding: 15px;
+                margin: 15px 0;
+                border-radius: 10px;
+                box-shadow: 0 0 10px rgba(0,0,0,0.5);
+            }
+            .severity {
+                font-weight: bold;
+                padding: 5px 10px;
+                border-radius: 5px;
+                display: inline-block;
+                margin-bottom: 10px;
+            }
+            .endpoint {
+                font-size: 18px;
+                color: #22c55e;
+            }
+            .method {
+                font-weight: bold;
+                color: #facc15;
+            }
+            pre {
+                background: #020617;
+                padding: 10px;
+                border-radius: 5px;
+                overflow-x: auto;
+                font-size: 12px;
+            }
+        </style>
+    </head>
+    <body>
+
+    <h1>🚨 AAVS Vulnerability Report</h1>
+    <h3>Total Findings: 1</h3>
+    
+        <div class="card">
+            <div class="severity" style="background:#4da6ff;">
+                LOW
+            </div>
+
+            <div class="endpoint">
+                GET /api/search
+            </div>
+
+            <p><b>Issue:</b> XSS</p>
+
+            <p><b>Payload:</b></p>
+            <pre>{'params': {'q': '"><script>alert(1)</script>'}, '__family__': 'generic'}</pre>
+
+            <p><b>Response:</b></p>
+            <pre>{'status_code': 200, 'response_body': 'results for: "><script>alert(1)</script>', 'response_headers': {'x-powered-by': 'express', 'content-type': 'text/html; charset=utf-8', 'content-length': '40', 'e</pre>
+        </div>
+        
+    </body>
+    </html>
+    

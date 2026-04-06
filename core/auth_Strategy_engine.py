@@ -6,17 +6,35 @@ class AuthStrategyEngine:
 
     def __init__(self, auth_attacker):
         self.auth_attacker = auth_attacker
+        self.current_token = None
 
+    # -------------------------
+    # TOKEN EXTRACTION (STATEFUL CORE)
+    # -------------------------
+    def extract_token(self, result):
+        try:
+            body = result.get("response_body", "")
+            data = json.loads(body)
+
+            token = data.get("token") or data.get("access_token")
+
+            if token:
+                self.current_token = token
+
+        except Exception:
+            pass
+
+    # -------------------------
+    # JWT TAMPERING
+    # -------------------------
     def _tamper_jwt(self, token):
         try:
             parts = token.split(".")
             if len(parts) != 3:
                 return token
 
-            header = json.loads(base64.urlsafe_b64decode(parts[0] + "=="))
             payload = json.loads(base64.urlsafe_b64decode(parts[1] + "=="))
 
-            # 🔥 escalate privileges
             payload["role"] = "admin"
             payload["isAdmin"] = True
 
@@ -24,33 +42,40 @@ class AuthStrategyEngine:
                 json.dumps(payload).encode()
             ).decode().rstrip("=")
 
-            # keep original signature (broken validation test)
             return f"{parts[0]}.{new_payload}.{parts[2]}"
 
         except Exception:
             return token
 
+    # -------------------------
+    # AUTH PAYLOADS
+    # -------------------------
     def get_auth_payloads(self):
         return [
-            {"headers": {}},  # no auth
+            {"headers": {}},
 
             {"headers": {"Authorization": "Bearer invalid.token.here"}},
-
             {"headers": {"Authorization": "Bearer null"}},
+            {"headers": {"Authorization": "Bearer "}},
 
-            {"headers": {"Authorization": "Bearer "}},  # empty token
-
-            # common weak tokens
             {"headers": {"Authorization": "Bearer admin"}},
             {"headers": {"Authorization": "Bearer user"}},
 
-            # tampered JWT (if scanner captures real token later)
             {"__tamper_jwt__": True},
         ]
 
-    def inject_token(self, payload, token):
-        if not token:
+    # -------------------------
+    # TOKEN INJECTION (STATEFUL)
+    # -------------------------
+    def inject_token(self, payload):
+        if not self.current_token:
             return payload
+
+        # handle tamper flag
+        if payload.get("__tamper_jwt__"):
+            token = self._tamper_jwt(self.current_token)
+        else:
+            token = self.current_token
 
         headers = payload.get("headers", {})
         headers["Authorization"] = f"Bearer {token}"
@@ -58,17 +83,26 @@ class AuthStrategyEngine:
 
         return payload
 
+    # -------------------------
+    # AUTH ANALYSIS
+    # -------------------------
     def process(self, endpoint, payload, result, memory):
+        requires_auth = bool(endpoint.get("security"))
+        if not requires_auth:
+            return []
 
         findings = []
 
         status = result.get("status_code", 0)
         body = str(result.get("response_body", "")).lower()
 
+        headers = payload.get("headers", {})
+        auth_header = headers.get("Authorization", "")
+
         # -------------------------
         # 1. NO AUTH BUT ACCESS
         # -------------------------
-        if not payload.get("headers") and status == 200:
+        if not headers and status == 200:
             findings.append({
                 "type": "Auth Bypass (No Token Required)",
                 "severity": "CRITICAL"
@@ -77,8 +111,6 @@ class AuthStrategyEngine:
         # -------------------------
         # 2. INVALID TOKEN ACCEPTED
         # -------------------------
-        auth_header = payload.get("headers", {}).get("Authorization", "")
-
         if "invalid" in auth_header and status == 200:
             findings.append({
                 "type": "Auth Bypass (Invalid Token Accepted)",
@@ -86,7 +118,16 @@ class AuthStrategyEngine:
             })
 
         # -------------------------
-        # 3. ROLE ESCALATION
+        # 3. TAMPERED TOKEN ACCEPTED
+        # -------------------------
+        if payload.get("__tamper_jwt__") and status == 200:
+            findings.append({
+                "type": "JWT Tampering Accepted",
+                "severity": "CRITICAL"
+            })
+
+        # -------------------------
+        # 4. ROLE ESCALATION
         # -------------------------
         if "admin" in body and status == 200:
             findings.append({
@@ -95,7 +136,7 @@ class AuthStrategyEngine:
             })
 
         # -------------------------
-        # 4. TOKEN LEAK
+        # 5. TOKEN LEAK
         # -------------------------
         if "token" in body or "jwt" in body:
             findings.append({
@@ -104,7 +145,7 @@ class AuthStrategyEngine:
             })
 
         # -------------------------
-        # 5. WEAK AUTH RESPONSE
+        # 6. BROKEN AUTH LOGIC
         # -------------------------
         if status == 200 and "unauthorized" in body:
             findings.append({

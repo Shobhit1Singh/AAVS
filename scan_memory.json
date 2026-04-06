@@ -509,7 +509,7 @@
         "has_json": false
       },
       "first_seen": 1775120445.274336,
-      "scan_count": 30,
+      "scan_count": 38,
       "suspicious": false
     },
     "POST::/api/update": {
@@ -517,7 +517,7 @@
         "has_json": false
       },
       "first_seen": 1775120470.440643,
-      "scan_count": 29,
+      "scan_count": 37,
       "suspicious": false
     },
     "POST::/api/exec": {
@@ -525,7 +525,7 @@
         "has_json": false
       },
       "first_seen": 1775120495.7529597,
-      "scan_count": 29,
+      "scan_count": 37,
       "suspicious": false
     },
     "GET::/api/users": {
@@ -533,7 +533,7 @@
         "has_json": false
       },
       "first_seen": 1775120521.0850008,
-      "scan_count": 29,
+      "scan_count": 35,
       "suspicious": false
     },
     "GET::/api/user/{id}": {
@@ -541,7 +541,7 @@
         "has_json": false
       },
       "first_seen": 1775120546.2358134,
-      "scan_count": 29,
+      "scan_count": 37,
       "suspicious": false
     },
     "GET::/api/search": {
@@ -549,7 +549,7 @@
         "has_json": false
       },
       "first_seen": 1775120571.6057417,
-      "scan_count": 29,
+      "scan_count": 37,
       "suspicious": false
     },
     "POST::/api/register": {
@@ -557,7 +557,7 @@
         "has_json": false
       },
       "first_seen": 1775209704.7330592,
-      "scan_count": 11,
+      "scan_count": 17,
       "suspicious": false
     },
     "POST::/api/refresh": {
@@ -565,7 +565,7 @@
         "has_json": false
       },
       "first_seen": 1775209705.2454872,
-      "scan_count": 11,
+      "scan_count": 17,
       "suspicious": false
     },
     "POST::/api/upload": {
@@ -573,7 +573,7 @@
         "has_json": false
       },
       "first_seen": 1775209705.673375,
-      "scan_count": 10,
+      "scan_count": 16,
       "suspicious": false
     },
     "GET::/api/admin": {
@@ -581,7 +581,15 @@
         "has_json": false
       },
       "first_seen": 1775209706.7387412,
-      "scan_count": 10,
+      "scan_count": 18,
+      "suspicious": false
+    },
+    "GET::/api/debug": {
+      "profile": {
+        "has_json": false
+      },
+      "first_seen": 1775467917.3143191,
+      "scan_count": 2,
       "suspicious": false
     }
   },
@@ -1702,6 +1710,20 @@
         "cluster_id": 200,
         "confidence": 0,
         "timestamp": 1775294798.2962368
+      },
+      {
+        "payload": "{'params': {'q': '\"><script>alert(1)</script>'}, '__family__': 'generic'}",
+        "response_hash": "db205ba029bb48998143d1c1ee730af48cb533f9fde440f4eab229740df21580",
+        "cluster_id": 200,
+        "confidence": 0,
+        "timestamp": 1775463845.6557596
+      },
+      {
+        "payload": "{'params': {'q': \"' OR 1=1/*\"}, '__family__': 'generic'}",
+        "response_hash": "504c2f889f23d954813680bab490009ddf141ac1d22ef95ef7a1912b8eb9cf4f",
+        "cluster_id": 200,
+        "confidence": 0,
+        "timestamp": 1775463845.6751657
       }
     ],
     "POST::/api/register": [
@@ -1766,6 +1788,15 @@
         "cluster_id": 404,
         "confidence": 0,
         "timestamp": 1775210525.7135675
+      }
+    ],
+    "GET::/api/debug": [
+      {
+        "payload": "{'headers': {}}",
+        "response_hash": "4773b2ca9ca2222e64a2acfbdd85a08e97782714522a5e68413f51bf46c7f4ec",
+        "cluster_id": 404,
+        "confidence": 0,
+        "timestamp": 1775467917.3540678
       }
     ]
   },
