@@ -1,0 +1,199 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "Intentionally Vulnerable API",
+    "version": "1.0.0"
+  },
+  "servers": [
+    {
+      "url": "http://localhost:3000"
+    }
+  ],
+  "components": {
+    "securitySchemes": {
+      "BearerAuth": {
+        "type": "http",
+        "scheme": "bearer",
+        "bearerFormat": "JWT"
+      }
+    }
+  },
+  "paths": {
+    "/login": {
+      "post": {
+        "summary": "Weak login returning predictable JWT",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "username": { "type": "string" },
+                  "password": { "type": "string" }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Always returns token (even if creds wrong)",
+            "content": {
+              "application/json": {
+                "example": {
+                  "token": "fake.jwt.token.with.admin=true"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Used for invalid credentials instead of 401"
+          }
+        }
+      }
+    },
+
+    "/user/{id}": {
+      "get": {
+        "summary": "IDOR - access any user by ID",
+        "security": [
+          { "BearerAuth": [] }
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": { "type": "integer" }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Returns full user data without ownership check",
+            "content": {
+              "application/json": {
+                "example": {
+                  "id": 2,
+                  "username": "victim",
+                  "email": "victim@email.com",
+                  "password": "plaintext123",
+                  "ssn": "123-45-6789"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Never actually used"
+          }
+        }
+      }
+    },
+
+    "/users": {
+      "get": {
+        "summary": "Data leak - dumps all users",
+        "responses": {
+          "200": {
+            "description": "Returns all users including sensitive data",
+            "content": {
+              "application/json": {
+                "example": [
+                  {
+                    "id": 1,
+                    "username": "admin",
+                    "password": "admin123",
+                    "token": "hardcoded-admin-token"
+                  },
+                  {
+                    "id": 2,
+                    "username": "user",
+                    "password": "user123"
+                  }
+                ]
+              }
+            }
+          }
+        }
+      }
+    },
+
+    "/search": {
+      "get": {
+        "summary": "Reflected input + status code abuse",
+        "parameters": [
+          {
+            "name": "q",
+            "in": "query",
+            "schema": { "type": "string" }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Reflects input directly (XSS risk)",
+            "content": {
+              "application/json": {
+                "example": {
+                  "result": "<script>alert('xss')</script>"
+                }
+              }
+            }
+          },
+          "201": {
+            "description": "Incorrect success code for GET"
+          }
+        }
+      }
+    },
+
+    "/admin": {
+      "get": {
+        "summary": "JWT not validated properly",
+        "security": [
+          { "BearerAuth": [] }
+        ],
+        "responses": {
+          "200": {
+            "description": "Grants admin access if token contains 'admin=true'",
+            "content": {
+              "application/json": {
+                "example": {
+                  "message": "Welcome admin",
+                  "config": "sensitive server config here"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Rarely used"
+          }
+        }
+      }
+    },
+
+    "/update-role": {
+      "post": {
+        "summary": "Privilege escalation via user input",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "example": {
+                "id": 1,
+                "role": "admin"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Updates role without auth checks"
+          },
+          "202": {
+            "description": "Used randomly instead of 200"
+          }
+        }
+      }
+    }
+  }
+}
