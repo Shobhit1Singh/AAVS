@@ -5,33 +5,61 @@ export default function NewScan() {
   const [targetUrl, setTargetUrl] = useState("")
   const [scanMode, setScanMode] = useState("active")
   const [authToken, setAuthToken] = useState("")
+  const [file, setFile] = useState(null)
   const [status, setStatus] = useState("")
+  const [scanId, setScanId] = useState(null)
 
   const startScan = async (e) => {
     e.preventDefault()
+
+    if (!targetUrl && !file) {
+      setStatus("Pick URL or file. Not neither. Not both. One.")
+      return
+    }
+
+    if (targetUrl && file) {
+      setStatus("One input only. Stop trying to confuse the system.")
+      return
+    }
 
     setStatus("Starting scan...")
 
     try {
 
-      const response = await fetch("http://localhost:8000/start-scan", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json"
-        },
-        body: JSON.stringify({
-          url: targetUrl,
-          mode: scanMode,
-          token: authToken
+      let response
+
+      if (file) {
+
+        const formData = new FormData()
+        formData.append("file", file)
+        formData.append("base_url", targetUrl || "")
+
+        response = await fetch("http://localhost:8000/scan/file", {
+          method: "POST",
+          body: formData
         })
-      })
+
+      } else {
+
+        response = await fetch("http://localhost:8000/scan/url", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json"
+          },
+          body: JSON.stringify({
+            url: targetUrl,
+            base_url: targetUrl
+          })
+        })
+      }
 
       const data = await response.json()
 
       if (response.ok) {
-        setStatus("Scan started successfully")
+        setStatus("Scan started")
+        setScanId(data.scan_id)
       } else {
-        setStatus("Scan failed: " + data.detail)
+        setStatus("Scan failed: " + (data.error || "unknown error"))
       }
 
     } catch (error) {
@@ -56,13 +84,23 @@ export default function NewScan() {
             onChange={(e) => setTargetUrl(e.target.value)}
             placeholder="https://api.example.com"
             className="w-full p-2 rounded bg-slate-800 border border-slate-700"
-            required
           />
         </div>
 
         <div>
           <label className="block mb-1 text-sm text-gray-300">
-            Scan Mode
+            Upload API File (optional)
+          </label>
+          <input
+            type="file"
+            onChange={(e) => setFile(e.target.files[0])}
+            className="w-full p-2 rounded bg-slate-800 border border-slate-700"
+          />
+        </div>
+
+        <div>
+          <label className="block mb-1 text-sm text-gray-300">
+            Scan Mode (backend ignores this for now)
           </label>
           <select
             value={scanMode}
@@ -99,6 +137,12 @@ export default function NewScan() {
       {status && (
         <div className="mt-4 text-sm text-gray-400">
           {status}
+        </div>
+      )}
+
+      {scanId && (
+        <div className="mt-3 text-sm text-green-400">
+          Scan ID: {scanId}
         </div>
       )}
 

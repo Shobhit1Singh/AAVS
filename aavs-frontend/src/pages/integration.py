@@ -1,26 +1,14 @@
 from fastapi import FastAPI
 from pydantic import BaseModel
-import subprocess
+from scanner_controller import run_scan
 
 app = FastAPI()
 
 class ScanRequest(BaseModel):
-    url: str
-    mode: str
+    spec: str
+    base_url: str
 
-
-@app.get("/")
-def hello():
-    return {"backend is working"}
-
-@app.post("/start-scan")
-def start_scan(data: ScanRequest):
-
-    subprocess.Popen([
-        "python",
-        "scanner_controller.py",
-        data.url,
-        data.mode
-    ])
-
-    return {"status": "started"}
+@app.post("/scan")
+def scan(req: ScanRequest):
+    result = run_scan(req.spec, req.base_url, mode="live")
+    return result

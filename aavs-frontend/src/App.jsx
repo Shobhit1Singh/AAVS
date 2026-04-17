@@ -5,6 +5,7 @@ import NewScan from "./pages/NewScans"
 import ActiveScans from "./pages/ActiveScans"
 import Results from "./pages/Results"
 import VulnerabilityDetails from "./pages/VulnerabilityDetails"
+import Login from "./pages/login"
 export default function App(){
   return (
     <BrowserRouter>
@@ -15,6 +16,7 @@ export default function App(){
           <Route path="/activescan" element={<ActiveScans />} />
           <Route path="/results" element={<Results />} />
           <Route path="/details" element={<VulnerabilityDetails />} />
+          <Route path="/login" element={<Login />} />
         </Routes>
       </MainLayout>
     </BrowserRouter>
