@@ -73,6 +73,7 @@ export default function Results() {
     if (severity === "CRITICAL") return "text-red-500"
     if (severity === "HIGH") return "text-orange-400"
     if (severity === "MEDIUM") return "text-yellow-400"
+    if (severity === "LOW") return "text-green-400"
     return "text-green-400"
   }
 

@@ -4,16 +4,16 @@ class SeverityEngine:
         "CRITICAL": 9,
         "HIGH": 7,
         "MEDIUM": 5,
-        "LOW": 3,
-        "INFO": 1
+        "LOW": 1,
+        "INFO": 3
     }
 
     def __init__(self):
         self.endpoint_scores = {}
 
     def process(self, result):
-        endpoint = result.get("endpoint")
-        method = result.get("method")
+        endpoint = result.get("endpoint", "unknown")
+        method = result.get("method", "GET")
 
         key = f"{method} {endpoint}"
 
@@ -23,8 +23,18 @@ class SeverityEngine:
                 "issues": []
             }
 
+        # CASE 1: flat finding
+        if "severity" in result:
+            severity = result.get("severity", "INFO")
+            score = self.SEVERITY_MAP.get(severity, 1)
+
+            self.endpoint_scores[key]["score"] += score
+            self.endpoint_scores[key]["issues"].append(result)
+            return
+
+        # CASE 2: nested vulnerabilities list
         for vuln in result.get("vulnerabilities", []):
-            severity = vuln.get("severity", "LOW")
+            severity = vuln.get("severity", "INFO")
             score = self.SEVERITY_MAP.get(severity, 1)
 
             self.endpoint_scores[key]["score"] += score
@@ -38,13 +48,16 @@ class SeverityEngine:
         )
 
     def print_ranking(self):
-        print("\n" + "="*60)
+        print("\n" + "=" * 60)
         print("RISK RANKING")
-        print("="*60)
+        print("=" * 60)
 
         ranked = self.get_ranked()
 
-        for endpoint, data in ranked:
-            print(f"{endpoint:40} → Score: {data['score']}")
+        if not ranked:
+            print("No ranked endpoints available")
 
-        print("="*60 + "\n")
+        for endpoint, data in ranked:
+            print(f"{endpoint:40} -> Score: {data['score']}")
+
+        print("=" * 60 + "\n")

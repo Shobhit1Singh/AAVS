@@ -1,6 +1,7 @@
 import asyncio
 import aiohttp
 import time
+import re
 
 
 class BaseExecutor:
@@ -8,13 +9,19 @@ class BaseExecutor:
         raise NotImplementedError("Executor must implement execute()")
 
 
+# ==========================================================
+# REAL EXECUTOR
+# ==========================================================
+
 class RealHTTPExecutor(BaseExecutor):
+
     def __init__(self, base_url, max_concurrency=20, timeout=10):
         self.base_url = base_url.rstrip("/")
         self.semaphore = asyncio.Semaphore(max_concurrency)
         self.timeout = aiohttp.ClientTimeout(total=timeout)
 
     async def execute(self, endpoint, payload):
+
         async with self.semaphore:
 
             path = endpoint.get("path", "")
@@ -26,19 +33,19 @@ class RealHTTPExecutor(BaseExecutor):
             params = {}
             json_body = None
 
-            # ----------------------------
-            # PAYLOAD INTERPRETATION (FIXED PROPERLY)
-            # ----------------------------
+            # ==================================================
+            # PAYLOAD HANDLING
+            # ==================================================
             if isinstance(payload, dict):
 
-                # 1. Direct structured payload support (preferred)
+                # structured payload support
                 headers.update(payload.get("headers", {}))
                 params.update(payload.get("params", {}))
 
                 if "body" in payload:
                     json_body = payload["body"]
 
-                # 2. Backward compatibility (your old broken format)
+                # old compatibility mode
                 param_location = payload.get("param_location")
                 param_name = payload.get("param_name")
                 value = payload.get("payload")
@@ -52,47 +59,69 @@ class RealHTTPExecutor(BaseExecutor):
                         headers[param_name] = str(value)
 
                     elif param_location == "path":
-                        url = url.replace(f"{{{param_name}}}", str(value))
+                        url = url.replace(
+                            f"{{{param_name}}}",
+                            str(value)
+                        )
 
                     elif param_location == "body":
-                        json_body = {param_name: value}
+                        json_body = {
+                            param_name: value
+                        }
 
-                # 3. Full body override (highest priority)
+                # full body override
                 if "full_body" in payload:
                     json_body = payload["full_body"]
 
-                # 4. Path params (NEW - critical for /user/{id})
+                # path params support
                 if "path_params" in payload:
                     for k, v in payload["path_params"].items():
-                        url = url.replace(f"{{{k}}}", str(v))
+                        url = url.replace(
+                            f"{{{k}}}",
+                            str(v)
+                        )
 
-            # ----------------------------
+            # ==================================================
+            # AUTO FIX UNRESOLVED PLACEHOLDERS
+            # /users/{user_id} -> /users/1
+            # Because APIs prefer reality.
+            # ==================================================
+            url = re.sub(r"\{[^}]+\}", "1", url)
+
+            # ==================================================
             # DEBUG
-            # ----------------------------
+            # ==================================================
             print("\n=== HTTP DEBUG ===")
-            print("METHOD:", method)
-            print("URL:", url)
+            print("METHOD :", method)
+            print("URL    :", url)
             print("HEADERS:", headers)
-            print("PARAMS:", params)
-            print("BODY:", json_body)
+            print("PARAMS :", params)
+            print("BODY   :", json_body)
 
             try:
                 start = time.time()
 
-                async with aiohttp.ClientSession(timeout=self.timeout) as session:
+                async with aiohttp.ClientSession(
+                    timeout=self.timeout
+                ) as session:
+
                     async with session.request(
                         method=method,
                         url=url,
                         params=params if params else None,
-                        json=json_body if method in ["POST", "PUT", "PATCH"] else None,
+                        json=json_body if method in [
+                            "POST",
+                            "PUT",
+                            "PATCH"
+                        ] else None,
                         headers=headers,
                     ) as resp:
 
                         body = await resp.text()
                         elapsed = time.time() - start
 
-                        print("STATUS:", resp.status)
-                        print("RESPONSE:", body[:200])
+                        print("STATUS :", resp.status)
+                        print("RESPONSE:", body[:300])
                         print("=================\n")
 
                         return {
@@ -104,7 +133,9 @@ class RealHTTPExecutor(BaseExecutor):
                         }
 
             except asyncio.TimeoutError:
+
                 print("TIMEOUT\n")
+
                 return {
                     "status_code": 0,
                     "response_body": "",
@@ -114,7 +145,9 @@ class RealHTTPExecutor(BaseExecutor):
                 }
 
             except Exception as e:
+
                 print("ERROR:", str(e), "\n")
+
                 return {
                     "status_code": 0,
                     "response_body": "",
@@ -124,15 +157,28 @@ class RealHTTPExecutor(BaseExecutor):
                 }
 
 
+# ==========================================================
+# MOCK EXECUTOR
+# ==========================================================
+
 class MockExecutor(BaseExecutor):
+
     async def execute(self, endpoint, payload):
 
         payload_str = str(payload)
 
-        if "' OR '1'='1'" in payload_str or "UNION SELECT" in payload_str:
+        if "' OR '1'='1'" in payload_str:
             return {
                 "status_code": 500,
                 "response_body": "Internal Server Error",
+                "response_headers": {},
+                "response_time": 0.01,
+            }
+
+        if "UNION SELECT" in payload_str:
+            return {
+                "status_code": 500,
+                "response_body": "SQL syntax error",
                 "response_headers": {},
                 "response_time": 0.01,
             }
@@ -145,12 +191,19 @@ class MockExecutor(BaseExecutor):
         }
 
 
+# ==========================================================
+# REPLAY EXECUTOR
+# ==========================================================
+
 class ReplayExecutor(BaseExecutor):
+
     def __init__(self, recorded_responses):
         self.recorded_responses = recorded_responses
 
     async def execute(self, endpoint, payload):
+
         for item in self.recorded_responses:
+
             if item.get("endpoint") == endpoint.get("path"):
                 return item
 
@@ -162,20 +215,36 @@ class ReplayExecutor(BaseExecutor):
         }
 
 
-# ----------------------------
+# ==========================================================
 # TEST RUN
-# ----------------------------
+# ==========================================================
+
 if __name__ == "__main__":
+
     async def main():
-        executor = RealHTTPExecutor("http://localhost:3000")
 
-        endpoint = {"path": "/api/search", "method": "GET"}
+        executor = RealHTTPExecutor(
+            "http://localhost:3000"
+        )
 
-        payload = {
-            "params": {"q": "<script>alert(1)</script>"}
+        endpoint = {
+            "path": "/api/search/{id}",
+            "method": "GET"
         }
 
-        result = await executor.execute(endpoint, payload)
+        payload = {
+            "path_params": {
+                "id": 1
+            },
+            "params": {
+                "q": "<script>alert(1)</script>"
+            }
+        }
+
+        result = await executor.execute(
+            endpoint,
+            payload
+        )
 
         print(result)
 
