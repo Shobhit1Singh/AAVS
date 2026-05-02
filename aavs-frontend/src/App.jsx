@@ -7,6 +7,7 @@ import Results from "./pages/Results"
 import VulnerabilityDetails from "./pages/VulnerabilityDetails"
 import Login from "./pages/login"
 import SettingsPage from "./pages/settings"
+import Register from "./pages/register"
 export default function App(){
   return (
     <BrowserRouter>
@@ -19,6 +20,7 @@ export default function App(){
           <Route path="/details" element={<VulnerabilityDetails />} />
           <Route path="/login" element={<Login />} />
           <Route path="/setting" element={<SettingsPage />} />
+          <Route path="/register" element={<Register />} />
         </Routes>
       </MainLayout>
     </BrowserRouter>

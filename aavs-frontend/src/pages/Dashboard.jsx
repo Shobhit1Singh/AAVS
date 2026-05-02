@@ -99,7 +99,7 @@ export default function Dashboard() {
       {/* Header */}
       <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-4">
         <div>
-          <h1 className="text-4xl font-bold">AAVS Dashboard</h1>
+          <h1 className="text-4xl font-bold">VULNPROBE Dashboard</h1>
           <p className="text-gray-400 mt-2">
             Automated API Vulnerability Scanner. Watching bad decisions in real time.
           </p>

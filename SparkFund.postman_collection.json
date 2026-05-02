@@ -1,0 +1,1958 @@
+{
+  "info": {
+    "_postman_id": "1249192c-6c06-4725-bb13-cfb30b9511cc",
+    "name": "SparkFund",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "_exporter_id": "43200383",
+    "_collection_link": "https://go.postman.co/collection/43200383-1249192c-6c06-4725-bb13-cfb30b9511cc?source=collection_link"
+  },
+  "item": [
+    {
+      "name": "Admin",
+      "item": [
+        {
+          "name": "Category",
+          "item": [
+            {
+              "name": "add",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoiYWRtaW4xIiwiZW1haWwiOiJhZG1pbkBnbWFpbC5jb20iLCJ1c2VySWQiOiI2OTdjOGE2YjQ0ZjhiMTMzZTNmOGE4MjgiLCJyb2xlIjoiYWRtaW4iLCJpYXQiOjE3Njk3Njk1OTAsImV4cCI6MTc2OTg1NTk5MH0.i8Pk7rvur1IjHOk7e_4KBXx7UuJuMssBTqKS7E9bNAA",
+                    "type": "text"
+                  }
+                ],
+                "body": {
+                  "mode": "urlencoded",
+                  "urlencoded": [
+                    {
+                      "key": "categoryName",
+                      "value": "Technology",
+                      "type": "text",
+                      "uuid": "62989dbf-3644-41f5-a928-5cddfe6ccbbb"
+                    },
+                    {
+                      "key": "description",
+                      "value": "bring tech",
+                      "type": "text",
+                      "uuid": "a54f0bb1-1e36-481f-ad72-c56c86787e59"
+                    }
+                  ]
+                },
+                "url": {
+                  "raw": "localhost:3000/admin/category/add",
+                  "host": [
+                    "localhost"
+                  ],
+                  "port": "3000",
+                  "path": [
+                    "admin",
+                    "category",
+                    "add"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "changeStatus",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoiYWRtaW4xIiwiZW1haWwiOiJhZG1pbkBnbWFpbC5jb20iLCJ1c2VySWQiOiI2OTdjOGE2YjQ0ZjhiMTMzZTNmOGE4MjgiLCJyb2xlIjoiYWRtaW4iLCJpYXQiOjE3Njk3Njk1OTAsImV4cCI6MTc2OTg1NTk5MH0.i8Pk7rvur1IjHOk7e_4KBXx7UuJuMssBTqKS7E9bNAA",
+                    "type": "text"
+                  }
+                ],
+                "body": {
+                  "mode": "urlencoded",
+                  "urlencoded": [
+                    {
+                      "key": "_id",
+                      "value": "697c9195025a0462e6675634",
+                      "type": "text",
+                      "uuid": "f288c766-b5d7-42db-a4bf-824a71e1fcdd"
+                    }
+                  ]
+                },
+                "url": {
+                  "raw": "localhost:3000/admin/category/changeStatus",
+                  "host": [
+                    "localhost"
+                  ],
+                  "port": "3000",
+                  "path": [
+                    "admin",
+                    "category",
+                    "changeStatus"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "delete",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoiYWRtaW4xIiwiZW1haWwiOiJhZG1pbkBnbWFpbC5jb20iLCJ1c2VySWQiOiI2OTdjOGE2YjQ0ZjhiMTMzZTNmOGE4MjgiLCJyb2xlIjoiYWRtaW4iLCJpYXQiOjE3Njk3Njk1OTAsImV4cCI6MTc2OTg1NTk5MH0.i8Pk7rvur1IjHOk7e_4KBXx7UuJuMssBTqKS7E9bNAA",
+                    "type": "text"
+                  }
+                ],
+                "body": {
+                  "mode": "urlencoded",
+                  "urlencoded": [
+                    {
+                      "key": "_id",
+                      "value": "697c90bc025a0462e667562a",
+                      "type": "text",
+                      "uuid": "f288c766-b5d7-42db-a4bf-824a71e1fcdd"
+                    }
+                  ]
+                },
+                "url": {
+                  "raw": "localhost:3000/admin/category/delete",
+                  "host": [
+                    "localhost"
+                  ],
+                  "port": "3000",
+                  "path": [
+                    "admin",
+                    "category",
+                    "delete"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "update",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoiYWRtaW4xIiwiZW1haWwiOiJhZG1pbkBnbWFpbC5jb20iLCJ1c2VySWQiOiI2OTdjOGE2YjQ0ZjhiMTMzZTNmOGE4MjgiLCJyb2xlIjoiYWRtaW4iLCJpYXQiOjE3Njk3Njk1OTAsImV4cCI6MTc2OTg1NTk5MH0.i8Pk7rvur1IjHOk7e_4KBXx7UuJuMssBTqKS7E9bNAA",
+                    "type": "text"
+                  }
+                ],
+                "body": {
+                  "mode": "urlencoded",
+                  "urlencoded": [
+                    {
+                      "key": "categoryName",
+                      "value": "Technology",
+                      "type": "text",
+                      "uuid": "62989dbf-3644-41f5-a928-5cddfe6ccbbb"
+                    },
+                    {
+                      "key": "description",
+                      "value": "bring techno",
+                      "type": "text",
+                      "uuid": "a54f0bb1-1e36-481f-ad72-c56c86787e59"
+                    },
+                    {
+                      "key": "_id",
+                      "value": "697c9195025a0462e6675634",
+                      "type": "text",
+                      "uuid": "c4929652-4e1b-405b-832d-23fba006a948"
+                    }
+                  ]
+                },
+                "url": {
+                  "raw": "localhost:3000/admin/category/update",
+                  "host": [
+                    "localhost"
+                  ],
+                  "port": "3000",
+                  "path": [
+                    "admin",
+                    "category",
+                    "update"
+                  ]
+                }
+              },
+              "response": []
+            }
+          ]
+        },
+        {
+          "name": "Investor",
+          "item": [
+            {
+              "name": "changeStatus",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoiYWRtaW4xIiwiZW1haWwiOiJhZG1pbkBnbWFpbC5jb20iLCJ1c2VySWQiOiI2OTdjOGE2YjQ0ZjhiMTMzZTNmOGE4MjgiLCJyb2xlIjoiYWRtaW4iLCJpYXQiOjE3Njk3Njk1OTAsImV4cCI6MTc2OTg1NTk5MH0.i8Pk7rvur1IjHOk7e_4KBXx7UuJuMssBTqKS7E9bNAA",
+                    "type": "text"
+                  }
+                ],
+                "body": {
+                  "mode": "urlencoded",
+                  "urlencoded": [
+                    {
+                      "key": "_id",
+                      "value": "697c8f3fa6a63401905bd17a",
+                      "type": "text",
+                      "uuid": "a4d00842-d084-4754-b675-f35cce5f894a"
+                    },
+                    {
+                      "key": "kycStatus",
+                      "value": "Verified",
+                      "type": "text",
+                      "uuid": "08469907-f7b4-4b66-b2c6-c83a15a850fe"
+                    }
+                  ]
+                },
+                "url": {
+                  "raw": "localhost:3000/admin/investor/changeStatus",
+                  "host": [
+                    "localhost"
+                  ],
+                  "port": "3000",
+                  "path": [
+                    "admin",
+                    "investor",
+                    "changeStatus"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "delete",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoiYWRtaW4xIiwiZW1haWwiOiJhZG1pbkBnbWFpbC5jb20iLCJ1c2VySWQiOiI2OTdjOGE2YjQ0ZjhiMTMzZTNmOGE4MjgiLCJyb2xlIjoiYWRtaW4iLCJpYXQiOjE3Njk3Njk1OTAsImV4cCI6MTc2OTg1NTk5MH0.i8Pk7rvur1IjHOk7e_4KBXx7UuJuMssBTqKS7E9bNAA",
+                    "type": "text"
+                  }
+                ],
+                "body": {
+                  "mode": "urlencoded",
+                  "urlencoded": [
+                    {
+                      "key": "_id",
+                      "value": "",
+                      "type": "text",
+                      "uuid": "83e7a86e-6ce9-463c-9887-89a7861ca25c"
+                    }
+                  ]
+                },
+                "url": {
+                  "raw": "localhost:3000/admin/investor/delete",
+                  "host": [
+                    "localhost"
+                  ],
+                  "port": "3000",
+                  "path": [
+                    "admin",
+                    "investor",
+                    "delete"
+                  ]
+                }
+              },
+              "response": []
+            }
+          ]
+        },
+        {
+          "name": "IdeaPitch",
+          "item": [
+            {
+              "name": "changeStatus",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoiYWRtaW4xIiwiZW1haWwiOiJhZG1pbkBnbWFpbC5jb20iLCJ1c2VySWQiOiI2OTdjOGE2YjQ0ZjhiMTMzZTNmOGE4MjgiLCJyb2xlIjoiYWRtaW4iLCJpYXQiOjE3Njk4NjIyMDYsImV4cCI6MTc2OTk0ODYwNn0.CJocHq2QmL9D15-fxM1vJ5C4YxcZI46V2Q9vHAhJ5JQ",
+                    "type": "text"
+                  }
+                ],
+                "body": {
+                  "mode": "urlencoded",
+                  "urlencoded": [
+                    {
+                      "key": "status",
+                      "value": "Approved",
+                      "type": "text",
+                      "uuid": "62989dbf-3644-41f5-a928-5cddfe6ccbbb"
+                    },
+                    {
+                      "key": "_id",
+                      "value": "697df25898c40ce222034591",
+                      "type": "text",
+                      "uuid": "4c9f7b8e-5ea5-4149-b7d5-ad609301e9dc"
+                    }
+                  ]
+                },
+                "url": {
+                  "raw": "localhost:3000/admin/idea/changeStatus",
+                  "host": [
+                    "localhost"
+                  ],
+                  "port": "3000",
+                  "path": [
+                    "admin",
+                    "idea",
+                    "changeStatus"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "delete",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoiYWRtaW4xIiwiZW1haWwiOiJhZG1pbkBnbWFpbC5jb20iLCJ1c2VySWQiOiI2OTdjOGE2YjQ0ZjhiMTMzZTNmOGE4MjgiLCJyb2xlIjoiYWRtaW4iLCJpYXQiOjE3Njk3Njk1OTAsImV4cCI6MTc2OTg1NTk5MH0.i8Pk7rvur1IjHOk7e_4KBXx7UuJuMssBTqKS7E9bNAA",
+                    "type": "text"
+                  }
+                ],
+                "body": {
+                  "mode": "urlencoded",
+                  "urlencoded": [
+                    {
+                      "key": "status",
+                      "value": "Approved",
+                      "type": "text",
+                      "uuid": "62989dbf-3644-41f5-a928-5cddfe6ccbbb",
+                      "disabled": true
+                    },
+                    {
+                      "key": "_id",
+                      "value": "697c94300d767046c3f963be",
+                      "type": "text",
+                      "uuid": "4c9f7b8e-5ea5-4149-b7d5-ad609301e9dc"
+                    }
+                  ]
+                },
+                "url": {
+                  "raw": "localhost:3000/admin/idea/delete",
+                  "host": [
+                    "localhost"
+                  ],
+                  "port": "3000",
+                  "path": [
+                    "admin",
+                    "idea",
+                    "delete"
+                  ]
+                }
+              },
+              "response": []
+            }
+          ]
+        },
+        {
+          "name": "User",
+          "item": [
+            {
+              "name": "update",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoiaW52ZXN0b3IxIiwiZW1haWwiOiJpbnZlc3RvckBnbWFpbC5jb20iLCJ1c2VySWQiOiI2OTdjOGYzYWE2YTYzNDAxOTA1YmQxNzgiLCJyb2xlIjoiaW52ZXN0b3IiLCJpYXQiOjE3Njk3NzQ0MzUsImV4cCI6MTc2OTg2MDgzNX0.vRai73YnCcyQxNWemRRGlqqPicbj8Ojmn7TP_1m5PKE",
+                    "type": "text"
+                  }
+                ],
+                "body": {
+                  "mode": "formdata",
+                  "formdata": [
+                    {
+                      "key": "_id",
+                      "value": "697c8bae47fd41af41bfcb0c",
+                      "type": "text"
+                    },
+                    {
+                      "key": "kycStatus",
+                      "value": "Verified",
+                      "type": "text",
+                      "disabled": true
+                    },
+                    {
+                      "key": "email",
+                      "value": "investor@gmail.com",
+                      "type": "text",
+                      "disabled": true
+                    },
+                    {
+                      "key": "password",
+                      "value": "123",
+                      "type": "text",
+                      "disabled": true
+                    },
+                    {
+                      "key": "name",
+                      "value": "owner",
+                      "type": "text"
+                    },
+                    {
+                      "key": "profileImage",
+                      "type": "file",
+                      "src": "/C:/Users/Ridhi/OneDrive/Pictures/Screenshots/basketball.jpg"
+                    }
+                  ]
+                },
+                "url": {
+                  "raw": "localhost:3000/api/user/update",
+                  "host": [
+                    "localhost"
+                  ],
+                  "port": "3000",
+                  "path": [
+                    "api",
+                    "user",
+                    "update"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "all",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoiaW52ZXN0b3IxIiwiZW1haWwiOiJpbnZlc3RvckBnbWFpbC5jb20iLCJ1c2VySWQiOiI2OTdjOGYzYWE2YTYzNDAxOTA1YmQxNzgiLCJyb2xlIjoiaW52ZXN0b3IiLCJpYXQiOjE3Njk3NzQ0MzUsImV4cCI6MTc2OTg2MDgzNX0.vRai73YnCcyQxNWemRRGlqqPicbj8Ojmn7TP_1m5PKE",
+                    "type": "text"
+                  }
+                ],
+                "url": {
+                  "raw": "localhost:3000/api/user/all",
+                  "host": [
+                    "localhost"
+                  ],
+                  "port": "3000",
+                  "path": [
+                    "api",
+                    "user",
+                    "all"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "changeStatus",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoiYWRtaW4xIiwiZW1haWwiOiJhZG1pbkBnbWFpbC5jb20iLCJ1c2VySWQiOiI2OTdjOGE2YjQ0ZjhiMTMzZTNmOGE4MjgiLCJyb2xlIjoiYWRtaW4iLCJpYXQiOjE3Njk3Njk1OTAsImV4cCI6MTc2OTg1NTk5MH0.i8Pk7rvur1IjHOk7e_4KBXx7UuJuMssBTqKS7E9bNAA",
+                    "type": "text"
+                  }
+                ],
+                "body": {
+                  "mode": "urlencoded",
+                  "urlencoded": [
+                    {
+                      "key": "_id",
+                      "value": "697c8bae47fd41af41bfcb0c",
+                      "type": "text"
+                    }
+                  ]
+                },
+                "url": {
+                  "raw": "localhost:3000/admin/user/softDelete",
+                  "host": [
+                    "localhost"
+                  ],
+                  "port": "3000",
+                  "path": [
+                    "admin",
+                    "user",
+                    "softDelete"
+                  ]
+                }
+              },
+              "response": []
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Owner",
+      "item": [
+        {
+          "name": "IdeaPitch",
+          "item": [
+            {
+              "name": "add",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoib3duZXIxIiwiZW1haWwiOiJvd25lcjFAZ21haWwuY29tIiwidXNlcklkIjoiNjk3YzhiYWU0N2ZkNDFhZjQxYmZjYjBjIiwicm9sZSI6Im93bmVyIiwiaWF0IjoxNzY5NzcyMDIwLCJleHAiOjE3Njk4NTg0MjB9.4Hg2vBTIWdqW4tEd_c_0BgLbEFOfy8eB0kjMEuy_bjQ",
+                    "type": "text"
+                  }
+                ],
+                "body": {
+                  "mode": "formdata",
+                  "formdata": [
+                    {
+                      "key": "categoryId",
+                      "value": "697c90bc025a0462e667562a",
+                      "type": "text"
+                    },
+                    {
+                      "key": "pitchVideoUrl",
+                      "type": "file",
+                      "src": "/C:/Users/Ridhi/OneDrive/Pictures/Screenshots/WhatsApp Video 2026-01-30 at 16.49.09.mp4"
+                    },
+                    {
+                      "key": "title",
+                      "value": "Technologu",
+                      "type": "text"
+                    },
+                    {
+                      "key": "description",
+                      "value": "aaa",
+                      "type": "text"
+                    },
+                    {
+                      "key": "totalAmount",
+                      "value": "200000",
+                      "type": "text"
+                    },
+                    {
+                      "key": "currentAmount",
+                      "value": "1000",
+                      "type": "text"
+                    },
+                    {
+                      "key": "aiScore",
+                      "value": "100",
+                      "type": "text"
+                    }
+                  ]
+                },
+                "url": {
+                  "raw": "localhost:3000/owner/idea/add",
+                  "host": [
+                    "localhost"
+                  ],
+                  "port": "3000",
+                  "path": [
+                    "owner",
+                    "idea",
+                    "add"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "update",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoib3duZXIxIiwiZW1haWwiOiJvd25lcjFAZ21haWwuY29tIiwidXNlcklkIjoiNjk3YzhiYWU0N2ZkNDFhZjQxYmZjYjBjIiwicm9sZSI6Im93bmVyIiwiaWF0IjoxNzY5NzcyMDIwLCJleHAiOjE3Njk4NTg0MjB9.4Hg2vBTIWdqW4tEd_c_0BgLbEFOfy8eB0kjMEuy_bjQ",
+                    "type": "text"
+                  }
+                ],
+                "body": {
+                  "mode": "formdata",
+                  "formdata": [
+                    {
+                      "key": "_id",
+                      "value": "697c94300d767046c3f963be",
+                      "type": "text"
+                    },
+                    {
+                      "key": "pitchVideoUrl",
+                      "type": "file",
+                      "src": "/C:/Users/Ridhi/OneDrive/Pictures/Screenshots/ss.mp4"
+                    },
+                    {
+                      "key": "title",
+                      "value": "Technolog",
+                      "type": "text"
+                    },
+                    {
+                      "key": "description",
+                      "value": "aaa",
+                      "type": "text"
+                    },
+                    {
+                      "key": "totalAmount",
+                      "value": "233",
+                      "type": "text"
+                    },
+                    {
+                      "key": "currentAmount",
+                      "value": "1004",
+                      "type": "text"
+                    },
+                    {
+                      "key": "aiScore",
+                      "value": "1004",
+                      "type": "text"
+                    }
+                  ]
+                },
+                "url": {
+                  "raw": "localhost:3000/owner/idea/update",
+                  "host": [
+                    "localhost"
+                  ],
+                  "port": "3000",
+                  "path": [
+                    "owner",
+                    "idea",
+                    "update"
+                  ]
+                }
+              },
+              "response": []
+            }
+          ]
+        },
+        {
+          "name": "IdeaMedia",
+          "item": [
+            {
+              "name": "add",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoiT3duZXIyIiwiZW1haWwiOiJvd25lcjJAZ21haWwuY29tIiwidXNlcklkIjoiNjk3ZGQyM2Y4MTZmMWU2NDk5MGVkOGVlIiwicm9sZSI6Im93bmVyIiwiaWF0IjoxNzcwMDA2ODExLCJleHAiOjE3NzAwOTMyMTF9.JKdg7q5jXOcqXPvLtiF7K8rMQIsKNWfl9J39osMfW-c",
+                    "type": "text"
+                  }
+                ],
+                "body": {
+                  "mode": "formdata",
+                  "formdata": [
+                    {
+                      "key": "ideaId",
+                      "value": "697df25898c40ce222034591",
+                      "type": "text",
+                      "uuid": "ff49fd71-5d92-496d-987b-965416407977"
+                    },
+                    {
+                      "key": "mediaType",
+                      "type": "file",
+                      "uuid": "ba6e6ee5-96b2-46a9-a689-5d7089f9e380",
+                      "src": "/C:/Users/Ridhi/OneDrive/Pictures/Screenshots/cricket.jpg"
+                    }
+                  ]
+                },
+                "url": {
+                  "raw": "localhost:3000/owner/ideaMedia/add",
+                  "host": [
+                    "localhost"
+                  ],
+                  "port": "3000",
+                  "path": [
+                    "owner",
+                    "ideaMedia",
+                    "add"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "update",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoib3duZXIxIiwiZW1haWwiOiJvd25lcjFAZ21haWwuY29tIiwidXNlcklkIjoiNjk3YzhiYWU0N2ZkNDFhZjQxYmZjYjBjIiwicm9sZSI6Im93bmVyIiwiaWF0IjoxNzY5NzcyMDIwLCJleHAiOjE3Njk4NTg0MjB9.4Hg2vBTIWdqW4tEd_c_0BgLbEFOfy8eB0kjMEuy_bjQ",
+                    "type": "text"
+                  }
+                ],
+                "body": {
+                  "mode": "formdata",
+                  "formdata": [
+                    {
+                      "key": "ideaId",
+                      "value": "697c94300d767046c3f963be",
+                      "type": "text",
+                      "uuid": "ff49fd71-5d92-496d-987b-965416407977"
+                    },
+                    {
+                      "key": "mediaType",
+                      "type": "file",
+                      "uuid": "f3ecd62b-b058-4e63-b516-16b49900bce0",
+                      "src": "/C:/Users/Ridhi/OneDrive/Pictures/Screenshots/football.jpg"
+                    },
+                    {
+                      "key": "_id",
+                      "value": "697c9a0951b8615bfb335d06",
+                      "type": "text",
+                      "uuid": "d53d31cb-70fe-4541-8f77-6ba03f6c307a"
+                    }
+                  ]
+                },
+                "url": {
+                  "raw": "localhost:3000/owner/ideaMedia/update",
+                  "host": [
+                    "localhost"
+                  ],
+                  "port": "3000",
+                  "path": [
+                    "owner",
+                    "ideaMedia",
+                    "update"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "delete",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoib3duZXIxIiwiZW1haWwiOiJvd25lcjFAZ21haWwuY29tIiwidXNlcklkIjoiNjk3YzhiYWU0N2ZkNDFhZjQxYmZjYjBjIiwicm9sZSI6Im93bmVyIiwiaWF0IjoxNzY5NzcyMDIwLCJleHAiOjE3Njk4NTg0MjB9.4Hg2vBTIWdqW4tEd_c_0BgLbEFOfy8eB0kjMEuy_bjQ",
+                    "type": "text"
+                  }
+                ],
+                "body": {
+                  "mode": "formdata",
+                  "formdata": [
+                    {
+                      "key": "_id",
+                      "value": "697c94300d767046c3f963be",
+                      "type": "text",
+                      "uuid": "ff49fd71-5d92-496d-987b-965416407977"
+                    }
+                  ]
+                },
+                "url": {
+                  "raw": "localhost:3000/owner/ideaMedia/update",
+                  "host": [
+                    "localhost"
+                  ],
+                  "port": "3000",
+                  "path": [
+                    "owner",
+                    "ideaMedia",
+                    "update"
+                  ]
+                }
+              },
+              "response": []
+            }
+          ]
+        },
+        {
+          "name": "IdeaComment",
+          "item": [
+            {
+              "name": "changeStatus",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoib3duZXIxIiwiZW1haWwiOiJvd25lcjFAZ21haWwuY29tIiwidXNlcklkIjoiNjk3YzhiYWU0N2ZkNDFhZjQxYmZjYjBjIiwicm9sZSI6Im93bmVyIiwiaWF0IjoxNzY5NzcyMDIwLCJleHAiOjE3Njk4NTg0MjB9.4Hg2vBTIWdqW4tEd_c_0BgLbEFOfy8eB0kjMEuy_bjQ ",
+                    "type": "text"
+                  }
+                ],
+                "body": {
+                  "mode": "urlencoded",
+                  "urlencoded": [
+                    {
+                      "key": "_id",
+                      "value": "697c9ee8e91050e3c5386a33",
+                      "type": "text"
+                    },
+                    {
+                      "key": "commentText",
+                      "value": "very best",
+                      "type": "text",
+                      "disabled": true
+                    }
+                  ]
+                },
+                "url": {
+                  "raw": "localhost:3000/owner/ideaComment/changeStatus",
+                  "host": [
+                    "localhost"
+                  ],
+                  "port": "3000",
+                  "path": [
+                    "owner",
+                    "ideaComment",
+                    "changeStatus"
+                  ]
+                }
+              },
+              "response": []
+            }
+          ]
+        },
+        {
+          "name": "IdeaLikes",
+          "item": [
+            {
+              "name": "changeStatus",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoib3duZXIxIiwiZW1haWwiOiJvd25lcjFAZ21haWwuY29tIiwidXNlcklkIjoiNjk3YzhiYWU0N2ZkNDFhZjQxYmZjYjBjIiwicm9sZSI6Im93bmVyIiwiaWF0IjoxNzY5NzcyMDIwLCJleHAiOjE3Njk4NTg0MjB9.4Hg2vBTIWdqW4tEd_c_0BgLbEFOfy8eB0kjMEuy_bjQ ",
+                    "type": "text"
+                  }
+                ],
+                "body": {
+                  "mode": "urlencoded",
+                  "urlencoded": [
+                    {
+                      "key": "_id",
+                      "value": "697c9d9eca65c826ab9d1589",
+                      "type": "text",
+                      "uuid": "a4d00842-d084-4754-b675-f35cce5f894a"
+                    }
+                  ]
+                },
+                "url": {
+                  "raw": "localhost:3000/owner/ideaLikes/changeStatus",
+                  "host": [
+                    "localhost"
+                  ],
+                  "port": "3000",
+                  "path": [
+                    "owner",
+                    "ideaLikes",
+                    "changeStatus"
+                  ]
+                }
+              },
+              "response": []
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Investor",
+      "item": [
+        {
+          "name": "IdeaLike",
+          "item": [
+            {
+              "name": "add",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoiaW52ZXN0b3IxIiwiZW1haWwiOiJpbnZlc3RvckBnbWFpbC5jb20iLCJ1c2VySWQiOiI2OTdjOGYzYWE2YTYzNDAxOTA1YmQxNzgiLCJyb2xlIjoiaW52ZXN0b3IiLCJpYXQiOjE3Njk3NzQ0MzUsImV4cCI6MTc2OTg2MDgzNX0.vRai73YnCcyQxNWemRRGlqqPicbj8Ojmn7TP_1m5PKE",
+                    "type": "text"
+                  }
+                ],
+                "body": {
+                  "mode": "urlencoded",
+                  "urlencoded": [
+                    {
+                      "key": "ideaId",
+                      "value": "697c94300d767046c3f963be",
+                      "type": "text"
+                    },
+                    {
+                      "key": "user",
+                      "value": "",
+                      "type": "text",
+                      "disabled": true
+                    }
+                  ]
+                },
+                "url": {
+                  "raw": "localhost:3000/investor/ideaLikes/add",
+                  "host": [
+                    "localhost"
+                  ],
+                  "port": "3000",
+                  "path": [
+                    "investor",
+                    "ideaLikes",
+                    "add"
+                  ]
+                }
+              },
+              "response": []
+            }
+          ]
+        },
+        {
+          "name": "IdeaComment",
+          "item": [
+            {
+              "name": "add",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoiaW52ZXN0b3IxIiwiZW1haWwiOiJpbnZlc3RvckBnbWFpbC5jb20iLCJ1c2VySWQiOiI2OTdjOGYzYWE2YTYzNDAxOTA1YmQxNzgiLCJyb2xlIjoiaW52ZXN0b3IiLCJpYXQiOjE3Njk3NzQ0MzUsImV4cCI6MTc2OTg2MDgzNX0.vRai73YnCcyQxNWemRRGlqqPicbj8Ojmn7TP_1m5PKE",
+                    "type": "text"
+                  }
+                ],
+                "body": {
+                  "mode": "urlencoded",
+                  "urlencoded": [
+                    {
+                      "key": "ideaId",
+                      "value": "697c94300d767046c3f963be",
+                      "type": "text"
+                    },
+                    {
+                      "key": "commentText",
+                      "value": "very good",
+                      "type": "text"
+                    }
+                  ]
+                },
+                "url": {
+                  "raw": "localhost:3000/investor/ideaComment/add",
+                  "host": [
+                    "localhost"
+                  ],
+                  "port": "3000",
+                  "path": [
+                    "investor",
+                    "ideaComment",
+                    "add"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "update",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoiaW52ZXN0b3IxIiwiZW1haWwiOiJpbnZlc3RvckBnbWFpbC5jb20iLCJ1c2VySWQiOiI2OTdjOGYzYWE2YTYzNDAxOTA1YmQxNzgiLCJyb2xlIjoiaW52ZXN0b3IiLCJpYXQiOjE3Njk3NzQ0MzUsImV4cCI6MTc2OTg2MDgzNX0.vRai73YnCcyQxNWemRRGlqqPicbj8Ojmn7TP_1m5PKE",
+                    "type": "text"
+                  }
+                ],
+                "body": {
+                  "mode": "urlencoded",
+                  "urlencoded": [
+                    {
+                      "key": "_id",
+                      "value": "697c9ee8e91050e3c5386a33",
+                      "type": "text"
+                    },
+                    {
+                      "key": "commentText",
+                      "value": "very best",
+                      "type": "text"
+                    }
+                  ]
+                },
+                "url": {
+                  "raw": "localhost:3000/investor/ideaComment/update",
+                  "host": [
+                    "localhost"
+                  ],
+                  "port": "3000",
+                  "path": [
+                    "investor",
+                    "ideaComment",
+                    "update"
+                  ]
+                }
+              },
+              "response": []
+            }
+          ]
+        },
+        {
+          "name": "INVESTMENT",
+          "item": [
+            {
+              "name": "add",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoiaW52ZXN0b3IxIiwiZW1haWwiOiJpbnZlc3RvckBnbWFpbC5jb20iLCJ1c2VySWQiOiI2OTdjOGYzYWE2YTYzNDAxOTA1YmQxNzgiLCJyb2xlIjoiaW52ZXN0b3IiLCJpYXQiOjE3Njk3NzQ0MzUsImV4cCI6MTc2OTg2MDgzNX0.vRai73YnCcyQxNWemRRGlqqPicbj8Ojmn7TP_1m5PKE",
+                    "type": "text"
+                  }
+                ],
+                "body": {
+                  "mode": "urlencoded",
+                  "urlencoded": [
+                    {
+                      "key": "ideaId",
+                      "value": "697c94300d767046c3f963be",
+                      "type": "text"
+                    },
+                    {
+                      "key": "amount",
+                      "value": "10000",
+                      "type": "text",
+                      "uuid": "7b608546-f1f0-44a6-b343-79adc092e82b"
+                    },
+                    {
+                      "key": "equityPercent",
+                      "value": "50",
+                      "type": "text",
+                      "uuid": "5ea16f84-1db3-4c7d-9c0f-5e384b11fde9"
+                    }
+                  ]
+                },
+                "url": {
+                  "raw": "localhost:3000/investor/investment/add",
+                  "host": [
+                    "localhost"
+                  ],
+                  "port": "3000",
+                  "path": [
+                    "investor",
+                    "investment",
+                    "add"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "changeStatus",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoiaW52ZXN0b3IxIiwiZW1haWwiOiJpbnZlc3RvckBnbWFpbC5jb20iLCJ1c2VySWQiOiI2OTdjOGYzYWE2YTYzNDAxOTA1YmQxNzgiLCJyb2xlIjoiaW52ZXN0b3IiLCJpYXQiOjE3Njk3NzQ0MzUsImV4cCI6MTc2OTg2MDgzNX0.vRai73YnCcyQxNWemRRGlqqPicbj8Ojmn7TP_1m5PKE",
+                    "type": "text"
+                  }
+                ],
+                "body": {
+                  "mode": "urlencoded",
+                  "urlencoded": [
+                    {
+                      "key": "_id",
+                      "value": "697ca118c2431b6d5bbf994d",
+                      "type": "text"
+                    },
+                    {
+                      "key": "status",
+                      "value": "Frozen",
+                      "type": "text",
+                      "uuid": "2ab24c27-f463-4123-a666-76274f9e1c5f"
+                    }
+                  ]
+                },
+                "url": {
+                  "raw": "localhost:3000/investor/investment/changeStatus",
+                  "host": [
+                    "localhost"
+                  ],
+                  "port": "3000",
+                  "path": [
+                    "investor",
+                    "investment",
+                    "changeStatus"
+                  ]
+                }
+              },
+              "response": []
+            }
+          ]
+        },
+        {
+          "name": "Payment",
+          "item": [
+            {
+              "name": "add",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoiaW52ZXN0b3IxIiwiZW1haWwiOiJpbnZlc3RvckBnbWFpbC5jb20iLCJ1c2VySWQiOiI2OTdjOGYzYWE2YTYzNDAxOTA1YmQxNzgiLCJyb2xlIjoiaW52ZXN0b3IiLCJpYXQiOjE3Njk3NzQ0MzUsImV4cCI6MTc2OTg2MDgzNX0.vRai73YnCcyQxNWemRRGlqqPicbj8Ojmn7TP_1m5PKE",
+                    "type": "text"
+                  }
+                ],
+                "body": {
+                  "mode": "urlencoded",
+                  "urlencoded": [
+                    {
+                      "key": "investmentId",
+                      "value": "697ca118c2431b6d5bbf994d",
+                      "type": "text"
+                    },
+                    {
+                      "key": "amount",
+                      "value": "10000",
+                      "type": "text",
+                      "uuid": "7b608546-f1f0-44a6-b343-79adc092e82b"
+                    },
+                    {
+                      "key": "paymentMethod",
+                      "value": "online",
+                      "type": "text",
+                      "uuid": "b418c5dc-962f-4cf7-93da-7f33d3c25808"
+                    },
+                    {
+                      "key": "transactionId",
+                      "value": "1212334r673883763",
+                      "type": "text",
+                      "uuid": "41226891-1bca-4e65-8bf6-2d658bd217de"
+                    }
+                  ]
+                },
+                "url": {
+                  "raw": "localhost:3000/investor/payment/add",
+                  "host": [
+                    "localhost"
+                  ],
+                  "port": "3000",
+                  "path": [
+                    "investor",
+                    "payment",
+                    "add"
+                  ]
+                }
+              },
+              "response": []
+            }
+          ]
+        },
+        {
+          "name": "update",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoiaW52ZXN0b3IxIiwiZW1haWwiOiJpbnZlc3RvckBnbWFpbC5jb20iLCJ1c2VySWQiOiI2OTdjOGYzYWE2YTYzNDAxOTA1YmQxNzgiLCJyb2xlIjoiaW52ZXN0b3IiLCJpYXQiOjE3Njk3NzQ0MzUsImV4cCI6MTc2OTg2MDgzNX0.vRai73YnCcyQxNWemRRGlqqPicbj8Ojmn7TP_1m5PKE",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "urlencoded",
+              "urlencoded": [
+                {
+                  "key": "_id",
+                  "value": "697c8f3fa6a63401905bd17a",
+                  "type": "text",
+                  "uuid": "a4d00842-d084-4754-b675-f35cce5f894a"
+                },
+                {
+                  "key": "kycStatus",
+                  "value": "Verified",
+                  "type": "text",
+                  "uuid": "08469907-f7b4-4b66-b2c6-c83a15a850fe",
+                  "disabled": true
+                },
+                {
+                  "key": "email",
+                  "value": "investor@gmail.com",
+                  "type": "text"
+                },
+                {
+                  "key": "password",
+                  "value": "123",
+                  "type": "text"
+                },
+                {
+                  "key": "name",
+                  "value": "investor1",
+                  "type": "text"
+                },
+                {
+                  "key": "country",
+                  "value": "India",
+                  "type": "text"
+                },
+                {
+                  "key": "riskPreference",
+                  "value": "medium",
+                  "type": "text"
+                }
+              ]
+            },
+            "url": {
+              "raw": "localhost:3000/investor/update",
+              "host": [
+                "localhost"
+              ],
+              "port": "3000",
+              "path": [
+                "investor",
+                "update"
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "CommonAPI",
+      "item": [
+        {
+          "name": "auth",
+          "item": [
+            {
+              "name": "login",
+              "request": {
+                "method": "POST",
+                "header": [],
+                "body": {
+                  "mode": "urlencoded",
+                  "urlencoded": [
+                    {
+                      "key": "email",
+                      "value": "investor@gmail.com",
+                      "type": "text",
+                      "uuid": "5850dcc7-e63a-4dce-ae84-1b2159fa8c70"
+                    },
+                    {
+                      "key": "password",
+                      "value": "123",
+                      "type": "text",
+                      "uuid": "3eee97ca-bfc8-4183-95d8-735617572a14"
+                    }
+                  ]
+                },
+                "url": {
+                  "raw": "localhost:3000/api/user/login",
+                  "host": [
+                    "localhost"
+                  ],
+                  "port": "3000",
+                  "path": [
+                    "api",
+                    "user",
+                    "login"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "register",
+              "request": {
+                "method": "POST",
+                "header": [],
+                "body": {
+                  "mode": "formdata",
+                  "formdata": [
+                    {
+                      "key": "email",
+                      "value": "owner1@gmail.com",
+                      "type": "text"
+                    },
+                    {
+                      "key": "password",
+                      "value": "123",
+                      "type": "text"
+                    },
+                    {
+                      "key": "name",
+                      "value": "owner1",
+                      "type": "text"
+                    },
+                    {
+                      "key": "profileImage",
+                      "type": "file",
+                      "src": "/C:/Users/Ridhi/OneDrive/Pictures/Screenshots/profile.png"
+                    }
+                  ]
+                },
+                "url": {
+                  "raw": "localhost:3000/api/user/register",
+                  "host": [
+                    "localhost"
+                  ],
+                  "port": "3000",
+                  "path": [
+                    "api",
+                    "user",
+                    "register"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "Investor Register",
+              "request": {
+                "method": "POST",
+                "header": [],
+                "body": {
+                  "mode": "formdata",
+                  "formdata": [
+                    {
+                      "key": "email",
+                      "value": "investor@gmail.com",
+                      "type": "text"
+                    },
+                    {
+                      "key": "password",
+                      "value": "123",
+                      "type": "text"
+                    },
+                    {
+                      "key": "name",
+                      "value": "investor1",
+                      "type": "text"
+                    },
+                    {
+                      "key": "profileImage",
+                      "type": "file",
+                      "src": "/C:/Users/Ridhi/OneDrive/Pictures/Screenshots/profile.png"
+                    },
+                    {
+                      "key": "country",
+                      "value": "India",
+                      "type": "text",
+                      "uuid": "d757b31e-a317-4252-b3c4-a5455e890594"
+                    },
+                    {
+                      "key": "riskPreference",
+                      "value": "low",
+                      "type": "text",
+                      "uuid": "936b98c2-a193-4c16-83d3-369dbd5642d3"
+                    }
+                  ]
+                },
+                "url": {
+                  "raw": "localhost:3000/api/investor/register",
+                  "host": [
+                    "localhost"
+                  ],
+                  "port": "3000",
+                  "path": [
+                    "api",
+                    "investor",
+                    "register"
+                  ]
+                }
+              },
+              "response": []
+            }
+          ]
+        },
+        {
+          "name": "idea",
+          "item": [
+            {
+              "name": "all",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoiaW52ZXN0b3IxIiwiZW1haWwiOiJpbnZlc3RvckBnbWFpbC5jb20iLCJ1c2VySWQiOiI2OTdjOGYzYWE2YTYzNDAxOTA1YmQxNzgiLCJyb2xlIjoiaW52ZXN0b3IiLCJpYXQiOjE3Njk3NzQ0MzUsImV4cCI6MTc2OTg2MDgzNX0.vRai73YnCcyQxNWemRRGlqqPicbj8Ojmn7TP_1m5PKE",
+                    "type": "text"
+                  }
+                ],
+                "body": {
+                  "mode": "urlencoded",
+                  "urlencoded": [
+                    {
+                      "key": "ideaId",
+                      "value": "697c94300d767046c3f963be",
+                      "type": "text"
+                    },
+                    {
+                      "key": "amount",
+                      "value": "10000",
+                      "type": "text",
+                      "uuid": "7b608546-f1f0-44a6-b343-79adc092e82b"
+                    },
+                    {
+                      "key": "equityPercent",
+                      "value": "50",
+                      "type": "text",
+                      "uuid": "5ea16f84-1db3-4c7d-9c0f-5e384b11fde9"
+                    }
+                  ]
+                },
+                "url": {
+                  "raw": "localhost:3000/api/idea/all",
+                  "host": [
+                    "localhost"
+                  ],
+                  "port": "3000",
+                  "path": [
+                    "api",
+                    "idea",
+                    "all"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "single",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoiaW52ZXN0b3IxIiwiZW1haWwiOiJpbnZlc3RvckBnbWFpbC5jb20iLCJ1c2VySWQiOiI2OTdjOGYzYWE2YTYzNDAxOTA1YmQxNzgiLCJyb2xlIjoiaW52ZXN0b3IiLCJpYXQiOjE3Njk3NzQ0MzUsImV4cCI6MTc2OTg2MDgzNX0.vRai73YnCcyQxNWemRRGlqqPicbj8Ojmn7TP_1m5PKE",
+                    "type": "text"
+                  }
+                ],
+                "body": {
+                  "mode": "urlencoded",
+                  "urlencoded": [
+                    {
+                      "key": "_id",
+                      "value": "697ca384b9c0f5d003239da7",
+                      "type": "text",
+                      "uuid": "a4d00842-d084-4754-b675-f35cce5f894a"
+                    }
+                  ]
+                },
+                "url": {
+                  "raw": "localhost:3000/api/idea/single",
+                  "host": [
+                    "localhost"
+                  ],
+                  "port": "3000",
+                  "path": [
+                    "api",
+                    "idea",
+                    "single"
+                  ]
+                }
+              },
+              "response": []
+            }
+          ]
+        },
+        {
+          "name": "ideaLikes",
+          "item": [
+            {
+              "name": "all",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoiaW52ZXN0b3IxIiwiZW1haWwiOiJpbnZlc3RvckBnbWFpbC5jb20iLCJ1c2VySWQiOiI2OTdjOGYzYWE2YTYzNDAxOTA1YmQxNzgiLCJyb2xlIjoiaW52ZXN0b3IiLCJpYXQiOjE3Njk3NzQ0MzUsImV4cCI6MTc2OTg2MDgzNX0.vRai73YnCcyQxNWemRRGlqqPicbj8Ojmn7TP_1m5PKE",
+                    "type": "text"
+                  }
+                ],
+                "url": {
+                  "raw": "localhost:3000/api/ideaLikes/all",
+                  "host": [
+                    "localhost"
+                  ],
+                  "port": "3000",
+                  "path": [
+                    "api",
+                    "ideaLikes",
+                    "all"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "single",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoiaW52ZXN0b3IxIiwiZW1haWwiOiJpbnZlc3RvckBnbWFpbC5jb20iLCJ1c2VySWQiOiI2OTdjOGYzYWE2YTYzNDAxOTA1YmQxNzgiLCJyb2xlIjoiaW52ZXN0b3IiLCJpYXQiOjE3Njk3NzQ0MzUsImV4cCI6MTc2OTg2MDgzNX0.vRai73YnCcyQxNWemRRGlqqPicbj8Ojmn7TP_1m5PKE",
+                    "type": "text"
+                  }
+                ],
+                "body": {
+                  "mode": "urlencoded",
+                  "urlencoded": [
+                    {
+                      "key": "_id",
+                      "value": "697c9d9eca65c826ab9d1589",
+                      "type": "text",
+                      "uuid": "a4d00842-d084-4754-b675-f35cce5f894a"
+                    }
+                  ]
+                },
+                "url": {
+                  "raw": "localhost:3000/api/ideaLikes/single",
+                  "host": [
+                    "localhost"
+                  ],
+                  "port": "3000",
+                  "path": [
+                    "api",
+                    "ideaLikes",
+                    "single"
+                  ]
+                }
+              },
+              "response": []
+            }
+          ]
+        },
+        {
+          "name": "IdeaComment",
+          "item": [
+            {
+              "name": "all",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoiaW52ZXN0b3IxIiwiZW1haWwiOiJpbnZlc3RvckBnbWFpbC5jb20iLCJ1c2VySWQiOiI2OTdjOGYzYWE2YTYzNDAxOTA1YmQxNzgiLCJyb2xlIjoiaW52ZXN0b3IiLCJpYXQiOjE3Njk3NzQ0MzUsImV4cCI6MTc2OTg2MDgzNX0.vRai73YnCcyQxNWemRRGlqqPicbj8Ojmn7TP_1m5PKE",
+                    "type": "text"
+                  }
+                ],
+                "url": {
+                  "raw": "localhost:3000/api/ideaComment/all",
+                  "host": [
+                    "localhost"
+                  ],
+                  "port": "3000",
+                  "path": [
+                    "api",
+                    "ideaComment",
+                    "all"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "single",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoiaW52ZXN0b3IxIiwiZW1haWwiOiJpbnZlc3RvckBnbWFpbC5jb20iLCJ1c2VySWQiOiI2OTdjOGYzYWE2YTYzNDAxOTA1YmQxNzgiLCJyb2xlIjoiaW52ZXN0b3IiLCJpYXQiOjE3Njk3NzQ0MzUsImV4cCI6MTc2OTg2MDgzNX0.vRai73YnCcyQxNWemRRGlqqPicbj8Ojmn7TP_1m5PKE",
+                    "type": "text"
+                  }
+                ],
+                "body": {
+                  "mode": "urlencoded",
+                  "urlencoded": [
+                    {
+                      "key": "_id",
+                      "value": "697c9ee8e91050e3c5386a33",
+                      "type": "text",
+                      "uuid": "a4d00842-d084-4754-b675-f35cce5f894a"
+                    }
+                  ]
+                },
+                "url": {
+                  "raw": "localhost:3000/api/ideaComment/single",
+                  "host": [
+                    "localhost"
+                  ],
+                  "port": "3000",
+                  "path": [
+                    "api",
+                    "ideaComment",
+                    "single"
+                  ]
+                }
+              },
+              "response": []
+            }
+          ]
+        },
+        {
+          "name": "Payment",
+          "item": [
+            {
+              "name": "all",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoiaW52ZXN0b3IxIiwiZW1haWwiOiJpbnZlc3RvckBnbWFpbC5jb20iLCJ1c2VySWQiOiI2OTdjOGYzYWE2YTYzNDAxOTA1YmQxNzgiLCJyb2xlIjoiaW52ZXN0b3IiLCJpYXQiOjE3Njk3NzQ0MzUsImV4cCI6MTc2OTg2MDgzNX0.vRai73YnCcyQxNWemRRGlqqPicbj8Ojmn7TP_1m5PKE",
+                    "type": "text"
+                  }
+                ],
+                "url": {
+                  "raw": "localhost:3000/api/payment/all",
+                  "host": [
+                    "localhost"
+                  ],
+                  "port": "3000",
+                  "path": [
+                    "api",
+                    "payment",
+                    "all"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "single",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoiaW52ZXN0b3IxIiwiZW1haWwiOiJpbnZlc3RvckBnbWFpbC5jb20iLCJ1c2VySWQiOiI2OTdjOGYzYWE2YTYzNDAxOTA1YmQxNzgiLCJyb2xlIjoiaW52ZXN0b3IiLCJpYXQiOjE3Njk3NzQ0MzUsImV4cCI6MTc2OTg2MDgzNX0.vRai73YnCcyQxNWemRRGlqqPicbj8Ojmn7TP_1m5PKE",
+                    "type": "text"
+                  }
+                ],
+                "body": {
+                  "mode": "urlencoded",
+                  "urlencoded": [
+                    {
+                      "key": "_id",
+                      "value": "697ca22fb9c0f5d003239d9b",
+                      "type": "text",
+                      "uuid": "a4d00842-d084-4754-b675-f35cce5f894a"
+                    }
+                  ]
+                },
+                "url": {
+                  "raw": "localhost:3000/api/payment/single",
+                  "host": [
+                    "localhost"
+                  ],
+                  "port": "3000",
+                  "path": [
+                    "api",
+                    "payment",
+                    "single"
+                  ]
+                }
+              },
+              "response": []
+            }
+          ]
+        },
+        {
+          "name": "Investor",
+          "item": [
+            {
+              "name": "all",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoiaW52ZXN0b3IxIiwiZW1haWwiOiJpbnZlc3RvckBnbWFpbC5jb20iLCJ1c2VySWQiOiI2OTdjOGYzYWE2YTYzNDAxOTA1YmQxNzgiLCJyb2xlIjoiaW52ZXN0b3IiLCJpYXQiOjE3Njk3NzQ0MzUsImV4cCI6MTc2OTg2MDgzNX0.vRai73YnCcyQxNWemRRGlqqPicbj8Ojmn7TP_1m5PKE",
+                    "type": "text"
+                  }
+                ],
+                "url": {
+                  "raw": "localhost:3000/api/investor/all",
+                  "host": [
+                    "localhost"
+                  ],
+                  "port": "3000",
+                  "path": [
+                    "api",
+                    "investor",
+                    "all"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "single",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoiaW52ZXN0b3IxIiwiZW1haWwiOiJpbnZlc3RvckBnbWFpbC5jb20iLCJ1c2VySWQiOiI2OTdjOGYzYWE2YTYzNDAxOTA1YmQxNzgiLCJyb2xlIjoiaW52ZXN0b3IiLCJpYXQiOjE3Njk3NzQ0MzUsImV4cCI6MTc2OTg2MDgzNX0.vRai73YnCcyQxNWemRRGlqqPicbj8Ojmn7TP_1m5PKE",
+                    "type": "text"
+                  }
+                ],
+                "body": {
+                  "mode": "urlencoded",
+                  "urlencoded": [
+                    {
+                      "key": "_id",
+                      "value": "697c8f3fa6a63401905bd17a",
+                      "type": "text",
+                      "uuid": "95ec0ad9-801d-4b3f-a883-91f0669ff846"
+                    }
+                  ]
+                },
+                "url": {
+                  "raw": "localhost:3000/api/investor/single",
+                  "host": [
+                    "localhost"
+                  ],
+                  "port": "3000",
+                  "path": [
+                    "api",
+                    "investor",
+                    "single"
+                  ]
+                }
+              },
+              "response": []
+            }
+          ]
+        },
+        {
+          "name": "Investment",
+          "item": [
+            {
+              "name": "all",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoiaW52ZXN0b3IxIiwiZW1haWwiOiJpbnZlc3RvckBnbWFpbC5jb20iLCJ1c2VySWQiOiI2OTdjOGYzYWE2YTYzNDAxOTA1YmQxNzgiLCJyb2xlIjoiaW52ZXN0b3IiLCJpYXQiOjE3Njk3NzQ0MzUsImV4cCI6MTc2OTg2MDgzNX0.vRai73YnCcyQxNWemRRGlqqPicbj8Ojmn7TP_1m5PKE",
+                    "type": "text"
+                  }
+                ],
+                "body": {
+                  "mode": "urlencoded",
+                  "urlencoded": [
+                    {
+                      "key": "ideaId",
+                      "value": "697c94300d767046c3f963be",
+                      "type": "text"
+                    },
+                    {
+                      "key": "amount",
+                      "value": "10000",
+                      "type": "text",
+                      "uuid": "7b608546-f1f0-44a6-b343-79adc092e82b"
+                    },
+                    {
+                      "key": "equityPercent",
+                      "value": "50",
+                      "type": "text",
+                      "uuid": "5ea16f84-1db3-4c7d-9c0f-5e384b11fde9"
+                    }
+                  ]
+                },
+                "url": {
+                  "raw": "localhost:3000/api/investment/all",
+                  "host": [
+                    "localhost"
+                  ],
+                  "port": "3000",
+                  "path": [
+                    "api",
+                    "investment",
+                    "all"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "single",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoiaW52ZXN0b3IxIiwiZW1haWwiOiJpbnZlc3RvckBnbWFpbC5jb20iLCJ1c2VySWQiOiI2OTdjOGYzYWE2YTYzNDAxOTA1YmQxNzgiLCJyb2xlIjoiaW52ZXN0b3IiLCJpYXQiOjE3Njk3NzQ0MzUsImV4cCI6MTc2OTg2MDgzNX0.vRai73YnCcyQxNWemRRGlqqPicbj8Ojmn7TP_1m5PKE",
+                    "type": "text"
+                  }
+                ],
+                "body": {
+                  "mode": "urlencoded",
+                  "urlencoded": [
+                    {
+                      "key": "_id",
+                      "value": "697ca118c2431b6d5bbf994d",
+                      "type": "text",
+                      "uuid": "95ec0ad9-801d-4b3f-a883-91f0669ff846"
+                    }
+                  ]
+                },
+                "url": {
+                  "raw": "localhost:3000/api/investment/single",
+                  "host": [
+                    "localhost"
+                  ],
+                  "port": "3000",
+                  "path": [
+                    "api",
+                    "investment",
+                    "single"
+                  ]
+                }
+              },
+              "response": []
+            }
+          ]
+        },
+        {
+          "name": "Category",
+          "item": [
+            {
+              "name": "all",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoiaW52ZXN0b3IxIiwiZW1haWwiOiJpbnZlc3RvckBnbWFpbC5jb20iLCJ1c2VySWQiOiI2OTdjOGYzYWE2YTYzNDAxOTA1YmQxNzgiLCJyb2xlIjoiaW52ZXN0b3IiLCJpYXQiOjE3Njk3NzQ0MzUsImV4cCI6MTc2OTg2MDgzNX0.vRai73YnCcyQxNWemRRGlqqPicbj8Ojmn7TP_1m5PKE",
+                    "type": "text"
+                  }
+                ],
+                "url": {
+                  "raw": "localhost:3000/api/category/all",
+                  "host": [
+                    "localhost"
+                  ],
+                  "port": "3000",
+                  "path": [
+                    "api",
+                    "category",
+                    "all"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "single",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoiaW52ZXN0b3IxIiwiZW1haWwiOiJpbnZlc3RvckBnbWFpbC5jb20iLCJ1c2VySWQiOiI2OTdjOGYzYWE2YTYzNDAxOTA1YmQxNzgiLCJyb2xlIjoiaW52ZXN0b3IiLCJpYXQiOjE3Njk3NzQ0MzUsImV4cCI6MTc2OTg2MDgzNX0.vRai73YnCcyQxNWemRRGlqqPicbj8Ojmn7TP_1m5PKE",
+                    "type": "text"
+                  }
+                ],
+                "body": {
+                  "mode": "urlencoded",
+                  "urlencoded": [
+                    {
+                      "key": "_id",
+                      "value": "697c9195025a0462e6675634",
+                      "type": "text",
+                      "uuid": "95ec0ad9-801d-4b3f-a883-91f0669ff846"
+                    }
+                  ]
+                },
+                "url": {
+                  "raw": "localhost:3000/api/category/single",
+                  "host": [
+                    "localhost"
+                  ],
+                  "port": "3000",
+                  "path": [
+                    "api",
+                    "category",
+                    "single"
+                  ]
+                }
+              },
+              "response": []
+            }
+          ]
+        },
+        {
+          "name": "IdeaMedia",
+          "item": [
+            {
+              "name": "all",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoiaW52ZXN0b3IxIiwiZW1haWwiOiJpbnZlc3RvckBnbWFpbC5jb20iLCJ1c2VySWQiOiI2OTdjOGYzYWE2YTYzNDAxOTA1YmQxNzgiLCJyb2xlIjoiaW52ZXN0b3IiLCJpYXQiOjE3Njk3NzQ0MzUsImV4cCI6MTc2OTg2MDgzNX0.vRai73YnCcyQxNWemRRGlqqPicbj8Ojmn7TP_1m5PKE",
+                    "type": "text"
+                  }
+                ],
+                "url": {
+                  "raw": "localhost:3000/api/ideaMedia/all",
+                  "host": [
+                    "localhost"
+                  ],
+                  "port": "3000",
+                  "path": [
+                    "api",
+                    "ideaMedia",
+                    "all"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "single",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoiaW52ZXN0b3IxIiwiZW1haWwiOiJpbnZlc3RvckBnbWFpbC5jb20iLCJ1c2VySWQiOiI2OTdjOGYzYWE2YTYzNDAxOTA1YmQxNzgiLCJyb2xlIjoiaW52ZXN0b3IiLCJpYXQiOjE3Njk3NzQ0MzUsImV4cCI6MTc2OTg2MDgzNX0.vRai73YnCcyQxNWemRRGlqqPicbj8Ojmn7TP_1m5PKE",
+                    "type": "text"
+                  }
+                ],
+                "body": {
+                  "mode": "urlencoded",
+                  "urlencoded": [
+                    {
+                      "key": "_id",
+                      "value": "697c9a0951b8615bfb335d06",
+                      "type": "text",
+                      "uuid": "53371b2f-bbc2-4e4b-a09d-059e2d2bb5f7"
+                    }
+                  ]
+                },
+                "url": {
+                  "raw": "localhost:3000/api/ideaMedia/single",
+                  "host": [
+                    "localhost"
+                  ],
+                  "port": "3000",
+                  "path": [
+                    "api",
+                    "ideaMedia",
+                    "single"
+                  ]
+                }
+              },
+              "response": []
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
