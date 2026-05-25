@@ -421,7 +421,7 @@
         "has_json": false
       },
       "first_seen": 1772185862.7334394,
-      "scan_count": 18,
+      "scan_count": 20,
       "suspicious": false
     },
     "POST::/api/Users": {
@@ -429,7 +429,7 @@
         "has_json": false
       },
       "first_seen": 1772185865.033938,
-      "scan_count": 17,
+      "scan_count": 19,
       "suspicious": false
     },
     "POST::/api/BasketItems": {
@@ -437,7 +437,7 @@
         "has_json": false
       },
       "first_seen": 1772185867.3335984,
-      "scan_count": 17,
+      "scan_count": 19,
       "suspicious": false
     },
     "GET::/rest/products/search": {
@@ -445,7 +445,7 @@
         "has_json": false
       },
       "first_seen": 1772185869.628172,
-      "scan_count": 17,
+      "scan_count": 19,
       "suspicious": false
     },
     "GET::/rest/basket/{id}": {
@@ -453,7 +453,7 @@
         "has_json": false
       },
       "first_seen": 1772185871.9364903,
-      "scan_count": 17,
+      "scan_count": 19,
       "suspicious": false
     },
     "POST::/login": {
@@ -509,7 +509,7 @@
         "has_json": false
       },
       "first_seen": 1775120445.274336,
-      "scan_count": 60,
+      "scan_count": 69,
       "suspicious": false
     },
     "POST::/api/update": {
@@ -517,7 +517,7 @@
         "has_json": false
       },
       "first_seen": 1775120470.440643,
-      "scan_count": 59,
+      "scan_count": 68,
       "suspicious": false
     },
     "POST::/api/exec": {
@@ -525,7 +525,7 @@
         "has_json": false
       },
       "first_seen": 1775120495.7529597,
-      "scan_count": 59,
+      "scan_count": 68,
       "suspicious": false
     },
     "GET::/api/users": {
@@ -533,7 +533,7 @@
         "has_json": false
       },
       "first_seen": 1775120521.0850008,
-      "scan_count": 39,
+      "scan_count": 41,
       "suspicious": false
     },
     "GET::/api/user/{id}": {
@@ -541,7 +541,7 @@
         "has_json": false
       },
       "first_seen": 1775120546.2358134,
-      "scan_count": 59,
+      "scan_count": 68,
       "suspicious": false
     },
     "GET::/api/search": {
@@ -549,7 +549,7 @@
         "has_json": false
       },
       "first_seen": 1775120571.6057417,
-      "scan_count": 59,
+      "scan_count": 68,
       "suspicious": false
     },
     "POST::/api/register": {
@@ -557,7 +557,7 @@
         "has_json": false
       },
       "first_seen": 1775209704.7330592,
-      "scan_count": 21,
+      "scan_count": 23,
       "suspicious": false
     },
     "POST::/api/refresh": {
@@ -565,7 +565,7 @@
         "has_json": false
       },
       "first_seen": 1775209705.2454872,
-      "scan_count": 21,
+      "scan_count": 23,
       "suspicious": false
     },
     "POST::/api/upload": {
@@ -573,7 +573,7 @@
         "has_json": false
       },
       "first_seen": 1775209705.673375,
-      "scan_count": 20,
+      "scan_count": 22,
       "suspicious": false
     },
     "GET::/api/admin": {
@@ -581,7 +581,7 @@
         "has_json": false
       },
       "first_seen": 1775209706.7387412,
-      "scan_count": 40,
+      "scan_count": 49,
       "suspicious": false
     },
     "GET::/api/debug": {
@@ -589,7 +589,7 @@
         "has_json": false
       },
       "first_seen": 1775467917.3143191,
-      "scan_count": 20,
+      "scan_count": 27,
       "suspicious": false
     },
     "POST::/update-role": {
@@ -1125,7 +1125,7 @@
         "has_json": false
       },
       "first_seen": 1776762096.9757102,
-      "scan_count": 5,
+      "scan_count": 34,
       "suspicious": false
     },
     "POST::/api/incidents/{incident_id}/revoke": {
@@ -1133,7 +1133,7 @@
         "has_json": false
       },
       "first_seen": 1776762097.1421568,
-      "scan_count": 5,
+      "scan_count": 34,
       "suspicious": false
     },
     "GET::/api/incidents": {
@@ -1141,7 +1141,7 @@
         "has_json": false
       },
       "first_seen": 1776762097.824477,
-      "scan_count": 5,
+      "scan_count": 34,
       "suspicious": false
     },
     "GET::/api/incidents/{incident_id}": {
@@ -1149,7 +1149,7 @@
         "has_json": false
       },
       "first_seen": 1776762097.9350543,
-      "scan_count": 5,
+      "scan_count": 34,
       "suspicious": false
     },
     "GET::/api/assets/search": {
@@ -1157,7 +1157,7 @@
         "has_json": false
       },
       "first_seen": 1776762098.4598455,
-      "scan_count": 5,
+      "scan_count": 34,
       "suspicious": false
     },
     "POST::3000/admin/category/add": {
@@ -1165,7 +1165,7 @@
         "has_json": false
       },
       "first_seen": 1776766042.316478,
-      "scan_count": 3,
+      "scan_count": 9,
       "suspicious": false
     },
     "POST::3000/admin/category/changeStatus": {
@@ -1173,7 +1173,7 @@
         "has_json": false
       },
       "first_seen": 1776766042.5999181,
-      "scan_count": 3,
+      "scan_count": 9,
       "suspicious": false
     },
     "POST::3000/admin/category/delete": {
@@ -1181,7 +1181,7 @@
         "has_json": false
       },
       "first_seen": 1776766042.713202,
-      "scan_count": 3,
+      "scan_count": 9,
       "suspicious": false
     },
     "POST::3000/admin/category/update": {
@@ -1189,7 +1189,7 @@
         "has_json": false
       },
       "first_seen": 1776766042.8102202,
-      "scan_count": 3,
+      "scan_count": 9,
       "suspicious": false
     },
     "POST::3000/admin/investor/changeStatus": {
@@ -1197,7 +1197,7 @@
         "has_json": false
       },
       "first_seen": 1776766042.8809862,
-      "scan_count": 3,
+      "scan_count": 9,
       "suspicious": false
     },
     "POST::3000/admin/investor/delete": {
@@ -1205,7 +1205,7 @@
         "has_json": false
       },
       "first_seen": 1776766042.9501715,
-      "scan_count": 3,
+      "scan_count": 9,
       "suspicious": false
     },
     "POST::3000/admin/idea/changeStatus": {
@@ -1213,7 +1213,7 @@
         "has_json": false
       },
       "first_seen": 1776766043.0397055,
-      "scan_count": 3,
+      "scan_count": 9,
       "suspicious": false
     },
     "POST::3000/admin/idea/delete": {
@@ -1221,7 +1221,7 @@
         "has_json": false
       },
       "first_seen": 1776766043.122371,
-      "scan_count": 3,
+      "scan_count": 9,
       "suspicious": false
     },
     "POST::3000/api/user/update": {
@@ -1229,7 +1229,7 @@
         "has_json": false
       },
       "first_seen": 1776766043.2027125,
-      "scan_count": 3,
+      "scan_count": 9,
       "suspicious": false
     },
     "POST::3000/api/user/all": {
@@ -1237,7 +1237,7 @@
         "has_json": false
       },
       "first_seen": 1776766043.2730484,
-      "scan_count": 3,
+      "scan_count": 9,
       "suspicious": false
     },
     "POST::3000/admin/user/softDelete": {
@@ -1245,7 +1245,7 @@
         "has_json": false
       },
       "first_seen": 1776766043.3469548,
-      "scan_count": 3,
+      "scan_count": 9,
       "suspicious": false
     },
     "POST::3000/owner/idea/add": {
@@ -1253,7 +1253,7 @@
         "has_json": false
       },
       "first_seen": 1776766043.412068,
-      "scan_count": 3,
+      "scan_count": 9,
       "suspicious": false
     },
     "POST::3000/owner/idea/update": {
@@ -1261,7 +1261,7 @@
         "has_json": false
       },
       "first_seen": 1776766043.4716585,
-      "scan_count": 3,
+      "scan_count": 9,
       "suspicious": false
     },
     "POST::3000/owner/ideaMedia/add": {
@@ -1269,7 +1269,7 @@
         "has_json": false
       },
       "first_seen": 1776766043.5422714,
-      "scan_count": 3,
+      "scan_count": 9,
       "suspicious": false
     },
     "POST::3000/owner/ideaMedia/update": {
@@ -1277,7 +1277,7 @@
         "has_json": false
       },
       "first_seen": 1776766043.6038058,
-      "scan_count": 3,
+      "scan_count": 9,
       "suspicious": false
     },
     "POST::3000/owner/ideaComment/changeStatus": {
@@ -1285,7 +1285,7 @@
         "has_json": false
       },
       "first_seen": 1776766043.7095864,
-      "scan_count": 3,
+      "scan_count": 9,
       "suspicious": false
     },
     "POST::3000/owner/ideaLikes/changeStatus": {
@@ -1293,7 +1293,7 @@
         "has_json": false
       },
       "first_seen": 1776766043.849472,
-      "scan_count": 3,
+      "scan_count": 9,
       "suspicious": false
     },
     "POST::3000/investor/ideaLikes/add": {
@@ -1301,7 +1301,7 @@
         "has_json": false
       },
       "first_seen": 1776766043.9300108,
-      "scan_count": 3,
+      "scan_count": 9,
       "suspicious": false
     },
     "POST::3000/investor/ideaComment/add": {
@@ -1309,7 +1309,7 @@
         "has_json": false
       },
       "first_seen": 1776766044.0052574,
-      "scan_count": 3,
+      "scan_count": 9,
       "suspicious": false
     },
     "POST::3000/investor/ideaComment/update": {
@@ -1317,7 +1317,7 @@
         "has_json": false
       },
       "first_seen": 1776766044.074071,
-      "scan_count": 3,
+      "scan_count": 9,
       "suspicious": false
     },
     "POST::3000/investor/investment/add": {
@@ -1325,7 +1325,7 @@
         "has_json": false
       },
       "first_seen": 1776766044.146292,
-      "scan_count": 3,
+      "scan_count": 9,
       "suspicious": false
     },
     "POST::3000/investor/investment/changeStatus": {
@@ -1333,7 +1333,7 @@
         "has_json": false
       },
       "first_seen": 1776766044.227822,
-      "scan_count": 3,
+      "scan_count": 9,
       "suspicious": false
     },
     "POST::3000/investor/payment/add": {
@@ -1341,7 +1341,7 @@
         "has_json": false
       },
       "first_seen": 1776766044.30782,
-      "scan_count": 3,
+      "scan_count": 9,
       "suspicious": false
     },
     "POST::3000/investor/update": {
@@ -1349,7 +1349,7 @@
         "has_json": false
       },
       "first_seen": 1776766044.3714085,
-      "scan_count": 3,
+      "scan_count": 9,
       "suspicious": false
     },
     "POST::3000/api/user/login": {
@@ -1357,7 +1357,7 @@
         "has_json": false
       },
       "first_seen": 1776766044.5697925,
-      "scan_count": 3,
+      "scan_count": 9,
       "suspicious": false
     },
     "POST::3000/api/user/register": {
@@ -1365,7 +1365,7 @@
         "has_json": false
       },
       "first_seen": 1776766044.6490257,
-      "scan_count": 3,
+      "scan_count": 9,
       "suspicious": false
     },
     "POST::3000/api/investor/register": {
@@ -1373,7 +1373,7 @@
         "has_json": false
       },
       "first_seen": 1776766044.7114017,
-      "scan_count": 3,
+      "scan_count": 9,
       "suspicious": false
     },
     "POST::3000/api/idea/all": {
@@ -1381,7 +1381,7 @@
         "has_json": false
       },
       "first_seen": 1776766044.7685976,
-      "scan_count": 3,
+      "scan_count": 9,
       "suspicious": false
     },
     "POST::3000/api/idea/single": {
@@ -1389,7 +1389,7 @@
         "has_json": false
       },
       "first_seen": 1776766044.8493402,
-      "scan_count": 3,
+      "scan_count": 9,
       "suspicious": false
     },
     "POST::3000/api/ideaLikes/all": {
@@ -1397,7 +1397,7 @@
         "has_json": false
       },
       "first_seen": 1776766044.9235206,
-      "scan_count": 3,
+      "scan_count": 9,
       "suspicious": false
     },
     "POST::3000/api/ideaLikes/single": {
@@ -1405,7 +1405,7 @@
         "has_json": false
       },
       "first_seen": 1776766045.0003145,
-      "scan_count": 3,
+      "scan_count": 9,
       "suspicious": false
     },
     "POST::3000/api/ideaComment/all": {
@@ -1413,7 +1413,7 @@
         "has_json": false
       },
       "first_seen": 1776766045.0845594,
-      "scan_count": 3,
+      "scan_count": 9,
       "suspicious": false
     },
     "POST::3000/api/ideaComment/single": {
@@ -1421,7 +1421,7 @@
         "has_json": false
       },
       "first_seen": 1776766045.1848195,
-      "scan_count": 3,
+      "scan_count": 9,
       "suspicious": false
     },
     "POST::3000/api/payment/all": {
@@ -1429,7 +1429,7 @@
         "has_json": false
       },
       "first_seen": 1776766045.3112607,
-      "scan_count": 3,
+      "scan_count": 9,
       "suspicious": false
     },
     "POST::3000/api/payment/single": {
@@ -1437,7 +1437,7 @@
         "has_json": false
       },
       "first_seen": 1776766045.443577,
-      "scan_count": 3,
+      "scan_count": 9,
       "suspicious": false
     },
     "POST::3000/api/investor/all": {
@@ -1445,7 +1445,7 @@
         "has_json": false
       },
       "first_seen": 1776766045.7270594,
-      "scan_count": 3,
+      "scan_count": 9,
       "suspicious": false
     },
     "POST::3000/api/investor/single": {
@@ -1453,7 +1453,7 @@
         "has_json": false
       },
       "first_seen": 1776766045.8388913,
-      "scan_count": 3,
+      "scan_count": 9,
       "suspicious": false
     },
     "POST::3000/api/investment/all": {
@@ -1461,7 +1461,7 @@
         "has_json": false
       },
       "first_seen": 1776766045.9160035,
-      "scan_count": 3,
+      "scan_count": 9,
       "suspicious": false
     },
     "POST::3000/api/investment/single": {
@@ -1469,7 +1469,7 @@
         "has_json": false
       },
       "first_seen": 1776766045.9898527,
-      "scan_count": 3,
+      "scan_count": 9,
       "suspicious": false
     },
     "POST::3000/api/category/all": {
@@ -1477,7 +1477,7 @@
         "has_json": false
       },
       "first_seen": 1776766046.0727112,
-      "scan_count": 3,
+      "scan_count": 9,
       "suspicious": false
     },
     "POST::3000/api/category/single": {
@@ -1485,7 +1485,7 @@
         "has_json": false
       },
       "first_seen": 1776766046.1492743,
-      "scan_count": 3,
+      "scan_count": 9,
       "suspicious": false
     },
     "POST::3000/api/ideaMedia/all": {
@@ -1493,7 +1493,7 @@
         "has_json": false
       },
       "first_seen": 1776766046.2128801,
-      "scan_count": 3,
+      "scan_count": 9,
       "suspicious": false
     },
     "POST::3000/api/ideaMedia/single": {
@@ -1501,7 +1501,7 @@
         "has_json": false
       },
       "first_seen": 1776766046.2952065,
-      "scan_count": 3,
+      "scan_count": 9,
       "suspicious": false
     },
     "POST::5000/user/booking/add": {
@@ -2609,6 +2609,34 @@
         "cluster_id": 404,
         "confidence": 0,
         "timestamp": 1776759387.8077023
+      },
+      {
+        "payload": "{'path_params': {'id': '<math href=\\'javascript:alert(\"test\")\\'>'}, '__family__': \"<script>alert('test')</script>\"}",
+        "response_hash": "287f2ea0319e02a441a12de84f628e6bbd0d0cbf8277bfda220d30261dc1b415",
+        "cluster_id": 404,
+        "confidence": 0,
+        "timestamp": 1778573212.7487228
+      },
+      {
+        "payload": "{'path_params': {'id': \"' OR 'admin'='admin\"}, '__family__': ''}",
+        "response_hash": "d08559deac47e084003892c4abbdaef66254cf600ffcdba32bb2419bbe5361bf",
+        "cluster_id": 404,
+        "confidence": 0,
+        "timestamp": 1778573212.8431783
+      },
+      {
+        "payload": "{'path_params': {'id': 'admin'}, '__family__': ''}",
+        "response_hash": "4031e28829a1f20bc75ad968bd1f34979ed0cf1084518bdb256ff35dadef186c",
+        "cluster_id": 404,
+        "confidence": 0,
+        "timestamp": 1778577142.2191057
+      },
+      {
+        "payload": "{'path_params': {'id': \"<iframe src=javascript:alert('test')>\"}, '__family__': \"<script>alert('test')</script>\"}",
+        "response_hash": "5011b8d7a5a7ce623cc7b2a8e4730e19aa04d281c8ccb2ded5fa90921984053b",
+        "cluster_id": 404,
+        "confidence": 0,
+        "timestamp": 1778577142.3437262
       }
     ],
     "POST::/api/login": [
@@ -2794,6 +2822,13 @@
         "cluster_id": 404,
         "confidence": 0,
         "timestamp": 1776845207.7817152
+      },
+      {
+        "payload": "{'path_params': {'id': \"<script>alert('test')</script>\"}, '__family__': \"<script>alert('test')</script>\"}",
+        "response_hash": "0fc2acdabee04c180df95f35421a9cc56512baa619cca9efe279718c8409386b",
+        "cluster_id": 404,
+        "confidence": 0,
+        "timestamp": 1778569625.2031503
       }
     ],
     "GET::/api/search": [
@@ -3125,6 +3160,62 @@
         "cluster_id": 200,
         "confidence": 0,
         "timestamp": 1776845208.0479922
+      },
+      {
+        "payload": "{'params': {'q': '<math href=\\'javascript:alert(\"test\")\\'>'}, '__family__': \"<script>alert('test')</script>\"}",
+        "response_hash": "a2c7f6b9fe5434bb72c5d42714be55bddefe553e8d08720bc693d7e7bc6121fb",
+        "cluster_id": 200,
+        "confidence": 0,
+        "timestamp": 1778064559.0449646
+      },
+      {
+        "payload": "{'params': {'q': '\"><script>alert(\\'test\\')</script>'}, '__family__': \"<script>alert('test')</script>\"}",
+        "response_hash": "cf69c70d4f3d8582c99fb063bf6ebdecf0c955be8854665a9546bdb48eb01706",
+        "cluster_id": 200,
+        "confidence": 0,
+        "timestamp": 1778569504.725066
+      },
+      {
+        "payload": "{'params': {'q': '/fake/etc/passwd'}, '__family__': '../../fake/file.txt'}",
+        "response_hash": "556e7f62db0df467189887c82ea8e99f380575f6ac4ae92a2dd0c5891022fda5",
+        "cluster_id": 200,
+        "confidence": 0,
+        "timestamp": 1778569504.8076708
+      },
+      {
+        "payload": "{'params': {'q': \"'; SELECT * FROM fake_table--\"}, '__family__': \"' OR '1'='1\"}",
+        "response_hash": "15979667ddef2805928a00357cae132c4b03d0ef40be47f61ab06abcda354f3d",
+        "cluster_id": 200,
+        "confidence": 0,
+        "timestamp": 1778569625.4818966
+      },
+      {
+        "payload": "{'params': {'q': \"<svg/onload=alert('test')>\"}, '__family__': \"<script>alert('test')</script>\"}",
+        "response_hash": "47564f12cc562279b4f3e6c690492d733c6063ebf88f4bc323fcce4521cb0875",
+        "cluster_id": 200,
+        "confidence": 0,
+        "timestamp": 1778573534.7871232
+      },
+      {
+        "payload": "{'params': {'q': '/fake/proc/self/environ'}, '__family__': '../../fake/file.txt'}",
+        "response_hash": "66013094ff15fcdc4fc2d986e49fb6bd93e25ab19e64604089dbed07cd0a1b13",
+        "cluster_id": 200,
+        "confidence": 0,
+        "timestamp": 1778577411.6462588
+      },
+      {
+        "payload": "{'params': {'q': '..\\\\..\\\\..\\\\windows\\\\fake.ini'}, '__family__': '../../fake/file.txt'}",
+        "response_hash": "050faeeb825bd87d54215e3894693fcaba3d55379deb7653717dd40003f2080a",
+        "cluster_id": 200,
+        "confidence": 0,
+        "timestamp": 1778577411.8069704
+      },
+      {
+        "payload": "{'params': {'q': '../../../fake/file.txt'}, '__family__': '../../fake/file.txt'}",
+        "response_hash": "33e57de4401f4bb90fc0a78d4ba8ac5de87788357b96c25aeb02bc57f326e729",
+        "cluster_id": 200,
+        "confidence": 0,
+        "timestamp": 1778577411.921551
       }
     ],
     "POST::/api/register": [
@@ -7501,6 +7592,90 @@
         "cluster_id": 404,
         "confidence": 0,
         "timestamp": 1776847830.7986386
+      },
+      {
+        "payload": "{'path_params': {'incident_id': '<math href=\\'javascript:alert(\"test\")\\'>'}, '__family__': \"<script>alert('test')</script>\"}",
+        "response_hash": "426dbff42ff640ea0ccdb6a0e54bded05428e0ebe8822f95c082f6f07dd49025",
+        "cluster_id": 404,
+        "confidence": 0,
+        "timestamp": 1777714787.961378
+      },
+      {
+        "payload": "{'path_params': {'incident_id': \"' OR 1=1--\"}, '__family__': \"' OR '1'='1\"}",
+        "response_hash": "025485cc7e33ac1cd6ebfdb3339f34c3b338c74fe36758a10e605126941dd78c",
+        "cluster_id": 404,
+        "confidence": 0,
+        "timestamp": 1777714788.1923947
+      },
+      {
+        "payload": "{'path_params': {'incident_id': ''}, '__family__': ''}",
+        "response_hash": "86ad5fbdd4ed14f4ccca18b888f5f39a1be456ba499e392e42ac00a77f909910",
+        "cluster_id": 404,
+        "confidence": 0,
+        "timestamp": 1778064498.3549762
+      },
+      {
+        "payload": "{'path_params': {'incident_id': \"<img src=x onerror=alert('test')>\"}, '__family__': \"<script>alert('test')</script>\"}",
+        "response_hash": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "cluster_id": 0,
+        "confidence": 0,
+        "timestamp": 1778223429.1729653
+      },
+      {
+        "payload": "{'path_params': {'incident_id': \"' UNION SELECT null--\"}, '__family__': \"' OR '1'='1\"}",
+        "response_hash": "80c1a5fc73e5ee1f446f109843780140cda1ae941b7dab024cc5275822afb5cc",
+        "cluster_id": 404,
+        "confidence": 0,
+        "timestamp": 1778321637.2387877
+      },
+      {
+        "payload": "{'path_params': {'incident_id': '/fake/proc/self/environ'}, '__family__': '../../fake/file.txt'}",
+        "response_hash": "40b92f312f52ee4a01a45e02644e8567cc7f3d57cfcf387fe571cf26c9a48c15",
+        "cluster_id": 404,
+        "confidence": 0,
+        "timestamp": 1778487151.7653022
+      },
+      {
+        "payload": "{'path_params': {'incident_id': \"' OR ''='\"}, '__family__': \"' OR '1'='1\"}",
+        "response_hash": "bcb7ac2a2eed3542f22f1231981e268e00640560674dbf51e21c8208acf44b6b",
+        "cluster_id": 404,
+        "confidence": 0,
+        "timestamp": 1778487151.8721726
+      },
+      {
+        "payload": "{'path_params': {'incident_id': '/fake/etc/passwd'}, '__family__': '../../fake/file.txt'}",
+        "response_hash": "d7e3446ba2b66ee49e1b68577026722ee31c4c05da6e6da9d755c188ff03dd4b",
+        "cluster_id": 404,
+        "confidence": 0,
+        "timestamp": 1778487384.460292
+      },
+      {
+        "payload": "{'path_params': {'incident_id': \"' OR 'admin'='admin\"}, '__family__': ''}",
+        "response_hash": "62bf42f3cda6878fcc4311dcbc063942c601fd2d1e14fe13897786b51f70f25a",
+        "cluster_id": 404,
+        "confidence": 0,
+        "timestamp": 1778488593.8677373
+      },
+      {
+        "payload": "{'path_params': {'incident_id': \"<svg/onload=alert('test')>\"}, '__family__': \"<script>alert('test')</script>\"}",
+        "response_hash": "99b70b2eaa37694be29a5cf5b808c984d1168e9429357fa077eb45f30eb73faa",
+        "cluster_id": 404,
+        "confidence": 0,
+        "timestamp": 1778488645.5083525
+      },
+      {
+        "payload": "{'path_params': {'incident_id': \"' OR 1=1#\"}, '__family__': \"' OR '1'='1\"}",
+        "response_hash": "75190a878781898af8b6f3e8c510954819ddd22287d799b31626fec969270861",
+        "cluster_id": 404,
+        "confidence": 0,
+        "timestamp": 1778488987.3368006
+      },
+      {
+        "payload": "{'path_params': {'incident_id': \"<script>alert('test')</script>\"}, '__family__': \"<script>alert('test')</script>\"}",
+        "response_hash": "874df98ec2e0bdfe085ca95b9711a625e65c5c61c6dd91a644050e6c225cdcee",
+        "cluster_id": 404,
+        "confidence": 0,
+        "timestamp": 1778488987.5713916
       }
     ],
     "GET::/api/incidents/{incident_id}": [
@@ -7615,6 +7790,97 @@
         "cluster_id": 404,
         "confidence": 0,
         "timestamp": 1776847831.4659438
+      },
+      {
+        "payload": "{'path_params': {'incident_id': ''}, '__family__': ''}",
+        "response_hash": "eede9e9ba3b2ab4171ef9d6371267291de3598f89f54d76fbf3beed7fc874bfb",
+        "cluster_id": 404,
+        "confidence": 0,
+        "timestamp": 1777714788.7353268
+      },
+      {
+        "payload": "{'path_params': {'incident_id': 'null'}, '__family__': ''}",
+        "response_hash": "e3462d77ce93fadb28e3e48ffdc3a45c24bfe2ebde7c3dc39828075c37f2a93e",
+        "cluster_id": 404,
+        "confidence": 0,
+        "timestamp": 1778064498.761902
+      },
+      {
+        "payload": "{'path_params': {'incident_id': \"' OR 1=1/*\"}, '__family__': \"' OR '1'='1\"}",
+        "response_hash": "1a0d381bb4619043de6f3a33416281d9b25e838d60f4818a278afefa8c23c476",
+        "cluster_id": 404,
+        "confidence": 0,
+        "timestamp": 1778064903.9194782
+      },
+      {
+        "payload": "{'path_params': {'incident_id': \"' OR 1=1#\"}, '__family__': \"' OR '1'='1\"}",
+        "response_hash": "8c31a6699f365b7d266e6180a6871e0ae203df47dd30ab4c4e47e7ab7fc6dacf",
+        "cluster_id": 404,
+        "confidence": 0,
+        "timestamp": 1778064904.1494215
+      },
+      {
+        "payload": "{'path_params': {'incident_id': ''}, '__family__': ''}",
+        "response_hash": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "cluster_id": 0,
+        "confidence": 0,
+        "timestamp": 1778223466.9013755
+      },
+      {
+        "payload": "{'path_params': {'incident_id': 'administrator'}, '__family__': ''}",
+        "response_hash": "36abfd1c057c200440e85a2ffbf9f9c02d5d604662d84484ffb337f9c7107841",
+        "cluster_id": 404,
+        "confidence": 0,
+        "timestamp": 1778320062.412176
+      },
+      {
+        "payload": "{'path_params': {'incident_id': \"<body onload=alert('test')>\"}, '__family__': \"<script>alert('test')</script>\"}",
+        "response_hash": "6fddc11edac3286e44dc06b625cc4665edcec7fd5585f386907f8df8b2ba39d6",
+        "cluster_id": 404,
+        "confidence": 0,
+        "timestamp": 1778321280.5314007
+      },
+      {
+        "payload": "{'path_params': {'incident_id': \"' UNION SELECT null--\"}, '__family__': \"' OR '1'='1\"}",
+        "response_hash": "d72cd7498cd861ce4bde9ec68b4f14fd33e17257c374902430bad81ac3f35801",
+        "cluster_id": 404,
+        "confidence": 0,
+        "timestamp": 1778321614.1139514
+      },
+      {
+        "payload": "{'path_params': {'incident_id': 'true'}, '__family__': ''}",
+        "response_hash": "6b612de1417bfb89445ab5366aa0910867dd0357edcd7b56a67b73c24114cda7",
+        "cluster_id": 404,
+        "confidence": 0,
+        "timestamp": 1778321614.1741
+      },
+      {
+        "payload": "{'path_params': {'incident_id': '..%2f..%2f..%2ffake%2fpasswd'}, '__family__': '../../fake/file.txt'}",
+        "response_hash": "ee98f1a8defcef60b10ff275cbb9c9a1c118e94af4419bfef7b2b9412894d281",
+        "cluster_id": 404,
+        "confidence": 0,
+        "timestamp": 1778321614.2267957
+      },
+      {
+        "payload": "{'path_params': {'incident_id': '<math href=\\'javascript:alert(\"test\")\\'>'}, '__family__': \"<script>alert('test')</script>\"}",
+        "response_hash": "8c1ae0516c780c6afcab57df2b43aecf95dcb4bfaf8e68d56b3b12d4566f13bf",
+        "cluster_id": 404,
+        "confidence": 0,
+        "timestamp": 1778488594.6334574
+      },
+      {
+        "payload": "{'path_params': {'incident_id': \"' OR ''='\"}, '__family__': \"' OR '1'='1\"}",
+        "response_hash": "55c352699f095d369c79e0b5148de4af1a6fa3d78eb043b117d34ae9498db802",
+        "cluster_id": 404,
+        "confidence": 0,
+        "timestamp": 1778488646.341548
+      },
+      {
+        "payload": "{'path_params': {'incident_id': \"<script>alert('test')</script>\"}, '__family__': \"<script>alert('test')</script>\"}",
+        "response_hash": "6a79f5bfa7d28de6b4ec6b29f732328a1d241d7891c4e2cc2395fef31dc7f415",
+        "cluster_id": 404,
+        "confidence": 0,
+        "timestamp": 1778572742.2268999
       }
     ],
     "GET::/api/assets/search": [
@@ -7624,6 +7890,13 @@
         "cluster_id": 404,
         "confidence": 0,
         "timestamp": 1776762098.5319946
+      },
+      {
+        "payload": "{'params': {'q': \"' OR 1=1/*\"}, '__family__': \"' OR '1'='1\"}",
+        "response_hash": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "cluster_id": 0,
+        "confidence": 0,
+        "timestamp": 1778223490.9437451
       }
     ]
   },

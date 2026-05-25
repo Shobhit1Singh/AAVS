@@ -25,6 +25,7 @@ export default function MainLayout({ children }) {
     { to: "/activescan", icon: Activity, label: "Active Scans" },
     { to: "/results", icon: BarChart3, label: "Results" },
     { to: "/details", icon: FileText, label: "Details" },
+    { to: "/solutions", icon: FileText, label: "AI Generated Report & Solutions" },
     { to: "/setting", icon: Settings, label: "Settings" },
     { to: "/register", icon: UserPlus, label: "Register" },
   ]

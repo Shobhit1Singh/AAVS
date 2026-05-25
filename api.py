@@ -13,8 +13,23 @@ import tempfile
 import os
 import uuid
 import traceback
+import psycopg2
 
 from scanner_controller import run_scan
+
+
+# ==========================================================
+# DB CONNECTION
+# ==========================================================
+
+def get_conn():
+    return psycopg2.connect(
+        dbname="aavs_attacks",
+        user="postgres",
+        password="Waheguru23@",
+        host="localhost",
+        port="5432"
+    )
 
 
 # ==========================================================
@@ -24,12 +39,12 @@ from scanner_controller import run_scan
 app = FastAPI(
     title="API Security Scanner",
     version="2.0.0",
-    description="Background API scanner service. Because manually testing endpoints is how people lose weekends."
+    description="Background API scanner service."
 )
 
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["*"],   # tighten in production, obviously
+    allow_origins=["*"],
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
@@ -38,7 +53,6 @@ app.add_middleware(
 
 # ==========================================================
 # MEMORY STORE
-# Replace later with Redis / DB if you enjoy scaling.
 # ==========================================================
 
 results_store = {}
@@ -67,6 +81,7 @@ def create_scan_record(status="queued"):
         "created_at": now(),
         "updated_at": now(),
         "result": [],
+        "ai_report": "",
         "error": None
     }
 
@@ -92,22 +107,76 @@ def safe_remove(path):
 # ==========================================================
 
 def run_and_store(scan_id, spec_path, base_url, delete_file=False):
-    try:
-        update_scan(scan_id, status="running")
 
-        findings = run_scan(
+    try:
+
+        update_scan(
+            scan_id,
+            status="running"
+        )
+
+        scan_result = run_scan(
             spec_path,
             base_url=base_url,
             mode="live"
         )
 
+        # print("\n========== SCAN RESULT RECEIVED ==========\n")
+
+        # print(scan_result)
+
+        findings = scan_result.get("findings", [])
+
+        ai_report = scan_result.get(
+            "ai_report",
+            ""
+        )
+
+        # print("\n========== FINDINGS COUNT ==========\n")
+
+        # print(len(findings))
+
+        conn = get_conn()
+        cur = conn.cursor()
+
+        for v in findings:
+
+            if not isinstance(v, dict):
+                continue
+
+            cur.execute("""
+                INSERT INTO scans (
+                    scan_id,
+                    attack_type,
+                    severity,
+                    endpoint,
+                    payload,
+                    solution
+                )
+                VALUES (%s, %s, %s, %s, %s, %s)
+            """, (
+                scan_id,
+                v.get("reason"),
+                v.get("severity"),
+                v.get("endpoint"),
+                v.get("payload", ""),
+                "Auto-detected vulnerability"
+            ))
+
+        conn.commit()
+        conn.close()
+
         update_scan(
             scan_id,
             status="completed",
-            result=findings
+            result=findings,
+            ai_report=ai_report
         )
 
     except Exception as e:
+
+        print("\n========== API ERROR ==========\n")
+
         print(traceback.format_exc())
 
         update_scan(
@@ -117,6 +186,7 @@ def run_and_store(scan_id, spec_path, base_url, delete_file=False):
         )
 
     finally:
+
         if delete_file:
             safe_remove(spec_path)
 
@@ -143,7 +213,7 @@ def health():
 
 
 # ==========================================================
-# START SCAN BY FILE UPLOAD
+# START SCAN BY FILE
 # ==========================================================
 
 @app.post("/scan/file")
@@ -152,6 +222,7 @@ async def scan_with_file(
     file: UploadFile = File(...),
     base_url: str = Form(...)
 ):
+
     if not base_url.strip():
         raise HTTPException(
             status_code=400,
@@ -172,7 +243,9 @@ async def scan_with_file(
         delete=False,
         suffix=".json"
     ) as tmp:
+
         tmp.write(content)
+
         tmp_path = tmp.name
 
     results_store[scan_id] = create_scan_record()
@@ -192,46 +265,14 @@ async def scan_with_file(
 
 
 # ==========================================================
-# START SCAN BY EXISTING LOCAL SPEC PATH
-# Good for CLI workflows.
-# ==========================================================
-
-@app.post("/scan/url")
-def scan_from_path(
-    payload: URLScanRequest,
-    background_tasks: BackgroundTasks
-):
-    if not os.path.exists(payload.spec_path):
-        raise HTTPException(
-            status_code=404,
-            detail="Spec file not found"
-        )
-
-    scan_id = str(uuid.uuid4())
-
-    results_store[scan_id] = create_scan_record()
-
-    background_tasks.add_task(
-        run_and_store,
-        scan_id,
-        payload.spec_path,
-        payload.base_url.strip(),
-        False
-    )
-
-    return {
-        "scan_id": scan_id,
-        "status": "queued"
-    }
-
-
-# ==========================================================
 # GET RESULT
 # ==========================================================
 
 @app.get("/scan/{scan_id}")
 def get_scan_result(scan_id: str):
+
     if scan_id not in results_store:
+
         raise HTTPException(
             status_code=404,
             detail="Scan ID not found"
@@ -255,22 +296,22 @@ def get_all_scans():
 
 @app.get("/active-scans")
 def get_active_scans():
-    active = {}
 
-    for scan_id, data in results_store.items():
-        if data["status"] in ["queued", "running"]:
-            active[scan_id] = data
-
-    return active
+    return {
+        k: v for k, v in results_store.items()
+        if v["status"] in ["queued", "running"]
+    }
 
 
 # ==========================================================
-# DELETE OLD SCAN
+# DELETE SCAN
 # ==========================================================
 
 @app.delete("/scan/{scan_id}")
 def delete_scan(scan_id: str):
+
     if scan_id not in results_store:
+
         raise HTTPException(
             status_code=404,
             detail="Scan not found"

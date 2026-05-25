@@ -4,16 +4,19 @@ import json
 import argparse
 import base64
 from copy import deepcopy
-import re
 import jwt
 from colorama import Fore, Style
+
 from report_generator import generate_html_report
 from parser.parser_factory import ParserFactory
 from core.Severity_engine import SeverityEngine
 from core.Schema_Validator import SchemaAwareValidator
 from attacks.attack_generator import AttackGenerator
 from attacks.async_executor import (
-    RealHTTPExecutor, MockExecutor,ReplayExecutor,)
+    RealHTTPExecutor,
+    MockExecutor,
+    ReplayExecutor,
+)
 from analyser.response_analyser import ResponseAnalyzer
 from analyser.endpoints_risk_scoring_engine import EndpointRiskScorer
 from core.semantic_diff_engine import SemanticDiffEngine
@@ -21,31 +24,57 @@ from core.payload_strategy import PayloadStrategy
 from core.scan_memory import ScanMemory
 from core.execution_engine import ExecutionEngine
 from core.intelligence_core import IntelligenceCore
+
+from gemini import generate_security_report
+
+
 def decode_jwt(token):
     try:
-        return jwt.decode(token, options={"verify_signature": False})
+        return jwt.decode(
+            token,
+            options={"verify_signature": False}
+        )
     except:
         return None
+
+
 def encode_none(payload):
-    header = {"alg": "none", "typ": "JWT"}
+
+    header = {
+        "alg": "none",
+        "typ": "JWT"
+    }
 
     def b64(data):
+
         return base64.urlsafe_b64encode(
             json.dumps(data).encode()
         ).rstrip(b"=").decode()
 
     return f"{b64(header)}.{b64(payload)}."
+
+
 def tamper_role(payload):
+
     p = deepcopy(payload)
+
     p["role"] = "admin"
+
     return p
+
+
 def remove_signature(token):
+
     parts = token.split(".")
+
     if len(parts) == 3:
         return parts[0] + "." + parts[1] + "."
+
     return token
 
+
 def clean_base_url(base_url):
+
     if not base_url:
         return None
 
@@ -66,6 +95,7 @@ def add_finding(
     reason,
     evidence
 ):
+
     issue = {
         "endpoint": path,
         "method": method,
@@ -82,7 +112,11 @@ def add_finding(
         "vulnerabilities": [
             {
                 "severity": severity,
-                "type": reason}]    })
+                "type": reason
+            }
+        ]
+    })
+
 
 class ExploitValidator:
 
@@ -90,7 +124,9 @@ class ExploitValidator:
         self.exec = execution_engine
 
     async def validate_idor(self, endpoint):
+
         try:
+
             path = endpoint["path"].lower()
 
             if "{" not in path:
@@ -99,6 +135,7 @@ class ExploitValidator:
             responses = []
 
             for val in ["1", "2", "3"]:
+
                 res = await self.exec.execute(
                     endpoint,
                     {
@@ -112,19 +149,30 @@ class ExploitValidator:
                 )
 
                 if res and res.get("status_code") == 200:
+
                     responses.append(
                         res.get("response_body", "")[:300]
                     )
 
             if len(set(responses)) > 1:
-                return "Multiple object IDs returned different records"
+
+                return (
+                    "Multiple object IDs returned "
+                    "different records"
+                )
 
         except:
             return None
 
     async def validate_priv_esc(self, endpoint):
+
         try:
-            if endpoint["method"] not in ["POST", "PUT", "PATCH"]:
+
+            if endpoint["method"] not in [
+                "POST",
+                "PUT",
+                "PATCH"
+            ]:
                 return None
 
             res = await self.exec.execute(
@@ -137,20 +185,34 @@ class ExploitValidator:
                 }
             )
 
-            if res and res.get("status_code") in [200, 201]:
-                return "Sensitive privilege fields accepted"
+            if res and res.get("status_code") in [
+                200,
+                201
+            ]:
+
+                return (
+                    "Sensitive privilege fields accepted"
+                )
 
         except:
             return None
 
     async def validate_data_leak(self, endpoint):
+
         try:
-            res = await self.exec.execute(endpoint, {})
+
+            res = await self.exec.execute(
+                endpoint,
+                {}
+            )
 
             if not res:
                 return None
 
-            body = res.get("response_body", "").lower()
+            body = (
+                res.get("response_body", "")
+                .lower()
+            )
 
             for word in [
                 "password",
@@ -159,21 +221,39 @@ class ExploitValidator:
                 "api_key",
                 "authorization"
             ]:
+
                 if word in body:
-                    return f"Sensitive data exposed: {word}"
+
+                    return (
+                        f"Sensitive data exposed: {word}"
+                    )
 
         except:
             return None
 
-    async def validate_auth_bypass(self, endpoint, jwt_token):
+    async def validate_auth_bypass(
+        self,
+        endpoint,
+        jwt_token
+    ):
+
         try:
+
             no_auth = await self.exec.execute(
                 endpoint,
-                {"headers": {}}
+                {
+                    "headers": {}
+                }
             )
 
-            if no_auth and no_auth.get("status_code") == 200:
-                return "Endpoint accessible without auth"
+            if (
+                no_auth
+                and no_auth.get("status_code") == 200
+            ):
+
+                return (
+                    "Endpoint accessible without auth"
+                )
 
             decoded = decode_jwt(jwt_token)
 
@@ -193,21 +273,29 @@ class ExploitValidator:
                 }
             )
 
-            if forged_res and forged_res.get("status_code") == 200:
+            if (
+                forged_res
+                and forged_res.get("status_code") == 200
+            ):
+
                 return "Forged JWT accepted"
 
         except:
             return None
+
+
 def create_executor(
     mode,
     base_url=None,
     replay_file=None
 ):
+
     base_url = clean_base_url(base_url)
 
     if mode == "live":
 
         if not base_url:
+
             raise ValueError(
                 "base_url is required in live mode"
             )
@@ -222,18 +310,22 @@ def create_executor(
         return MockExecutor()
 
     if mode == "replay":
+
         with open(replay_file, "r") as f:
             recorded = json.load(f)
 
         return ReplayExecutor(recorded)
 
     raise ValueError("Invalid execution mode")
+
+
 async def run_scan_async(
     swagger_path,
     base_url=None,
     mode="live",
     replay_file=None
 ):
+
     base_url = clean_base_url(base_url)
 
     parser = ParserFactory.create_parser(
@@ -248,13 +340,19 @@ async def run_scan_async(
     )
 
     attacker = AttackGenerator()
+
     analyzer = ResponseAnalyzer()
+
     semantic_engine = SemanticDiffEngine()
+
     risk_scorer = EndpointRiskScorer()
+
     payload_strategy = PayloadStrategy()
+
     memory = ScanMemory()
 
     severity_engine = SeverityEngine()
+
     schema_validator = SchemaAwareValidator()
 
     execution_engine = ExecutionEngine(
@@ -273,16 +371,21 @@ async def run_scan_async(
     )
 
     endpoints = parser.get_all_endpoints()
-    ranked_endpoints = risk_scorer.rank_endpoints(
-        endpoints
+
+    ranked_endpoints = (
+        risk_scorer.rank_endpoints(endpoints)
     )
 
     findings = []
+
+    endpoint_contexts = []
+
     jwt_token = None
 
     for endpoint in ranked_endpoints:
 
         path = endpoint["path"]
+
         method = endpoint["method"]
 
         print(
@@ -290,11 +393,24 @@ async def run_scan_async(
             f"{method} {path}"
             f"{Style.RESET_ALL}"
         )
+
+        details = parser.get_endpoint_details(
+            path,
+            method
+        )
+
+        endpoint_contexts.append({
+            "endpoint": path,
+            "method": method,
+            "parameters":details.get("parameters",[])
+        })
+
         schema_findings = schema_validator.validate(
             endpoint
         )
 
         for sf in schema_findings:
+
             add_finding(
                 findings,
                 severity_engine,
@@ -304,13 +420,9 @@ async def run_scan_async(
                 sf["type"],
                 "Schema analysis"
             )
+
         baseline = await execution_engine.get_baseline(
             endpoint
-        )
-
-        details = parser.get_endpoint_details(
-            path,
-            method
         )
 
         base_payloads = attacker.generate_for_endpoint(
@@ -345,11 +457,13 @@ async def run_scan_async(
                 baseline,
                 result
             )
+
         idor = await validator.validate_idor(
             endpoint
         )
 
         if idor:
+
             add_finding(
                 findings,
                 severity_engine,
@@ -365,6 +479,7 @@ async def run_scan_async(
         )
 
         if priv:
+
             add_finding(
                 findings,
                 severity_engine,
@@ -380,6 +495,7 @@ async def run_scan_async(
         )
 
         if leak:
+
             add_finding(
                 findings,
                 severity_engine,
@@ -398,6 +514,7 @@ async def run_scan_async(
             )
 
             if auth:
+
                 add_finding(
                     findings,
                     severity_engine,
@@ -407,6 +524,7 @@ async def run_scan_async(
                     "Auth Bypass",
                     auth
                 )
+
     print(
         f"\n{Fore.GREEN}✓ Completed scanning "
         f"{len(ranked_endpoints)} endpoints"
@@ -415,22 +533,51 @@ async def run_scan_async(
 
     analyzer.print_summary()
 
-    print("\n========== FINDINGS ==========")
+    print("\n========== FINDINGS ==========\n")
 
     if findings:
+
         for item in findings:
             print(json.dumps(item, indent=2))
+
     else:
         print("No findings")
 
     severity_engine.print_ranking()
 
-    return findings
+    llm_input = {
+        "findings": findings[:20],
+        "endpoints": endpoint_contexts[:20],
+        "total_endpoints_scanned": len(ranked_endpoints)
+    }
+
+    print(
+        "\n========== GENERATING AI SECURITY REPORT ==========\n"
+    )
+
+    ai_report = generate_security_report(
+        llm_input
+    )
+
+    print(
+        "\n========== AI SECURITY REPORT ==========\n"
+    )
+
+    print(ai_report)
+
+    return {
+        "findings": findings,
+        "ai_report": ai_report
+    }
+
+
 def run_scan(
     swagger_path,
     base_url=None,
     mode="live",
-    replay_file=None):
+    replay_file=None
+):
+
     return asyncio.run(
         run_scan_async(
             swagger_path,
@@ -439,6 +586,8 @@ def run_scan(
             replay_file
         )
     )
+
+
 if __name__ == "__main__":
 
     parser = argparse.ArgumentParser()
@@ -450,7 +599,8 @@ if __name__ == "__main__":
 
     parser.add_argument(
         "--base_url",
-        default="http://localhost:3000"    )
+        default="http://localhost:3000"
+    )
 
     parser.add_argument(
         "--mode",
@@ -458,18 +608,26 @@ if __name__ == "__main__":
         choices=[
             "live",
             "mock",
-            "replay"        ]    )
+            "replay"
+        ]
+    )
 
     parser.add_argument(
         "--replay_file",
-        default=None )
+        default=None
+    )
 
     args = parser.parse_args()
 
-    findings = run_scan(
+    result = run_scan(
         os.path.abspath(args.spec),
         base_url=args.base_url,
         mode=args.mode,
-        replay_file=args.replay_file )
+        replay_file=args.replay_file
+    )
 
-    # generate_html_report(findings)
+    # print(
+    #     "\n========== FINAL RESULT ==========\n"
+    # )
+
+    # print(json.dumps(result, indent=2))

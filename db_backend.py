@@ -14,9 +14,9 @@ class Scan(BaseModel):
 
 def get_conn():
     return psycopg2.connect(
-        dbname="aavs",
+        dbname="aavs_attacks",
         user="postgres",
-        password="your_password",
+        password="Waheguru23@",
         host="localhost",
         port="5432"
     )

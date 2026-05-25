@@ -4,7 +4,6 @@ import { useNavigate } from "react-router-dom"
 export default function NewScan() {
   const navigate = useNavigate()
 
-  // Autofilled because typing localhost repeatedly is a tax on human life
   const [targetUrl, setTargetUrl] = useState("http://localhost:3000")
   const [scanMode, setScanMode] = useState("active")
   const [authToken, setAuthToken] = useState("")
@@ -20,12 +19,12 @@ export default function NewScan() {
     const cleanUrl = targetUrl.trim()
 
     if (!cleanUrl) {
-      setStatus("Enter API Target URL. Clairvoyance is still unavailable.")
+      setStatus("Enter API Target URL")
       return
     }
 
     if (!file) {
-      setStatus("Upload your OpenAPI / Swagger file.")
+      setStatus("Upload OpenAPI / Swagger file")
       return
     }
 
@@ -57,8 +56,18 @@ export default function NewScan() {
         return
       }
 
-      setScanId(data.scan_id)
+      const id = data.scan_id
+
+      setScanId(id)
       setStatus("Scan started successfully")
+
+      // 🔥 IMPORTANT: store scan id locally (optional but useful)
+      localStorage.setItem("last_scan_id", id)
+
+      // // 🔥 REDIRECT to results page (this is what you were missing)
+      // setTimeout(() => {
+      //   navigate(`/results/${id}`)
+      // }, 1000)
 
     } catch (error) {
       setStatus("Backend not reachable")
@@ -74,6 +83,7 @@ export default function NewScan() {
       </h2>
 
       <form onSubmit={startScan} className="space-y-5">
+
         <div>
           <label className="block mb-1 text-sm text-gray-300">
             API Target URL

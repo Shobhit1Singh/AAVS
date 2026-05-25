@@ -50,12 +50,40 @@ export default function Results() {
       }
 
       if (data.status === "completed") {
-        setVulns(data.result || [])
+        const results = data.result || []
+        setVulns(results)
         setStatus("")
+
+        // 🔥 SAVE TO DB HERE
+        saveToDB(id, results)
       }
 
     } catch (error) {
       setStatus("Failed to fetch results")
+    }
+  }
+
+  // ✅ NEW FUNCTION
+  const saveToDB = async (scanId, results) => {
+    try {
+      for (const v of results) {
+        await fetch("http://localhost:8000/scan", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json"
+          },
+          body: JSON.stringify({
+            scan_id: scanId,
+            attack_type: v.reason,
+            severity: v.severity,
+            endpoint: v.endpoint,
+            payload: v.payload || "",
+            solution: "Auto-detected vulnerability"
+          })
+        })
+      }
+    } catch (err) {
+      console.log("Failed to store in DB")
     }
   }
 
@@ -83,7 +111,6 @@ export default function Results() {
         Scan Results
       </h2>
 
-      {/* Scan ID Search */}
       <div className="flex gap-3 mb-6">
         <input
           type="text"

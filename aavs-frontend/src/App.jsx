@@ -5,6 +5,7 @@ import NewScan from "./pages/NewScans"
 import ActiveScans from "./pages/ActiveScans"
 import Results from "./pages/Results"
 import VulnerabilityDetails from "./pages/VulnerabilityDetails"
+import AISolutionPage from "./pages/solutions"
 import Login from "./pages/login"
 import SettingsPage from "./pages/settings"
 import Register from "./pages/register"
@@ -18,6 +19,7 @@ export default function App(){
           <Route path="/activescan" element={<ActiveScans />} />
           <Route path="/results" element={<Results />} />
           <Route path="/details" element={<VulnerabilityDetails />} />
+          <Route path="/solutions" element={<AISolutionPage />} />
           <Route path="/login" element={<Login />} />
           <Route path="/setting" element={<SettingsPage />} />
           <Route path="/register" element={<Register />} />

@@ -96,7 +96,6 @@ export default function Dashboard() {
 
   return (
     <div className="min-h-screen bg-black text-white p-6">
-      {/* Header */}
       <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-4">
         <div>
           <h1 className="text-4xl font-bold">VULNPROBE Dashboard</h1>
@@ -119,7 +118,6 @@ export default function Dashboard() {
         </div>
       </div>
 
-      {/* Stats */}
       <div className="grid grid-cols-2 lg:grid-cols-6 gap-4 mt-8">
         <Card title="Total Scans" value={stats.scans} />
         <Card title="Vulnerabilities" value={stats.vulns} />
@@ -129,44 +127,43 @@ export default function Dashboard() {
         <Card title="Tracked APIs" value={stats.apis} />
       </div>
 
-      {/* Main Grid */}
       <div className="grid grid-cols-1 xl:grid-cols-3 gap-6 mt-8">
-        {/* Left */}
         <div className="xl:col-span-2 space-y-6">
-          {/* Scan Trend */}
           <Panel title="Weekly Scan Trend">
-            <ResponsiveContainer width="100%" height={300}>
-              <LineChart data={scanTrend}>
-                <CartesianGrid strokeDasharray="3 3" />
-                <XAxis dataKey="day" stroke="#aaa" />
-                <YAxis stroke="#aaa" />
-                <Tooltip />
-                <Legend />
-                <Line dataKey="scans" stroke="#3b82f6" strokeWidth={3} />
-                <Line dataKey="vulns" stroke="#ef4444" strokeWidth={3} />
-              </LineChart>
-            </ResponsiveContainer>
+            <div className="h-[300px] w-full">
+              <ResponsiveContainer width="100%" height="100%">
+                <LineChart data={scanTrend}>
+                  <CartesianGrid strokeDasharray="3 3" />
+                  <XAxis dataKey="day" stroke="#aaa" />
+                  <YAxis stroke="#aaa" />
+                  <Tooltip />
+                  <Legend />
+                  <Line dataKey="scans" stroke="#3b82f6" strokeWidth={3} />
+                  <Line dataKey="vulns" stroke="#ef4444" strokeWidth={3} />
+                </LineChart>
+              </ResponsiveContainer>
+            </div>
           </Panel>
 
-          {/* Traffic */}
           <Panel title="API Traffic Heat">
-            <ResponsiveContainer width="100%" height={300}>
-              <AreaChart data={traffic}>
-                <CartesianGrid strokeDasharray="3 3" />
-                <XAxis dataKey="hour" stroke="#aaa" />
-                <YAxis stroke="#aaa" />
-                <Tooltip />
-                <Area
-                  type="monotone"
-                  dataKey="requests"
-                  stroke="#22c55e"
-                  fill="#14532d"
-                />
-              </AreaChart>
-            </ResponsiveContainer>
+            <div className="h-[300px] w-full">
+              <ResponsiveContainer width="100%" height="100%">
+                <AreaChart data={traffic}>
+                  <CartesianGrid strokeDasharray="3 3" />
+                  <XAxis dataKey="hour" stroke="#aaa" />
+                  <YAxis stroke="#aaa" />
+                  <Tooltip />
+                  <Area
+                    type="monotone"
+                    dataKey="requests"
+                    stroke="#22c55e"
+                    fill="#14532d"
+                  />
+                </AreaChart>
+              </ResponsiveContainer>
+            </div>
           </Panel>
 
-          {/* Result */}
           {result && (
             <Panel title="Latest Scan Payload">
               <pre className="text-sm overflow-auto max-h-72 text-gray-300">
@@ -176,36 +173,36 @@ export default function Dashboard() {
           )}
         </div>
 
-        {/* Right */}
         <div className="space-y-6">
-          {/* Severity */}
           <Panel title="Severity Split">
-            <ResponsiveContainer width="100%" height={260}>
-              <PieChart>
-                <Pie data={severity} dataKey="value" outerRadius={95} label>
-                  {severity.map((item, i) => (
-                    <Cell key={i} fill={colors[i % colors.length]} />
-                  ))}
-                </Pie>
-                <Tooltip />
-              </PieChart>
-            </ResponsiveContainer>
+            <div className="h-[260px] w-full">
+              <ResponsiveContainer width="100%" height="100%">
+                <PieChart>
+                  <Pie data={severity} dataKey="value" outerRadius={95} label>
+                    {severity.map((item, i) => (
+                      <Cell key={i} fill={colors[i % colors.length]} />
+                    ))}
+                  </Pie>
+                  <Tooltip />
+                </PieChart>
+              </ResponsiveContainer>
+            </div>
           </Panel>
 
-          {/* User Growth */}
           <Panel title="User Growth">
-            <ResponsiveContainer width="100%" height={260}>
-              <BarChart data={users}>
-                <CartesianGrid strokeDasharray="3 3" />
-                <XAxis dataKey="month" stroke="#aaa" />
-                <YAxis stroke="#aaa" />
-                <Tooltip />
-                <Bar dataKey="users" fill="#8b5cf6" radius={[6, 6, 0, 0]} />
-              </BarChart>
-            </ResponsiveContainer>
+            <div className="h-[260px] w-full">
+              <ResponsiveContainer width="100%" height="100%">
+                <BarChart data={users}>
+                  <CartesianGrid strokeDasharray="3 3" />
+                  <XAxis dataKey="month" stroke="#aaa" />
+                  <YAxis stroke="#aaa" />
+                  <Tooltip />
+                  <Bar dataKey="users" fill="#8b5cf6" radius={[6, 6, 0, 0]} />
+                </BarChart>
+              </ResponsiveContainer>
+            </div>
           </Panel>
 
-          {/* Findings */}
           <Panel title="Recent Findings">
             <div className="space-y-3">
               {recentFindings.map((item) => (
@@ -223,7 +220,6 @@ export default function Dashboard() {
             </div>
           </Panel>
 
-          {/* Status */}
           <Panel title="System Status">
             <div className="space-y-2 text-sm text-gray-300">
               <Row label="Scanner Engine" value="Online" />
@@ -250,7 +246,7 @@ function Card({ title, value }) {
 
 function Panel({ title, children }) {
   return (
-    <div className="bg-gray-900 rounded-2xl p-5 border border-gray-800">
+    <div className="bg-gray-900 rounded-2xl p-5 border border-gray-800 min-h-[320px]">
       <h3 className="text-lg font-semibold mb-4">{title}</h3>
       {children}
     </div>
