@@ -28,7 +28,7 @@ export default function Results() {
     try {
       setStatus("Loading...")
 
-      const response = await fetch(`13.233.10.6:8001/scan/${id}`)
+      const response = await fetch(`https://localhost:8000/scan/${id}`)
       const data = await response.json()
 
       if (data.status === "running") {
@@ -67,7 +67,7 @@ export default function Results() {
   const saveToDB = async (scanId, results) => {
     try {
       for (const v of results) {
-        await fetch("13.233.10.6:8001/scan", {
+        await fetch("https://localhost:8000/scan", {
           method: "POST",
           headers: {
             "Content-Type": "application/json"

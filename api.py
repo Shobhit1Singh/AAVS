@@ -6,30 +6,17 @@ from fastapi import (
     Form,
     HTTPException
 )
+
 from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel
 from datetime import datetime
+
 import tempfile
 import os
 import uuid
 import traceback
-import psycopg2
 
 from scanner_controller import run_scan
-
-
-# ==========================================================
-# DB CONNECTION
-# ==========================================================
-
-def get_conn():
-    return psycopg2.connect(
-        dbname="aavs_attacks",
-        user="postgres",
-        password="Waheguru23@",
-        host="localhost",
-        port="5432"
-    )
 
 
 # ==========================================================
@@ -87,6 +74,7 @@ def create_scan_record(status="queued"):
 
 
 def update_scan(scan_id, **kwargs):
+
     if scan_id not in results_store:
         return
 
@@ -95,9 +83,12 @@ def update_scan(scan_id, **kwargs):
 
 
 def safe_remove(path):
+
     try:
+
         if path and os.path.exists(path):
             os.remove(path)
+
     except:
         pass
 
@@ -121,50 +112,18 @@ def run_and_store(scan_id, spec_path, base_url, delete_file=False):
             mode="live"
         )
 
-        # print("\n========== SCAN RESULT RECEIVED ==========\n")
-
-        # print(scan_result)
-
-        findings = scan_result.get("findings", [])
+        findings = scan_result.get(
+            "findings",
+            []
+        )
 
         ai_report = scan_result.get(
             "ai_report",
             ""
         )
 
-        # print("\n========== FINDINGS COUNT ==========\n")
-
-        # print(len(findings))
-
-        conn = get_conn()
-        cur = conn.cursor()
-
-        for v in findings:
-
-            if not isinstance(v, dict):
-                continue
-
-            cur.execute("""
-                INSERT INTO scans (
-                    scan_id,
-                    attack_type,
-                    severity,
-                    endpoint,
-                    payload,
-                    solution
-                )
-                VALUES (%s, %s, %s, %s, %s, %s)
-            """, (
-                scan_id,
-                v.get("reason"),
-                v.get("severity"),
-                v.get("endpoint"),
-                v.get("payload", ""),
-                "Auto-detected vulnerability"
-            ))
-
-        conn.commit()
-        conn.close()
+        # Database temporarily disabled
+        print("Skipping database storage")
 
         update_scan(
             scan_id,
@@ -197,6 +156,7 @@ def run_and_store(scan_id, spec_path, base_url, delete_file=False):
 
 @app.get("/")
 def root():
+
     return {
         "service": "API Security Scanner",
         "status": "online",
@@ -206,6 +166,7 @@ def root():
 
 @app.get("/health")
 def health():
+
     return {
         "ok": True,
         "active_jobs": len(results_store)
@@ -224,6 +185,7 @@ async def scan_with_file(
 ):
 
     if not base_url.strip():
+
         raise HTTPException(
             status_code=400,
             detail="base_url is required"
@@ -232,6 +194,7 @@ async def scan_with_file(
     content = await file.read()
 
     if not content:
+
         raise HTTPException(
             status_code=400,
             detail="Empty file uploaded"
@@ -245,7 +208,6 @@ async def scan_with_file(
     ) as tmp:
 
         tmp.write(content)
-
         tmp_path = tmp.name
 
     results_store[scan_id] = create_scan_record()
@@ -287,6 +249,7 @@ def get_scan_result(scan_id: str):
 
 @app.get("/scans")
 def get_all_scans():
+
     return results_store
 
 

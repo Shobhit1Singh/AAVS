@@ -40,7 +40,7 @@ export default function AISolutionPage() {
       setStatus("Generating AI remediation report...")
 
       const res = await fetch(
-        `13.233.10.6:8001/scan/${id}`
+        `https://localhost:8000/scan/${id}`
       )
 
       const result = await res.json()
