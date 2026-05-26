@@ -1,0 +1,208 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "Leaked Incident Records API",
+    "version": "1.0.0",
+    "description": "Dummy OpenAPI spec for AAVS testing. Simulates leaked credential incidents, exposed assets, remediation workflows, and logs using fake data. Humanity loves making messes, then documenting them."
+  },
+  "servers": [
+    {
+      "url": "http://localhost:3000"
+    }
+  ],
+  "components": {
+    "securitySchemes": {
+      "bearerAuth": {
+        "type": "http",
+        "scheme": "bearer",
+        "bearerFormat": "JWT"
+      }
+    },
+    "schemas": {
+      "Asset": {
+        "type": "object",
+        "properties": {
+          "service": { "type": "string", "example": "OpenAI" },
+          "api_key": { "type": "string", "example": "sk-test-xxxx" },
+          "access_key_id": { "type": "string", "example": "AKIAFAKE123" },
+          "secret_access_key": { "type": "string", "example": "fakeSecret123" },
+          "account_sid": { "type": "string", "example": "ACfake123456" },
+          "auth_token": { "type": "string", "example": "fakeToken" },
+          "owner": { "type": "string", "example": "dev-team@app.local" },
+          "region": { "type": "string", "example": "ap-south-1" },
+          "last_used_ip": { "type": "string", "example": "192.168.1.14" },
+          "requests_24h": { "type": "integer", "example": 381 },
+          "charges_attempted": { "type": "integer", "example": 12 }
+        }
+      },
+      "Incident": {
+        "type": "object",
+        "properties": {
+          "incident_id": { "type": "string", "example": "LEAK-2026-041" },
+          "source": { "type": "string", "example": "public_github_repo" },
+          "detected_at": { "type": "string", "format": "date-time" },
+          "severity": { "type": "string", "example": "high" },
+          "status": { "type": "string", "example": "revoked" },
+          "assets": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Asset"
+            }
+          },
+          "response_actions": {
+            "type": "array",
+            "items": { "type": "string" }
+          }
+        }
+      }
+    }
+  },
+  "paths": {
+    "/api/incidents": {
+      "get": {
+        "summary": "Get all leak incidents",
+        "security": [
+          { "bearerAuth": [] }
+        ],
+        "responses": {
+          "200": {
+            "description": "List of incidents",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Incident"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/incidents/{incident_id}": {
+      "get": {
+        "summary": "Get incident by ID",
+        "security": [
+          { "bearerAuth": [] }
+        ],
+        "parameters": [
+          {
+            "name": "incident_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Incident details",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Incident"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/incidents/report": {
+      "post": {
+        "summary": "Create a simulated leak incident",
+        "security": [
+          { "bearerAuth": [] }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Incident"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Incident created"
+          }
+        }
+      }
+    },
+    "/api/incidents/{incident_id}/revoke": {
+      "post": {
+        "summary": "Mark incident assets as revoked",
+        "security": [
+          { "bearerAuth": [] }
+        ],
+        "parameters": [
+          {
+            "name": "incident_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Revocation completed",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": { "type": "string" },
+                    "message": { "type": "string" }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/assets/search": {
+      "get": {
+        "summary": "Search leaked assets by service or owner",
+        "security": [
+          { "bearerAuth": [] }
+        ],
+        "parameters": [
+          {
+            "name": "q",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Matching assets",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Asset"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "security": [
+    { "bearerAuth": [] }
+  ]
+}

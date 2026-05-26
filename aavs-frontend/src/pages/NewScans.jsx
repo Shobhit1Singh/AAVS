@@ -43,7 +43,7 @@ export default function NewScan() {
         formData.append("auth_token", authToken.trim())
       }
 
-      const response = await fetch("http://localhost:8000/scan/file", {
+      const response = await fetch("13.233.10.6:8001/scan/file", {
         method: "POST",
         body: formData,
       })

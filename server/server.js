@@ -83,7 +83,11 @@ app.post("/login", async (req, res) => {
     res.status(500).json({ message: "Server error" });
   }
 });
-
+app.get("/api/test", (req, res) => {
+  res.json({
+    message: "Backend running on port 5000"
+  });
+});
 /* ================= SERVE FRONTEND ================= */
 
 app.use(
@@ -97,6 +101,7 @@ app.use((req, res) => {
     path.join(__dirname, "../aavs-frontend/dist/index.html")
   );
 });
+
 
 /* ================= START SERVER ================= */
 

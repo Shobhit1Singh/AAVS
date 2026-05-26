@@ -1,0 +1,1937 @@
+{
+  "info": {
+    "_postman_id": "1390d181-42f5-4e79-b757-64487739bcec",
+    "name": "Sports",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "_exporter_id": "43200383",
+    "_collection_link": "https://go.postman.co/collection/43200383-1390d181-42f5-4e79-b757-64487739bcec?source=collection_link"
+  },
+  "item": [
+    {
+      "name": "User",
+      "item": [
+        {
+          "name": "Booking",
+          "item": [
+            {
+              "name": "add",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoidXNlcjEiLCJlbWFpbCI6InVzZXIxQGdtYWlsLmNvbSIsInVzZXJJZCI6IjY5NmZiNzYyZTJiOTU2MjRiZDNlZWIzNiIsInVzZXJUeXBlIjoidXNlciIsImlhdCI6MTc2ODk5NjU0MiwiZXhwIjoxNzY5MDgyOTQyfQ.bm6ludTPO8qXktzCV7TIM1eRttWEIko7R-TaFdKc7do",
+                    "type": "text"
+                  }
+                ],
+                "body": {
+                  "mode": "urlencoded",
+                  "urlencoded": [
+                    {
+                      "key": "matchId",
+                      "value": "6970be544baa26b7270284f7",
+                      "type": "text",
+                      "uuid": "d4e03dfd-6445-4eee-9c33-011ee1a3e498"
+                    },
+                    {
+                      "key": "seatsBooked",
+                      "value": "",
+                      "type": "text",
+                      "uuid": "1daaad5d-eeb3-4d51-abb5-6b1ffa6a702a"
+                    },
+                    {
+                      "key": "seatsNumbers",
+                      "value": "[\"11\",\"12\",\"13\"]",
+                      "type": "text",
+                      "uuid": "1a9aa1d9-76f2-48f8-8761-f31205bb6b65"
+                    },
+                    {
+                      "key": "totalAmount",
+                      "value": "1500",
+                      "type": "text",
+                      "uuid": "172305e2-a7fb-49d4-b8a2-60bd3ac3aac2"
+                    },
+                    {
+                      "key": "transactionId",
+                      "value": "1234567788",
+                      "type": "text",
+                      "uuid": "6818c1f4-d0c0-4fed-9040-8456eb82be6f"
+                    },
+                    {
+                      "key": "paymentMode",
+                      "value": "",
+                      "type": "text",
+                      "uuid": "e3655749-7a12-45c7-9bbe-14d548934b3c",
+                      "disabled": true
+                    }
+                  ]
+                },
+                "url": {
+                  "raw": "localhost:5000/user/booking/add",
+                  "host": [
+                    "localhost"
+                  ],
+                  "port": "5000",
+                  "path": [
+                    "user",
+                    "booking",
+                    "add"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "update",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoidXNlcjEiLCJlbWFpbCI6InVzZXIxQGdtYWlsLmNvbSIsInVzZXJJZCI6IjY5NmZiNzYyZTJiOTU2MjRiZDNlZWIzNiIsInVzZXJUeXBlIjoidXNlciIsImlhdCI6MTc2ODk5NjU0MiwiZXhwIjoxNzY5MDgyOTQyfQ.bm6ludTPO8qXktzCV7TIM1eRttWEIko7R-TaFdKc7do",
+                    "type": "text"
+                  }
+                ],
+                "body": {
+                  "mode": "urlencoded",
+                  "urlencoded": [
+                    {
+                      "key": "matchId",
+                      "value": "6970be544baa26b7270284f7",
+                      "type": "text",
+                      "uuid": "d4e03dfd-6445-4eee-9c33-011ee1a3e498",
+                      "disabled": true
+                    },
+                    {
+                      "key": "seatsBooked",
+                      "value": "3",
+                      "type": "text",
+                      "uuid": "1daaad5d-eeb3-4d51-abb5-6b1ffa6a702a"
+                    },
+                    {
+                      "key": "seatsNumbers",
+                      "value": "[\"11\", \"12\", \"13\"]",
+                      "type": "text"
+                    },
+                    {
+                      "key": "totalAmount",
+                      "value": "1500",
+                      "type": "text",
+                      "uuid": "172305e2-a7fb-49d4-b8a2-60bd3ac3aac2"
+                    },
+                    {
+                      "key": "transactionId",
+                      "value": "1234567788",
+                      "type": "text",
+                      "uuid": "6818c1f4-d0c0-4fed-9040-8456eb82be6f"
+                    },
+                    {
+                      "key": "paymentMode",
+                      "value": "",
+                      "type": "text",
+                      "uuid": "e3655749-7a12-45c7-9bbe-14d548934b3c"
+                    },
+                    {
+                      "key": "_id",
+                      "value": "6970c000197c938431e9d7ca",
+                      "type": "text",
+                      "uuid": "32c178d4-bffc-4d1e-ad17-ee0f0937af86"
+                    }
+                  ]
+                },
+                "url": {
+                  "raw": "localhost:5000/user/booking/update",
+                  "host": [
+                    "localhost"
+                  ],
+                  "port": "5000",
+                  "path": [
+                    "user",
+                    "booking",
+                    "update"
+                  ]
+                }
+              },
+              "response": []
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Admin",
+      "item": [
+        {
+          "name": "Sport",
+          "item": [
+            {
+              "name": "add",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoiYWRtaW4xIiwiZW1haWwiOiJhZG1pbkBnbWFpbC5jb20iLCJ1c2VySWQiOiI2OTZmNjdiOTRlZDA0M2FlMTEzMmJiYzUiLCJ1c2VyVHlwZSI6ImFkbWluIiwiaWF0IjoxNzY4OTc4MjM2LCJleHAiOjE3NjkwNjQ2MzZ9.MEPESCvsij4cZC5-zdRILgf7muloolRriGVigB8IkKI",
+                    "type": "text"
+                  }
+                ],
+                "body": {
+                  "mode": "urlencoded",
+                  "urlencoded": [
+                    {
+                      "key": "sportName",
+                      "value": "Crickets",
+                      "type": "text",
+                      "uuid": "d42bbd6e-8991-403e-8a6d-1f13c9cd287d"
+                    },
+                    {
+                      "key": "description",
+                      "value": "It is a 11 player game",
+                      "type": "text",
+                      "uuid": "b89bfe0b-b852-41e9-aeff-bf262e314ce6"
+                    },
+                    {
+                      "key": "maxPlayers",
+                      "value": "11",
+                      "type": "text",
+                      "uuid": "c936926b-bb3a-4e82-a828-3bd62ae0644f"
+                    },
+                    {
+                      "key": "matchDuration",
+                      "value": "90",
+                      "type": "text",
+                      "uuid": "de3e4804-5cc4-40bc-84bb-bb43d9d8fec7"
+                    }
+                  ]
+                },
+                "url": {
+                  "raw": "localhost:5000/admin/sport/add",
+                  "host": [
+                    "localhost"
+                  ],
+                  "port": "5000",
+                  "path": [
+                    "admin",
+                    "sport",
+                    "add"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "update",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoiYWRtaW4xIiwiZW1haWwiOiJhZG1pbkBnbWFpbC5jb20iLCJ1c2VySWQiOiI2OTZmNjdiOTRlZDA0M2FlMTEzMmJiYzUiLCJ1c2VyVHlwZSI6ImFkbWluIiwiaWF0IjoxNzY4OTc4MjM2LCJleHAiOjE3NjkwNjQ2MzZ9.MEPESCvsij4cZC5-zdRILgf7muloolRriGVigB8IkKI",
+                    "type": "text"
+                  }
+                ],
+                "body": {
+                  "mode": "urlencoded",
+                  "urlencoded": [
+                    {
+                      "key": "_id",
+                      "value": "69707b5b9f11b2b31e5826fc",
+                      "type": "text",
+                      "uuid": "d42bbd6e-8991-403e-8a6d-1f13c9cd287d"
+                    },
+                    {
+                      "key": "description",
+                      "value": "It is a 11 player game",
+                      "type": "text",
+                      "uuid": "b89bfe0b-b852-41e9-aeff-bf262e314ce6"
+                    },
+                    {
+                      "key": "maxPlayers",
+                      "value": "11",
+                      "type": "text",
+                      "uuid": "c936926b-bb3a-4e82-a828-3bd62ae0644f"
+                    },
+                    {
+                      "key": "matchDuration",
+                      "value": "10",
+                      "type": "text",
+                      "uuid": "de3e4804-5cc4-40bc-84bb-bb43d9d8fec7"
+                    }
+                  ]
+                },
+                "url": {
+                  "raw": "localhost:5000/admin/sport/update",
+                  "host": [
+                    "localhost"
+                  ],
+                  "port": "5000",
+                  "path": [
+                    "admin",
+                    "sport",
+                    "update"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "changeStatus",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoiYWRtaW4xIiwiZW1haWwiOiJhZG1pbkBnbWFpbC5jb20iLCJ1c2VySWQiOiI2OTZmNjdiOTRlZDA0M2FlMTEzMmJiYzUiLCJ1c2VyVHlwZSI6ImFkbWluIiwiaWF0IjoxNzY4OTc4MjM2LCJleHAiOjE3NjkwNjQ2MzZ9.MEPESCvsij4cZC5-zdRILgf7muloolRriGVigB8IkKI",
+                    "type": "text"
+                  }
+                ],
+                "body": {
+                  "mode": "urlencoded",
+                  "urlencoded": [
+                    {
+                      "key": "_id",
+                      "value": "697077c08ff43a7cd82a6d61",
+                      "type": "text",
+                      "uuid": "8956e0e5-8e29-4fed-b805-aca871299171"
+                    },
+                    {
+                      "key": "",
+                      "value": "",
+                      "type": "text",
+                      "uuid": "9f59f4c9-67c6-44ce-80e8-c346d1e13b90"
+                    }
+                  ]
+                },
+                "url": {
+                  "raw": "localhost:5000/admin/sport/changeStatus",
+                  "host": [
+                    "localhost"
+                  ],
+                  "port": "5000",
+                  "path": [
+                    "admin",
+                    "sport",
+                    "changeStatus"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "Delete",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoiYWRtaW4xIiwiZW1haWwiOiJhZG1pbkBnbWFpbC5jb20iLCJ1c2VySWQiOiI2OTZmNjdiOTRlZDA0M2FlMTEzMmJiYzUiLCJ1c2VyVHlwZSI6ImFkbWluIiwiaWF0IjoxNzY4OTc4MjM2LCJleHAiOjE3NjkwNjQ2MzZ9.MEPESCvsij4cZC5-zdRILgf7muloolRriGVigB8IkKI",
+                    "type": "text"
+                  }
+                ],
+                "body": {
+                  "mode": "urlencoded",
+                  "urlencoded": [
+                    {
+                      "key": "_id",
+                      "value": "69707b5b9f11b2b31e5826fc",
+                      "type": "text",
+                      "uuid": "3190966d-3bbe-46f9-bbe4-e5bddb66de6b"
+                    }
+                  ]
+                },
+                "url": {
+                  "raw": "localhost:5000/admin/sport/delete",
+                  "host": [
+                    "localhost"
+                  ],
+                  "port": "5000",
+                  "path": [
+                    "admin",
+                    "sport",
+                    "delete"
+                  ]
+                }
+              },
+              "response": []
+            }
+          ]
+        },
+        {
+          "name": "Match",
+          "item": [
+            {
+              "name": "add",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoiYWRtaW4xIiwiZW1haWwiOiJhZG1pbkBnbWFpbC5jb20iLCJ1c2VySWQiOiI2OTZmNjdiOTRlZDA0M2FlMTEzMmJiYzUiLCJ1c2VyVHlwZSI6ImFkbWluIiwiaWF0IjoxNzY4OTc4MjM2LCJleHAiOjE3NjkwNjQ2MzZ9.MEPESCvsij4cZC5-zdRILgf7muloolRriGVigB8IkKI",
+                    "type": "text"
+                  }
+                ],
+                "body": {
+                  "mode": "urlencoded",
+                  "urlencoded": [
+                    {
+                      "key": "sportsId",
+                      "value": "697077c08ff43a7cd82a6d61",
+                      "type": "text"
+                    },
+                    {
+                      "key": "teamId",
+                      "value": "6970b4cbf210c8df0dac6305",
+                      "type": "text"
+                    },
+                    {
+                      "key": "venue",
+                      "value": "jal",
+                      "type": "text"
+                    },
+                    {
+                      "key": "matchName",
+                      "value": "CricketMatch",
+                      "type": "text"
+                    },
+                    {
+                      "key": "matchDate",
+                      "value": "22jan 2026",
+                      "type": "text",
+                      "uuid": "9f93233a-4443-498f-a9a7-6da712c760c0"
+                    },
+                    {
+                      "key": "matchTime",
+                      "value": "10:00",
+                      "type": "text",
+                      "uuid": "41a10c62-98af-41fa-b9ef-c822535556d2"
+                    },
+                    {
+                      "key": "totalSeats",
+                      "value": "100",
+                      "type": "text",
+                      "uuid": "338e11c8-d901-4d5a-bc8a-9ff92194cfc9"
+                    },
+                    {
+                      "key": "availableSeats",
+                      "value": "50",
+                      "type": "text",
+                      "uuid": "5c3d1832-9d2e-41c6-96fe-e7c1bd02ebcf"
+                    },
+                    {
+                      "key": "ticketPrice",
+                      "value": "500",
+                      "type": "text",
+                      "uuid": "fcba9100-41f6-44a8-88e5-37962febd6ed"
+                    }
+                  ]
+                },
+                "url": {
+                  "raw": "localhost:5000/admin/match/add",
+                  "host": [
+                    "localhost"
+                  ],
+                  "port": "5000",
+                  "path": [
+                    "admin",
+                    "match",
+                    "add"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "update",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoiYWRtaW4xIiwiZW1haWwiOiJhZG1pbkBnbWFpbC5jb20iLCJ1c2VySWQiOiI2OTZmNjdiOTRlZDA0M2FlMTEzMmJiYzUiLCJ1c2VyVHlwZSI6ImFkbWluIiwiaWF0IjoxNzY4OTc4MjM2LCJleHAiOjE3NjkwNjQ2MzZ9.MEPESCvsij4cZC5-zdRILgf7muloolRriGVigB8IkKI",
+                    "type": "text"
+                  }
+                ],
+                "body": {
+                  "mode": "urlencoded",
+                  "urlencoded": [
+                    {
+                      "key": "sportsId",
+                      "value": "697077c08ff43a7cd82a6d61",
+                      "type": "text",
+                      "disabled": true
+                    },
+                    {
+                      "key": "teamId",
+                      "value": "6970b4cbf210c8df0dac6305",
+                      "type": "text",
+                      "disabled": true
+                    },
+                    {
+                      "key": "venue",
+                      "value": "jalandhar",
+                      "type": "text"
+                    },
+                    {
+                      "key": "matchName",
+                      "value": "CricketMatch",
+                      "type": "text"
+                    },
+                    {
+                      "key": "matchDate",
+                      "value": "22jan 2026",
+                      "type": "text",
+                      "uuid": "9f93233a-4443-498f-a9a7-6da712c760c0"
+                    },
+                    {
+                      "key": "matchTime",
+                      "value": "10:00",
+                      "type": "text",
+                      "uuid": "41a10c62-98af-41fa-b9ef-c822535556d2"
+                    },
+                    {
+                      "key": "totalSeats",
+                      "value": "100",
+                      "type": "text",
+                      "uuid": "338e11c8-d901-4d5a-bc8a-9ff92194cfc9"
+                    },
+                    {
+                      "key": "availableSeats",
+                      "value": "50",
+                      "type": "text",
+                      "uuid": "5c3d1832-9d2e-41c6-96fe-e7c1bd02ebcf"
+                    },
+                    {
+                      "key": "ticketPrice",
+                      "value": "500",
+                      "type": "text",
+                      "uuid": "fcba9100-41f6-44a8-88e5-37962febd6ed"
+                    },
+                    {
+                      "key": "_id",
+                      "value": "6970b6dfbb20ad032a488bed",
+                      "type": "text",
+                      "uuid": "6943632f-b553-478c-8fec-467efa2f493f"
+                    }
+                  ]
+                },
+                "url": {
+                  "raw": "localhost:5000/admin/match/update",
+                  "host": [
+                    "localhost"
+                  ],
+                  "port": "5000",
+                  "path": [
+                    "admin",
+                    "match",
+                    "update"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "changeStatus",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoiYWRtaW4xIiwiZW1haWwiOiJhZG1pbkBnbWFpbC5jb20iLCJ1c2VySWQiOiI2OTZmNjdiOTRlZDA0M2FlMTEzMmJiYzUiLCJ1c2VyVHlwZSI6ImFkbWluIiwiaWF0IjoxNzY4OTc4MjM2LCJleHAiOjE3NjkwNjQ2MzZ9.MEPESCvsij4cZC5-zdRILgf7muloolRriGVigB8IkKI",
+                    "type": "text"
+                  }
+                ],
+                "body": {
+                  "mode": "urlencoded",
+                  "urlencoded": [
+                    {
+                      "key": "_id",
+                      "value": "6970b6dfbb20ad032a488bed",
+                      "type": "text",
+                      "uuid": "de4c529b-c8e9-413c-a46b-1b4366817c8f"
+                    },
+                    {
+                      "key": "status",
+                      "value": "Upcoming",
+                      "type": "text",
+                      "uuid": "f43dbae4-401e-4685-b296-f864d92504fa"
+                    }
+                  ]
+                },
+                "url": {
+                  "raw": "localhost:5000/admin/match/changeStatus",
+                  "host": [
+                    "localhost"
+                  ],
+                  "port": "5000",
+                  "path": [
+                    "admin",
+                    "match",
+                    "changeStatus"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "delete",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoiYWRtaW4xIiwiZW1haWwiOiJhZG1pbkBnbWFpbC5jb20iLCJ1c2VySWQiOiI2OTZmNjdiOTRlZDA0M2FlMTEzMmJiYzUiLCJ1c2VyVHlwZSI6ImFkbWluIiwiaWF0IjoxNzY4OTc4MjM2LCJleHAiOjE3NjkwNjQ2MzZ9.MEPESCvsij4cZC5-zdRILgf7muloolRriGVigB8IkKI",
+                    "type": "text"
+                  }
+                ],
+                "body": {
+                  "mode": "urlencoded",
+                  "urlencoded": [
+                    {
+                      "key": "_id",
+                      "value": "6970b6dfbb20ad032a488bed",
+                      "type": "text",
+                      "uuid": "de4c529b-c8e9-413c-a46b-1b4366817c8f"
+                    },
+                    {
+                      "key": "status",
+                      "value": "Ongoing",
+                      "type": "text",
+                      "uuid": "f43dbae4-401e-4685-b296-f864d92504fa",
+                      "disabled": true
+                    }
+                  ]
+                },
+                "url": {
+                  "raw": "localhost:5000/admin/match/delete",
+                  "host": [
+                    "localhost"
+                  ],
+                  "port": "5000",
+                  "path": [
+                    "admin",
+                    "match",
+                    "delete"
+                  ]
+                }
+              },
+              "response": []
+            }
+          ]
+        },
+        {
+          "name": "MatchApplication",
+          "item": [
+            {
+              "name": "changeStatus",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoiYWRtaW4xIiwiZW1haWwiOiJhZG1pbkBnbWFpbC5jb20iLCJ1c2VySWQiOiI2OTZmNjdiOTRlZDA0M2FlMTEzMmJiYzUiLCJ1c2VyVHlwZSI6ImFkbWluIiwiaWF0IjoxNzY4OTc4MjM2LCJleHAiOjE3NjkwNjQ2MzZ9.MEPESCvsij4cZC5-zdRILgf7muloolRriGVigB8IkKI",
+                    "type": "text"
+                  }
+                ],
+                "body": {
+                  "mode": "urlencoded",
+                  "urlencoded": [
+                    {
+                      "key": "_id",
+                      "value": "6970b0e0b41d5d0c0c6fc380",
+                      "type": "text",
+                      "uuid": "28c414d5-05a4-4c42-9a0e-0bc492d3a239"
+                    },
+                    {
+                      "key": "status",
+                      "value": "Approved",
+                      "type": "text",
+                      "uuid": "8865f44b-cca5-46f8-a374-da983e202e9f"
+                    }
+                  ]
+                },
+                "url": {
+                  "raw": "localhost:5000/admin/matchapplication/changeStatus",
+                  "host": [
+                    "localhost"
+                  ],
+                  "port": "5000",
+                  "path": [
+                    "admin",
+                    "matchapplication",
+                    "changeStatus"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "delete",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoiYWRtaW4xIiwiZW1haWwiOiJhZG1pbkBnbWFpbC5jb20iLCJ1c2VySWQiOiI2OTZmNjdiOTRlZDA0M2FlMTEzMmJiYzUiLCJ1c2VyVHlwZSI6ImFkbWluIiwiaWF0IjoxNzY4OTc4MjM2LCJleHAiOjE3NjkwNjQ2MzZ9.MEPESCvsij4cZC5-zdRILgf7muloolRriGVigB8IkKI",
+                    "type": "text"
+                  }
+                ],
+                "body": {
+                  "mode": "urlencoded",
+                  "urlencoded": [
+                    {
+                      "key": "_id",
+                      "value": "6970b4faf210c8df0dac6309",
+                      "type": "text",
+                      "uuid": "186090e9-d6f4-4f34-89b0-571cbbfeaf8c"
+                    }
+                  ]
+                },
+                "url": {
+                  "raw": "localhost:5000/admin/matchapplication/delete",
+                  "host": [
+                    "localhost"
+                  ],
+                  "port": "5000",
+                  "path": [
+                    "admin",
+                    "matchapplication",
+                    "delete"
+                  ]
+                }
+              },
+              "response": []
+            }
+          ]
+        },
+        {
+          "name": "Coach",
+          "item": [
+            {
+              "name": "changeStatus",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoiYWRtaW4xIiwiZW1haWwiOiJhZG1pbkBnbWFpbC5jb20iLCJ1c2VySWQiOiI2OTZmNjdiOTRlZDA0M2FlMTEzMmJiYzUiLCJ1c2VyVHlwZSI6ImFkbWluIiwiaWF0IjoxNzY4OTc4MjM2LCJleHAiOjE3NjkwNjQ2MzZ9.MEPESCvsij4cZC5-zdRILgf7muloolRriGVigB8IkKI",
+                    "type": "text"
+                  }
+                ],
+                "body": {
+                  "mode": "urlencoded",
+                  "urlencoded": [
+                    {
+                      "key": "_id",
+                      "value": "6970781b8ff43a7cd82a6d69",
+                      "type": "text",
+                      "uuid": "62b7beea-2afa-4e7d-8888-0bd134ff9262"
+                    },
+                    {
+                      "key": "status",
+                      "value": "Approved",
+                      "type": "text",
+                      "uuid": "c236ec36-84e3-45b1-a095-75b434716172"
+                    }
+                  ]
+                },
+                "url": {
+                  "raw": "localhost:5000/admin/coach/changeStatus",
+                  "host": [
+                    "localhost"
+                  ],
+                  "port": "5000",
+                  "path": [
+                    "admin",
+                    "coach",
+                    "changeStatus"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "delete",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoiYWRtaW4xIiwiZW1haWwiOiJhZG1pbkBnbWFpbC5jb20iLCJ1c2VySWQiOiI2OTZmNjdiOTRlZDA0M2FlMTEzMmJiYzUiLCJ1c2VyVHlwZSI6ImFkbWluIiwiaWF0IjoxNzY4OTc4MjM2LCJleHAiOjE3NjkwNjQ2MzZ9.MEPESCvsij4cZC5-zdRILgf7muloolRriGVigB8IkKI",
+                    "type": "text"
+                  }
+                ],
+                "body": {
+                  "mode": "urlencoded",
+                  "urlencoded": [
+                    {
+                      "key": "_id",
+                      "value": "6970781b8ff43a7cd82a6d69",
+                      "type": "text",
+                      "uuid": "62b7beea-2afa-4e7d-8888-0bd134ff9262"
+                    },
+                    {
+                      "key": "stattus",
+                      "value": "",
+                      "type": "text",
+                      "uuid": "c236ec36-84e3-45b1-a095-75b434716172",
+                      "disabled": true
+                    }
+                  ]
+                },
+                "url": {
+                  "raw": "localhost:5000/admin/coach/delete",
+                  "host": [
+                    "localhost"
+                  ],
+                  "port": "5000",
+                  "path": [
+                    "admin",
+                    "coach",
+                    "delete"
+                  ]
+                }
+              },
+              "response": []
+            }
+          ]
+        },
+        {
+          "name": "Booking",
+          "item": [
+            {
+              "name": "changeStatus",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoiYWRtaW4xIiwiZW1haWwiOiJhZG1pbkBnbWFpbC5jb20iLCJ1c2VySWQiOiI2OTZmNjdiOTRlZDA0M2FlMTEzMmJiYzUiLCJ1c2VyVHlwZSI6ImFkbWluIiwiaWF0IjoxNzY4OTc4MjM2LCJleHAiOjE3NjkwNjQ2MzZ9.MEPESCvsij4cZC5-zdRILgf7muloolRriGVigB8IkKI",
+                    "type": "text"
+                  }
+                ],
+                "body": {
+                  "mode": "urlencoded",
+                  "urlencoded": [
+                    {
+                      "key": "_id",
+                      "value": "6970c01b197c938431e9d7cd",
+                      "type": "text",
+                      "uuid": "d54e8e50-cf1e-4c96-9d59-ab3fdfcddbc8"
+                    },
+                    {
+                      "key": "status",
+                      "value": "cancelled",
+                      "type": "text",
+                      "uuid": "b019f31e-447c-4393-945c-c41f82c939f0",
+                      "disabled": true
+                    }
+                  ]
+                },
+                "url": {
+                  "raw": "localhost:5000/admin/booking/changeStatus",
+                  "host": [
+                    "localhost"
+                  ],
+                  "port": "5000",
+                  "path": [
+                    "admin",
+                    "booking",
+                    "changeStatus"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "single",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoiYWRtaW4xIiwiZW1haWwiOiJhZG1pbkBnbWFpbC5jb20iLCJ1c2VySWQiOiI2OTZmNjdiOTRlZDA0M2FlMTEzMmJiYzUiLCJ1c2VyVHlwZSI6ImFkbWluIiwiaWF0IjoxNzY4OTc4MjM2LCJleHAiOjE3NjkwNjQ2MzZ9.MEPESCvsij4cZC5-zdRILgf7muloolRriGVigB8IkKI",
+                    "type": "text"
+                  }
+                ],
+                "body": {
+                  "mode": "urlencoded",
+                  "urlencoded": [
+                    {
+                      "key": "_id",
+                      "value": "6970c035197c938431e9d7d0",
+                      "type": "text",
+                      "uuid": "230a15f0-d3ba-448c-ab7a-a8250fe65a84"
+                    }
+                  ]
+                },
+                "url": {
+                  "raw": "localhost:5000/admin/booking/single",
+                  "host": [
+                    "localhost"
+                  ],
+                  "port": "5000",
+                  "path": [
+                    "admin",
+                    "booking",
+                    "single"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "all",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoiYWRtaW4xIiwiZW1haWwiOiJhZG1pbkBnbWFpbC5jb20iLCJ1c2VySWQiOiI2OTZmNjdiOTRlZDA0M2FlMTEzMmJiYzUiLCJ1c2VyVHlwZSI6ImFkbWluIiwiaWF0IjoxNzY4OTc4MjM2LCJleHAiOjE3NjkwNjQ2MzZ9.MEPESCvsij4cZC5-zdRILgf7muloolRriGVigB8IkKI",
+                    "type": "text"
+                  }
+                ],
+                "url": {
+                  "raw": "localhost:5000/admin/booking/all",
+                  "host": [
+                    "localhost"
+                  ],
+                  "port": "5000",
+                  "path": [
+                    "admin",
+                    "booking",
+                    "all"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "Delete",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoiYWRtaW4xIiwiZW1haWwiOiJhZG1pbkBnbWFpbC5jb20iLCJ1c2VySWQiOiI2OTZmNjdiOTRlZDA0M2FlMTEzMmJiYzUiLCJ1c2VyVHlwZSI6ImFkbWluIiwiaWF0IjoxNzY4OTc4MjM2LCJleHAiOjE3NjkwNjQ2MzZ9.MEPESCvsij4cZC5-zdRILgf7muloolRriGVigB8IkKI",
+                    "type": "text"
+                  }
+                ],
+                "body": {
+                  "mode": "urlencoded",
+                  "urlencoded": [
+                    {
+                      "key": "_id",
+                      "value": "6970c035197c938431e9d7d0",
+                      "type": "text",
+                      "uuid": "d54e8e50-cf1e-4c96-9d59-ab3fdfcddbc8"
+                    },
+                    {
+                      "key": "status",
+                      "value": "",
+                      "type": "text",
+                      "uuid": "b019f31e-447c-4393-945c-c41f82c939f0",
+                      "disabled": true
+                    }
+                  ]
+                },
+                "url": {
+                  "raw": "localhost:5000/admin/booking/delete",
+                  "host": [
+                    "localhost"
+                  ],
+                  "port": "5000",
+                  "path": [
+                    "admin",
+                    "booking",
+                    "delete"
+                  ]
+                }
+              },
+              "response": []
+            }
+          ]
+        },
+        {
+          "name": "adminuser",
+          "item": [
+            {
+              "name": "all",
+              "request": {
+                "method": "POST",
+                "header": [],
+                "url": {
+                  "raw": "localhost:5000/api/user/all",
+                  "host": [
+                    "localhost"
+                  ],
+                  "port": "5000",
+                  "path": [
+                    "api",
+                    "user",
+                    "all"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "softDelete",
+              "request": {
+                "method": "POST",
+                "header": [],
+                "body": {
+                  "mode": "urlencoded",
+                  "urlencoded": [
+                    {
+                      "key": "_id",
+                      "value": "69704db7d4b2958ff5695179",
+                      "type": "text",
+                      "uuid": "3190966d-3bbe-46f9-bbe4-e5bddb66de6b"
+                    }
+                  ]
+                },
+                "url": {
+                  "raw": "localhost:5000/api/user/softDelete",
+                  "host": [
+                    "localhost"
+                  ],
+                  "port": "5000",
+                  "path": [
+                    "api",
+                    "user",
+                    "softDelete"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "update",
+              "request": {
+                "method": "POST",
+                "header": [],
+                "body": {
+                  "mode": "formdata",
+                  "formdata": [
+                    {
+                      "key": "name",
+                      "value": "user2",
+                      "type": "text",
+                      "uuid": "5347e37f-65fb-4f2f-a2d9-1caf59cdf7a3"
+                    },
+                    {
+                      "key": "contact",
+                      "value": "1111111111111",
+                      "type": "text",
+                      "uuid": "a88183c5-14d1-4165-babb-8d398d243e54"
+                    },
+                    {
+                      "key": "profileImage",
+                      "type": "file",
+                      "uuid": "f0bf62f9-8ba3-4da2-a74c-777199851d28",
+                      "src": "/C:/Users/Ridhi/OneDrive/Pictures/Screenshots/profile.png"
+                    },
+                    {
+                      "key": "_id",
+                      "value": "69704db7d4b2958ff5695179",
+                      "type": "text",
+                      "uuid": "e231753a-28bd-405d-bbf7-d3c4c314288a"
+                    }
+                  ]
+                },
+                "url": {
+                  "raw": "localhost:5000/api/user/update",
+                  "host": [
+                    "localhost"
+                  ],
+                  "port": "5000",
+                  "path": [
+                    "api",
+                    "user",
+                    "update"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "Delete",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoiYWRtaW4xIiwiZW1haWwiOiJhZG1pbkBnbWFpbC5jb20iLCJ1c2VySWQiOiI2OTZmNjdiOTRlZDA0M2FlMTEzMmJiYzUiLCJ1c2VyVHlwZSI6ImFkbWluIiwiaWF0IjoxNzY5MDY4ODMzLCJleHAiOjE3NjkxNTUyMzN9.uGNhI7Z2-Bl5rlu-ugUatN_V3irMZ73du6tfwOrXjsw",
+                    "type": "text"
+                  }
+                ],
+                "body": {
+                  "mode": "urlencoded",
+                  "urlencoded": [
+                    {
+                      "key": "_id",
+                      "value": "6971d7fc440edc44f957f43b",
+                      "type": "text",
+                      "uuid": "3190966d-3bbe-46f9-bbe4-e5bddb66de6b"
+                    }
+                  ]
+                },
+                "url": {
+                  "raw": "localhost:5000/admin/user/delete",
+                  "host": [
+                    "localhost"
+                  ],
+                  "port": "5000",
+                  "path": [
+                    "admin",
+                    "user",
+                    "delete"
+                  ]
+                }
+              },
+              "response": []
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "CommonApis",
+      "item": [
+        {
+          "name": "Sport",
+          "item": [
+            {
+              "name": "all",
+              "request": {
+                "method": "POST",
+                "header": [],
+                "url": {
+                  "raw": "localhost:5000/api/sport/all",
+                  "host": [
+                    "localhost"
+                  ],
+                  "port": "5000",
+                  "path": [
+                    "api",
+                    "sport",
+                    "all"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "single",
+              "request": {
+                "method": "POST",
+                "header": [],
+                "body": {
+                  "mode": "urlencoded",
+                  "urlencoded": [
+                    {
+                      "key": "_id",
+                      "value": "697087772c0c32b2d9dcfeb7",
+                      "type": "text",
+                      "uuid": "37fa610e-34a7-4abf-a7d9-23a2a2d24f56"
+                    }
+                  ]
+                },
+                "url": {
+                  "raw": "localhost:5000/api/sport/single",
+                  "host": [
+                    "localhost"
+                  ],
+                  "port": "5000",
+                  "path": [
+                    "api",
+                    "sport",
+                    "single"
+                  ]
+                }
+              },
+              "response": []
+            }
+          ]
+        },
+        {
+          "name": "Team",
+          "item": [
+            {
+              "name": "all",
+              "request": {
+                "method": "POST",
+                "header": [],
+                "url": {
+                  "raw": "localhost:5000/api/team/all",
+                  "host": [
+                    "localhost"
+                  ],
+                  "port": "5000",
+                  "path": [
+                    "api",
+                    "team",
+                    "all"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "single",
+              "request": {
+                "method": "POST",
+                "header": [],
+                "body": {
+                  "mode": "urlencoded",
+                  "urlencoded": [
+                    {
+                      "key": "_id",
+                      "value": "6970acc362aaf6ff7be0e43c",
+                      "type": "text",
+                      "uuid": "a4143518-c6d5-4200-ab0d-6f7182589e51"
+                    }
+                  ]
+                },
+                "url": {
+                  "raw": "localhost:5000/api/team/single",
+                  "host": [
+                    "localhost"
+                  ],
+                  "port": "5000",
+                  "path": [
+                    "api",
+                    "team",
+                    "single"
+                  ]
+                }
+              },
+              "response": []
+            }
+          ]
+        },
+        {
+          "name": "MatchApplication",
+          "item": [
+            {
+              "name": "all",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoiY29hY2gxIiwiZW1haWwiOiJjb2FjaDJAZ21haWwuY29tIiwidXNlcklkIjoiNjk3MDc4MTc4ZmY0M2E3Y2Q4MmE2ZDY3IiwidXNlclR5cGUiOiJjb2FjaCIsImlhdCI6MTc2ODk4MjYzNSwiZXhwIjoxNzY5MDY5MDM1fQ.ldRB8drHIlsAq4h_73TEoFYYxbDhZnva2sUKbvw2ekw",
+                    "type": "text",
+                    "disabled": true
+                  }
+                ],
+                "url": {
+                  "raw": "localhost:5000/api/matchapplication/all",
+                  "host": [
+                    "localhost"
+                  ],
+                  "port": "5000",
+                  "path": [
+                    "api",
+                    "matchapplication",
+                    "all"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "single",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoiY29hY2gxIiwiZW1haWwiOiJjb2FjaDJAZ21haWwuY29tIiwidXNlcklkIjoiNjk3MDc4MTc4ZmY0M2E3Y2Q4MmE2ZDY3IiwidXNlclR5cGUiOiJjb2FjaCIsImlhdCI6MTc2ODk4MjYzNSwiZXhwIjoxNzY5MDY5MDM1fQ.ldRB8drHIlsAq4h_73TEoFYYxbDhZnva2sUKbvw2ekw",
+                    "type": "text",
+                    "disabled": true
+                  }
+                ],
+                "body": {
+                  "mode": "urlencoded",
+                  "urlencoded": [
+                    {
+                      "key": "_id",
+                      "value": "6970b0e0b41d5d0c0c6fc380",
+                      "type": "text",
+                      "uuid": "78b67a26-9af8-4678-93da-774241ddc805"
+                    }
+                  ]
+                },
+                "url": {
+                  "raw": "localhost:5000/api/matchapplication/single",
+                  "host": [
+                    "localhost"
+                  ],
+                  "port": "5000",
+                  "path": [
+                    "api",
+                    "matchapplication",
+                    "single"
+                  ]
+                }
+              },
+              "response": []
+            }
+          ]
+        },
+        {
+          "name": "Match",
+          "item": [
+            {
+              "name": "all",
+              "request": {
+                "method": "POST",
+                "header": [],
+                "url": {
+                  "raw": "localhost:5000/api/match/all",
+                  "host": [
+                    "localhost"
+                  ],
+                  "port": "5000",
+                  "path": [
+                    "api",
+                    "match",
+                    "all"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "single",
+              "request": {
+                "method": "POST",
+                "header": [],
+                "body": {
+                  "mode": "urlencoded",
+                  "urlencoded": [
+                    {
+                      "key": "_id",
+                      "value": "6970b6dfbb20ad032a488bed",
+                      "type": "text",
+                      "uuid": "6756dce3-403b-47be-95f4-4d05c9f003d5"
+                    }
+                  ]
+                },
+                "url": {
+                  "raw": "localhost:5000/api/match/single",
+                  "host": [
+                    "localhost"
+                  ],
+                  "port": "5000",
+                  "path": [
+                    "api",
+                    "match",
+                    "single"
+                  ]
+                }
+              },
+              "response": []
+            }
+          ]
+        },
+        {
+          "name": "Coach",
+          "item": [
+            {
+              "name": "all",
+              "request": {
+                "method": "POST",
+                "header": [],
+                "url": {
+                  "raw": "localhost:5000/api/coach/all",
+                  "host": [
+                    "localhost"
+                  ],
+                  "port": "5000",
+                  "path": [
+                    "api",
+                    "coach",
+                    "all"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "single",
+              "request": {
+                "method": "POST",
+                "header": [],
+                "body": {
+                  "mode": "urlencoded",
+                  "urlencoded": [
+                    {
+                      "key": "_id",
+                      "value": "6970781b8ff43a7cd82a6d69",
+                      "type": "text",
+                      "uuid": "8ba8561c-798b-47ec-9a10-c939c52eb407"
+                    }
+                  ]
+                },
+                "url": {
+                  "raw": "localhost:5000/api/coach/single",
+                  "host": [
+                    "localhost"
+                  ],
+                  "port": "5000",
+                  "path": [
+                    "api",
+                    "coach",
+                    "single"
+                  ]
+                }
+              },
+              "response": []
+            }
+          ]
+        },
+        {
+          "name": "user",
+          "item": [
+            {
+              "name": "register",
+              "request": {
+                "method": "POST",
+                "header": [],
+                "body": {
+                  "mode": "formdata",
+                  "formdata": [
+                    {
+                      "key": "email",
+                      "value": "coach1@gmail.com",
+                      "type": "text",
+                      "uuid": "2e718f96-2a44-4839-b3d8-e2a937df7dfe"
+                    },
+                    {
+                      "key": "password",
+                      "value": "123",
+                      "type": "text",
+                      "uuid": "897a4845-4eb0-48d4-b13a-1728ecb1fe20"
+                    },
+                    {
+                      "key": "name",
+                      "value": "coach1",
+                      "type": "text",
+                      "uuid": "5347e37f-65fb-4f2f-a2d9-1caf59cdf7a3"
+                    },
+                    {
+                      "key": "contact",
+                      "value": "1111111111111",
+                      "type": "text",
+                      "uuid": "a88183c5-14d1-4165-babb-8d398d243e54"
+                    },
+                    {
+                      "key": "profileImage",
+                      "type": "file",
+                      "uuid": "f0bf62f9-8ba3-4da2-a74c-777199851d28",
+                      "src": "/C:/Users/Ridhi/OneDrive/Pictures/Screenshots/profile.png"
+                    },
+                    {
+                      "key": "userType",
+                      "value": "coach",
+                      "type": "text",
+                      "uuid": "a9cb72d6-2a72-4455-82ce-83dcfc0e7699",
+                      "disabled": true
+                    }
+                  ]
+                },
+                "url": {
+                  "raw": "localhost:5000/api/user/register",
+                  "host": [
+                    "localhost"
+                  ],
+                  "port": "5000",
+                  "path": [
+                    "api",
+                    "user",
+                    "register"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "login",
+              "request": {
+                "method": "POST",
+                "header": [],
+                "body": {
+                  "mode": "urlencoded",
+                  "urlencoded": [
+                    {
+                      "key": "email",
+                      "value": "admin@gmail.com",
+                      "type": "text",
+                      "uuid": "d54e8e50-cf1e-4c96-9d59-ab3fdfcddbc8"
+                    },
+                    {
+                      "key": "password",
+                      "value": "123",
+                      "type": "text",
+                      "uuid": "b019f31e-447c-4393-945c-c41f82c939f0"
+                    }
+                  ]
+                },
+                "url": {
+                  "raw": "localhost:5000/api/user/login",
+                  "host": [
+                    "localhost"
+                  ],
+                  "port": "5000",
+                  "path": [
+                    "api",
+                    "user",
+                    "login"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "coachRegister",
+              "request": {
+                "method": "POST",
+                "header": [],
+                "body": {
+                  "mode": "formdata",
+                  "formdata": [
+                    {
+                      "key": "email",
+                      "value": "coach2@gmail.com",
+                      "type": "text"
+                    },
+                    {
+                      "key": "password",
+                      "value": "123",
+                      "type": "text"
+                    },
+                    {
+                      "key": "name",
+                      "value": "coach1",
+                      "type": "text"
+                    },
+                    {
+                      "key": "contact",
+                      "value": "1111111111111",
+                      "type": "text"
+                    },
+                    {
+                      "key": "profileImage",
+                      "type": "file",
+                      "uuid": "24bebfe8-ad5c-4b82-b757-ade6dfa936bb",
+                      "src": "/C:/Users/Ridhi/OneDrive/Pictures/Screenshots/profile.png"
+                    },
+                    {
+                      "key": "organisationName",
+                      "value": "Punjab's Cricket",
+                      "type": "text",
+                      "uuid": "d3037054-c089-4366-a275-18e77c5d5a97"
+                    },
+                    {
+                      "key": "sportsId",
+                      "value": "697077c08ff43a7cd82a6d61",
+                      "type": "text",
+                      "uuid": "2bc1679e-7815-4d5e-b304-f0a6f7df7950"
+                    },
+                    {
+                      "key": "bio",
+                      "value": "cricket team",
+                      "type": "text",
+                      "uuid": "c2f73649-31d0-4693-83e5-f0150eba1103"
+                    },
+                    {
+                      "key": "experience",
+                      "value": "3",
+                      "type": "text",
+                      "uuid": "58608174-1e02-4409-aa6d-7b5111fe97c7"
+                    }
+                  ]
+                },
+                "url": {
+                  "raw": "localhost:5000/api/coach/register",
+                  "host": [
+                    "localhost"
+                  ],
+                  "port": "5000",
+                  "path": [
+                    "api",
+                    "coach",
+                    "register"
+                  ]
+                }
+              },
+              "response": []
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Coach",
+      "item": [
+        {
+          "name": "Team",
+          "item": [
+            {
+              "name": "add",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoiY29hY2gxIiwiZW1haWwiOiJjb2FjaDJAZ21haWwuY29tIiwidXNlcklkIjoiNjk3MDc4MTc4ZmY0M2E3Y2Q4MmE2ZDY3IiwidXNlclR5cGUiOiJjb2FjaCIsImlhdCI6MTc2ODk4MjYzNSwiZXhwIjoxNzY5MDY5MDM1fQ.ldRB8drHIlsAq4h_73TEoFYYxbDhZnva2sUKbvw2ekw",
+                    "type": "text"
+                  }
+                ],
+                "body": {
+                  "mode": "formdata",
+                  "formdata": [
+                    {
+                      "key": "teamName",
+                      "value": "jal cricket team",
+                      "type": "text",
+                      "uuid": "362a4caa-a8ea-4eaf-8763-5b1aa5f04ef6"
+                    },
+                    {
+                      "key": "description",
+                      "value": "We are a cricket team",
+                      "type": "text",
+                      "uuid": "ef4cdd82-b979-41fc-923a-a8b6cf285efc"
+                    },
+                    {
+                      "key": "sportsId",
+                      "value": "697087772c0c32b2d9dcfeb7",
+                      "type": "text",
+                      "uuid": "3da0ca96-58ee-4d86-81b3-70ce52de19d0"
+                    },
+                    {
+                      "key": "coachId",
+                      "value": "697078178ff43a7cd82a6d67",
+                      "type": "text",
+                      "uuid": "82ce6519-9ceb-48a9-848f-7fdd508184cc"
+                    },
+                    {
+                      "key": "playersCount",
+                      "value": "11",
+                      "type": "text",
+                      "uuid": "7898ec20-86c0-469d-a1d7-7580482d46d5"
+                    },
+                    {
+                      "key": "logo",
+                      "type": "file",
+                      "uuid": "66652221-9b30-4015-bcab-f4e872793b2a",
+                      "src": "/C:/Users/Ridhi/OneDrive/Pictures/Screenshots/profile.png"
+                    }
+                  ]
+                },
+                "url": {
+                  "raw": "localhost:5000/coach/team/add",
+                  "host": [
+                    "localhost"
+                  ],
+                  "port": "5000",
+                  "path": [
+                    "coach",
+                    "team",
+                    "add"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "update",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoiY29hY2gxIiwiZW1haWwiOiJjb2FjaDJAZ21haWwuY29tIiwidXNlcklkIjoiNjk3MDc4MTc4ZmY0M2E3Y2Q4MmE2ZDY3IiwidXNlclR5cGUiOiJjb2FjaCIsImlhdCI6MTc2ODk4MjYzNSwiZXhwIjoxNzY5MDY5MDM1fQ.ldRB8drHIlsAq4h_73TEoFYYxbDhZnva2sUKbvw2ekw",
+                    "type": "text"
+                  }
+                ],
+                "body": {
+                  "mode": "formdata",
+                  "formdata": [
+                    {
+                      "key": "teamName",
+                      "value": "Yellow Cricket team",
+                      "type": "text",
+                      "uuid": "362a4caa-a8ea-4eaf-8763-5b1aa5f04ef6"
+                    },
+                    {
+                      "key": "description",
+                      "value": "We are a cricket team",
+                      "type": "text",
+                      "uuid": "ef4cdd82-b979-41fc-923a-a8b6cf285efc"
+                    },
+                    {
+                      "key": "playersCount",
+                      "value": "12",
+                      "type": "text",
+                      "uuid": "7898ec20-86c0-469d-a1d7-7580482d46d5"
+                    },
+                    {
+                      "key": "logo",
+                      "value": "",
+                      "type": "text",
+                      "uuid": "66652221-9b30-4015-bcab-f4e872793b2a"
+                    },
+                    {
+                      "key": "_id",
+                      "value": "6970aa6a86ba8fbe00855563",
+                      "type": "text",
+                      "uuid": "ec28d5b4-9da0-4eee-9d13-d0433f89d41e"
+                    }
+                  ]
+                },
+                "url": {
+                  "raw": "localhost:5000/coach/team/update",
+                  "host": [
+                    "localhost"
+                  ],
+                  "port": "5000",
+                  "path": [
+                    "coach",
+                    "team",
+                    "update"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "changeStatus",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoiY29hY2gxIiwiZW1haWwiOiJjb2FjaDJAZ21haWwuY29tIiwidXNlcklkIjoiNjk3MDc4MTc4ZmY0M2E3Y2Q4MmE2ZDY3IiwidXNlclR5cGUiOiJjb2FjaCIsImlhdCI6MTc2ODk4MjYzNSwiZXhwIjoxNzY5MDY5MDM1fQ.ldRB8drHIlsAq4h_73TEoFYYxbDhZnva2sUKbvw2ekw",
+                    "type": "text"
+                  }
+                ],
+                "body": {
+                  "mode": "urlencoded",
+                  "urlencoded": [
+                    {
+                      "key": "_id",
+                      "value": "6970acc362aaf6ff7be0e43c",
+                      "type": "text",
+                      "uuid": "232cb644-4ae0-4f71-b9c7-2f9066e711cb"
+                    }
+                  ]
+                },
+                "url": {
+                  "raw": "localhost:5000/coach/team/changeStatus",
+                  "host": [
+                    "localhost"
+                  ],
+                  "port": "5000",
+                  "path": [
+                    "coach",
+                    "team",
+                    "changeStatus"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "delete",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoiY29hY2gxIiwiZW1haWwiOiJjb2FjaDJAZ21haWwuY29tIiwidXNlcklkIjoiNjk3MDc4MTc4ZmY0M2E3Y2Q4MmE2ZDY3IiwidXNlclR5cGUiOiJjb2FjaCIsImlhdCI6MTc2ODk4MjYzNSwiZXhwIjoxNzY5MDY5MDM1fQ.ldRB8drHIlsAq4h_73TEoFYYxbDhZnva2sUKbvw2ekw",
+                    "type": "text"
+                  }
+                ],
+                "body": {
+                  "mode": "urlencoded",
+                  "urlencoded": [
+                    {
+                      "key": "_id",
+                      "value": "6970acc362aaf6ff7be0e43c",
+                      "type": "text",
+                      "uuid": "232cb644-4ae0-4f71-b9c7-2f9066e711cb"
+                    }
+                  ]
+                },
+                "url": {
+                  "raw": "localhost:5000/coach/team/delete",
+                  "host": [
+                    "localhost"
+                  ],
+                  "port": "5000",
+                  "path": [
+                    "coach",
+                    "team",
+                    "delete"
+                  ]
+                }
+              },
+              "response": []
+            }
+          ]
+        },
+        {
+          "name": "MatchApplication",
+          "item": [
+            {
+              "name": "add",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoiY29hY2gxIiwiZW1haWwiOiJjb2FjaDJAZ21haWwuY29tIiwidXNlcklkIjoiNjk3MDc4MTc4ZmY0M2E3Y2Q4MmE2ZDY3IiwidXNlclR5cGUiOiJjb2FjaCIsImlhdCI6MTc2ODk4MjYzNSwiZXhwIjoxNzY5MDY5MDM1fQ.ldRB8drHIlsAq4h_73TEoFYYxbDhZnva2sUKbvw2ekw",
+                    "type": "text"
+                  }
+                ],
+                "body": {
+                  "mode": "urlencoded",
+                  "urlencoded": [
+                    {
+                      "key": "sportsId",
+                      "value": "697077c08ff43a7cd82a6d61",
+                      "type": "text",
+                      "uuid": "6d6d2c52-26ca-4765-ac3d-65af4e664b19"
+                    },
+                    {
+                      "key": "teamId",
+                      "value": "6970b4cbf210c8df0dac6305",
+                      "type": "text",
+                      "uuid": "c274b6ca-eb4e-4ffe-8a68-0fe1825ed334"
+                    },
+                    {
+                      "key": "coachId",
+                      "value": "697078178ff43a7cd82a6d67",
+                      "type": "text",
+                      "uuid": "2dc63ae5-e5ed-4a54-858b-ae5ba7d37e67"
+                    },
+                    {
+                      "key": "preferredDate",
+                      "value": "22 jan2026",
+                      "type": "text",
+                      "uuid": "b93dc796-1a49-410a-8574-bc4bfc38ea1e"
+                    },
+                    {
+                      "key": "venue",
+                      "value": "jal",
+                      "type": "text",
+                      "uuid": "a71080bc-9952-4deb-9a09-0320e7dfa218"
+                    },
+                    {
+                      "key": "adminRemarks",
+                      "value": "pending",
+                      "type": "text",
+                      "uuid": "cba7250f-cb49-4c80-948c-64f89b17b46e"
+                    }
+                  ]
+                },
+                "url": {
+                  "raw": "localhost:5000/coach/matchapplication/add",
+                  "host": [
+                    "localhost"
+                  ],
+                  "port": "5000",
+                  "path": [
+                    "coach",
+                    "matchapplication",
+                    "add"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "update",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoiY29hY2gxIiwiZW1haWwiOiJjb2FjaDJAZ21haWwuY29tIiwidXNlcklkIjoiNjk3MDc4MTc4ZmY0M2E3Y2Q4MmE2ZDY3IiwidXNlclR5cGUiOiJjb2FjaCIsImlhdCI6MTc2ODk4MjYzNSwiZXhwIjoxNzY5MDY5MDM1fQ.ldRB8drHIlsAq4h_73TEoFYYxbDhZnva2sUKbvw2ekw",
+                    "type": "text"
+                  }
+                ],
+                "body": {
+                  "mode": "urlencoded",
+                  "urlencoded": [
+                    {
+                      "key": "sportsId",
+                      "value": "697077c08ff43a7cd82a6d61",
+                      "type": "text",
+                      "uuid": "6d6d2c52-26ca-4765-ac3d-65af4e664b19",
+                      "disabled": true
+                    },
+                    {
+                      "key": "teamId",
+                      "value": "6970aa6a86ba8fbe00855563",
+                      "type": "text",
+                      "uuid": "c274b6ca-eb4e-4ffe-8a68-0fe1825ed334",
+                      "disabled": true
+                    },
+                    {
+                      "key": "coachId",
+                      "value": "697078178ff43a7cd82a6d67",
+                      "type": "text",
+                      "uuid": "2dc63ae5-e5ed-4a54-858b-ae5ba7d37e67",
+                      "disabled": true
+                    },
+                    {
+                      "key": "preferredDate",
+                      "value": "22 jan2026",
+                      "type": "text",
+                      "uuid": "b93dc796-1a49-410a-8574-bc4bfc38ea1e"
+                    },
+                    {
+                      "key": "venue",
+                      "value": "jalandhar",
+                      "type": "text",
+                      "uuid": "a71080bc-9952-4deb-9a09-0320e7dfa218"
+                    },
+                    {
+                      "key": "adminRemarks",
+                      "value": "pending",
+                      "type": "text",
+                      "uuid": "cba7250f-cb49-4c80-948c-64f89b17b46e"
+                    },
+                    {
+                      "key": "_id",
+                      "value": "6970b0e0b41d5d0c0c6fc380",
+                      "type": "text",
+                      "uuid": "61fb4576-9256-47cf-9da9-a481bf310585"
+                    }
+                  ]
+                },
+                "url": {
+                  "raw": "localhost:5000/coach/matchapplication/update",
+                  "host": [
+                    "localhost"
+                  ],
+                  "port": "5000",
+                  "path": [
+                    "coach",
+                    "matchapplication",
+                    "update"
+                  ]
+                }
+              },
+              "response": []
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

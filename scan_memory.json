@@ -1125,7 +1125,7 @@
         "has_json": false
       },
       "first_seen": 1776762096.9757102,
-      "scan_count": 34,
+      "scan_count": 35,
       "suspicious": false
     },
     "POST::/api/incidents/{incident_id}/revoke": {
@@ -1133,7 +1133,7 @@
         "has_json": false
       },
       "first_seen": 1776762097.1421568,
-      "scan_count": 34,
+      "scan_count": 35,
       "suspicious": false
     },
     "GET::/api/incidents": {
@@ -1141,7 +1141,7 @@
         "has_json": false
       },
       "first_seen": 1776762097.824477,
-      "scan_count": 34,
+      "scan_count": 35,
       "suspicious": false
     },
     "GET::/api/incidents/{incident_id}": {
@@ -1149,7 +1149,7 @@
         "has_json": false
       },
       "first_seen": 1776762097.9350543,
-      "scan_count": 34,
+      "scan_count": 35,
       "suspicious": false
     },
     "GET::/api/assets/search": {
@@ -1157,7 +1157,7 @@
         "has_json": false
       },
       "first_seen": 1776762098.4598455,
-      "scan_count": 34,
+      "scan_count": 35,
       "suspicious": false
     },
     "POST::3000/admin/category/add": {
@@ -7881,6 +7881,13 @@
         "cluster_id": 404,
         "confidence": 0,
         "timestamp": 1778572742.2268999
+      },
+      {
+        "payload": "{'path_params': {'incident_id': \"'; SELECT * FROM fake_table--\"}, '__family__': \"' OR '1'='1\"}",
+        "response_hash": "6447144e0ec80318c8f2cbd0fcd6359ef006b5f0dbf463367ef21ef6cfe6fbd7",
+        "cluster_id": 404,
+        "confidence": 0,
+        "timestamp": 1779706177.249047
       }
     ],
     "GET::/api/assets/search": [
